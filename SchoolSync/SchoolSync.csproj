@@ -116,7 +116,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <None Include="Resources\icons8-high-risk-48.ico" />
+    <None Include="Resources\icons8-high-risk-48.png" />
+    <None Include="Resources\icons8-email-50.png" />
+    <None Include="Resources\icons8-badge-50.png" />
+    <None Include="Resources\icons8-enter-50.png" />
+    <None Include="Resources\icons8-enter-48.png" />
+    <None Include="Resources\icons8-password-50.png" />
+    <None Include="Resources\icons8-male-user-50.png" />
     <None Include="Resources\background-index.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

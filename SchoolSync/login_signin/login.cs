@@ -19,7 +19,24 @@ namespace SchoolSync.login_signin
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            var frm = new signin();
 
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            panel.Controls.Add(frm);
+            frm.Show();
+            panel.Controls.Remove(this);
+            GC.Collect();
+        }
+
+
+        private void login_Load(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | Autentificare";
+            GC.Collect();
         }
     }
 }

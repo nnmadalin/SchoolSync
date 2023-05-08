@@ -23,7 +23,9 @@ namespace SchoolSync
             guna2Panel2.Controls.Add(frm);
             frm.Show();
             frm.Location = new Point(0, 0);
+            GC.Collect();
         }
+
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
