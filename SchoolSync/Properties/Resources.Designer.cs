@@ -83,6 +83,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icons8_checkmark_64__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_checkmark_64__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icons8_email_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8_email_50", resourceCulture);
@@ -101,12 +111,32 @@ namespace SchoolSync.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_error_64__2_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_error_64__2_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon icons8_high_risk_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8_high_risk_48", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_information_64__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_information_64__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -126,6 +156,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap icons8_password_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8_password_50", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_warning_64__1_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_warning_64__1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

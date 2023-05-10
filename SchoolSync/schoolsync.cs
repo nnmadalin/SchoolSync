@@ -26,6 +26,40 @@ namespace SchoolSync
             GC.Collect();
         }
 
+        public static void show_loading()
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var pnl = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            Panel panel = new Panel()
+            {
+                BackColor = Color.FromArgb(55, Color.Black),
+                Size = new Size(1340, 690),
+                Location = new Point(0, 0),
+                Dock = DockStyle.Fill,
+                Name = "panel_loading"
+            };
+
+            Guna.UI2.WinForms.Guna2WinProgressIndicator loading = new Guna.UI2.WinForms.Guna2WinProgressIndicator()
+            {
+                Size = new Size(90, 90),
+                UseTransparentBackground = true,
+                AutoStart = true,
+                Location = new Point((1340 - 90) / 2, (690 - 90) / 2)
+            };
+            panel.Controls.Add(loading);
+            loading.Show();
+
+            pnl.Controls.Add(panel);
+            panel.Show();
+            panel.BringToFront();
+        }
+
+        public static void hide_loading()
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var pnl = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            pnl.Controls.Remove(pnl.Controls["panel_loading"]);
+        }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
