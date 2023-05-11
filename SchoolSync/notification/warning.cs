@@ -21,6 +21,7 @@ namespace SchoolSync.notification
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            label2.Text = message;
             if (k == 301)
             {
                 timer1.Stop();
