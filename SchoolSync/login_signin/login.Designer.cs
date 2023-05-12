@@ -72,9 +72,10 @@ namespace SchoolSync.login_signin
             this.guna2Button1.Location = new System.Drawing.Point(254, 332);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(360, 37);
-            this.guna2Button1.TabIndex = 7;
+            this.guna2Button1.TabIndex = 4;
             this.guna2Button1.Text = "Enter";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // linkLabel1
             // 
@@ -85,7 +86,7 @@ namespace SchoolSync.login_signin
             this.linkLabel1.Location = new System.Drawing.Point(3, 356);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(157, 23);
-            this.linkLabel1.TabIndex = 6;
+            this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Crează unul acum!";
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(144)))), ((int)(((byte)(136)))));
@@ -126,8 +127,9 @@ namespace SchoolSync.login_signin
             this.guna2TextBox2.PlaceholderText = "Parola";
             this.guna2TextBox2.SelectedText = "";
             this.guna2TextBox2.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox2.TabIndex = 3;
+            this.guna2TextBox2.TabIndex = 2;
             this.guna2TextBox2.UseSystemPasswordChar = true;
+            this.guna2TextBox2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.guna2TextBox2_KeyDown);
             // 
             // guna2TextBox1
             // 
@@ -154,7 +156,8 @@ namespace SchoolSync.login_signin
             this.guna2TextBox1.PlaceholderText = "Email | Username";
             this.guna2TextBox1.SelectedText = "";
             this.guna2TextBox1.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox1.TabIndex = 2;
+            this.guna2TextBox1.TabIndex = 1;
+            this.guna2TextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.guna2TextBox2_KeyDown);
             // 
             // label2
             // 

@@ -73,6 +73,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap home {
+            get {
+                object obj = ResourceManager.GetObject("home", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap icons8_badge_50 {
             get {
                 object obj = ResourceManager.GetObject("icons8_badge_50", resourceCulture);
@@ -187,6 +197,16 @@ namespace SchoolSync.Properties {
             get {
                 object obj = ResourceManager.GetObject("logo_ico", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap standard_avatar {
+            get {
+                object obj = ResourceManager.GetObject("standard_avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

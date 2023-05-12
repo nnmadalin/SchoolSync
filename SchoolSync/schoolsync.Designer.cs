@@ -126,6 +126,7 @@ namespace SchoolSync
             this.guna2BorderlessForm1.DragForm = false;
             this.guna2BorderlessForm1.HasFormShadow = false;
             this.guna2BorderlessForm1.ResizeForm = false;
+            this.guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
             // schoolsync
             // 

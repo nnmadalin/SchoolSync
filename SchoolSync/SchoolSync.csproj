@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="navbar_home.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="navbar_home.Designer.cs">
+      <DependentUpon>navbar_home.cs</DependentUpon>
+    </Compile>
     <Compile Include="login_signin\login.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -116,6 +122,12 @@
     <Compile Include="notification\warning.Designer.cs">
       <DependentUpon>warning.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\home.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\home.Designer.cs">
+      <DependentUpon>home.cs</DependentUpon>
+    </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +136,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="navbar_home.resx">
+      <DependentUpon>navbar_home.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="login_signin\login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="notification\warning.resx">
       <DependentUpon>warning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\home.resx">
+      <DependentUpon>home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
@@ -177,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <Content Include="TODO.txt" />
+    <None Include="Resources\standard_avatar.png" />
+    <None Include="Resources\home.png" />
     <None Include="Resources\icons8-checkmark-64 %281%29.png" />
     <None Include="Resources\icons8-warning-64 %281%29.png" />
     <None Include="Resources\icons8-information-64 %281%29.png" />

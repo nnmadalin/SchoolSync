@@ -89,7 +89,7 @@ namespace SchoolSync.login_signin
             this.guna2Button1.Location = new System.Drawing.Point(258, 439);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(360, 37);
-            this.guna2Button1.TabIndex = 13;
+            this.guna2Button1.TabIndex = 7;
             this.guna2Button1.Text = "Enter";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click_1);
@@ -103,7 +103,7 @@ namespace SchoolSync.login_signin
             this.linkLabel1.Location = new System.Drawing.Point(7, 463);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(129, 23);
-            this.linkLabel1.TabIndex = 12;
+            this.linkLabel1.TabIndex = 6;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Conectează-te!";
             this.linkLabel1.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(144)))), ((int)(((byte)(136)))));
@@ -145,9 +145,10 @@ namespace SchoolSync.login_signin
             this.guna2TextBox5.PlaceholderText = "Confirmare parola";
             this.guna2TextBox5.SelectedText = "";
             this.guna2TextBox5.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox5.TabIndex = 10;
+            this.guna2TextBox5.TabIndex = 5;
             this.guna2TextBox5.UseSystemPasswordChar = true;
             this.guna2TextBox5.TextChanged += new System.EventHandler(this.guna2TextBox5_TextChanged);
+            this.guna2TextBox5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
             // 
             // guna2TextBox4
             // 
@@ -175,9 +176,10 @@ namespace SchoolSync.login_signin
             this.guna2TextBox4.PlaceholderText = "Parola";
             this.guna2TextBox4.SelectedText = "";
             this.guna2TextBox4.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox4.TabIndex = 9;
+            this.guna2TextBox4.TabIndex = 4;
             this.guna2TextBox4.UseSystemPasswordChar = true;
             this.guna2TextBox4.TextChanged += new System.EventHandler(this.guna2TextBox4_TextChanged);
+            this.guna2TextBox4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
             // 
             // guna2TextBox3
             // 
@@ -206,8 +208,9 @@ namespace SchoolSync.login_signin
             this.guna2TextBox3.PlaceholderText = "Email";
             this.guna2TextBox3.SelectedText = "";
             this.guna2TextBox3.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox3.TabIndex = 8;
+            this.guna2TextBox3.TabIndex = 3;
             this.guna2TextBox3.TextChanged += new System.EventHandler(this.guna2TextBox3_TextChanged);
+            this.guna2TextBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
             // 
             // guna2TextBox2
             // 
@@ -235,8 +238,9 @@ namespace SchoolSync.login_signin
             this.guna2TextBox2.PlaceholderText = "Username";
             this.guna2TextBox2.SelectedText = "";
             this.guna2TextBox2.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox2.TabIndex = 3;
+            this.guna2TextBox2.TabIndex = 2;
             this.guna2TextBox2.TextChanged += new System.EventHandler(this.guna2TextBox2_TextChanged);
+            this.guna2TextBox2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
             // 
             // guna2TextBox1
             // 
@@ -265,8 +269,9 @@ namespace SchoolSync.login_signin
             this.guna2TextBox1.PlaceholderText = "Nume complet";
             this.guna2TextBox1.SelectedText = "";
             this.guna2TextBox1.Size = new System.Drawing.Size(603, 44);
-            this.guna2TextBox1.TabIndex = 2;
+            this.guna2TextBox1.TabIndex = 1;
             this.guna2TextBox1.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
+            this.guna2TextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.guna2TextBox1_KeyPress);
             // 
             // label2
             // 

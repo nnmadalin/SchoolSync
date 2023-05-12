@@ -40,34 +40,44 @@ namespace SchoolSync.login_signin
                 guna2TextBox1.BorderColor = Color.FromArgb(203, 25, 39);
                 ok = false;
             }
-            if (guna2TextBox2.Text.Trim() == "")
+            else if (guna2TextBox2.Text.Trim() == "")
             {
                 errorProvider2.SetError(guna2TextBox2, "Completeaza caseta!");
                 guna2TextBox2.BorderColor = Color.FromArgb(203, 25, 39);
                 ok = false;
             }
-            if (guna2TextBox3.Text.Trim() == "")
+            else if(guna2TextBox3.Text.Trim() == "")
             {
                 errorProvider3.SetError(guna2TextBox3, "Completeaza caseta!");
                 guna2TextBox3.BorderColor = Color.FromArgb(203, 25, 39);
                 ok = false;
             }
-            if (guna2TextBox4.Text.Trim() == "")
+            else if(guna2TextBox4.Text.Trim() == "")
             {
                 errorProvider4.SetError(guna2TextBox4, "Completeaza caseta!");
                 guna2TextBox4.BorderColor = Color.FromArgb(203, 25, 39);
                 ok = false;
             }
-            if (guna2TextBox5.Text.Trim() == "")
+            else if(guna2TextBox5.Text.Trim() == "")
             {
                 errorProvider5.SetError(guna2TextBox5, "Completeaza caseta!");
                 guna2TextBox5.BorderColor = Color.FromArgb(203, 25, 39);
                 ok = false;
             }
 
-            if(guna2TextBox4.Text != guna2TextBox5.Text)
+            else if(guna2TextBox4.Text != guna2TextBox5.Text)
             {
                 errorProvider4.SetError(guna2TextBox4, "Parolele nu corespund!");
+                guna2TextBox4.BorderColor = Color.FromArgb(203, 25, 39);
+
+                errorProvider5.SetError(guna2TextBox5, "Parolele nu corespund!");
+                guna2TextBox5.BorderColor = Color.FromArgb(203, 25, 39);
+                ok = false;
+            }
+
+            else if(guna2TextBox4.Text.Length < 5)
+            {
+                errorProvider4.SetError(guna2TextBox4, "Parola trebuie sa fie de minim 5 caractere!");
                 guna2TextBox4.BorderColor = Color.FromArgb(203, 25, 39);
 
                 errorProvider5.SetError(guna2TextBox5, "Parolele nu corespund!");
@@ -125,9 +135,7 @@ namespace SchoolSync.login_signin
             return System.Convert.ToBase64String(plain);
         }
 
-        
-
-        private async void guna2Button1_Click_1(object sender, EventArgs e)
+        async void sign_send()
         {
             if (check_trim())
             {
@@ -166,7 +174,7 @@ namespace SchoolSync.login_signin
                         task = await multiple_class.PostRequestAsync(url, data);
                         Console.WriteLine(task["message"] + " " + data["sql"]);
                         if (task["message"] == "insert success")
-                        {                          
+                        {
                             var frm = new notification.success();
                             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
@@ -239,6 +247,11 @@ namespace SchoolSync.login_signin
             }
         }
 
+        private void guna2Button1_Click_1(object sender, EventArgs e)
+        {
+            sign_send();
+        }
+
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
             guna2TextBox1.BorderColor = Color.Black;
@@ -261,12 +274,21 @@ namespace SchoolSync.login_signin
         {
             guna2TextBox4.BorderColor = Color.Black;
             errorProvider4.Dispose();
+            guna2TextBox5.BorderColor = Color.Black;
+            errorProvider5.Dispose();
         }
 
         private void guna2TextBox5_TextChanged(object sender, EventArgs e)
         {
+            guna2TextBox4.BorderColor = Color.Black;
+            errorProvider4.Dispose();
             guna2TextBox5.BorderColor = Color.Black;
             errorProvider5.Dispose();
+        }
+
+        private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            sign_send();
         }
     }
 }
