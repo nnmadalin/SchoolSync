@@ -122,6 +122,12 @@
     <Compile Include="notification\warning.Designer.cs">
       <DependentUpon>warning.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\ClassPortal.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\ClassPortal.Designer.cs">
+      <DependentUpon>ClassPortal.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\home.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +142,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="navbar_home.resx">
       <DependentUpon>navbar_home.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="notification\warning.resx">
       <DependentUpon>warning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\ClassPortal.resx">
+      <DependentUpon>ClassPortal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\home.resx">
       <DependentUpon>home.cs</DependentUpon>
@@ -195,6 +205,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <None Include="Resources\classroom.png" />
+    <None Include="Resources\materiale_educative.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

@@ -26,9 +26,50 @@ namespace SchoolSync
             GC.Collect();
 
             var frm = new pages.home();
-
             guna2Panel2.Controls.Add(frm);
             frm.Show();
         }
+
+        void background_color_btn()
+        {
+            guna2Button1.FillColor = Color.Transparent;
+            guna2Button2.FillColor = Color.Transparent;
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | Acasa";
+            GC.Collect();
+            
+            var frm = new pages.home();
+            guna2Panel2.Controls.Clear();
+            guna2Panel2.Controls.Add(frm);
+            frm.Show();
+
+            background_color_btn();
+            guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | ClassPortal";
+            GC.Collect();
+
+            var frm = new pages.ClassPortal();
+            guna2Panel2.Controls.Clear();
+            guna2Panel2.Controls.Add(frm);
+            frm.Show();
+
+            background_color_btn();
+            guna2Button2.FillColor = Color.FromArgb(66, 66, 66);
+        }
+
+        
     }
 }

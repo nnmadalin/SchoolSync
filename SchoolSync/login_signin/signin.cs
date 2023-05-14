@@ -141,7 +141,7 @@ namespace SchoolSync.login_signin
             {
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
                 Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("token", "W!WSAnXZLOhyQ6lpt=adAhsOaF5QrI6eN4!1p/PWi7y8A9gTwKiD6DO6kmwdmcUHFeG?v99ihZYAeiLtf7NdT2MHCnzy=mvdI1MnmZLEtVOus2O0qYFo4oDfVyB7QeLBFo5SrzqueDvwtMFVBpRcLygr3Jxg-GhmOZ07IPsBpmZ8P0bhBUegmskNsTKk!x!bc2yT-LOrCwk!XU!!2I10=SLFfsf0s-OGCcmS-f=4l3X8u3lL/nsnY8vjSQ0jn13H");
+                data.Add("token", schoolsync.token);
                 data.Add("sql", string.Format("select * from accounts where username = '{0}'", guna2TextBox2.Text));
 
                 var multiple_class = new multiple_class();
@@ -156,7 +156,7 @@ namespace SchoolSync.login_signin
                 {
                     url = "https://schoolsync.nnmadalin.me/api/get.php";
                     data = new Dictionary<string, string>();
-                    data.Add("token", "W!WSAnXZLOhyQ6lpt=adAhsOaF5QrI6eN4!1p/PWi7y8A9gTwKiD6DO6kmwdmcUHFeG?v99ihZYAeiLtf7NdT2MHCnzy=mvdI1MnmZLEtVOus2O0qYFo4oDfVyB7QeLBFo5SrzqueDvwtMFVBpRcLygr3Jxg-GhmOZ07IPsBpmZ8P0bhBUegmskNsTKk!x!bc2yT-LOrCwk!XU!!2I10=SLFfsf0s-OGCcmS-f=4l3X8u3lL/nsnY8vjSQ0jn13H");
+                    data.Add("token", schoolsync.token);
                     data.Add("sql", string.Format("select * from accounts where email = '{0}'", guna2TextBox3.Text));
                     task = await multiple_class.PostRequestAsync(url, data);
                     if (task["message"] == "success")
@@ -168,7 +168,7 @@ namespace SchoolSync.login_signin
                     {
                         url = "https://schoolsync.nnmadalin.me/api/post.php";
                         data = new Dictionary<string, string>();
-                        data.Add("token", "W!WSAnXZLOhyQ6lpt=adAhsOaF5QrI6eN4!1p/PWi7y8A9gTwKiD6DO6kmwdmcUHFeG?v99ihZYAeiLtf7NdT2MHCnzy=mvdI1MnmZLEtVOus2O0qYFo4oDfVyB7QeLBFo5SrzqueDvwtMFVBpRcLygr3Jxg-GhmOZ07IPsBpmZ8P0bhBUegmskNsTKk!x!bc2yT-LOrCwk!XU!!2I10=SLFfsf0s-OGCcmS-f=4l3X8u3lL/nsnY8vjSQ0jn13H");
+                        data.Add("token", schoolsync.token);
                         string token = generate_token();
                         data.Add("sql", string.Format("insert into accounts (token, full_name, username, email, password) values ('{0}', '{1}', '{2}', '{3}', '{4}')", token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text)));
                         task = await multiple_class.PostRequestAsync(url, data);

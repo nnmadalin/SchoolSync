@@ -1,1 +1,7 @@
 ﻿de adaugat sistem recaptcha la sign in si la autentificare
+
+pt judet vr sa fac: materiale educative si brainly!!!!!!!!!!!!!!!
+
+inscriere curs: cod, username, email
+mysql curs: token curs, creat de, ultima modificare, titlu, persoane(json), materiale (json)
+materiale json: ultima modificare, cine a adaugat, titlu, descriere, token fisiere, da/nu cu incarcare
