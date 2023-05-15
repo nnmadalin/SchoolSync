@@ -70,6 +70,21 @@ namespace SchoolSync
             guna2Button2.FillColor = Color.FromArgb(66, 66, 66);
         }
 
-        
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | ÎnvațăUnit";
+            GC.Collect();
+
+            var frm = new pages.invataunit();
+            guna2Panel2.Controls.Clear();
+            guna2Panel2.Controls.Add(frm);
+            frm.Show();
+
+            background_color_btn();
+            guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
+        }
     }
 }

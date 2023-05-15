@@ -134,6 +134,12 @@
     <Compile Include="pages\home.Designer.cs">
       <DependentUpon>home.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\invataunit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\invataunit.Designer.cs">
+      <DependentUpon>invataunit.cs</DependentUpon>
+    </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\home.resx">
       <DependentUpon>home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\invataunit.resx">
+      <DependentUpon>invataunit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
@@ -207,6 +216,23 @@
     <Content Include="logo_ico.ico" />
     <None Include="Resources\classroom.png" />
     <None Include="Resources\materiale_educative.png" />
+    <None Include="Resources\download %2823%29.png" />
+    <None Include="Resources\apps_FILL1_wght400_GRAD0_opsz48.png" />
+    <None Include="Resources\calculate_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\auto_stories_FILL1_wght400_GRAD0_opsz48.png" />
+    <None Include="Resources\eco_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\communication_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\wb_incandescent_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\science_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\language_gb_english_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\language_french_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\account_tree_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\graphic_eq_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\computer_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\history_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\translate_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\palette_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\public_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />
