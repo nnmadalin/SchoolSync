@@ -64,7 +64,8 @@ namespace SchoolSync.pages
                         BorderRadius = 10,
                         TextAlign = HorizontalAlignment.Left,
                         Size = new Size(100, 35),
-                        Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "..."
+                        Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
+                        Tag = opf.FileName.ToString()
                     };
 
                     this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
@@ -80,6 +81,27 @@ namespace SchoolSync.pages
                 frm.Show();
                 notification.error.message = "Poti adauga maxim 5 fisiere!";
                 frm.BringToFront();
+            }
+        }
+
+        private void panel_question_textbox(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2TextBox btn = sender as Guna.UI2.WinForms.Guna2TextBox;
+            btn.BorderColor = Color.FromArgb(213, 218, 223);
+        }
+
+        private void send_question(object sender, EventArgs e)
+        {
+            if(this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"]).BorderColor = Color.Red;
+            }
+            else
+            {
+                //TOTUL ESTE BINE
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"]).BorderColor = Color.FromArgb(213, 218, 223);
+            
+                
             }
         }
 
@@ -132,8 +154,10 @@ namespace SchoolSync.pages
                 Location = new Point(10, 50),
                 Multiline = true,
                 Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular),
-                PlaceholderText = "Scrie întrebarea aici (sfat: pentru a primi cel mai bun răspuns, formulează întrebarea cât\r\nmai clar)"
+                PlaceholderText = "Scrie întrebarea aici (sfat: pentru a primi cel mai bun răspuns, formulează întrebarea cât\r\nmai clar)",
+                Name = "txtbox"
             };
+            txtbox.TextChanged += panel_question_textbox;
 
             FlowLayoutPanel flp = new FlowLayoutPanel()
             {
@@ -179,6 +203,7 @@ namespace SchoolSync.pages
                 UseTransparentBackground = true,
                 Location = new Point(10, 430)
             };
+            btn_finish.Click += send_question;
 
             sub_panel_question.Controls.Add(btn);
             sub_panel_question.Controls.Add(title);
@@ -192,12 +217,8 @@ namespace SchoolSync.pages
             panel_question.BringToFront();
 
 
-
         }
 
-        private void guna2Chip1_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            MessageBox.Show("d");
-        }
+        
     }
 }

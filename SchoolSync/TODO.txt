@@ -1,7 +1,16 @@
 ﻿de adaugat sistem recaptcha la sign in si la autentificare
+de adaugat last_login in autentificare
+de adaugat la login, daca contul a fost activat!
 
 pt judet vr sa fac: materiale educative si brainly!!!!!!!!!!!!!!!
 
-inscriere curs: cod, username, email
-mysql curs: token curs, creat de, ultima modificare, titlu, persoane(json), materiale (json)
-materiale json: ultima modificare, cine a adaugat, titlu, descriere, token fisiere, da/nu cu incarcare
+
+Sa comprim fisierele, cat de mult se poate
+sistem de urcat pe server, maxim, 5 MB per fisier
+de facut fisier php care returneaza fisierul, getfiles?....
+
+de populat pagina principala la invataunit
+de facut sistemele pt intrebarile/raspunsuri
+daca vr sa raspunzi, ai un btn cu raspunde, acolo apare numere, data, categorie, nr de raspunsuri si afisarea rasp + heart,
+sistem de raspundere, aproapre identic ca sistemul de adaugare question (doar textbox si fisierele), aici limita este de 3 fisiere
+de facut sistem de favorite
