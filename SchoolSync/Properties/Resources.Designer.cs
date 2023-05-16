@@ -83,6 +83,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap attach_file_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("attach_file_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap auto_stories_FILL1_wght400_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("auto_stories_FILL1_wght400_GRAD0_opsz48", resourceCulture);
@@ -116,6 +126,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap classroom {
             get {
                 object obj = ResourceManager.GetObject("classroom", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap close_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("close_FILL1_wght700_GRAD0_opsz48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

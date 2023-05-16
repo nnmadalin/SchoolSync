@@ -233,6 +233,8 @@
     <None Include="Resources\translate_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\palette_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\public_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\close_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\attach_file_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />
