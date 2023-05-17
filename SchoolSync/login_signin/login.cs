@@ -115,7 +115,6 @@ namespace SchoolSync.login_signin
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                frm.Show();
                 panel.Controls.Remove(this);
                 GC.Collect();
             }
@@ -125,8 +124,6 @@ namespace SchoolSync.login_signin
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                frm.Location = new Point(840, 50);
-                frm.Show();
                 notification.error.message = "Email sau parola gresita!";
                 frm.BringToFront();
             }
@@ -136,8 +133,6 @@ namespace SchoolSync.login_signin
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                frm.Location = new Point(840, 50);
-                frm.Show();
                 notification.error.message = "Ceva nu e mers bine!";
                 frm.BringToFront();
             }

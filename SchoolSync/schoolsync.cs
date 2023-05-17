@@ -18,6 +18,7 @@ namespace SchoolSync
         }
 
         public static string token = "W!WSAnXZLOhyQ6lpt=adAhsOaF5QrI6eN4!1p/PWi7y8A9gTwKiD6DO6kmwdmcUHFeG?v99ihZYAeiLtf7NdT2MHCnzy=mvdI1MnmZLEtVOus2O0qYFo4oDfVyB7QeLBFo5SrzqueDvwtMFVBpRcLygr3Jxg-GhmOZ07IPsBpmZ8P0bhBUegmskNsTKk!x!bc2yT-LOrCwk!XU!!2I10=SLFfsf0s-OGCcmS-f=4l3X8u3lL/nsnY8vjSQ0jn13H";
+        public static bool is_loading = false;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -30,21 +31,26 @@ namespace SchoolSync
 
         public static void show_loading()
         {
-            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-            var pnl = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-            pnl.Enabled = false;
-
-            Guna.UI2.WinForms.Guna2WinProgressIndicator loading = new Guna.UI2.WinForms.Guna2WinProgressIndicator()
+            if (is_loading == false)
             {
-                Size = new Size(90, 90),
-                UseTransparentBackground = true,
-                AutoStart = true,
-                Location = new Point((1340 - 90) / 2, (690 - 90) / 2),
-                Name = "panel_loading"
-            };
-            pnl.Controls.Add(loading);
-            loading.Show();
-            loading.BringToFront();
+                is_loading = true;
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var pnl = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                pnl.Enabled = false;
+
+                Guna.UI2.WinForms.Guna2WinProgressIndicator loading = new Guna.UI2.WinForms.Guna2WinProgressIndicator()
+                {
+                    Size = new Size(90, 90),
+                    BackColor = Color.Transparent,
+                    UseTransparentBackground = true,
+                    AutoStart = true,
+                    Location = new Point((1340 - 90) / 2, (690 - 90) / 2),
+                    Name = "panel_loading"
+                };
+                pnl.Controls.Add(loading);
+                loading.Show();
+                loading.BringToFront();
+            }
         }
 
         public static void hide_loading()
@@ -53,6 +59,7 @@ namespace SchoolSync
             var pnl = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
             pnl.Controls.Remove(pnl.Controls["panel_loading"]);
             pnl.Enabled = true;
+            is_loading = false;
         }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)

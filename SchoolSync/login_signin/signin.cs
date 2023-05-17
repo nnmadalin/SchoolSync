@@ -114,20 +114,7 @@ namespace SchoolSync.login_signin
 
         }
 
-        string generate_token()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[128];
-            var random = new Random();
-
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-
-            var finalString = new String(stringChars);
-            return finalString.ToString();
-        }
+       
 
         public static string passencrypt(string text)
         {
@@ -169,7 +156,9 @@ namespace SchoolSync.login_signin
                         url = "https://schoolsync.nnmadalin.me/api/post.php";
                         data = new Dictionary<string, string>();
                         data.Add("token", schoolsync.token);
-                        string token = generate_token();
+
+                        multiple_class multiple_Class = new multiple_class();
+                        string token = multiple_class.generate_token();
                         data.Add("sql", string.Format("insert into accounts (token, full_name, username, email, password) values ('{0}', '{1}', '{2}', '{3}', '{4}')", token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text)));
                         task = await multiple_class.PostRequestAsync(url, data);
                         Console.WriteLine(task["message"] + " " + data["sql"]);
@@ -179,8 +168,6 @@ namespace SchoolSync.login_signin
                             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                             panel.Controls.Add(frm);
-                            frm.Location = new Point(840, 50);
-                            frm.Show();
                             notification.success.message = "Cont creat cu succes. Intra pe email si confirma contul!";
                             frm.BringToFront();
                             guna2TextBox1.Text = guna2TextBox2.Text = guna2TextBox3.Text = guna2TextBox4.Text = guna2TextBox5.Text = "";
@@ -191,8 +178,6 @@ namespace SchoolSync.login_signin
                             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                             panel.Controls.Add(frm);
-                            frm.Location = new Point(840, 50);
-                            frm.Show();
                             notification.error.message = "Ceva nu e mers bine!";
                             frm.BringToFront();
                         }
@@ -204,8 +189,6 @@ namespace SchoolSync.login_signin
                         schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                         var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                         panel.Controls.Add(frm);
-                        frm.Location = new Point(840, 50);
-                        frm.Show();
                         notification.error.message = "Eroare API";
                         frm.BringToFront();
                     }
@@ -215,8 +198,6 @@ namespace SchoolSync.login_signin
                         schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                         var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                         panel.Controls.Add(frm);
-                        frm.Location = new Point(840, 50);
-                        frm.Show();
                         notification.error.message = "Eroare API - token";
                         frm.BringToFront();
                     }
@@ -227,8 +208,6 @@ namespace SchoolSync.login_signin
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
-                    frm.Location = new Point(840, 50);
-                    frm.Show();
                     notification.error.message = "Eroare API";
                     frm.BringToFront();
                 }
@@ -238,8 +217,6 @@ namespace SchoolSync.login_signin
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
-                    frm.Location = new Point(840, 50);
-                    frm.Show();
                     notification.error.message = "Eroare API - token";
                     frm.BringToFront();
                 }

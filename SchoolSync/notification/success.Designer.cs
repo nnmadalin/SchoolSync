@@ -120,6 +120,7 @@ namespace SchoolSync.notification
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2PictureBox1);
+            this.Location = new System.Drawing.Point(840, 50);
             this.Name = "success";
             this.Size = new System.Drawing.Size(481, 96);
             this.Load += new System.EventHandler(this.success_Load);

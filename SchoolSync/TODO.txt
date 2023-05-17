@@ -1,12 +1,11 @@
 ﻿de adaugat sistem recaptcha la sign in si la autentificare
 de adaugat last_login in autentificare
 de adaugat la login, daca contul a fost activat!
+de refacut php pt verificare email!
 
 pt judet vr sa fac: materiale educative si brainly!!!!!!!!!!!!!!!
 
 
-Sa comprim fisierele, cat de mult se poate
-sistem de urcat pe server, maxim, 5 MB per fisier
 de facut fisier php care returneaza fisierul, getfiles?....
 
 de populat pagina principala la invataunit

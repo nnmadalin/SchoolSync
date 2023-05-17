@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace SchoolSync.pages
 {
@@ -52,23 +54,42 @@ namespace SchoolSync.pages
                 opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf) " +
                     "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf";
                 DialogResult dir = opf.ShowDialog();
+
+
                 if (dir == DialogResult.OK)
                 {
-                    Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
-                    {
-                        FillColor = Color.FromArgb(180, 180, 180),
-                        BorderColor = Color.FromArgb(180, 180, 180),
-                        ForeColor = Color.Black,
-                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
-                        AutoRoundedCorners = false,
-                        BorderRadius = 10,
-                        TextAlign = HorizontalAlignment.Left,
-                        Size = new Size(100, 35),
-                        Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
-                        Tag = opf.FileName.ToString()
-                    };
+                    FileInfo fl = new FileInfo(opf.FileName);
 
-                    this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
+                    long fileSizeibBytes = fl.Length;
+                    long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                    if (fileSizeibMbs > 5)
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                        {
+                            FillColor = Color.FromArgb(180, 180, 180),
+                            BorderColor = Color.FromArgb(180, 180, 180),
+                            ForeColor = Color.Black,
+                            Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                            AutoRoundedCorners = false,
+                            BorderRadius = 10,
+                            TextAlign = HorizontalAlignment.Left,
+                            Size = new Size(100, 35),
+                            Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
+                            Tag = opf.FileName.ToString()
+                        };
+
+                        this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
+                    }
                 }
             }
             else
@@ -89,8 +110,9 @@ namespace SchoolSync.pages
             Guna.UI2.WinForms.Guna2TextBox btn = sender as Guna.UI2.WinForms.Guna2TextBox;
             btn.BorderColor = Color.FromArgb(213, 218, 223);
         }
+        
 
-        private void send_question(object sender, EventArgs e)
+        private async void send_question(object sender, EventArgs e)
         {
             if(this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"].Text.Trim() == "")
             {
@@ -99,9 +121,59 @@ namespace SchoolSync.pages
             else
             {
                 //TOTUL ESTE BINE
+                schoolsync.show_loading();
+
                 ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"]).BorderColor = Color.FromArgb(213, 218, 223);
-            
+
+                multiple_class _class = new multiple_class();
+                string token = _class.generate_token();
+
+                Control combobox = this.Controls["panel_question"].Controls["sub_panel_question"].Controls["combobox_materii"];
+                Control textbox = this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"];
+
+                string files = "";
+
+                foreach (Control control in this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls)
+                {
+                    string token_file = await _class.UploadFileAsync(control.Tag.ToString());
+                    if (token_file != null)
+                        files += (token_file + ";");
+                }
+
+                string url = "https://schoolsync.nnmadalin.me/api/post.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("sql", string.Format("insert into invataunit(token, created, category, question, answers, files) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", 
+                    token, login_signin.login.accounts_user["username"], ((ComboBox)combobox).SelectedItem, textbox.Text, "{}", files));
                 
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if(task["message"] == "insert success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    
+                    notification.success.message = "Intrebare salvata cu succes!";
+                    frm.BringToFront();
+                    foreach (Control control in this.Controls)
+                    {
+                        if (control.Name == "panel_question")
+                        {
+                            this.Controls.Remove(control);
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a functionat bine!";
+                    frm.BringToFront();
+                }
             }
         }
 
@@ -154,7 +226,7 @@ namespace SchoolSync.pages
                 Location = new Point(10, 50),
                 Multiline = true,
                 Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular),
-                PlaceholderText = "Scrie întrebarea aici (sfat: pentru a primi cel mai bun răspuns, formulează întrebarea cât\r\nmai clar)",
+                PlaceholderText = "Scrie întrebarea aici!",
                 Name = "txtbox"
             };
             txtbox.TextChanged += panel_question_textbox;
@@ -188,7 +260,8 @@ namespace SchoolSync.pages
                 Location = new Point(15, 365),
                 Items = { "Limba română", "Matematică", "Istorie", "Chimie", "Biologie", "Fizică", "Geografie",
                            "Studii sociale", "Informatică", "Engleza", "Franceza", "Alte limbi", "Ed. tehnologică", "Arte", "Ed. muzicală"},
-                FillColor = Color.FromArgb(235, 242, 247),                
+                FillColor = Color.FromArgb(235, 242, 247),    
+                Name = "combobox_materii"
             };
             cmb.SelectedIndex = 0;
 
