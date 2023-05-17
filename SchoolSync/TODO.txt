@@ -3,13 +3,11 @@ de adaugat last_login in autentificare
 de adaugat la login, daca contul a fost activat!
 de refacut php pt verificare email!
 
-pt judet vr sa fac: materiale educative si brainly!!!!!!!!!!!!!!!
+pt judet vr sa fac: materiale educative si invataunit, profil, !!!!!!!!!!!!!!!
 
 
-de facut fisier php care returneaza fisierul, getfiles?....
-
-de populat pagina principala la invataunit
-de facut sistemele pt intrebarile/raspunsuri
-daca vr sa raspunzi, ai un btn cu raspunde, acolo apare numere, data, categorie, nr de raspunsuri si afisarea rasp + heart,
+de facut sistemele pt /raspunsuri
+sortare dupa cele mai recente!
+pt pagina cu intrebarea, documentele vor fi afisate ca si la classroom, dar size mai mic ;)
 sistem de raspundere, aproapre identic ca sistemul de adaugare question (doar textbox si fisierele), aici limita este de 3 fisiere
-de facut sistem de favorite
+de facut sistem de favorite, vezi da favorite din pagina intrebarii

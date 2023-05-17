@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.IO;
 
 namespace SchoolSync.pages
@@ -31,6 +32,8 @@ namespace SchoolSync.pages
 
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             btn.FillColor = Color.FromArgb(225, 225, 225);
+            sort = btn.Text;
+            load_question_panel();
         }
 
         private void close_add_question(object sender, EventArgs e)
@@ -291,57 +294,162 @@ namespace SchoolSync.pages
 
         }
 
+        string sort = "";
 
         async void load_question_panel()
         {
-            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
-            {
-                Size = new Size(945, 137),
-                BorderColor = Color.FromArgb(96, 211, 153),
-                BorderRadius = 15,
-                BorderThickness = 2
-            };
-            Label lbl = new Label()
-            {
-                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
-                Location = new Point(28, 18),
-                Text = "InvataUnit • Raspuns",
-                AutoSize = true
-            };
-            Label lbl_question = new Label()
-            {
-                Font = new Font("Segoe UI Semibold", 20, FontStyle.Regular),
-                Location = new Point(25, 39),
-                AutoSize = true,
-                Text = ""
-            };
-            if(lbl_question.Text.Length > 55)
-            {
-                lbl_question.Text = lbl_question.Text.Substring(0, 55) + "...";
-            }
-            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
-            {
-                Text = "Răspunde",
-                Tag = "",
-                FillColor = Color.Transparent,
-                ForeColor = Color.Black,
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                Cursor = Cursors.Hand,
-                BorderRadius = 15,
-                BorderColor = Color.Black,
-                BorderThickness = 2,
-                Size = new Size(146, 36),
-                Location = new Point(781, 88)
-            };
+            this.Controls["flowLayoutPanel1"].Controls.Clear();
 
-            pnl.Controls.Add(lbl);
-            pnl.Controls.Add(lbl_question);
-            pnl.Controls.Add(btn);
-            this.Controls["flowLayoutPanel1"].Controls.Add(pnl);
+            sort = sort.Trim();
+            string answer_sort = guna2ComboBox2.SelectedItem.ToString();
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+
+            if (sort.Trim() == "" || sort == "Toate materiile")
+            {
+                if (answer_sort == "" || answer_sort == "Toate")
+                {
+                    data.Add("sql", string.Format("select * from invataunit"));
+
+                    if (guna2Button17.ShadowDecoration.Enabled == true)
+                        data["sql"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
+                }
+                else
+                {
+                    if (answer_sort == "Fără răspuns")
+                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) = 2"));
+                    else
+                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) > 2"));
+                    if (guna2Button17.ShadowDecoration.Enabled == true)
+                        data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+                }
+            }
+            else
+            {
+                if (answer_sort == "" || answer_sort == "Toate")
+                    data.Add("sql", string.Format("select * from invataunit where category = '{0}'", sort));
+                else
+                {
+                    if (answer_sort == "Fără răspuns")
+                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) = 2", sort));
+                    else
+                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) > 2", sort));
+                }
+                if (guna2Button17.ShadowDecoration.Enabled == true)
+                    data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+            }
+            if (guna2Button17.ShadowDecoration.Enabled == true)
+            {
+                data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+            }
+
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            JObject jb = task;
+
+            if(task["message"] == "success")
+            {
+                for(int i = 0; i < 15 && i < jb.Count - 1; i++)
+                {
+                    Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                    {
+                        Size = new Size(925, 137),
+                        BorderColor = Color.FromArgb(96, 211, 153),
+                        BorderRadius = 15,
+                        BorderThickness = 2
+                    };
+                    Label lbl = new Label()
+                    {
+                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                        Location = new Point(28, 20),
+                        Text = "",
+                        AutoSize = true
+                    };
+                    Label lbl_question = new Label()
+                    {
+                        Font = new Font("Segoe UI Semibold", 20, FontStyle.Regular),
+                        Location = new Point(25, 39),
+                        AutoSize = true,
+                        Text = ""
+                    };
+                    Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+                    {
+                        Text = "Răspunde",
+                        Tag = "",
+                        FillColor = Color.Transparent,
+                        ForeColor = Color.Black,
+                        Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                        Cursor = Cursors.Hand,
+                        BorderRadius = 15,
+                        BorderColor = Color.Black,
+                        BorderThickness = 2,
+                        Size = new Size(146, 36),
+                        Location = new Point(740, 88)
+                    };
+
+                    string date = task[i.ToString()]["data"];
+                    DateTime dt = Convert.ToDateTime(date);
+
+                    lbl.Text = task[i.ToString()]["created"] + " • " + task[i.ToString()]["category"] + " • " 
+                        + dt.Day + "/" + dt.Month  + "/" + dt.Year + " " + Convert.ToDateTime(date).ToShortTimeString();
+                    lbl_question.Text = task[i.ToString()]["question"];
+
+                    if (lbl_question.Text.Length > 55)
+                    {
+                        lbl_question.Text = lbl_question.Text.Substring(0, 55) + "...";
+                    }
+
+                    btn.Tag = task[i.ToString()]["token"];
+                    pnl.Controls.Add(lbl);
+                    pnl.Controls.Add(lbl_question);
+                    pnl.Controls.Add(btn);
+                    this.Controls["flowLayoutPanel1"].Controls.Add(pnl);
+
+                }
+            }
+
+           
         }
 
         private void invataunit_Load(object sender, EventArgs e)
         {
+            load_question_panel();
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            load_question_panel();
+        }
+
+        private void guna2Button19_Click(object sender, EventArgs e)
+        {            
+            guna2Button19.ShadowDecoration.Enabled = true;
+            guna2Button17.ShadowDecoration.Enabled = false;
+            guna2Button18.ShadowDecoration.Enabled = false;
+            load_question_panel();
+        }
+
+        private void guna2Button17_Click(object sender, EventArgs e)
+        {
+            guna2Button19.ShadowDecoration.Enabled = false;
+            guna2Button17.ShadowDecoration.Enabled = true;
+            guna2Button18.ShadowDecoration.Enabled = false;
+            load_question_panel();
+        }
+
+        private void guna2Button18_Click(object sender, EventArgs e)
+        {
+            guna2Button19.ShadowDecoration.Enabled = false;
+            guna2Button17.ShadowDecoration.Enabled = false;
+            guna2Button18.ShadowDecoration.Enabled = true;
             load_question_panel();
         }
     }
