@@ -111,7 +111,6 @@ namespace SchoolSync.pages
             btn.BorderColor = Color.FromArgb(213, 218, 223);
         }
         
-
         private async void send_question(object sender, EventArgs e)
         {
             if(this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"].Text.Trim() == "")
@@ -292,6 +291,58 @@ namespace SchoolSync.pages
 
         }
 
-        
+
+        async void load_question_panel()
+        {
+            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+            {
+                Size = new Size(945, 137),
+                BorderColor = Color.FromArgb(96, 211, 153),
+                BorderRadius = 15,
+                BorderThickness = 2
+            };
+            Label lbl = new Label()
+            {
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Location = new Point(28, 18),
+                Text = "InvataUnit • Raspuns",
+                AutoSize = true
+            };
+            Label lbl_question = new Label()
+            {
+                Font = new Font("Segoe UI Semibold", 20, FontStyle.Regular),
+                Location = new Point(25, 39),
+                AutoSize = true,
+                Text = ""
+            };
+            if(lbl_question.Text.Length > 55)
+            {
+                lbl_question.Text = lbl_question.Text.Substring(0, 55) + "...";
+            }
+            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Text = "Răspunde",
+                Tag = "",
+                FillColor = Color.Transparent,
+                ForeColor = Color.Black,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Cursor = Cursors.Hand,
+                BorderRadius = 15,
+                BorderColor = Color.Black,
+                BorderThickness = 2,
+                Size = new Size(146, 36),
+                Location = new Point(781, 88)
+            };
+
+            pnl.Controls.Add(lbl);
+            pnl.Controls.Add(lbl_question);
+            pnl.Controls.Add(btn);
+            this.Controls["flowLayoutPanel1"].Controls.Add(pnl);
+        }
+
+        private void invataunit_Load(object sender, EventArgs e)
+        {
+            load_question_panel();
+        }
     }
 }

@@ -54,8 +54,13 @@ namespace SchoolSync.pages
             this.guna2Button10 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button19 = new Guna.UI2.WinForms.Guna2Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.guna2Button20 = new Guna.UI2.WinForms.Guna2Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel_materii.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Separator1
@@ -95,7 +100,7 @@ namespace SchoolSync.pages
             "Școala Primară (Clasele I-IV)",
             "Gimnaziu (Clasele V-VIII)",
             "Liceu"});
-            this.guna2ComboBox1.Location = new System.Drawing.Point(330, 15);
+            this.guna2ComboBox1.Location = new System.Drawing.Point(221, 15);
             this.guna2ComboBox1.Name = "guna2ComboBox1";
             this.guna2ComboBox1.Size = new System.Drawing.Size(232, 36);
             this.guna2ComboBox1.StartIndex = 0;
@@ -118,7 +123,7 @@ namespace SchoolSync.pages
             "Toate",
             "Fără răspuns",
             "S-a răspuns"});
-            this.guna2ComboBox2.Location = new System.Drawing.Point(568, 14);
+            this.guna2ComboBox2.Location = new System.Drawing.Point(459, 15);
             this.guna2ComboBox2.Name = "guna2ComboBox2";
             this.guna2ComboBox2.Size = new System.Drawing.Size(139, 36);
             this.guna2ComboBox2.StartIndex = 0;
@@ -564,7 +569,7 @@ namespace SchoolSync.pages
             this.guna2Button19.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(211)))), ((int)(((byte)(153)))));
             this.guna2Button19.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button19.Location = new System.Drawing.Point(713, 14);
+            this.guna2Button19.Location = new System.Drawing.Point(665, 14);
             this.guna2Button19.Name = "guna2Button19";
             this.guna2Button19.Size = new System.Drawing.Size(140, 36);
             this.guna2Button19.TabIndex = 19;
@@ -573,10 +578,35 @@ namespace SchoolSync.pages
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.guna2Panel1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(218, 69);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(952, 608);
             this.flowLayoutPanel1.TabIndex = 5;
+            // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(211)))), ((int)(((byte)(153)))));
+            this.guna2Panel1.BorderRadius = 15;
+            this.guna2Panel1.BorderThickness = 5;
+            this.guna2Panel1.Controls.Add(this.label3);
+            this.guna2Panel1.Controls.Add(this.guna2Button20);
+            this.guna2Panel1.Controls.Add(this.label2);
+            this.guna2Panel1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(211)))), ((int)(((byte)(153)))));
+            this.guna2Panel1.Location = new System.Drawing.Point(3, 3);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(945, 168);
+            this.guna2Panel1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(28, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(159, 21);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "InvataUnit • Raspuns";
             // 
             // guna2Button20
             // 
@@ -589,12 +619,22 @@ namespace SchoolSync.pages
             this.guna2Button20.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(199)))), ((int)(((byte)(191)))));
             this.guna2Button20.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button20.Location = new System.Drawing.Point(218, 15);
+            this.guna2Button20.Location = new System.Drawing.Point(32, 105);
             this.guna2Button20.Name = "guna2Button20";
-            this.guna2Button20.Size = new System.Drawing.Size(90, 36);
-            this.guna2Button20.TabIndex = 20;
+            this.guna2Button20.Size = new System.Drawing.Size(187, 36);
+            this.guna2Button20.TabIndex = 21;
             this.guna2Button20.Text = "Întreabă";
             this.guna2Button20.Click += new System.EventHandler(this.guna2Button20_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Black", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(20, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(404, 72);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Ce vrei să ştii?";
             // 
             // invataunit
             // 
@@ -604,15 +644,18 @@ namespace SchoolSync.pages
             this.Controls.Add(this.guna2ComboBox2);
             this.Controls.Add(this.guna2ComboBox1);
             this.Controls.Add(this.guna2Button19);
-            this.Controls.Add(this.guna2Button20);
             this.Controls.Add(this.panel_materii);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.guna2Button18);
             this.Controls.Add(this.guna2Button17);
             this.Name = "invataunit";
             this.Size = new System.Drawing.Size(1192, 690);
+            this.Load += new System.EventHandler(this.invataunit_Load);
             this.panel_materii.ResumeLayout(false);
             this.panel_materii.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.guna2Panel1.ResumeLayout(false);
+            this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -643,6 +686,9 @@ namespace SchoolSync.pages
         private Guna.UI2.WinForms.Guna2Panel panel_materii;
         private Guna.UI2.WinForms.Guna2Button guna2Button19;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private System.Windows.Forms.Label label3;
         private Guna.UI2.WinForms.Guna2Button guna2Button20;
+        private System.Windows.Forms.Label label2;
     }
 }
