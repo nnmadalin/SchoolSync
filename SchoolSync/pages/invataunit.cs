@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Dynamic;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -191,6 +191,93 @@ namespace SchoolSync.pages
                 }
             }
         }
+        
+        private async void send_answer(object sender, EventArgs e)
+        {
+            if (this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"]).BorderColor = Color.Red;
+            }
+            else
+            {
+                //TOTUL ESTE BINE
+                schoolsync.show_loading();
+
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"]).BorderColor = Color.FromArgb(213, 218, 223);
+
+                multiple_class _class = new multiple_class();
+                string token = ((Guna.UI2.WinForms.Guna2Button)sender).Tag.ToString();
+
+                Control textbox = this.Controls["panel_question"].Controls["sub_panel_question"].Controls["txtbox"];
+
+                string files = "";
+
+                foreach (Control control in this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls)
+                {
+                    string token_file = await _class.UploadFileAsync(control.Tag.ToString());
+                    if (token_file != null)
+                        files += (token_file + ";");
+                }
+
+                //get json file
+
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("sql", string.Format("select * from invataunit where token = '{0}'", token));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                
+                if (task["message"] == "success") 
+                {
+                    int x = 0;
+                    dynamic mini = JsonConvert.DeserializeObject((string)task["0"]["answers"]);
+                    JObject jbo = JObject.FromObject(mini);
+                    JObject sub_json = new JObject();
+
+                    sub_json.Add("username", login_signin.login.accounts_user["username"]);
+                    sub_json.Add("data", DateTime.Now.ToString());
+                    sub_json.Add("answer", textbox.Text);
+                    sub_json.Add("files", files);
+                    jbo.Add(jbo.Count.ToString(), sub_json);
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("sql", string.Format("update invataunit set answers = '{0}' where token = '{1}'", JsonConvert.SerializeObject(jbo), token));
+
+                    task = await _class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Raspuns salvata cu succes!";
+                        frm.BringToFront();
+                        foreach (Control control in this.Controls)
+                        {
+                            if (control.Name == "panel_question")
+                            {
+                                this.Controls.Remove(control);                                
+                                break;
+                            }
+                        }
+                        simple_load_question_with_answer();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a functionat bine!";
+                        frm.BringToFront();
+                    }
+                }
+            }
+        }
 
         private void guna2Button20_Click(object sender, EventArgs e)
         {
@@ -307,7 +394,112 @@ namespace SchoolSync.pages
 
         }
 
-        string sort = "";
+        private void add_answer(object sender, EventArgs e)
+        {
+            Panel panel_question = new Panel()
+            {
+                Size = new Size(1192, 690),
+                BackColor = Color.FromArgb(125, 96, 186, 247),
+                Name = "panel_question"
+            };
+
+            Guna.UI2.WinForms.Guna2Panel sub_panel_question = new Guna.UI2.WinForms.Guna2Panel()
+            {
+                Size = new Size(600, 420),
+                FillColor = Color.White,
+                UseTransparentBackground = true,
+                BorderRadius = 20,
+                Location = new Point((1192 - 600) / 2, (690 - 500) / 2),
+                Name = "sub_panel_question"
+            };
+
+            Label title = new Label()
+            {
+                Text = "Raspunde la intrebare!",
+                Width = 300,
+                Location = new Point(15, 15),
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold)
+            };
+
+            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Image = SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48,
+                ImageAlign = HorizontalAlignment.Center,
+                Size = new Size(25, 25),
+                ImageSize = new Size(25, 25),
+                FillColor = Color.Transparent,
+                UseTransparentBackground = true,
+                Location = new Point(550, 15),
+                Cursor = Cursors.Hand
+            };
+            btn.Click += close_add_question;
+
+            Guna.UI2.WinForms.Guna2TextBox txtbox = new Guna.UI2.WinForms.Guna2TextBox()
+            {
+                FillColor = Color.FromArgb(235, 242, 247),
+                BorderRadius = 20,
+                PlaceholderForeColor = Color.Gray,
+                ForeColor = Color.Black,
+                Size = new Size(500, 200),
+                Location = new Point(10, 50),
+                Multiline = true,
+                Font = new Font("Segoe UI Semibold", 10, FontStyle.Regular),
+                PlaceholderText = "Scrie raspunsul aici!",
+                Name = "txtbox"
+            };
+            txtbox.TextChanged += panel_question_textbox;
+
+            FlowLayoutPanel flp = new FlowLayoutPanel()
+            {
+                Size = new Size(540, 50),
+                BackColor = Color.FromArgb(242, 242, 242),
+                Location = new Point(40, 300),
+                Name = "flp_files"
+            };
+
+            Guna.UI2.WinForms.Guna2Button add_file = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Image = SchoolSync.Properties.Resources.attach_file_FILL1_wght700_GRAD0_opsz48,
+                ImageAlign = HorizontalAlignment.Center,
+                Size = new Size(25, 25),
+                ImageSize = new Size(25, 25),
+                FillColor = Color.Transparent,
+                UseTransparentBackground = true,
+                Location = new Point(10, 310),
+                Cursor = Cursors.Hand
+            };
+
+            add_file.Click += open_file_dialog;
+
+
+            Guna.UI2.WinForms.Guna2Button btn_finish = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Size = new Size(170, 40),
+                FillColor = Color.Black,
+                ForeColor = Color.White,
+                BorderRadius = 15,
+                Text = "Raspunde!",
+                Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                UseTransparentBackground = true,
+                Location = new Point(10, 370),
+                Cursor = Cursors.Hand,
+                Tag = token_question
+            };
+            btn_finish.Click += send_answer;
+
+            sub_panel_question.Controls.Add(btn);
+            sub_panel_question.Controls.Add(title);
+            sub_panel_question.Controls.Add(txtbox);
+            sub_panel_question.Controls.Add(flp);
+            sub_panel_question.Controls.Add(add_file);
+            sub_panel_question.Controls.Add(btn_finish);
+            panel_question.Controls.Add(sub_panel_question);
+            this.Controls.Add(panel_question);
+            panel_question.BringToFront();
+
+        }
+
+        string sort = "", token_question;
 
         private void open_link(object sender, EventArgs e)
         {
@@ -315,20 +507,113 @@ namespace SchoolSync.pages
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
         }
 
-        private async void load_question_with_answer(object sender, EventArgs e)
+        private void open_link_chip(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Chip;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
+        }
+
+        private async void add_close_favorite(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from accounts where token = '{0}'", login_signin.login.accounts_user["token"]));
+
+            bool ok = false;
+            
+            if (btn.Tag == "1")
+            {
+                btn.Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48;
+                btn.Tag = "0";
+                ok = true;
+            }
+            else
+            {
+                btn.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+                btn.Tag = "1";
+            }
+
+            multiple_class _Class = new multiple_class();
+            dynamic task = await _Class.PostRequestAsync(url, data);
+
+            if(task["message"] == "success")
+            {
+                string str = task["0"]["favorite_invataunit"];
+                if(ok == false)
+                {
+                    str += (token_question + ";");
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("sql", string.Format("update accounts set favorite_invataunit = '{0}'", str));
+                    task = await _Class.PostRequestAsync(url, data);
+                    if(task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Adaugat la favorite cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu e mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+                else
+                {
+                    string[] split = str.Split(';');
+                    string fns = "";
+                    for(int i = 0; i < split.Length - 1; i++)
+                    {
+                        if(split[i] != token_question)
+                        {
+                            fns += (split[i] + ";");
+                        }
+                    }
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("sql", string.Format("update accounts set favorite_invataunit = '{0}'", fns));
+                    task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Scos de la favorite cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu e mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+            }
+        }
+
+        async void simple_load_question_with_answer()
         {
             multiple_class _Class = new multiple_class();
 
-            string token = (sender as Guna.UI2.WinForms.Guna2Button).Tag.ToString();
-            Console.WriteLine(token);
-            FlowLayoutPanel panel_question_with_answer = new FlowLayoutPanel()
-            {
-                Size = new Size(1192, 690),
-                Padding = new Padding(0,0, 0, 20),
-                AutoScroll = true,
-                BackColor = Color.White,
-                Name = "panel_question_with_answer"
-            };
+            this.Controls["panel_question_with_answer"].Controls.Clear();
 
             Guna.UI2.WinForms.Guna2CircleButton btn = new Guna.UI2.WinForms.Guna2CircleButton()
             {
@@ -344,6 +629,51 @@ namespace SchoolSync.pages
                 Cursor = Cursors.Hand
             };
             btn.Click += close_question_with_answer;
+
+
+            Guna.UI2.WinForms.Guna2Button btn_add_favorite = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48,
+                Size = new Size(140, 45),
+                ImageAlign = HorizontalAlignment.Left,
+                ImageSize = new Size(30, 30),
+                UseTransparentBackground = true,
+                Name = "0",
+                Tag = token_question,
+                ForeColor = Color.Black,
+                FillColor = Color.White,
+                BorderColor = Color.Black,
+                BorderThickness = 2,
+                BorderRadius = 15,
+                Location = new Point(10, 10),
+                Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold),
+                Text = "Favorite!",
+                TextAlign = HorizontalAlignment.Right,
+                Cursor = Cursors.Hand
+            };
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from accounts where token = '{0}'", login_signin.login.accounts_user["token"]));
+
+            dynamic task = await _Class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                string str = task["0"]["favorite_invataunit"];
+                string[] split = str.Split(';');
+                for(int i = 0; i < split.Length - 1; i++)
+                {
+                    if(split[i] == token_question)
+                    {
+                        btn_add_favorite.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+                        btn_add_favorite.Tag = "1";
+                        break;
+                    }
+                }
+            }
+
+            btn_add_favorite.Click += add_close_favorite;
 
             //panel + elemente intrebare
             Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
@@ -366,7 +696,7 @@ namespace SchoolSync.pages
                 UseTransparentBackground = true,
                 Location = new Point(30, 20)
             };
-            cpb.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_"+ login_signin.login.accounts_user["token"] + ".png");
+            cpb.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
 
             Label lbl_name = new Label()
             {
@@ -383,7 +713,7 @@ namespace SchoolSync.pages
                 Text = "",
                 AutoSize = true
             };
-            Label lbl_question= new Label()
+            Label lbl_question = new Label()
             {
                 Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
                 ForeColor = Color.Black,
@@ -392,22 +722,24 @@ namespace SchoolSync.pages
                 AutoSize = true,
                 MaximumSize = new Size(1110, 0)
             };
-            Label lbl_panel_before= new Label()
+            Label lbl_panel_before = new Label()
             {
                 Text = "Fisiere atasate:",
-                AutoSize = true, 
+                AutoSize = true,
                 Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
-            };            
+            };
 
             //Extrage date din API, dupa token
-            string url = "https://schoolsync.nnmadalin.me/api/get.php";
-            Dictionary<string, string> data = new Dictionary<string, string>();
+            url = "https://schoolsync.nnmadalin.me/api/get.php";
+            data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from invataunit where token = '{0}'", token));
+            data.Add("sql", string.Format("select * from invataunit where token = '{0}'", token_question));
 
             FlowLayoutPanel flp = new FlowLayoutPanel()
             {
-                Size = new Size(1110, 185),
+                MinimumSize = new Size(1110, 0),
+                AutoSize = true,
+                Padding = new Padding(0, 0, 0, 20)
             };
             Label lbl_panel_file_not = new Label()
             {
@@ -417,9 +749,21 @@ namespace SchoolSync.pages
                 Text = "Nu sunt fisiere atasate!",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
-           
-            dynamic task = await _Class.PostRequestAsync(url, data);
+            Guna.UI2.WinForms.Guna2Button btn_add_answer = new Guna.UI2.WinForms.Guna2Button()
+            {
+                FillColor = Color.Black,
+                Size = new Size(150, 40),
+                Text = "Adauga Mesaj",
+                ForeColor = Color.White,
+                Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            btn_add_answer.Click += add_answer;
 
+            task = await _Class.PostRequestAsync(url, data);
+
+            this.Controls["panel_question_with_answer"].Controls.Add(btn);
+            this.Controls["panel_question_with_answer"].Controls.Add(btn_add_favorite);
             if (task["message"] == "success")
             {
                 lbl_name.Text = task["0"]["created"];
@@ -428,7 +772,7 @@ namespace SchoolSync.pages
                         + dt.Day + "/" + dt.Month + "/" + dt.Year + " " + Convert.ToDateTime(date).ToShortTimeString(); ;
                 lbl_question.Text = task["0"]["question"];
 
-                if(task["0"]["files"] == "")
+                if (task["0"]["files"] == "")
                 {
                     flp.Controls.Add(lbl_panel_file_not);
                 }
@@ -483,7 +827,7 @@ namespace SchoolSync.pages
                         flp_files_panel.Controls.Add(gcp);
                         flp_files_panel.Controls.Add(lbl_panel_file);
 
-                        if(splitplit[0].Length >= 10)
+                        if (splitplit[0].Length >= 10)
                         {
                             lbl_panel_file.Text = splitplit[0].Substring(0, 10) + "." + splitplit[1];
                         }
@@ -501,21 +845,144 @@ namespace SchoolSync.pages
                         panel_file_btn.Click += open_link;
                     }
                 }
+
+                string dst = task["0"]["answers"];
+                dynamic sub_task = JsonConvert.DeserializeObject(dst);
+                JObject jb = JObject.FromObject(sub_task);
+
+                pnl.Controls.Add(cpb);
+                pnl.Controls.Add(lbl_name);
+                pnl.Controls.Add(lbl_category_time);
+                pnl.Controls.Add(lbl_question);
+                this.Controls["panel_question_with_answer"].Controls.Add(pnl);
+                this.Controls["panel_question_with_answer"].Controls.Add(lbl_panel_before);
+                this.Controls["panel_question_with_answer"].Controls.Add(flp);
+                this.Controls["panel_question_with_answer"].Controls.Add(btn_add_answer);
+
+                for (int i = 0; i < jb.Count; i++)
+                {
+                    Guna.UI2.WinForms.Guna2Panel pnl_answer = new Guna.UI2.WinForms.Guna2Panel()
+                    {
+                        MaximumSize = new Size(1150, 0),
+                        MinimumSize = new Size(1150, 0),
+                        Padding = new Padding(0, 0, 0, 10),
+                        AutoSize = true,
+                        BorderColor = Color.FromArgb(96, 211, 153),
+                        BorderRadius = 15,
+                        BorderThickness = 1
+                    };
+
+                    Guna.UI2.WinForms.Guna2CirclePictureBox cpb_answer = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                    {
+                        Size = new Size(50, 50),
+                        ErrorImage = SchoolSync.Properties.Resources.standard_avatar,
+                        InitialImage = SchoolSync.Properties.Resources.standard_avatar,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        UseTransparentBackground = true,
+                        Location = new Point(30, 20)
+                    };
+                    cpb_answer.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
+
+                    Label lbl_name_answer = new Label()
+                    {
+                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                        Location = new Point(82, 25),
+                        Text = "",
+                        AutoSize = true
+                    };
+                    lbl_name_answer.Text = jb[i.ToString()]["username"].ToString();
+                    Label lbl_time_answer = new Label()
+                    {
+                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                        ForeColor = Color.FromArgb(145, 145, 145),
+                        Location = new Point(82, 45),
+                        Text = "",
+                        AutoSize = true
+                    };
+                    lbl_time_answer.Text = jb[i.ToString()]["data"].ToString();
+                    Label lbl_question_answer = new Label()
+                    {
+                        Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                        ForeColor = Color.Black,
+                        Location = new Point(10, 80),
+                        Text = "",
+                        AutoSize = true,
+                        MaximumSize = new Size(1110, 0)
+                    };
+                    lbl_question_answer.Text = jb[i.ToString()]["answer"].ToString();
+                    FlowLayoutPanel flp_answer = new FlowLayoutPanel()
+                    {
+                        MaximumSize = new Size(1150, 0),
+                        MinimumSize = new Size(1150, 0),
+                        AutoSize = true,
+                        Name = "flp_files"
+                    };
+
+                    string files = jb[i.ToString()]["files"].ToString();
+                    string[] split = files.Split(';');
+
+                    if (files != "")
+                    {
+                        for (int j = 0; j < split.Length - 1; j++)
+                        {
+                            Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                            {
+                                FillColor = Color.FromArgb(180, 180, 180),
+                                BorderColor = Color.FromArgb(180, 180, 180),
+                                ForeColor = Color.Black,
+                                Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                AutoRoundedCorners = false,
+                                BorderRadius = 10,
+                                TextAlign = HorizontalAlignment.Left,
+                                Size = new Size(150, 40),
+                                IsClosable = false,
+                                Cursor = Cursors.Hand
+                            };
+
+                            string[] splitsplit = split[j].Split('.');
+                            guna2Chip.Tag = split[j].ToString();
+                            if (splitsplit[0].Length > 10)
+                                guna2Chip.Text = splitsplit[0].Substring(0, 10) + "___." + splitsplit[1];
+                            else
+                                guna2Chip.Text = split[j];
+                            guna2Chip.Click += open_link_chip;
+                            flp_answer.Controls.Add(guna2Chip);
+                        }
+                    }
+
+
+                    pnl_answer.Controls.Add(cpb_answer);
+                    pnl_answer.Controls.Add(lbl_name_answer);
+                    pnl_answer.Controls.Add(lbl_time_answer);
+                    pnl_answer.Controls.Add(lbl_question_answer);
+                    pnl_answer.Controls.Add(flp_answer);
+
+                    this.Controls["panel_question_with_answer"].Controls.Add(pnl_answer);
+                    this.Controls["panel_question_with_answer"].Controls.Add(flp_answer);
+                }
+
+                
             }
+        }
+        
+        private async void load_question_with_answer(object sender, EventArgs e)
+        {
 
-            pnl.Controls.Add(cpb);
-            pnl.Controls.Add(lbl_name);
-            pnl.Controls.Add(lbl_category_time);
-            pnl.Controls.Add(lbl_question);
+            string token = (sender as Guna.UI2.WinForms.Guna2Button).Tag.ToString();
+            token_question = token;            
 
-
-
-            panel_question_with_answer.Controls.Add(btn);
-            panel_question_with_answer.Controls.Add(pnl);
-            panel_question_with_answer.Controls.Add(lbl_panel_before);
-            panel_question_with_answer.Controls.Add(flp);
+            FlowLayoutPanel panel_question_with_answer = new FlowLayoutPanel()
+            {
+                Size = new Size(1192, 690),
+                Padding = new Padding(0, 0, 0, 20),
+                AutoScroll = true,
+                BackColor = Color.White,
+                Name = "panel_question_with_answer"
+            };
             this.Controls.Add(panel_question_with_answer);
             panel_question_with_answer.BringToFront();
+
+            simple_load_question_with_answer();
         }
 
         void load_question_information_add()

@@ -6,7 +6,5 @@ de refacut php pt verificare email!
 pt judet vr sa fac: materiale educative si invataunit, profil, !!!!!!!!!!!!!!!
 
 
-de facut sistemele pt /raspunsuri
-sistem de raspundere, aproapre identic ca sistemul de adaugare question (doar textbox si fisierele), aici limita este de 3 fisiere
-de facut sistem de favorite, vezi da favorite din pagina intrebarii
+de facut sorta pe elemente favorite!
 de facut posibilitate editare

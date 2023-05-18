@@ -193,6 +193,26 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap favorite_FILL0_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("favorite_FILL0_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap favorite_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("favorite_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap graphic_eq_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("graphic_eq_FILL1_wght700_GRAD0_opsz48", resourceCulture);

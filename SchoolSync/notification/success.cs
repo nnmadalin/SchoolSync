@@ -17,11 +17,16 @@ namespace SchoolSync.notification
             InitializeComponent();
         }
 
-        int k = 0;
+        int k = 0, p = 1;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            label2.Text = message;
+            label2.Text = message_local;
+            if (p <= 3)
+            {
+                message_local = message;
+                p++;
+            }
             if (k == 301)
             {
                 timer1.Stop();
@@ -41,10 +46,11 @@ namespace SchoolSync.notification
         }
 
         public static string message = "";
+        string message_local = "";
 
         private void success_Load(object sender, EventArgs e)
         {
-            
+            message_local = message;
         }
     }
 }
