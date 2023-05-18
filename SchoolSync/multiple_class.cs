@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Net;
 using FluentFTP;
-using System.IO.Compression;
+using System.Drawing;
 
 namespace SchoolSync
 {
@@ -68,6 +68,26 @@ namespace SchoolSync
             }
         }
 
-        
+        public async Task<Image> IncarcaImagineAsync(string url)
+        {
+            try
+            {
+                using (var webClient = new WebClient())
+                {
+                    byte[] imageData = await webClient.DownloadDataTaskAsync(url);
+
+                    using (var ms = new System.IO.MemoryStream(imageData))
+                    {
+                        return Image.FromStream(ms);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return SchoolSync.Properties.Resources.standard_avatar;    
+            }
+        }
+
+
     }
 }
