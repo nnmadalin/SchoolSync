@@ -47,6 +47,7 @@ namespace SchoolSync.pages
                 }
             }
         }
+
         private void close_question_with_answer(object sender, EventArgs e)
         {
             foreach(Control control in this.Controls)
@@ -308,6 +309,12 @@ namespace SchoolSync.pages
 
         string sort = "";
 
+        private void open_link(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Button;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
+        }
+
         private async void load_question_with_answer(object sender, EventArgs e)
         {
             multiple_class _Class = new multiple_class();
@@ -411,8 +418,6 @@ namespace SchoolSync.pages
                 TextAlign = ContentAlignment.MiddleCenter,
             };
            
-            
-
             dynamic task = await _Class.PostRequestAsync(url, data);
 
             if (task["message"] == "success")
@@ -492,6 +497,8 @@ namespace SchoolSync.pages
                             gcp.Image = SchoolSync.Properties.Resources.description_FILL1_wght700_GRAD0_opsz48;
 
                         flp_files_panel.Controls.Add(panel_file_btn);
+                        panel_file_btn.Tag = split[i];
+                        panel_file_btn.Click += open_link;
                     }
                 }
             }
@@ -568,36 +575,36 @@ namespace SchoolSync.pages
             {
                 if (answer_sort == "" || answer_sort == "Toate")
                 {
-                    data.Add("sql", string.Format("select * from invataunit order by data DESC"));
-
+                    data.Add("sql", string.Format("select * from invataunit"));
                     if (guna2Button17.BorderThickness == 2)
-                        data["sql"] += " where created = '" + login_signin.login.accounts_user["username"] + "' orber by data DESC";
+                        data["sql"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
                 }
                 else
                 {
                     if (answer_sort == "Fără răspuns")
-                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) = 2 order by data DESC"));
+                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) = 2"));
                     else
-                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) > 2 order by data DESC"));
+                        data.Add("sql", string.Format("select * from invataunit where LENGTH(answers) > 2"));
                     if (guna2Button17.BorderThickness == 2)
-                        data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "' order by data DESC";
+                        data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
                 }
+                data["sql"] += " order by data DESC";
             }
             else
             {
                 if (answer_sort == "" || answer_sort == "Toate")
-                    data.Add("sql", string.Format("select * from invataunit where category = '{0}' order by data DESC", sort));
+                    data.Add("sql", string.Format("select * from invataunit where category = '{0}'", sort));
                 else
                 {
                     if (answer_sort == "Fără răspuns")
-                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) = 2 order by data DESC", sort));
+                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) = 2", sort));
                     else
-                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) > 2 order by data DESC", sort));
+                        data.Add("sql", string.Format("select * from invataunit where category = '{0}' and LENGTH(answers) > 2", sort));
                 }
-                if (guna2Button17.ShadowDecoration.Enabled == true)
-                    data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "' order by data DESC";
+                if (guna2Button17.BorderThickness == 2)
+                    data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+                data["sql"] += " order by data DESC";
             }
-
 
             dynamic task = await _class.PostRequestAsync(url, data);
             JObject jb = task;
