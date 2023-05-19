@@ -109,7 +109,7 @@ namespace SchoolSync.login_signin
                 }
                 else
                 {
-
+                    accounts_user = task["0"];
                     if (guna2ToggleSwitch1.Checked == true)
                     {
                         Properties.Settings.Default.Data_account = JsonConvert.SerializeObject(accounts_user);
@@ -121,7 +121,6 @@ namespace SchoolSync.login_signin
                         Properties.Settings.Default.Save();
                     }
                     var frm = new navbar_home();
-                    accounts_user = task["0"];
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
