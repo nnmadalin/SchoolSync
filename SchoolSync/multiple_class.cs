@@ -24,6 +24,16 @@ namespace SchoolSync
             return json;
         }
 
+        public async Task<dynamic> PostRequestAsync_norefresh(string url, Dictionary<string, string> data)
+        {
+            var client = new HttpClient();
+            var content = new FormUrlEncodedContent(data);
+            var response = await client.PostAsync(url, content);
+            var responseString = await response.Content.ReadAsStringAsync();
+            dynamic json = JsonConvert.DeserializeObject(responseString);
+            return json;
+        }
+
         public string generate_token()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

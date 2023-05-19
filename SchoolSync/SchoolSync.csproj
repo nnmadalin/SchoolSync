@@ -244,6 +244,8 @@
     <None Include="Resources\download_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\favorite_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\favorite_FILL0_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\delete_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\edit_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

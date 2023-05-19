@@ -29,6 +29,7 @@ namespace SchoolSync.pages
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.label1 = new System.Windows.Forms.Label();
             this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -54,6 +55,9 @@ namespace SchoolSync.pages
             this.guna2Button19 = new Guna.UI2.WinForms.Guna2Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Button21 = new Guna.UI2.WinForms.Guna2Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.panel_materii.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +102,7 @@ namespace SchoolSync.pages
             this.guna2ComboBox2.Size = new System.Drawing.Size(167, 36);
             this.guna2ComboBox2.StartIndex = 0;
             this.guna2ComboBox2.TabIndex = 2;
-            this.guna2ComboBox2.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox2_SelectedIndexChanged);
+            this.guna2ComboBox2.SelectedIndexChanged += new System.EventHandler(this.combobox1);
             // 
             // guna2Button17
             // 
@@ -119,7 +123,7 @@ namespace SchoolSync.pages
             this.guna2Button17.Size = new System.Drawing.Size(158, 36);
             this.guna2Button17.TabIndex = 3;
             this.guna2Button17.Text = "Intrebarile tale";
-            this.guna2Button17.Click += new System.EventHandler(this.guna2Button17_Click);
+            this.guna2Button17.Click += new System.EventHandler(this.intrebarile_tale);
             // 
             // guna2Button18
             // 
@@ -140,7 +144,7 @@ namespace SchoolSync.pages
             this.guna2Button18.Size = new System.Drawing.Size(95, 36);
             this.guna2Button18.TabIndex = 4;
             this.guna2Button18.Text = "Favorite";
-            this.guna2Button18.Click += new System.EventHandler(this.guna2Button18_Click);
+            this.guna2Button18.Click += new System.EventHandler(this.favorite);
             // 
             // panel_materii
             // 
@@ -190,7 +194,7 @@ namespace SchoolSync.pages
             this.guna2Button16.TabIndex = 17;
             this.guna2Button16.Text = "Ed. muzicală";
             this.guna2Button16.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button16.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button16.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button5
             // 
@@ -213,7 +217,7 @@ namespace SchoolSync.pages
             this.guna2Button5.TabIndex = 6;
             this.guna2Button5.Text = "Chimie";
             this.guna2Button5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button5.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button5.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button4
             // 
@@ -236,7 +240,7 @@ namespace SchoolSync.pages
             this.guna2Button4.TabIndex = 5;
             this.guna2Button4.Text = "Istorie";
             this.guna2Button4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button4.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button4.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button15
             // 
@@ -259,7 +263,7 @@ namespace SchoolSync.pages
             this.guna2Button15.TabIndex = 16;
             this.guna2Button15.Text = "Arte";
             this.guna2Button15.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button15.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button15.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button6
             // 
@@ -282,7 +286,7 @@ namespace SchoolSync.pages
             this.guna2Button6.TabIndex = 7;
             this.guna2Button6.Text = "Biologie";
             this.guna2Button6.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button6.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button6.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button3
             // 
@@ -305,7 +309,7 @@ namespace SchoolSync.pages
             this.guna2Button3.TabIndex = 4;
             this.guna2Button3.Text = "Matematică";
             this.guna2Button3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button3.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button3.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button14
             // 
@@ -328,7 +332,7 @@ namespace SchoolSync.pages
             this.guna2Button14.TabIndex = 15;
             this.guna2Button14.Text = "Ed. tehnologică";
             this.guna2Button14.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button14.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button14.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button7
             // 
@@ -351,7 +355,7 @@ namespace SchoolSync.pages
             this.guna2Button7.TabIndex = 8;
             this.guna2Button7.Text = "Fizică";
             this.guna2Button7.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button7.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button7.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button2
             // 
@@ -374,7 +378,7 @@ namespace SchoolSync.pages
             this.guna2Button2.TabIndex = 3;
             this.guna2Button2.Text = "Limba română";
             this.guna2Button2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button2.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button2.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button13
             // 
@@ -397,7 +401,7 @@ namespace SchoolSync.pages
             this.guna2Button13.TabIndex = 14;
             this.guna2Button13.Text = "Alte limbi ";
             this.guna2Button13.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button13.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button13.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button8
             // 
@@ -420,7 +424,7 @@ namespace SchoolSync.pages
             this.guna2Button8.TabIndex = 9;
             this.guna2Button8.Text = "Geografie";
             this.guna2Button8.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button8.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button8.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button1
             // 
@@ -443,7 +447,7 @@ namespace SchoolSync.pages
             this.guna2Button1.TabIndex = 2;
             this.guna2Button1.Text = "Toate materiile";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button1.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button12
             // 
@@ -466,7 +470,7 @@ namespace SchoolSync.pages
             this.guna2Button12.TabIndex = 13;
             this.guna2Button12.Text = "Franceza";
             this.guna2Button12.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button12.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button12.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button9
             // 
@@ -489,7 +493,7 @@ namespace SchoolSync.pages
             this.guna2Button9.TabIndex = 10;
             this.guna2Button9.Text = "Studii sociale";
             this.guna2Button9.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button9.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button9.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button11
             // 
@@ -512,7 +516,7 @@ namespace SchoolSync.pages
             this.guna2Button11.TabIndex = 12;
             this.guna2Button11.Text = "Engleza";
             this.guna2Button11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button11.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button11.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button10
             // 
@@ -535,7 +539,7 @@ namespace SchoolSync.pages
             this.guna2Button10.TabIndex = 11;
             this.guna2Button10.Text = "Informatică";
             this.guna2Button10.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.guna2Button10.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.guna2Button10.Click += new System.EventHandler(this.buton_sortare_materie);
             // 
             // guna2Button19
             // 
@@ -557,7 +561,7 @@ namespace SchoolSync.pages
             this.guna2Button19.Size = new System.Drawing.Size(200, 36);
             this.guna2Button19.TabIndex = 19;
             this.guna2Button19.Text = "Toate intrebarile";
-            this.guna2Button19.Click += new System.EventHandler(this.guna2Button19_Click);
+            this.guna2Button19.Click += new System.EventHandler(this.home);
             // 
             // flowLayoutPanel1
             // 
@@ -585,7 +589,26 @@ namespace SchoolSync.pages
             this.guna2Button21.TabIndex = 22;
             this.guna2Button21.Text = "Întreabă";
             this.guna2Button21.UseTransparentBackground = true;
-            this.guna2Button21.Click += new System.EventHandler(this.guna2Button20_Click);
+            this.guna2Button21.Click += new System.EventHandler(this.load_adaugare_intrebare_panel);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer_refresh_home);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 1000;
+            this.timer2.Tick += new System.EventHandler(this.timer_refresh_intrebare);
+            // 
+            // guna2MessageDialog1
+            // 
+            this.guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK;
+            this.guna2MessageDialog1.Caption = null;
+            this.guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.None;
+            this.guna2MessageDialog1.Parent = null;
+            this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Light;
+            this.guna2MessageDialog1.Text = null;
             // 
             // invataunit
             // 
@@ -634,5 +657,8 @@ namespace SchoolSync.pages
         private Guna.UI2.WinForms.Guna2Button guna2Button19;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2Button guna2Button21;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
+        private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
     }
 }
