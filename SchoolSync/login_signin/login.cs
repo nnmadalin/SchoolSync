@@ -97,26 +97,39 @@ namespace SchoolSync.login_signin
             dynamic task = await multiple_class.PostRequestAsync(url, data);
             if (task["message"] == "success")
             {
-                var frm = new navbar_home();
 
-                accounts_user = task["0"];
-
-                if(guna2ToggleSwitch1.Checked == true)
+                if (task["0"]["verified"] == "0")
                 {
-                    Properties.Settings.Default.Data_account = JsonConvert.SerializeObject(accounts_user);
-                    Properties.Settings.Default.Save();
+                    var frm2 = new notification.error();
+                    schoolsync schoolsync2 = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel2 = (Guna.UI2.WinForms.Guna2Panel)schoolsync2.Controls["guna2Panel2"];
+                    panel2.Controls.Add(frm2);
+                    notification.error.message = "Contul nu a fost activat! Verifica spam!";
+                    frm2.BringToFront();
                 }
                 else
                 {
-                    Properties.Settings.Default.Data_account = "";
-                    Properties.Settings.Default.Save();
+
+                    if (guna2ToggleSwitch1.Checked == true)
+                    {
+                        Properties.Settings.Default.Data_account = JsonConvert.SerializeObject(accounts_user);
+                        Properties.Settings.Default.Save();
+                    }
+                    else
+                    {
+                        Properties.Settings.Default.Data_account = "";
+                        Properties.Settings.Default.Save();
+                    }
+                    var frm = new navbar_home();
+                    accounts_user = task["0"];
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    panel.Controls.Remove(this);
+                    GC.Collect();
                 }
 
-                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                panel.Controls.Add(frm);
-                panel.Controls.Remove(this);
-                GC.Collect();
+                
             }
             else if (task["message"] == "Database no value")
             {

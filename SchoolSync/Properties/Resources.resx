@@ -118,11 +118,20 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="aaron_burden_1zR3WNSTnvY_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\aaron-burden-1zR3WNSTnvY-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="account_tree_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\account_tree_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="adi_goldstein_EUsVwEOsblE_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\adi-goldstein-EUsVwEOsblE-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="apps_FILL1_wght400_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\apps_FILL1_wght400_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="artturi_jalli_gYrYa37fAKI_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\artturi-jalli-gYrYa37fAKI-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="attach_file_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\attach_file_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -135,6 +144,9 @@
   </data>
   <data name="calculate_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calculate_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clarisse_meyer_jKU2NneZAbI_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clarisse-meyer-jKU2NneZAbI-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="classroom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\classroom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -162,6 +174,9 @@
   </data>
   <data name="edit_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="engin_akyurt_KUeJcc4YUug_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\engin-akyurt-KUeJcc4YUug-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="favorite_FILL0_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\favorite_FILL0_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,6 +229,9 @@
   <data name="invataunit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download (23).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="kyle_glenn_nXt5HtLmlgE_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\kyle-glenn-nXt5HtLmlgE-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="language_french_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\language_french_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -226,8 +244,17 @@
   <data name="logo_ico" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo_ico.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="luca_bravo_XJXWbfSo2f0_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\luca-bravo-XJXWbfSo2f0-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marcela_laskoski_YrtFlrLo2DQ_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="materiale_educative" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\materiale_educative.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="old_bible_wooden_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\old-bible-wooden-table.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="palette_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\palette_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -238,8 +265,23 @@
   <data name="reply_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reply_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="romain_vignes_ywqa9IZB_dU_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\romain-vignes-ywqa9IZB-dU-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ryan_wallace_azA1hLbjBBo_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ryan-wallace-azA1hLbjBBo-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="schedule_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\schedule_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="science_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\science_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="search_FILL1_wght700_GRAD0_opsz48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search_FILL1_wght700_GRAD0_opsz48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="simon_frederick_vuV25OfnGa8_unsplash" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\simon-frederick-vuV25OfnGa8-unsplash.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="standard_avatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\standard_avatar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

@@ -34,6 +34,7 @@ namespace SchoolSync
         {
             guna2Button1.FillColor = Color.Transparent;
             guna2Button2.FillColor = Color.Transparent;
+            guna2Button3.FillColor = Color.Transparent;
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -58,10 +59,10 @@ namespace SchoolSync
             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
             var label = panel.Controls["label1"];
-            label.Text = "SchoolSync | ClassPortal";
+            label.Text = "SchoolSync | EduMentor";
             GC.Collect();
 
-            var frm = new pages.ClassPortal();
+            var frm = new pages.EduMentor();
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
@@ -78,7 +79,7 @@ namespace SchoolSync
             label.Text = "SchoolSync | ÎnvațăUnit";
             GC.Collect();
 
-            var frm = new pages.invataunit();
+            var frm = new pages.InvataUnit();
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();

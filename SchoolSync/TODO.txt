@@ -1,21 +1,17 @@
 ﻿de adaugat sistem recaptcha la sign in si la autentificare
 de adaugat last_login in autentificare
-de adaugat la login, daca contul a fost activat!
 de refacut php pt verificare email!
-sa minimizam cat putem de mult lucrul cu fisierele json (ex accounts sa scot profile, sa le pun ca si coloana distincte)
-de fct pt orice buton sa apara cursor.hand
 de cautat api pt citate
-de verificat daca intrebarea exista, daca nu, sa o elimin de la favorite
 
 de pus comentarii si redenumit fct
 
 pt judet vr sa fac: materiale educative, invataunit, profil, !!!!!!!!!!!!!!!
 
+de adaugat un seartch bar
 
 pt materiale educative: un combobox cu toate materiliile + `toate materiile`
 le afisam pe tip grid, design: figma, cu posibilitate de love
 fiecare material va avea formatul: titlu, realizat de, data, prezentarea formularului, posibilitate incarcare fisiere (design invataunit), 
-cat dureaza sa fie citit, inimioare, imagini prestabilite / adauga creatorul o imagine pt material.  Va fi o platforma de resurse, 
-cautat denumire ceva cu edu si resurse / materiale / educativ etc
+cat dureaza sa fie citit, inimioare,  Va fi o platforma de resurse, 
 
 de inceput sa facem pagina principala, la material

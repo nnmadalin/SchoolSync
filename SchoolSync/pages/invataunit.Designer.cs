@@ -1,7 +1,7 @@
 ﻿
 namespace SchoolSync.pages
 {
-    partial class invataunit
+    partial class InvataUnit
     {
         /// <summary> 
         /// Required designer variable.
@@ -137,11 +137,12 @@ namespace SchoolSync.pages
             this.guna2Button18.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(234)))), ((int)(((byte)(205)))));
             this.guna2Button18.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button18.Location = new System.Drawing.Point(1082, 14);
+            this.guna2Button18.Image = global::SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+            this.guna2Button18.Location = new System.Drawing.Point(1045, 14);
             this.guna2Button18.Name = "guna2Button18";
             this.guna2Button18.ShadowDecoration.BorderRadius = 15;
             this.guna2Button18.ShadowDecoration.Depth = 20;
-            this.guna2Button18.Size = new System.Drawing.Size(95, 36);
+            this.guna2Button18.Size = new System.Drawing.Size(132, 36);
             this.guna2Button18.TabIndex = 4;
             this.guna2Button18.Text = "Favorite";
             this.guna2Button18.Click += new System.EventHandler(this.favorite);
@@ -610,7 +611,7 @@ namespace SchoolSync.pages
             this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Light;
             this.guna2MessageDialog1.Text = null;
             // 
-            // invataunit
+            // InvataUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -622,7 +623,7 @@ namespace SchoolSync.pages
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.guna2Button18);
             this.Controls.Add(this.guna2Button17);
-            this.Name = "invataunit";
+            this.Name = "InvataUnit";
             this.Size = new System.Drawing.Size(1192, 690);
             this.Load += new System.EventHandler(this.invataunit_Load);
             this.panel_materii.ResumeLayout(false);

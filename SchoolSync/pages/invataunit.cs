@@ -13,9 +13,9 @@ using System.IO;
 
 namespace SchoolSync.pages
 {
-    public partial class invataunit : UserControl
+    public partial class InvataUnit : UserControl
     {
-        public invataunit()
+        public InvataUnit()
         {
             InitializeComponent();
         }

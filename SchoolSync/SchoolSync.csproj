@@ -66,6 +66,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -131,17 +132,23 @@
     <Compile Include="pages\ClassPortal.Designer.cs">
       <DependentUpon>ClassPortal.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EduMentor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduMentor.Designer.cs">
+      <DependentUpon>EduMentor.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\home.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="pages\home.Designer.cs">
       <DependentUpon>home.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\invataunit.cs">
+    <Compile Include="pages\InvataUnit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\invataunit.Designer.cs">
-      <DependentUpon>invataunit.cs</DependentUpon>
+    <Compile Include="pages\InvataUnit.Designer.cs">
+      <DependentUpon>InvataUnit.cs</DependentUpon>
     </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
@@ -176,11 +183,14 @@
     <EmbeddedResource Include="pages\ClassPortal.resx">
       <DependentUpon>ClassPortal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduMentor.resx">
+      <DependentUpon>EduMentor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\home.resx">
       <DependentUpon>home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\invataunit.resx">
-      <DependentUpon>invataunit.cs</DependentUpon>
+    <EmbeddedResource Include="pages\InvataUnit.resx">
+      <DependentUpon>InvataUnit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
@@ -246,6 +256,20 @@
     <None Include="Resources\favorite_FILL0_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\delete_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\edit_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\schedule_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\aaron-burden-1zR3WNSTnvY-unsplash.jpg" />
+    <None Include="Resources\adi-goldstein-EUsVwEOsblE-unsplash.jpg" />
+    <None Include="Resources\artturi-jalli-gYrYa37fAKI-unsplash.jpg" />
+    <None Include="Resources\clarisse-meyer-jKU2NneZAbI-unsplash.jpg" />
+    <None Include="Resources\engin-akyurt-KUeJcc4YUug-unsplash.jpg" />
+    <None Include="Resources\kyle-glenn-nXt5HtLmlgE-unsplash.jpg" />
+    <None Include="Resources\luca-bravo-XJXWbfSo2f0-unsplash.jpg" />
+    <None Include="Resources\marcela-laskoski-YrtFlrLo2DQ-unsplash.jpg" />
+    <None Include="Resources\old-bible-wooden-table.jpg" />
+    <None Include="Resources\romain-vignes-ywqa9IZB-dU-unsplash.jpg" />
+    <None Include="Resources\ryan-wallace-azA1hLbjBBo-unsplash.jpg" />
+    <None Include="Resources\simon-frederick-vuV25OfnGa8-unsplash.jpg" />
+    <None Include="Resources\search_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

@@ -63,6 +63,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap aaron_burden_1zR3WNSTnvY_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("aaron_burden_1zR3WNSTnvY_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap account_tree_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("account_tree_FILL1_wght700_GRAD0_opsz48", resourceCulture);
@@ -73,9 +83,29 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap adi_goldstein_EUsVwEOsblE_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("adi_goldstein_EUsVwEOsblE_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap apps_FILL1_wght400_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("apps_FILL1_wght400_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap artturi_jalli_gYrYa37fAKI_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("artturi_jalli_gYrYa37fAKI_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -116,6 +146,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap calculate_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("calculate_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap clarisse_meyer_jKU2NneZAbI_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("clarisse_meyer_jKU2NneZAbI_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +246,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap edit_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("edit_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap engin_akyurt_KUeJcc4YUug_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("engin_akyurt_KUeJcc4YUug_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,6 +433,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap kyle_glenn_nXt5HtLmlgE_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("kyle_glenn_nXt5HtLmlgE_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap language_french_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("language_french_FILL1_wght700_GRAD0_opsz48", resourceCulture);
@@ -423,9 +483,39 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap luca_bravo_XJXWbfSo2f0_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("luca_bravo_XJXWbfSo2f0_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap marcela_laskoski_YrtFlrLo2DQ_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("marcela_laskoski_YrtFlrLo2DQ_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap materiale_educative {
             get {
                 object obj = ResourceManager.GetObject("materiale_educative", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap old_bible_wooden_table {
+            get {
+                object obj = ResourceManager.GetObject("old_bible_wooden_table", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,9 +553,59 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap romain_vignes_ywqa9IZB_dU_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("romain_vignes_ywqa9IZB_dU_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap ryan_wallace_azA1hLbjBBo_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("ryan_wallace_azA1hLbjBBo_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap schedule_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("schedule_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap science_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("science_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap search_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("search_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap simon_frederick_vuV25OfnGa8_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("simon_frederick_vuV25OfnGa8_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
