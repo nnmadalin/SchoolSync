@@ -874,21 +874,45 @@ namespace SchoolSync.pages
 
                     string token_app = schoolsync.token;
                     string files = "";
+                    string[] split_1 = fisiere_value.Split(';');
+
                     foreach (Control control in this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls)
                     {
-                        string token_file = await _class.UploadFileAsync(control.Tag.ToString());
-                        if (token_file != null)
-                            files += (token_file + ";");
+                        bool ok = false;
+                        for(int i = 0; i < split_1.Length - 1; i++)
+                        {
+                            if(split_1[i] == control.Tag.ToString())
+                            {
+                                split_1[i] = "-1";
+                                ok = true;
+                                break;
+                            }
+                        }
+                        if(ok == true)
+                        {
+                            files += (control.Tag.ToString() + ";");
+                        }
+                        else
+                        {
+                            string token_file = await _class.UploadFileAsync(control.Tag.ToString());
+                            if (token_file != null)
+                                files += (token_file + ";");
+                        }
+
+                        
                     }
 
-                    string[] split_1 = fisiere_value.Split(';');
+                    
                     for (int i = 0; i < split_1.Length - 1; i++)
                     {
-                        url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
-                        data = new Dictionary<string, string>();
-                        data.Add("token", token_app);
-                        data.Add("file", split_1[i]);
-                        task = await _class.PostRequestAsync_norefresh(url, data);
+                        if (split_1[i] != "-1")
+                        {
+                            url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
+                            data = new Dictionary<string, string>();
+                            data.Add("token", token_app);
+                            data.Add("file", split_1[i]);
+                            task = await _class.PostRequestAsync_norefresh(url, data);
+                        }
                     }
 
                     url = "https://schoolsync.nnmadalin.me/api/put.php";
