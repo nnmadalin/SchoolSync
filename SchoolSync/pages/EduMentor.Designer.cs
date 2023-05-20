@@ -98,12 +98,13 @@ namespace SchoolSync.pages
             this.guna2Button21.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(199)))), ((int)(((byte)(191)))));
             this.guna2Button21.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button21.Location = new System.Drawing.Point(731, 14);
+            this.guna2Button21.Location = new System.Drawing.Point(702, 14);
             this.guna2Button21.Name = "guna2Button21";
             this.guna2Button21.Size = new System.Drawing.Size(143, 36);
             this.guna2Button21.TabIndex = 23;
             this.guna2Button21.Text = "Adauga Material";
             this.guna2Button21.UseTransparentBackground = true;
+            this.guna2Button21.Click += new System.EventHandler(this.adauga_material);
             // 
             // guna2Panel1
             // 
@@ -241,7 +242,7 @@ namespace SchoolSync.pages
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(157)))), ((int)(((byte)(209)))), ((int)(((byte)(148)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button1.Location = new System.Drawing.Point(880, 14);
+            this.guna2Button1.Location = new System.Drawing.Point(864, 14);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(143, 36);
             this.guna2Button1.TabIndex = 25;
@@ -259,6 +260,7 @@ namespace SchoolSync.pages
             this.Controls.Add(this.guna2ComboBox2);
             this.Name = "EduMentor";
             this.Size = new System.Drawing.Size(1192, 690);
+            this.Load += new System.EventHandler(this.EduMentor_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
