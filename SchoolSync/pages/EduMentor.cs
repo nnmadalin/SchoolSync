@@ -89,6 +89,19 @@ namespace SchoolSync.pages
                 frm.BringToFront();
             }
         }
+        
+        private void inchide_panel_adauga_material(object sender, EventArgs e)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if(control.Name == "pnl_fullpage")
+                {
+                    this.Controls.Remove(control);
+                    break;
+                }
+            }
+            load_panel();
+        }
 
         private void adauga_material(object sender, EventArgs e)
         {
@@ -107,11 +120,27 @@ namespace SchoolSync.pages
                 UseTransparentBackground = true,
                 Name = "pnl"
             };
+
+            Guna.UI2.WinForms.Guna2CircleButton btn_inchide_panel = new Guna.UI2.WinForms.Guna2CircleButton()
+            {
+                Size = new Size(35, 35),
+                BorderColor = Color.White,
+                BorderThickness = 2,
+                UseTransparentBackground = true,
+                FillColor = Color.White,
+                Image = SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48,
+                ImageAlign = HorizontalAlignment.Center,
+                Location = new Point(900, 20),
+                Cursor = Cursors.Hand
+            };
+            btn_inchide_panel.Click += inchide_panel_adauga_material;
+
             Label title = new Label() 
             { 
                 Text = "Adauga un material nou!",
-                Font = new Font("Segoe UI Semibold", 15, FontStyle.Bold),
-                Location = new Point(60, 20),
+                Font = new Font("Segoe UI Semibold", 17, FontStyle.Bold),
+                Location = new Point(40, 20),
+                ForeColor = Color.White,
                 AutoSize = true,
             };
 
@@ -150,6 +179,8 @@ namespace SchoolSync.pages
                 PlaceholderText = "Adauga o descriere materialului!",
                 ForeColor = Color.Black,
                 Multiline = true, 
+                AutoScroll = true, 
+                ScrollBars = ScrollBars.Vertical,
             };
 
             Guna.UI2.WinForms.Guna2CircleButton btn_fisier = new Guna.UI2.WinForms.Guna2CircleButton()
@@ -174,7 +205,52 @@ namespace SchoolSync.pages
                 Name = "flp_fisiere"
             };
 
+            Guna.UI2.WinForms.Guna2ComboBox cmb = new Guna.UI2.WinForms.Guna2ComboBox()
+            {
+                BorderRadius = 15,
+                Size = new Size(200, 50),
+                Location = new Point(20, 500),
+                Items = { "Limba română", "Matematică", "Istorie", "Chimie", "Biologie", "Fizică", "Geografie",
+                    "Studii sociale", "Informatică", "Engleza", "Franceza", "Alte limbi", "Ed. tehnologică", "Arte", "Ed. muzicală" },
+                FillColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Name = "combobox_materii",
+                Cursor = Cursors.Hand,
+            };
+            cmb.SelectedIndex = 0;
+
+            Label lbl_time = new Label()
+            {
+                Text = "Cat dureaza sa fie citit materialul? (min)",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Location = new Point(20, 550),
+                ForeColor = Color.White,
+                AutoSize = true,
+            };
+            Guna.UI2.WinForms.Guna2NumericUpDown gnu = new Guna.UI2.WinForms.Guna2NumericUpDown()
+            {
+                Minimum = 2,
+                Maximum = 999,
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Size = new Size(90, 30),
+                Location = new Point(370, 550),
+                Value = 2,
+                BorderRadius = 5,
+            };
+
+            Guna.UI2.WinForms.Guna2Button btn_trimite = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Location = new Point(20, 600),
+                Text = "Adauga material!",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Size = new Size(180, 40),
+                FillColor = Color.FromArgb(107, 150, 108),
+                BorderRadius = 10,
+                Cursor = Cursors.Hand,
+            };
+
             pnl.Controls.Add(title);
+            pnl.Controls.Add(btn_inchide_panel);
 
             pnl.Controls.Add(lbl_titlu);
             pnl.Controls.Add(txt_titlu);
@@ -184,6 +260,12 @@ namespace SchoolSync.pages
 
             pnl.Controls.Add(btn_fisier);
             pnl.Controls.Add(flp_fisiere);
+            
+            pnl.Controls.Add(cmb);
+            pnl.Controls.Add(lbl_time);
+            pnl.Controls.Add(gnu);
+            
+            pnl.Controls.Add(btn_trimite);
 
             pnl_fullpage.Controls.Add(pnl);
           
