@@ -283,6 +283,7 @@
     <None Include="Resources\download %2825%29.png" />
     <None Include="Resources\abstract-pyrimid-upsplash.png" />
     <None Include="Resources\location_on_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\settings_account_box_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />
