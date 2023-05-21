@@ -7,6 +7,11 @@ de pus comentarii si redenumit fct
 
 pt judet vr sa fac: materiale educative, invataunit, profil, !!!!!!!!!!!!!!!
 
+PE VIITOR:  adminul SAU creatorul sa poate sterge mesajul + sa apara "Sters de creator[gigel]"/"Sters de utilizator[gigel]"/"Sters de admin[gigel]"
+
+pt EduMentor, sa poti adauga comentarii la material
+
+
 de adaugat un seartch bar
 
 pt materiale educative: un combobox cu toate materiliile + `toate materiile`

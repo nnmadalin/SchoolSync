@@ -103,6 +103,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap anthony_choren_lYzap0eubDY_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("anthony_choren_lYzap0eubDY_unsplash", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap apps_FILL1_wght400_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("apps_FILL1_wght400_GRAD0_opsz48", resourceCulture);
@@ -146,6 +156,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap background {
             get {
                 object obj = ResourceManager.GetObject("background", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap brett_jordan_POMpXtcVYHo_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("brett_jordan_POMpXtcVYHo_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -666,6 +686,26 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap standard_avatar {
             get {
                 object obj = ResourceManager.GetObject("standard_avatar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap terry_vlisidis_RflgrtzU3Cw_unsplash__1_ {
+            get {
+                object obj = ResourceManager.GetObject("terry_vlisidis_RflgrtzU3Cw_unsplash__1_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap timothy_dykes_zVU_3H3cwjk_unsplash {
+            get {
+                object obj = ResourceManager.GetObject("timothy_dykes_zVU_3H3cwjk_unsplash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

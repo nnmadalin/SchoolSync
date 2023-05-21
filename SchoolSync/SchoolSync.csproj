@@ -284,6 +284,10 @@
     <None Include="Resources\abstract-pyrimid-upsplash.png" />
     <None Include="Resources\location_on_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\settings_account_box_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\brett-jordan-POMpXtcVYHo-unsplash.jpg" />
+    <None Include="Resources\timothy-dykes-zVU_3H3cwjk-unsplash.jpg" />
+    <None Include="Resources\terry-vlisidis-RflgrtzU3Cw-unsplash %281%29.jpg" />
+    <None Include="Resources\anthony-choren-lYzap0eubDY-unsplash.jpg" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

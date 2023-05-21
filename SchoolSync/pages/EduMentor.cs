@@ -19,6 +19,44 @@ namespace SchoolSync.pages
             InitializeComponent();
         }
 
+        string token_first_material = "";
+
+        Image incarca_imagine_specifica(string str)
+        {
+            if (str == "Limba română")
+                return SchoolSync.Properties.Resources.clarisse_meyer_jKU2NneZAbI_unsplash;
+            if (str == "Matematică")
+                return SchoolSync.Properties.Resources.artturi_jalli_gYrYa37fAKI_unsplash;
+            if (str == "Istorie")
+                return SchoolSync.Properties.Resources.old_bible_wooden_table;
+            if (str == "Chimie")
+                return SchoolSync.Properties.Resources.terry_vlisidis_RflgrtzU3Cw_unsplash__1_;
+            if (str == "Biologie")
+                return SchoolSync.Properties.Resources.timothy_dykes_zVU_3H3cwjk_unsplash;
+            if (str == "Fizică")
+                return SchoolSync.Properties.Resources.engin_akyurt_KUeJcc4YUug_unsplash;
+            if (str == "Geografie")
+                return SchoolSync.Properties.Resources.kyle_glenn_nXt5HtLmlgE_unsplash;
+            if (str == "Studii sociale")
+                return SchoolSync.Properties.Resources.aaron_burden_1zR3WNSTnvY_unsplash;
+            if (str == "Informatică")
+                return SchoolSync.Properties.Resources.luca_bravo_XJXWbfSo2f0_unsplash;
+            if (str == "Engleza")
+                return SchoolSync.Properties.Resources.simon_frederick_vuV25OfnGa8_unsplash;
+            if (str == "Franceza")
+                return SchoolSync.Properties.Resources.anthony_choren_lYzap0eubDY_unsplash;
+            if (str == "Alte limbi")
+                return SchoolSync.Properties.Resources.brett_jordan_POMpXtcVYHo_unsplash;
+            if (str == "Ed. tehnologică")
+                return SchoolSync.Properties.Resources.adi_goldstein_EUsVwEOsblE_unsplash;
+            if (str == "Arte")
+                return SchoolSync.Properties.Resources.aaron_burden_1zR3WNSTnvY_unsplash;
+            if (str == "Ed. muzicală")
+                return SchoolSync.Properties.Resources.marcela_laskoski_YrtFlrLo2DQ_unsplash;
+
+            return SchoolSync.Properties.Resources.clarisse_meyer_jKU2NneZAbI_unsplash;
+        }
+
         async void load_panel()
         {
             flowLayoutPanel1.Controls.Clear();
@@ -36,72 +74,77 @@ namespace SchoolSync.pages
 
             if (task["message"] == "success")
             {
+                if (jb.Count - 1 > 0)
+                    token_first_material = task["0"]["token"];
                 for (int i = 0; i < jb.Count - 1; i++)
                 {
+                    Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                    {
+                        Size = new Size(277, 376),
+                        BorderRadius = 5,
+                        UseTransparentBackground = true,
+                        Padding = new Padding(0, 0, 0, 10),
+                        FillColor = Color.FromArgb(223, 229, 232),
+                        AutoSize = true,
+                        BorderColor = task["0"]["color"],
+                        BorderThickness = 2
+                    };
+                    Guna.UI2.WinForms.Guna2PictureBox gpb = new Guna.UI2.WinForms.Guna2PictureBox()
+                    {
+                        Size = new Size(271, 200),
+                        Location = new Point(3, 3),
+                        UseTransparentBackground = true,
+                        BorderRadius = 5,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                    };                    
+                    Label lbl = new Label()
+                    {
+                        TextAlign = ContentAlignment.MiddleCenter,
+                        Size = new Size(260, 100),
+                        AutoEllipsis = true,
+                        Location = new Point(10, 219),
+                        Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                    };                    
+                    Panel pnl_jos = new Panel()
+                    {
+                        Size = new Size(271, 34),
+                        Location = new Point(3, 329),
+                    };
+                    Label lbl_read = new Label()
+                    {
+                        Location = new Point(8, 9),
+                        Size = new Size(117, 19),
+                        Cursor = Cursors.Hand,
+                        Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                        ForeColor = Color.Black,
+                        Text = "Citeşte mai mult"
+                    };
+                    Guna.UI2.WinForms.Guna2PictureBox pct = new Guna.UI2.WinForms.Guna2PictureBox()
+                    {
+                        Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48,
+                        UseTransparentBackground = true,
+                        Size = new Size(17, 17),
+                        Location = new Point(233, 9),
+                        BackColor = Color.DimGray,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        Cursor = Cursors.Hand
+                    };
 
+                    string sttr = task["0"]["category"];
+                    gpb.Image = incarca_imagine_specifica(sttr);
+                    lbl.Text = task[i.ToString()]["title"];
+
+                    pnl.Controls.Add(gpb);
+                    pnl.Controls.Add(lbl);
+                    pnl_jos.Controls.Add(lbl_read);
+                    pnl_jos.Controls.Add(pct);
+                    pnl.Controls.Add(pnl_jos);
+
+                    flowLayoutPanel1.Controls.Add(pnl);
                 }
             }
 
-            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
-            {
-                Size = new Size(277, 376),
-                BorderRadius = 5,
-                UseTransparentBackground = true,
-                Padding = new Padding(0, 0, 0, 10),
-                FillColor = Color.FromArgb(223, 229, 232),
-                AutoSize = true,
-            };
-
-            Guna.UI2.WinForms.Guna2PictureBox gpb = new Guna.UI2.WinForms.Guna2PictureBox()
-            {
-                Size = new Size(271, 200),
-                Location = new Point(3, 3),
-                UseTransparentBackground = true,
-                BorderRadius = 5,
-                SizeMode = PictureBoxSizeMode.StretchImage,
-            };
-
-            Label lbl = new Label()
-            {
-                TextAlign = ContentAlignment.MiddleCenter,
-                Size = new Size(260, 100),
-                AutoEllipsis = true,
-                Location = new Point(10, 219)
-            };
-
-            Panel pnl_jos = new Panel()
-            {
-                Size = new Size(271, 34),
-                Location = new Point(3, 329),
-            };
-
-            Label lbl_read = new Label()
-            {
-                Location = new Point(8, 9),
-                Size = new Size(117, 19),
-                Cursor = Cursors.Hand,
-                Font = new Font("Segoe UI", 10, FontStyle.Bold),
-                ForeColor = Color.Black,
-                Text = "Citeşte mai mult"
-            };
-
-            Guna.UI2.WinForms.Guna2PictureBox pct = new Guna.UI2.WinForms.Guna2PictureBox()
-            {
-                Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48,
-                UseTransparentBackground = true,
-                Size = new Size(17, 17),
-                Location = new Point(233, 9),
-                BackColor = Color.DimGray,
-                SizeMode = PictureBoxSizeMode.StretchImage
-            };
             
-            pnl.Controls.Add(gpb);
-            pnl.Controls.Add(lbl);
-            pnl_jos.Controls.Add(lbl_read);
-            pnl_jos.Controls.Add(pct);
-            pnl.Controls.Add(pnl_jos);
-
-            flowLayoutPanel1.Controls.Add(pnl);
         }
 
         private void EduMentor_Load(object sender, EventArgs e)
