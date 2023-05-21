@@ -103,6 +103,86 @@ namespace SchoolSync.pages
             load_panel();
         }
 
+        private void border_none(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2TextBox btn = sender as Guna.UI2.WinForms.Guna2TextBox;
+            btn.BorderColor = Color.FromArgb(213, 218, 223);
+        }
+
+        private async void trimite_material_api(object sender, EventArgs e)
+        {
+            if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"]).BorderColor = Color.Red;
+            }
+            else if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"]).BorderColor = Color.Red;
+            }
+            else
+            {
+                schoolsync.show_loading();
+
+                multiple_class _class = new multiple_class();
+                string token = _class.generate_token();
+
+
+                Control combobox = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["combobox_materii"];
+                Control txt_title = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"];
+                Control txt_descriere = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"];
+                Control gnu = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["gnu"];
+
+                string files = "";
+
+                Random rand = new Random();
+                string random_color = rand.Next(256) + ", " + rand.Next(256) + ", " + rand.Next(256);
+
+                foreach (Control control in this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls)
+                {
+                    string token_file = await _class.UploadFileAsync(control.Tag.ToString());
+                    if (token_file != null)
+                        files += (token_file + ";");
+                }
+
+                string url = "https://schoolsync.nnmadalin.me/api/post.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("sql", string.Format("insert into edumentor(token, token_user, created, category, color, title, description, files, reading_time, users_hearts) values ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')",
+                    token, login_signin.login.accounts_user["token"], login_signin.login.accounts_user["username"], ((ComboBox)combobox).SelectedItem, random_color, txt_title.Text.Trim(), txt_descriere.Text.Trim(), files, ((Guna.UI2.WinForms.Guna2NumericUpDown)gnu).Value, ""));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "insert success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+
+                    notification.success.message = "Material salvat cu succes!";
+                    frm.BringToFront();
+                    foreach (Control control in this.Controls)
+                    {
+                        if (control.Name == "pnl_fullpage")
+                        {
+                            this.Controls.Remove(control);
+                            load_panel();
+                            break;
+                        }
+                    }                    
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a functionat bine!";
+                    frm.BringToFront();
+                }
+
+            }
+        }
+
         private void adauga_material(object sender, EventArgs e)
         {
             Panel pnl_fullpage = new Panel()
@@ -160,7 +240,9 @@ namespace SchoolSync.pages
                 BorderRadius = 10,
                 PlaceholderText = "Adauga titlu materialului!",
                 ForeColor = Color.Black,
+                Name = "txt_titlu",
             };
+            txt_titlu.TextChanged += border_none;
 
             Label lbl_descriere = new Label()
             {
@@ -181,7 +263,9 @@ namespace SchoolSync.pages
                 Multiline = true, 
                 AutoScroll = true, 
                 ScrollBars = ScrollBars.Vertical,
+                Name = "txt_descriere",
             };
+            txt_descriere.TextChanged += border_none;
 
             Guna.UI2.WinForms.Guna2CircleButton btn_fisier = new Guna.UI2.WinForms.Guna2CircleButton()
             {
@@ -236,6 +320,7 @@ namespace SchoolSync.pages
                 Location = new Point(370, 550),
                 Value = 2,
                 BorderRadius = 5,
+                Name = "gnu"
             };
 
             Guna.UI2.WinForms.Guna2Button btn_trimite = new Guna.UI2.WinForms.Guna2Button()
@@ -248,6 +333,7 @@ namespace SchoolSync.pages
                 BorderRadius = 10,
                 Cursor = Cursors.Hand,
             };
+            btn_trimite.Click += trimite_material_api;
 
             pnl.Controls.Add(title);
             pnl.Controls.Add(btn_inchide_panel);

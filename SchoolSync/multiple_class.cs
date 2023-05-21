@@ -73,7 +73,7 @@ namespace SchoolSync
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"A apărut o eroare la încărcarea fișierului pe serverul FTP: {ex.InnerException?.Message ?? ex.Message}");
+                Console.WriteLine($"A apărut o eroare la încărcarea fisierului pe serverul FTP: {ex.InnerException?.Message ?? ex.Message}");
                 return null;
             }
         }
