@@ -150,6 +150,12 @@
     <Compile Include="pages\InvataUnit.Designer.cs">
       <DependentUpon>InvataUnit.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\profil.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\profil.Designer.cs">
+      <DependentUpon>profil.cs</DependentUpon>
+    </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\InvataUnit.resx">
       <DependentUpon>InvataUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\profil.resx">
+      <DependentUpon>profil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
@@ -272,6 +281,8 @@
     <None Include="Resources\search_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\download %2824%29.png" />
     <None Include="Resources\download %2825%29.png" />
+    <None Include="Resources\abstract-pyrimid-upsplash.png" />
+    <None Include="Resources\location_on_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

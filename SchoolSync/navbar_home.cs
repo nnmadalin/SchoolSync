@@ -98,13 +98,13 @@ namespace SchoolSync
             label.Text = "SchoolSync | Profil";
             GC.Collect();
 
-            /*
-            var frm = new pages.InvataUnit();
+            
+            var frm = new pages.profil();
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
 
-            */
+            
 
             background_color_btn();
             guna2Button5.FillColor = Color.FromArgb(66, 66, 66);

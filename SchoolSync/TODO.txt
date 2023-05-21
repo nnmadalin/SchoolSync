@@ -15,3 +15,6 @@ fiecare material va avea formatul: titlu, realizat de, data, prezentarea formula
 cat dureaza sa fie citit, inimioare,  Va fi o platforma de resurse, 
 
 de inceput sa facem pagina principala, la material
+
+
+pt profil: instagram, facebook, email, website, github, linkedln, dirscord
