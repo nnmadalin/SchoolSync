@@ -30,14 +30,13 @@ namespace SchoolSync
         private void InitializeComponent()
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2Button7 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -46,7 +45,6 @@ namespace SchoolSync
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 10;
-            this.guna2Panel1.Controls.Add(this.guna2Button7);
             this.guna2Panel1.Controls.Add(this.guna2Button6);
             this.guna2Panel1.Controls.Add(this.guna2Button5);
             this.guna2Panel1.Controls.Add(this.guna2Button3);
@@ -63,23 +61,12 @@ namespace SchoolSync
             this.guna2Panel1.Size = new System.Drawing.Size(109, 655);
             this.guna2Panel1.TabIndex = 1;
             // 
-            // guna2Button7
+            // guna2Panel2
             // 
-            this.guna2Button7.BorderRadius = 10;
-            this.guna2Button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button7.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button7.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button7.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button7.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button7.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button7.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button7.ForeColor = System.Drawing.Color.White;
-            this.guna2Button7.Image = global::SchoolSync.Properties.Resources.classroom;
-            this.guna2Button7.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button7.Location = new System.Drawing.Point(19, 457);
-            this.guna2Button7.Name = "guna2Button7";
-            this.guna2Button7.Size = new System.Drawing.Size(70, 45);
-            this.guna2Button7.TabIndex = 7;
+            this.guna2Panel2.Location = new System.Drawing.Point(148, 0);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(1192, 690);
+            this.guna2Panel2.TabIndex = 2;
             // 
             // guna2Button6
             // 
@@ -92,12 +79,13 @@ namespace SchoolSync
             this.guna2Button6.FillColor = System.Drawing.Color.Transparent;
             this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button6.ForeColor = System.Drawing.Color.White;
-            this.guna2Button6.Image = global::SchoolSync.Properties.Resources.classroom;
-            this.guna2Button6.ImageSize = new System.Drawing.Size(40, 40);
-            this.guna2Button6.Location = new System.Drawing.Point(19, 390);
+            this.guna2Button6.Image = global::SchoolSync.Properties.Resources.logout;
+            this.guna2Button6.ImageSize = new System.Drawing.Size(35, 35);
+            this.guna2Button6.Location = new System.Drawing.Point(19, 592);
             this.guna2Button6.Name = "guna2Button6";
             this.guna2Button6.Size = new System.Drawing.Size(70, 45);
             this.guna2Button6.TabIndex = 6;
+            this.guna2Button6.Click += new System.EventHandler(this.guna2Button6_Click);
             // 
             // guna2Button5
             // 
@@ -110,12 +98,13 @@ namespace SchoolSync
             this.guna2Button5.FillColor = System.Drawing.Color.Transparent;
             this.guna2Button5.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button5.ForeColor = System.Drawing.Color.White;
-            this.guna2Button5.Image = global::SchoolSync.Properties.Resources.classroom;
-            this.guna2Button5.ImageSize = new System.Drawing.Size(40, 40);
+            this.guna2Button5.Image = global::SchoolSync.Properties.Resources.my_account;
+            this.guna2Button5.ImageSize = new System.Drawing.Size(35, 35);
             this.guna2Button5.Location = new System.Drawing.Point(19, 321);
             this.guna2Button5.Name = "guna2Button5";
             this.guna2Button5.Size = new System.Drawing.Size(70, 45);
             this.guna2Button5.TabIndex = 6;
+            this.guna2Button5.Click += new System.EventHandler(this.guna2Button5_Click);
             // 
             // guna2Button3
             // 
@@ -129,7 +118,7 @@ namespace SchoolSync
             this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
             this.guna2Button3.Image = global::SchoolSync.Properties.Resources.invataunit;
-            this.guna2Button3.ImageSize = new System.Drawing.Size(35, 40);
+            this.guna2Button3.ImageSize = new System.Drawing.Size(30, 35);
             this.guna2Button3.Location = new System.Drawing.Point(19, 258);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(70, 45);
@@ -148,7 +137,7 @@ namespace SchoolSync
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
             this.guna2Button2.Image = global::SchoolSync.Properties.Resources.classroom;
-            this.guna2Button2.ImageSize = new System.Drawing.Size(40, 40);
+            this.guna2Button2.ImageSize = new System.Drawing.Size(35, 35);
             this.guna2Button2.Location = new System.Drawing.Point(19, 191);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(70, 45);
@@ -167,7 +156,7 @@ namespace SchoolSync
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.Image = global::SchoolSync.Properties.Resources.home;
-            this.guna2Button1.ImageSize = new System.Drawing.Size(40, 40);
+            this.guna2Button1.ImageSize = new System.Drawing.Size(35, 35);
             this.guna2Button1.Location = new System.Drawing.Point(19, 120);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(70, 45);
@@ -186,13 +175,6 @@ namespace SchoolSync
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
-            // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.Location = new System.Drawing.Point(148, 0);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(1192, 690);
-            this.guna2Panel2.TabIndex = 2;
             // 
             // navbar_home
             // 
@@ -216,7 +198,6 @@ namespace SchoolSync
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button7;
         private Guna.UI2.WinForms.Guna2Button guna2Button6;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
         private Guna.UI2.WinForms.Guna2Button guna2Button3;

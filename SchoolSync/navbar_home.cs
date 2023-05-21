@@ -35,6 +35,8 @@ namespace SchoolSync
             guna2Button1.FillColor = Color.Transparent;
             guna2Button2.FillColor = Color.Transparent;
             guna2Button3.FillColor = Color.Transparent;
+            guna2Button5.FillColor = Color.Transparent;
+            guna2Button6.FillColor = Color.Transparent;
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -86,6 +88,38 @@ namespace SchoolSync
 
             background_color_btn();
             guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
+        }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | Profil";
+            GC.Collect();
+
+            /*
+            var frm = new pages.InvataUnit();
+            guna2Panel2.Controls.Clear();
+            guna2Panel2.Controls.Add(frm);
+            frm.Show();
+
+            */
+
+            background_color_btn();
+            guna2Button5.FillColor = Color.FromArgb(66, 66, 66);
+        }
+
+        private void guna2Button6_Click(object sender, EventArgs e)
+        {
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            Properties.Settings.Default.Data_account = "";
+            Properties.Settings.Default.Save();
+
+            var frm = new login_signin.login ();
+            panel.Controls.Clear();
+            panel.Controls.Add(frm);
         }
     }
 }

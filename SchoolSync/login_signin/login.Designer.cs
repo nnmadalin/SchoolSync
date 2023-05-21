@@ -74,7 +74,6 @@ namespace SchoolSync.login_signin
             // guna2ToggleSwitch1
             // 
             this.guna2ToggleSwitch1.Animated = true;
-            this.guna2ToggleSwitch1.Checked = true;
             this.guna2ToggleSwitch1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2ToggleSwitch1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2ToggleSwitch1.CheckedState.InnerBorderColor = System.Drawing.Color.White;

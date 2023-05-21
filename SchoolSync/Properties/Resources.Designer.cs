@@ -483,6 +483,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap logout {
+            get {
+                object obj = ResourceManager.GetObject("logout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap luca_bravo_XJXWbfSo2f0_unsplash {
             get {
                 object obj = ResourceManager.GetObject("luca_bravo_XJXWbfSo2f0_unsplash", resourceCulture);
@@ -506,6 +516,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap materiale_educative {
             get {
                 object obj = ResourceManager.GetObject("materiale_educative", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap my_account {
+            get {
+                object obj = ResourceManager.GetObject("my_account", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
