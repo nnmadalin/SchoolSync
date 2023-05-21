@@ -1502,7 +1502,7 @@ namespace SchoolSync.pages
             {
                 if(jb.Count - 1 > 0)
                     token_first_question = task["0"]["token"];
-                for (int i = 0; i < 15 && i < jb.Count - 1; i++)
+                for (int i = 0; i < jb.Count - 1; i++)
                 {                    
                     Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                     {

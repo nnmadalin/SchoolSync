@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using Newtonsoft.Json.Linq;
 
 namespace SchoolSync.pages
 {
@@ -21,12 +22,93 @@ namespace SchoolSync.pages
         async void load_panel()
         {
             flowLayoutPanel1.Controls.Clear();
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from edumentor"));
+
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            JObject jb = task;
+
+
+            if (task["message"] == "success")
+            {
+                for (int i = 0; i < jb.Count - 1; i++)
+                {
+
+                }
+            }
+
+            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+            {
+                Size = new Size(277, 376),
+                BorderRadius = 5,
+                UseTransparentBackground = true,
+                Padding = new Padding(0, 0, 0, 10),
+                FillColor = Color.FromArgb(223, 229, 232),
+                AutoSize = true,
+            };
+
+            Guna.UI2.WinForms.Guna2PictureBox gpb = new Guna.UI2.WinForms.Guna2PictureBox()
+            {
+                Size = new Size(271, 200),
+                Location = new Point(3, 3),
+                UseTransparentBackground = true,
+                BorderRadius = 5,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+            };
+
+            Label lbl = new Label()
+            {
+                TextAlign = ContentAlignment.MiddleCenter,
+                Size = new Size(260, 100),
+                AutoEllipsis = true,
+                Location = new Point(10, 219)
+            };
+
+            Panel pnl_jos = new Panel()
+            {
+                Size = new Size(271, 34),
+                Location = new Point(3, 329),
+            };
+
+            Label lbl_read = new Label()
+            {
+                Location = new Point(8, 9),
+                Size = new Size(117, 19),
+                Cursor = Cursors.Hand,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                ForeColor = Color.Black,
+                Text = "Citeşte mai mult"
+            };
+
+            Guna.UI2.WinForms.Guna2PictureBox pct = new Guna.UI2.WinForms.Guna2PictureBox()
+            {
+                Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48,
+                UseTransparentBackground = true,
+                Size = new Size(17, 17),
+                Location = new Point(233, 9),
+                BackColor = Color.DimGray,
+                SizeMode = PictureBoxSizeMode.StretchImage
+            };
+            
+            pnl.Controls.Add(gpb);
+            pnl.Controls.Add(lbl);
+            pnl_jos.Controls.Add(lbl_read);
+            pnl_jos.Controls.Add(pct);
+            pnl.Controls.Add(pnl_jos);
+
+            flowLayoutPanel1.Controls.Add(pnl);
         }
 
         private void EduMentor_Load(object sender, EventArgs e)
         {
             load_panel();
         }
+        
         private void adauga_fisier(object sender, EventArgs e)
         {
             if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Count < 5)
