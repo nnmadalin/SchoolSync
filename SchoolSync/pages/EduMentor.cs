@@ -130,7 +130,7 @@ namespace SchoolSync.pages
                         Cursor = Cursors.Hand
                     };
 
-                    string sttr = task["0"]["category"];
+                    string sttr = task[i.ToString()]["category"];
                     gpb.Image = incarca_imagine_specifica(sttr);
                     lbl.Text = task[i.ToString()]["title"];
 
