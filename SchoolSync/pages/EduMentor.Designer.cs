@@ -280,6 +280,11 @@ namespace SchoolSync.pages
             this.guna2Button2.UseTransparentBackground = true;
             this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // EduMentor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

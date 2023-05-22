@@ -275,7 +275,7 @@ namespace SchoolSync.pages
                     flowLayoutPanel1.Controls.Add(pnl);
                 }
             }
-
+            timer1.Enabled = true;
             
         }
 
@@ -630,6 +630,56 @@ namespace SchoolSync.pages
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 0;
             load_panel();
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            if (page == "home")
+            {
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+
+                if (sort.Trim() == "" || sort == "Toate materiile")
+                {
+                    data.Add("sql", string.Format("select * from edumentor"));
+                    if (guna2Button1.BorderThickness == 2)
+                        data["sql"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
+                    if (guna2Button18.BorderThickness == 2)
+                        data["sql"] += " where users_hearts like '%" + login_signin.login.accounts_user["token"] + "%'";
+                    data["sql"] += " order by data DESC";
+                }
+                else
+                {
+                    data.Add("sql", string.Format("select * from edumentor where category = '{0}'", sort));
+
+                    if (guna2Button1.BorderThickness == 2)
+                        data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+                    if (guna2Button18.BorderThickness == 2)
+                        data["sql"] += " and users_hearts like '%" + login_signin.login.accounts_user["token"] + "%'";
+                    data["sql"] += " order by data DESC";
+                }
+
+                
+
+                dynamic task = await _class.PostRequestAsync_norefresh(url, data);
+                JObject jb = task;
+                if (jb.Count - 1 >= 1)
+                {
+                    string tkn = task["0"]["token"];
+                    
+                    if (tkn.Trim() != token_first_material.Trim())
+                    {
+                        token_first_material = task["0"]["token"];
+                        schoolsync.show_loading();
+                        load_panel();
+                        schoolsync.hide_loading();
+                    }
+                }
+            }
+            else
+                timer1.Enabled = false;
         }
 
         private void guna2Button18_Click(object sender, EventArgs e)
