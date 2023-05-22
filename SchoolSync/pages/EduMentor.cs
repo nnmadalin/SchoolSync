@@ -130,6 +130,186 @@ namespace SchoolSync.pages
             load_panel();
         }
 
+        private async void inchide_panel_material(object sender, EventArgs e)
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control.Name == "panel_material")
+                {
+                    this.Controls.Remove(control);
+                    break;
+                }
+            }
+            if (guna2Button18.BorderThickness != 2)
+            {
+                page = "home";
+                load_panel();
+            }
+
+        }
+
+        private async void load_material(object sender, EventArgs e)
+        {
+            Label lbl_token = sender as Label;
+            page = "vizualizare_material";
+
+            Panel pnl = new Panel()
+            {
+                Size = new Size(1192, 690),
+                AutoScroll = true,
+                BackColor = Color.FromArgb(237, 237, 237),
+                Name = "panel_material"
+            };
+            Guna.UI2.WinForms.Guna2CircleButton btn = new Guna.UI2.WinForms.Guna2CircleButton()
+            {
+                Image = SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48,
+                Size = new Size(35, 35),
+                ImageAlign = HorizontalAlignment.Center,
+                ImageSize = new Size(20, 20),
+                UseTransparentBackground = true,
+                FillColor = Color.White,
+                Location = new Point(1130, 20),
+                Cursor = Cursors.Hand
+            };
+            pnl.Controls.Add(btn);
+            btn.Click += inchide_panel_material;
+
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from edumentor where token = '{0}'", lbl_token.Tag));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            JObject jb = task;
+
+            if (task["message"] == "success")
+            {                
+                Guna.UI2.WinForms.Guna2Panel panglica = new Guna.UI2.WinForms.Guna2Panel()
+                {
+                    Location = new Point(0, 0),
+                    Size = new Size(1192, 200),
+                    FillColor = task["0"]["color"]
+                };
+
+                Guna.UI2.WinForms.Guna2Panel center = new Guna.UI2.WinForms.Guna2Panel()
+                {
+                    Location = new Point(196, 100),
+                    Size = new Size(800, 300),
+                    FillColor = Color.White,
+                    BorderRadius = 5,       
+                    UseTransparentBackground = true, 
+                };
+
+                Label title = new Label()
+                {
+                    Location = new Point(0, 0),
+                    Size = new Size(800, 200),
+                    Font = new Font("Segoe UI Semibold", 22, FontStyle.Bold),
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    MaximumSize = new Size(800, 200),
+                    MinimumSize = new Size(800, 200),
+                    Text = task["0"]["title"],                   
+                };
+                
+
+                Guna.UI2.WinForms.Guna2Separator gsp = new Guna.UI2.WinForms.Guna2Separator()
+                {
+                    UseTransparentBackground = true, 
+                    Location = new Point(0, 210),
+                    Size = new Size(800, 2),
+                };
+                Guna.UI2.WinForms.Guna2CirclePictureBox pct_usr = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                {
+                    FillColor = Color.Gray,
+                    Size = new Size(50, 50),
+                    Location = new Point(20, 230),
+                    InitialImage = SchoolSync.Properties.Resources.standard_avatar,
+                    ErrorImage = SchoolSync.Properties.Resources.standard_avatar,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    UseTransparentBackground = true
+                };
+
+                Label nume = new Label()
+                {
+                    Location = new Point(75, 235),
+                    AutoSize = true,
+                    Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                    TextAlign = ContentAlignment.TopLeft,
+                    Text = task["0"]["created"]
+                };
+                string date = task["0"]["data"];
+                Label descriere = new Label()
+                {
+                    Location = new Point(75, 255),
+                    AutoSize = true,
+                    Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                    TextAlign = ContentAlignment.TopLeft,
+                    ForeColor = Color.FromArgb(140, 140, 140),
+                    Text = task["0"]["category"] + " • " + Convert.ToDateTime(date).ToShortDateString(),
+                };
+
+                Guna.UI2.WinForms.Guna2CirclePictureBox pct_ceas = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                {
+                    FillColor = Color.Gray,
+                    Size = new Size(20, 20),
+                    Location = new Point(675, 237),
+                    Image = SchoolSync.Properties.Resources.schedule_FILL1_wght700_GRAD0_opsz48,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    UseTransparentBackground = true
+                };
+                Label read_time = new Label()
+                {
+                    Location = new Point(700, 235),
+                    AutoSize = true,
+                    Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                    TextAlign = ContentAlignment.TopRight,
+                    Text = task["0"]["reading_time"] + " min"
+                };
+
+                Guna.UI2.WinForms.Guna2CirclePictureBox pct_inima = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                {
+                    FillColor = Color.Gray,
+                    Size = new Size(20, 20),
+                    Location = new Point(675, 260),
+                    Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48,
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    UseTransparentBackground = true
+                };
+                string inimi = task["0"]["users_hearts"];
+                string[] spinimi = inimi.Split(';');
+                Label loves = new Label()
+                {
+                    Location = new Point(700, 257),
+                    AutoSize = true,
+                    Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                    TextAlign = ContentAlignment.TopLeft,
+                    Text = (spinimi.Length - 1).ToString()
+                };
+
+                pct_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");
+
+                center.Controls.Add(title);
+                center.Controls.Add(gsp);
+                center.Controls.Add(pct_usr);
+                center.Controls.Add(nume);
+                center.Controls.Add(descriere);
+                center.Controls.Add(pct_ceas);
+                center.Controls.Add(read_time);
+                center.Controls.Add(pct_inima);
+                center.Controls.Add(loves);
+                
+                pnl.Controls.Add(center);
+                pnl.Controls.Add(panglica);
+                
+            }
+
+            
+            this.Controls.Add(pnl);
+            pnl.BringToFront();
+        }
+
         async void load_panel()
         {
             page = "home";
@@ -234,11 +414,12 @@ namespace SchoolSync.pages
                         Text = "Citeşte mai mult",
                         Tag = task[i.ToString()]["token"]
                     };
+                    lbl_read.Click += load_material;
                     Guna.UI2.WinForms.Guna2PictureBox pct = new Guna.UI2.WinForms.Guna2PictureBox()
                     {
                         Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48,
                         UseTransparentBackground = true,
-                        Size = new Size(17, 17),
+                        Size = new Size(17, 17),                        
                         Location = new Point(233, 9),
                         BackColor = Color.DimGray,
                         SizeMode = PictureBoxSizeMode.StretchImage,
@@ -661,8 +842,6 @@ namespace SchoolSync.pages
                     data["sql"] += " order by data DESC";
                 }
 
-                
-
                 dynamic task = await _class.PostRequestAsync_norefresh(url, data);
                 JObject jb = task;
                 if (jb.Count - 1 >= 1)
@@ -695,5 +874,8 @@ namespace SchoolSync.pages
             sort = guna2ComboBox2.SelectedItem.ToString();
             load_panel();
         }
+
+        
+
     }
 }
