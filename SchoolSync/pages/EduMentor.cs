@@ -19,7 +19,7 @@ namespace SchoolSync.pages
             InitializeComponent();
         }
 
-        string token_first_material = "";
+        string page = "", token_first_material = "", sort = "";
 
         Image incarca_imagine_specifica(string str)
         {
@@ -57,20 +57,134 @@ namespace SchoolSync.pages
             return SchoolSync.Properties.Resources.clarisse_meyer_jKU2NneZAbI_unsplash;
         }
 
+        private async void sterge_adauga_inima(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2PictureBox pct = sender as Guna.UI2.WinForms.Guna2PictureBox;
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from edumentor where token = '{0}'", pct.Name.ToString()));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            
+            string users = task["0"]["users_hearts"];
+                            
+            string[] split_user = users.Split(';');
+
+            bool ok = false;
+            Bitmap bit = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48;
+            if (pct.Tag.ToString() == "0")
+            {
+                pct.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+                users += (login_signin.login.accounts_user["token"] + ";");
+                pct.Tag = "1";
+            }
+            else
+            {
+                pct.Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48;
+
+                string newlove = "";
+                for (int j = 0; j < split_user.Length - 1; j++)
+                {
+                    string tkn = login_signin.login.accounts_user["token"];
+                    if (split_user[j] != tkn)
+                    {
+                        newlove += (split_user[j] + ";");
+                    }
+                }
+
+                ok = true;
+                users = newlove;
+                pct.Tag = "0";
+            }
+            
+            url = "https://schoolsync.nnmadalin.me/api/put.php";
+            data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("update edumentor set users_hearts = '{1}' where token = '{0}'", pct.Name.ToString(), users));
+            task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "update success")
+            {
+                var frm = new notification.success();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.success.message = "Adaugat cu succes la favorite!";
+                if (ok == true)
+                {
+                    notification.success.message = "Eliminat cu succes de la favorite!";
+                }
+                frm.BringToFront();
+            }
+            else
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Ceva nu a mers bine!";
+                frm.BringToFront();
+            }
+            load_panel();
+        }
+
         async void load_panel()
         {
+            page = "home";
             flowLayoutPanel1.Controls.Clear();
 
             multiple_class _class = new multiple_class();
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from edumentor"));
 
+            if (sort.Trim() == "" || sort == "Toate materiile")
+            {
+                data.Add("sql", string.Format("select * from edumentor"));
+                if (guna2Button1.BorderThickness == 2)
+                        data["sql"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
+                if (guna2Button18.BorderThickness == 2)
+                    data["sql"] += " where users_hearts like '%" + login_signin.login.accounts_user["token"] + "%'";
+                data["sql"] += " order by data DESC";
+            }
+            else
+            {
+                data.Add("sql", string.Format("select * from edumentor where category = '{0}'", sort));
+
+                if (guna2Button1.BorderThickness == 2)
+                    data["sql"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+                if (guna2Button18.BorderThickness == 2)
+                    data["sql"] += " and users_hearts like '%" + login_signin.login.accounts_user["token"] + "%'";
+                data["sql"] += " order by data DESC";
+            }
+
+            if (guna2Button1.BorderThickness == 2)
+            {
+                Label title = new Label()
+                {
+                    Text = "Materialele mele",
+                    Font = new Font("Segoe UI Black", 30, FontStyle.Bold),
+                    Size = new Size(1140, 70),
+                    TextAlign = ContentAlignment.TopCenter 
+                };
+                flowLayoutPanel1.Controls.Add(title);
+            }
+            if (guna2Button18.BorderThickness == 2)
+            {
+                Label title = new Label()
+                {
+                    Text = "Materialele mele favorite",
+                    Font = new Font("Segoe UI Black", 30, FontStyle.Bold),
+                    Size = new Size(1140, 70),
+                    TextAlign = ContentAlignment.TopCenter
+                };
+                flowLayoutPanel1.Controls.Add(title);
+            }
 
             dynamic task = await _class.PostRequestAsync(url, data);
             JObject jb = task;
-
 
             if (task["message"] == "success")
             {
@@ -86,7 +200,7 @@ namespace SchoolSync.pages
                         Padding = new Padding(0, 0, 0, 10),
                         FillColor = Color.FromArgb(223, 229, 232),
                         AutoSize = true,
-                        BorderColor = task["0"]["color"],
+                        BorderColor = task[i.ToString()]["color"],
                         BorderThickness = 2
                     };
                     Guna.UI2.WinForms.Guna2PictureBox gpb = new Guna.UI2.WinForms.Guna2PictureBox()
@@ -95,7 +209,7 @@ namespace SchoolSync.pages
                         Location = new Point(3, 3),
                         UseTransparentBackground = true,
                         BorderRadius = 5,
-                        SizeMode = PictureBoxSizeMode.StretchImage,
+                        SizeMode = PictureBoxSizeMode.Normal,
                     };                    
                     Label lbl = new Label()
                     {
@@ -117,7 +231,8 @@ namespace SchoolSync.pages
                         Cursor = Cursors.Hand,
                         Font = new Font("Segoe UI", 10, FontStyle.Bold),
                         ForeColor = Color.Black,
-                        Text = "Citeşte mai mult"
+                        Text = "Citeşte mai mult",
+                        Tag = task[i.ToString()]["token"]
                     };
                     Guna.UI2.WinForms.Guna2PictureBox pct = new Guna.UI2.WinForms.Guna2PictureBox()
                     {
@@ -127,8 +242,25 @@ namespace SchoolSync.pages
                         Location = new Point(233, 9),
                         BackColor = Color.DimGray,
                         SizeMode = PictureBoxSizeMode.StretchImage,
-                        Cursor = Cursors.Hand
+                        Cursor = Cursors.Hand,
+                        Tag = 0,
+                        Name = task[i.ToString()]["token"]
+
                     };
+
+                    pct.Click += sterge_adauga_inima;
+                    string users = task[i.ToString()]["users_hearts"];
+                    string[] split_user = users.Split(';');                    
+                    for(int j = 0; j < split_user.Length - 1; j++)
+                    {
+                        string tkn = login_signin.login.accounts_user["token"];
+                        if (split_user[j] == tkn)
+                        {
+                            pct.Tag = "1";
+                            pct.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+                            break;
+                        }
+                    }
 
                     string sttr = task[i.ToString()]["category"];
                     gpb.Image = incarca_imagine_specifica(sttr);
@@ -150,6 +282,7 @@ namespace SchoolSync.pages
         private void EduMentor_Load(object sender, EventArgs e)
         {
             load_panel();
+            page = "home";
         }
         
         private void adauga_fisier(object sender, EventArgs e)
@@ -208,8 +341,6 @@ namespace SchoolSync.pages
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                frm.Location = new Point(840, 50);
-                frm.Show();
                 notification.error.message = "Poti adauga maxim 5 fisiere!";
                 frm.BringToFront();
             }
@@ -310,6 +441,7 @@ namespace SchoolSync.pages
 
         private void adauga_material(object sender, EventArgs e)
         {
+            page = "adauga_material";
             Panel pnl_fullpage = new Panel()
             {
                 Size = new Size(1192, 690),
@@ -482,6 +614,36 @@ namespace SchoolSync.pages
           
             this.Controls.Add(pnl_fullpage);
             pnl_fullpage.BringToFront();
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            guna2Button1.BorderThickness = 0;
+            guna2Button18.BorderThickness = 0;
+            guna2Button2.BorderThickness = 2;
+            load_panel();
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            guna2Button1.BorderThickness = 2;
+            guna2Button18.BorderThickness = 0;
+            guna2Button2.BorderThickness = 0;
+            load_panel();
+        }
+
+        private void guna2Button18_Click(object sender, EventArgs e)
+        {
+            guna2Button1.BorderThickness = 0;
+            guna2Button18.BorderThickness = 2;
+            guna2Button2.BorderThickness = 0;
+            load_panel();
+        }
+
+        private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sort = guna2ComboBox2.SelectedItem.ToString();
+            load_panel();
         }
     }
 }

@@ -12,7 +12,7 @@ PE VIITOR:  adminul SAU creatorul sa poate sterge mesajul + sa apara "Sters de c
 pt EduMentor, sa poti adauga comentarii la material
 
 
-de adaugat un seartch bar
+de adaugat un seartch bar coll like '%stringcautat%'
 
 pt materiale educative: un combobox cu toate materiliile + `toate materiile`
 le afisam pe tip grid, design: figma, cu posibilitate de love
