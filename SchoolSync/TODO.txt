@@ -8,20 +8,14 @@ de pus comentarii si redenumit fct
 pt judet vr sa fac: materiale educative, invataunit, profil, !!!!!!!!!!!!!!!
 
 PE VIITOR:  adminul SAU creatorul sa poate sterge mesajul + sa apara "Sters de creator[gigel]"/"Sters de utilizator[gigel]"/"Sters de admin[gigel]"
+PE VIITOR:  comentarii la EduMentor
+PE VIITOR: de rezolvat bugul cu textbox ' " etc
+PE VIITOR: de adaugat un seartch bar coll like '%stringcautat%'
+PE VIITOR: de adaugat redirect home -> material educativ
 
-pt EduMentor, sa poti adauga comentarii la material?
-
-de rezolvat bugul cu textbox ' " etc
-
-
-de adaugat un seartch bar coll like '%stringcautat%'
-
-pt materiale educative: un combobox cu toate materiliile + `toate materiile`
-le afisam pe tip grid, design: figma, cu posibilitate de love
-fiecare material va avea formatul: titlu, realizat de, data, prezentarea formularului, posibilitate incarcare fisiere (design invataunit), 
-cat dureaza sa fie citit, inimioare,  Va fi o platforma de resurse, 
-
-de inceput sa facem pagina principala, la material
-
+===================================================================================
+PE VIITOR: EduMentor, editeaza material / sterge
+de facut pt post; token, comanda sql DAR CU PARAMETRI, si parametri, tip json
+===================================================================================
 
 pt profil: instagram, facebook, email, website, github, linkedln, dirscord

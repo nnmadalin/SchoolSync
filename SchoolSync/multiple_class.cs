@@ -22,6 +22,14 @@ namespace SchoolSync
             dynamic json = JsonConvert.DeserializeObject(responseString);
             schoolsync.hide_loading();
             return json;
+        }       
+
+        public async Task<dynamic> getstring(string url)
+        {
+            var client = new HttpClient();
+            var response = await client.GetStringAsync(url);
+            dynamic json = JsonConvert.DeserializeObject(response);
+            return json;
         }
 
         public async Task<dynamic> PostRequestAsync_norefresh(string url, Dictionary<string, string> data)

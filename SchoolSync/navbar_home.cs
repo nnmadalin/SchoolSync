@@ -25,7 +25,7 @@ namespace SchoolSync
             label.Text = "SchoolSync | Acasa";
             GC.Collect();
 
-            var frm = new pages.home();
+            var frm = new pages.Home();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
         }
@@ -47,7 +47,7 @@ namespace SchoolSync
             label.Text = "SchoolSync | Acasa";
             GC.Collect();
             
-            var frm = new pages.home();
+            var frm = new pages.Home();
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
@@ -55,6 +55,8 @@ namespace SchoolSync
             background_color_btn();
             guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
         }
+
+       
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
@@ -99,7 +101,7 @@ namespace SchoolSync
             GC.Collect();
 
             
-            var frm = new pages.profil();
+            var frm = new pages.Profil();
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();

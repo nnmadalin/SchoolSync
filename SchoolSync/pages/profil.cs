@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SchoolSync.pages
 {
-    public partial class profil : UserControl
+    public partial class Profil : UserControl
     {
-        public profil()
+        public Profil()
         {
             InitializeComponent();
         }

@@ -1,7 +1,7 @@
 ﻿
 namespace SchoolSync.pages
 {
-    partial class profil
+    partial class Profil
     {
         /// <summary> 
         /// Required designer variable.

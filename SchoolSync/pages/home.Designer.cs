@@ -1,7 +1,7 @@
 ﻿
 namespace SchoolSync.pages
 {
-    partial class home
+    partial class Home
     {
         /// <summary> 
         /// Required designer variable.
@@ -44,7 +44,10 @@ namespace SchoolSync.pages
             this.label9 = new System.Windows.Forms.Label();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1.SuspendLayout();
+            this.guna2Panel2.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             this.guna2Panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
@@ -114,10 +117,12 @@ namespace SchoolSync.pages
             this.guna2Panel2.AutoSize = true;
             this.guna2Panel2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel2.BorderRadius = 13;
+            this.guna2Panel2.Controls.Add(this.label10);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.guna2Panel2.Location = new System.Drawing.Point(29, 241);
             this.guna2Panel2.MinimumSize = new System.Drawing.Size(0, 60);
             this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.guna2Panel2.ShadowDecoration.BorderRadius = 40;
             this.guna2Panel2.ShadowDecoration.Depth = 3;
             this.guna2Panel2.ShadowDecoration.Enabled = true;
@@ -156,13 +161,13 @@ namespace SchoolSync.pages
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 10);
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold);
+            this.label7.Location = new System.Drawing.Point(3, 19);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(81, 62);
+            this.label7.Size = new System.Drawing.Size(79, 46);
             this.label7.TabIndex = 11;
-            this.label7.Text = "05";
+            this.label7.Text = "0";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
@@ -170,9 +175,9 @@ namespace SchoolSync.pages
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(80, 25);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 40);
+            this.label6.Size = new System.Drawing.Size(75, 40);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Materiale\r\nCitite";
+            this.label6.Text = "Materiale\r\nEducative";
             // 
             // guna2Panel4
             // 
@@ -193,23 +198,23 @@ namespace SchoolSync.pages
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 10);
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 25F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(3, 19);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 62);
+            this.label8.Size = new System.Drawing.Size(79, 46);
             this.label8.TabIndex = 13;
-            this.label8.Text = "05";
+            this.label8.Text = "0";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(80, 25);
+            this.label9.Location = new System.Drawing.Point(78, 25);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(74, 40);
+            this.label9.Size = new System.Drawing.Size(80, 40);
             this.label9.TabIndex = 12;
-            this.label9.Text = "Materiale\r\nActive";
+            this.label9.Text = "Intrebari\r\nInvataUnit";
             // 
             // guna2TextBox1
             // 
@@ -221,6 +226,7 @@ namespace SchoolSync.pages
             this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox1.Enabled = false;
             this.guna2TextBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
@@ -255,10 +261,29 @@ namespace SchoolSync.pages
             this.guna2CirclePictureBox1.TabStop = false;
             this.guna2CirclePictureBox1.UseTransparentBackground = true;
             // 
-            // home
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(15, 18);
+            this.label10.MaximumSize = new System.Drawing.Size(606, 100);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.label10.Size = new System.Drawing.Size(0, 30);
+            this.label10.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(30, 414);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(711, 252);
+            this.flowLayoutPanel1.TabIndex = 10;
+            // 
+            // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.guna2Panel4);
             this.Controls.Add(this.guna2Panel3);
             this.Controls.Add(this.guna2TextBox1);
@@ -267,11 +292,13 @@ namespace SchoolSync.pages
             this.Controls.Add(this.label4);
             this.Controls.Add(this.guna2CirclePictureBox1);
             this.Controls.Add(this.guna2Panel1);
-            this.Name = "home";
+            this.Name = "Home";
             this.Size = new System.Drawing.Size(1192, 690);
             this.Load += new System.EventHandler(this.home_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            this.guna2Panel2.ResumeLayout(false);
+            this.guna2Panel2.PerformLayout();
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             this.guna2Panel4.ResumeLayout(false);
@@ -299,5 +326,7 @@ namespace SchoolSync.pages
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -138,11 +138,11 @@
     <Compile Include="pages\EduMentor.Designer.cs">
       <DependentUpon>EduMentor.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\home.cs">
+    <Compile Include="pages\Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\home.Designer.cs">
-      <DependentUpon>home.cs</DependentUpon>
+    <Compile Include="pages\Home.Designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\InvataUnit.cs">
       <SubType>UserControl</SubType>
@@ -150,11 +150,11 @@
     <Compile Include="pages\InvataUnit.Designer.cs">
       <DependentUpon>InvataUnit.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\profil.cs">
+    <Compile Include="pages\Profil.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\profil.Designer.cs">
-      <DependentUpon>profil.cs</DependentUpon>
+    <Compile Include="pages\Profil.Designer.cs">
+      <DependentUpon>Profil.cs</DependentUpon>
     </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
@@ -192,14 +192,14 @@
     <EmbeddedResource Include="pages\EduMentor.resx">
       <DependentUpon>EduMentor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\home.resx">
-      <DependentUpon>home.cs</DependentUpon>
+    <EmbeddedResource Include="pages\Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\InvataUnit.resx">
       <DependentUpon>InvataUnit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\profil.resx">
-      <DependentUpon>profil.cs</DependentUpon>
+    <EmbeddedResource Include="pages\Profil.resx">
+      <DependentUpon>Profil.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
