@@ -9,7 +9,9 @@ pt judet vr sa fac: materiale educative, invataunit, profil, !!!!!!!!!!!!!!!
 
 PE VIITOR:  adminul SAU creatorul sa poate sterge mesajul + sa apara "Sters de creator[gigel]"/"Sters de utilizator[gigel]"/"Sters de admin[gigel]"
 
-pt EduMentor, sa poti adauga comentarii la material
+pt EduMentor, sa poti adauga comentarii la material?
+
+de rezolvat bugul cu textbox ' " etc
 
 
 de adaugat un seartch bar coll like '%stringcautat%'

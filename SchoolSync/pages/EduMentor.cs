@@ -148,6 +148,12 @@ namespace SchoolSync.pages
 
         }
 
+        private void deschide_fisier_buton(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Button;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
+        }
+
         private async void load_material(object sender, EventArgs e)
         {
             Label lbl_token = sender as Label;
@@ -198,7 +204,7 @@ namespace SchoolSync.pages
                     Location = new Point(196, 100),
                     Size = new Size(800, 300),
                     FillColor = Color.White,
-                    BorderRadius = 5,       
+                    BorderRadius = 15,       
                     UseTransparentBackground = true, 
                 };
                 Label title = new Label()
@@ -285,7 +291,7 @@ namespace SchoolSync.pages
                 FlowLayoutPanel flp_main = new FlowLayoutPanel()
                 {
                     Location = new Point(0, 450),
-                    MinimumSize = new Size(1172, 480),
+                    MinimumSize = new Size(1172, 20),
                     MaximumSize = new Size(1172, 0),
                     Padding = new Padding(0, 0, 0, 20),
                     AutoSize = true,
@@ -294,10 +300,10 @@ namespace SchoolSync.pages
                 Guna.UI2.WinForms.Guna2Panel flp_panel = new Guna.UI2.WinForms.Guna2Panel()
                 {
                     AutoSize = true,
-                    MinimumSize = new Size(1000, 500),
+                    MinimumSize = new Size(1000, 0),
                     MaximumSize = new Size(1000, 0),
                     FillColor = Color.White,
-                    BorderRadius = 10,
+                    BorderRadius = 15,
                     UseTransparentBackground = true,
                     Margin = new Padding(92, 0, 0 , 0),
                 };
@@ -305,9 +311,21 @@ namespace SchoolSync.pages
                 FlowLayoutPanel flp = new FlowLayoutPanel()
                 {
                     Location = new Point(10, 10),
-                    Size = new Size(980, 480),
+                    MinimumSize = new Size(980, 0),
+                    MaximumSize = new Size(980, 0),
+                    Padding = new Padding(0, 0, 0, 20),
                     BackColor = Color.White,
                     AutoSize = true,
+                };
+
+                Label descriere_material = new Label()
+                {
+                    MinimumSize = new Size(980, 0),
+                    MaximumSize = new Size(980, 0),
+                    AutoSize = true,
+                    Padding = new Padding(0, 0, 0, 10),
+                    Font = new Font("Segoe UI", 13),
+                    Text = task["0"]["description"],
                 };
 
                 pct_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");
@@ -322,8 +340,83 @@ namespace SchoolSync.pages
                 center.Controls.Add(pct_inima);
                 center.Controls.Add(loves);
 
-                flp_panel.Controls.Add(flp);
                 flp_main.Controls.Add(flp_panel);
+
+                flp_panel.Controls.Add(flp);
+
+                flp.Controls.Add(descriere_material);
+
+                string file = task["0"]["files"];
+                string[] file_split = file.Split(';');
+
+                for (int i = 0; i < file_split.Length - 1; i++)
+                {
+                    string[] splitplit = file_split[i].Split('.');
+                    Guna.UI2.WinForms.Guna2Panel flp_files_panel = new Guna.UI2.WinForms.Guna2Panel()
+                    {
+                        Size = new Size(200, 180),
+                        FillColor = Color.FromArgb(235, 241, 244),
+                        BorderRadius = 10,
+                        UseTransparentBackground = true
+                    };
+                    Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                    {
+                        Size = new Size(60, 60),
+                        UseTransparentBackground = true,
+                        SizeMode = PictureBoxSizeMode.CenterImage,
+                        FillColor = Color.FromArgb(208, 216, 220),
+                        Location = new Point(65, 15),
+                    };
+                    Label lbl_panel_file = new Label()
+                    {
+                        Location = new Point(0, 80),
+                        AutoSize = true,
+                        MinimumSize = new Size(190, 0),
+                        Font = new Font("Segoe UI Semibold", 11, FontStyle.Bold),
+                        TextAlign = ContentAlignment.TopCenter,
+                    };
+                    Guna.UI2.WinForms.Guna2Button panel_file_btn = new Guna.UI2.WinForms.Guna2Button()
+                    {
+                        FillColor = Color.FromArgb(112, 204, 97),
+                        ForeColor = Color.Black,
+                        BorderRadius = 15,
+                        Cursor = Cursors.Hand,
+                        Text = "Download",
+                        TextAlign = HorizontalAlignment.Left,
+                        Image = SchoolSync.Properties.Resources.download_FILL1_wght700_GRAD0_opsz48,
+                        ImageSize = new Size(15, 15),
+                        ImageAlign = HorizontalAlignment.Right,
+                        Size = new Size(110, 30),
+                        Font = new Font("Segoe UI Semibold", 9, FontStyle.Bold),
+                        Location = new Point((200 - 110) / 2, 140)
+                    };
+
+                    flp.Controls.Add(flp_files_panel);
+                    flp_files_panel.Controls.Add(gcp);
+                    flp_files_panel.Controls.Add(lbl_panel_file);
+
+                    if (splitplit[0].Length >= 10)
+                    {
+                        lbl_panel_file.Text = splitplit[0].Substring(0, 10) + "." + splitplit[1];
+                    }
+                    else
+                        lbl_panel_file.Text = file_split[i];
+                    if (splitplit[1] == "jpg" || splitplit[1] == "jpeg" || splitplit[1] == "png" || splitplit[1] == "svg" || splitplit[1] == "webp" || splitplit[1] == "bmp")
+                    {
+                        gcp.Image = SchoolSync.Properties.Resources.image_FILL1_wght700_GRAD0_opsz48;
+                    }
+                    else
+                        gcp.Image = SchoolSync.Properties.Resources.description_FILL1_wght700_GRAD0_opsz48;
+
+                    flp_files_panel.Controls.Add(panel_file_btn);
+
+                    panel_file_btn.Tag = file_split[i];
+                    panel_file_btn.Click += deschide_fisier_buton;
+
+                }
+
+                
+                
 
                 pnl.Controls.Add(flp_main);
                 pnl.Controls.Add(center);
