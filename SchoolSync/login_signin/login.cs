@@ -93,7 +93,6 @@ namespace SchoolSync.login_signin
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("sql", string.Format("select * from accounts where (username = '{0}' or email = '{0}') and password = '{1}'", username, pswd));
-
             dynamic task = await multiple_class.PostRequestAsync(url, data);
             if (task["message"] == "success")
             {

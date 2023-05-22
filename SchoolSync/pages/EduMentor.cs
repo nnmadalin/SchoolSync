@@ -189,7 +189,7 @@ namespace SchoolSync.pages
                 Guna.UI2.WinForms.Guna2Panel panglica = new Guna.UI2.WinForms.Guna2Panel()
                 {
                     Location = new Point(0, 0),
-                    Size = new Size(1192, 200),
+                    Size = new Size(1172, 200),
                     FillColor = task["0"]["color"]
                 };
 
@@ -201,7 +201,6 @@ namespace SchoolSync.pages
                     BorderRadius = 5,       
                     UseTransparentBackground = true, 
                 };
-
                 Label title = new Label()
                 {
                     Location = new Point(0, 0),
@@ -212,8 +211,6 @@ namespace SchoolSync.pages
                     MinimumSize = new Size(800, 200),
                     Text = task["0"]["title"],                   
                 };
-                
-
                 Guna.UI2.WinForms.Guna2Separator gsp = new Guna.UI2.WinForms.Guna2Separator()
                 {
                     UseTransparentBackground = true, 
@@ -230,7 +227,6 @@ namespace SchoolSync.pages
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     UseTransparentBackground = true
                 };
-
                 Label nume = new Label()
                 {
                     Location = new Point(75, 235),
@@ -249,7 +245,6 @@ namespace SchoolSync.pages
                     ForeColor = Color.FromArgb(140, 140, 140),
                     Text = task["0"]["category"] + " • " + Convert.ToDateTime(date).ToShortDateString(),
                 };
-
                 Guna.UI2.WinForms.Guna2CirclePictureBox pct_ceas = new Guna.UI2.WinForms.Guna2CirclePictureBox()
                 {
                     FillColor = Color.Gray,
@@ -267,7 +262,6 @@ namespace SchoolSync.pages
                     TextAlign = ContentAlignment.TopRight,
                     Text = task["0"]["reading_time"] + " min"
                 };
-
                 Guna.UI2.WinForms.Guna2CirclePictureBox pct_inima = new Guna.UI2.WinForms.Guna2CirclePictureBox()
                 {
                     FillColor = Color.Gray,
@@ -288,6 +282,34 @@ namespace SchoolSync.pages
                     Text = (spinimi.Length - 1).ToString()
                 };
 
+                FlowLayoutPanel flp_main = new FlowLayoutPanel()
+                {
+                    Location = new Point(0, 450),
+                    MinimumSize = new Size(1172, 480),
+                    MaximumSize = new Size(1172, 0),
+                    Padding = new Padding(0, 0, 0, 20),
+                    AutoSize = true,
+                };
+
+                Guna.UI2.WinForms.Guna2Panel flp_panel = new Guna.UI2.WinForms.Guna2Panel()
+                {
+                    AutoSize = true,
+                    MinimumSize = new Size(1000, 500),
+                    MaximumSize = new Size(1000, 0),
+                    FillColor = Color.White,
+                    BorderRadius = 10,
+                    UseTransparentBackground = true,
+                    Margin = new Padding(92, 0, 0 , 0),
+                };
+
+                FlowLayoutPanel flp = new FlowLayoutPanel()
+                {
+                    Location = new Point(10, 10),
+                    Size = new Size(980, 480),
+                    BackColor = Color.White,
+                    AutoSize = true,
+                };
+
                 pct_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");
 
                 center.Controls.Add(title);
@@ -299,7 +321,11 @@ namespace SchoolSync.pages
                 center.Controls.Add(read_time);
                 center.Controls.Add(pct_inima);
                 center.Controls.Add(loves);
-                
+
+                flp_panel.Controls.Add(flp);
+                flp_main.Controls.Add(flp_panel);
+
+                pnl.Controls.Add(flp_main);
                 pnl.Controls.Add(center);
                 pnl.Controls.Add(panglica);
                 
