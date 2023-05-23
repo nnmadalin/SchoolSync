@@ -80,60 +80,72 @@ namespace SchoolSync.pages
 
         private void file_dialog(object sender, EventArgs e)
         {
-            if (this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Count < 5)
+            try
             {
-                OpenFileDialog opf = new OpenFileDialog();
-                opf.FileName = "";
-                opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf) " +
-                    "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf";
-                DialogResult dir = opf.ShowDialog();
-
-
-                if (dir == DialogResult.OK)
+                if (this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Count < 5)
                 {
-                    FileInfo fl = new FileInfo(opf.FileName);
+                    OpenFileDialog opf = new OpenFileDialog();
+                    opf.FileName = "";
+                    opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf) " +
+                        "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf";
+                    DialogResult dir = opf.ShowDialog();
 
-                    long fileSizeibBytes = fl.Length;
-                    long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
 
-                    if (fileSizeibMbs > 5)
+                    if (dir == DialogResult.OK)
                     {
-                        var frm = new notification.error();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-                        notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
-                        frm.BringToFront();
-                    }
-                    else
-                    {
-                        Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                        FileInfo fl = new FileInfo(opf.FileName);
+
+                        long fileSizeibBytes = fl.Length;
+                        long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                        if (fileSizeibMbs > 5)
                         {
-                            FillColor = Color.FromArgb(180, 180, 180),
-                            BorderColor = Color.FromArgb(180, 180, 180),
-                            ForeColor = Color.Black,
-                            Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
-                            AutoRoundedCorners = false,
-                            BorderRadius = 10,
-                            TextAlign = HorizontalAlignment.Left,
-                            Size = new Size(100, 35),
-                            Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
-                            Tag = opf.FileName.ToString()
-                        };
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
+                            frm.BringToFront();
+                        }
+                        else
+                        {
+                            Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                            {
+                                FillColor = Color.FromArgb(180, 180, 180),
+                                BorderColor = Color.FromArgb(180, 180, 180),
+                                ForeColor = Color.Black,
+                                Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                AutoRoundedCorners = false,
+                                BorderRadius = 10,
+                                TextAlign = HorizontalAlignment.Left,
+                                Size = new Size(100, 35),
+                                Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
+                                Tag = opf.FileName.ToString()
+                            };
 
-                        this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
+                            this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
+                        }
                     }
                 }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    frm.Location = new Point(840, 50);
+                    frm.Show();
+                    notification.error.message = "Poti adauga maxim 5 fisiere!";
+                    frm.BringToFront();
+                }
             }
-            else
+            catch
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                frm.Location = new Point(840, 50);
-                frm.Show();
-                notification.error.message = "Poti adauga maxim 5 fisiere!";
+                notification.error.message = "Ceva nu a mers bine!";
                 frm.BringToFront();
             }
         }
@@ -957,8 +969,10 @@ namespace SchoolSync.pages
 
         private async void load_profil(object sender, EventArgs e)
         {
+            Label lbl = (sender as Label);
             var frm = new pages.Profil();
-            pages.Profil.token = login_signin.login.accounts_user["token"];
+            pages.Profil.token = lbl.Tag.ToString();
+            pages.Profil.page = "";
             this.Controls.Add(frm);
             frm.BringToFront();
         }
@@ -1084,14 +1098,14 @@ namespace SchoolSync.pages
                 Location = new Point(30, 20)
             };
             cpb.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
-
+            
             Label lbl_name = new Label()
             {
                 Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
                 Location = new Point(82, 25),
                 Text = "",
                 AutoSize = true,
-                Cursor = Cursors.Hand
+                Cursor = Cursors.Hand,
             };
             lbl_name.Click += load_profil;            
 
@@ -1123,7 +1137,7 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from invataunit where token = '{0}'", token_question));
+            data.Add("sql", string.Format("select * from invataunit where token = '{0}'", token_question));            
 
             FlowLayoutPanel flp = new FlowLayoutPanel()
             {
@@ -1151,13 +1165,14 @@ namespace SchoolSync.pages
             btn_add_answer.Click += load_adaugare_raspuns_panel;
 
             task = await _Class.PostRequestAsync(url, data);
+                       
 
             this.Controls["panel_question_with_answer"].Controls.Add(btn);           
             this.Controls["panel_question_with_answer"].Controls.Add(btn_add_favorite);
             if (task["message"] == "success")
             {
                 lbl_name.Text = task["0"]["created"];
-                lbl_name.Tag = task["0"]["token"];
+                lbl_name.Tag = task["0"]["token_user"];
                 string date = task["0"]["data"]; DateTime dt = Convert.ToDateTime(date);
                 lbl_category_time.Text = task["0"]["category"] + " • "
                         + dt.Day + "/" + dt.Month + "/" + dt.Year + " " + Convert.ToDateTime(date).ToShortTimeString(); ;
@@ -1781,16 +1796,24 @@ namespace SchoolSync.pages
                 data.Add("sql", string.Format("select * from invataunit where token = '{0}' order by data DESC", token_question));
                 dynamic task = await _class.PostRequestAsync_norefresh(url, data);
 
-                string dst = task["0"]["answers"];
-                dynamic sub_task = JsonConvert.DeserializeObject(dst);
-                JObject jb = JObject.FromObject(sub_task);
-
-                if (number_answer != jb.Count.ToString())
+                if (task["message"] == "success")
                 {
-                    number_answer = jb.Count.ToString();
-                    schoolsync.show_loading();
-                    load_intrebare_cu_raspunsuri();
-                    schoolsync.hide_loading();
+
+                    string dst = task["0"]["answers"];
+                    dynamic sub_task = JsonConvert.DeserializeObject(dst);
+                    JObject jb = JObject.FromObject(sub_task);
+
+                    if (number_answer != jb.Count.ToString())
+                    {
+                        number_answer = jb.Count.ToString();
+                        schoolsync.show_loading();
+                        load_intrebare_cu_raspunsuri();
+                        schoolsync.hide_loading();
+                    }
+                }
+                else
+                {
+                    load_intrebari_panel();
                 }
             }
             else

@@ -30,6 +30,7 @@ namespace SchoolSync.pages
         private void InitializeComponent()
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -57,7 +58,6 @@ namespace SchoolSync.pages
             this.label8 = new System.Windows.Forms.Label();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
@@ -88,6 +88,26 @@ namespace SchoolSync.pages
             this.guna2Panel1.Size = new System.Drawing.Size(1129, 250);
             this.guna2Panel1.TabIndex = 0;
             this.guna2Panel1.UseTransparentBackground = true;
+            // 
+            // guna2CircleButton2
+            // 
+            this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton2.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2CircleButton2.ForeColor = System.Drawing.Color.White;
+            this.guna2CircleButton2.Image = global::SchoolSync.Properties.Resources.edit_FILL1_wght700_GRAD0_opsz48;
+            this.guna2CircleButton2.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2CircleButton2.Location = new System.Drawing.Point(1086, 207);
+            this.guna2CircleButton2.Name = "guna2CircleButton2";
+            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton2.Size = new System.Drawing.Size(40, 40);
+            this.guna2CircleButton2.TabIndex = 7;
+            this.guna2CircleButton2.UseTransparentBackground = true;
+            this.guna2CircleButton2.Visible = false;
             // 
             // guna2Panel3
             // 
@@ -259,7 +279,7 @@ namespace SchoolSync.pages
             this.flowLayoutPanel2.MaximumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 310);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 308);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // guna2Panel8
@@ -289,9 +309,9 @@ namespace SchoolSync.pages
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
             this.label7.Location = new System.Drawing.Point(16, 157);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(132, 19);
+            this.label7.Size = new System.Drawing.Size(144, 19);
             this.label7.TabIndex = 10;
-            this.label7.Text = "Materiale adaugate:";
+            this.label7.Text = "Materiale adaugate: 0";
             // 
             // label11
             // 
@@ -301,9 +321,9 @@ namespace SchoolSync.pages
             this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
             this.label11.Location = new System.Drawing.Point(16, 124);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(117, 19);
+            this.label11.Size = new System.Drawing.Size(129, 19);
             this.label11.TabIndex = 9;
-            this.label11.Text = "Intrebari favorite:";
+            this.label11.Text = "Intrebari favorite: 0";
             // 
             // label6
             // 
@@ -313,9 +333,9 @@ namespace SchoolSync.pages
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
             this.label6.Location = new System.Drawing.Point(16, 92);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 19);
+            this.label6.Size = new System.Drawing.Size(77, 19);
             this.label6.TabIndex = 7;
-            this.label6.Text = "Intrebari:";
+            this.label6.Text = "Intrebari: 0";
             // 
             // label9
             // 
@@ -426,25 +446,6 @@ namespace SchoolSync.pages
             this.guna2CircleButton1.TabIndex = 6;
             this.guna2CircleButton1.UseTransparentBackground = true;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
-            // 
-            // guna2CircleButton2
-            // 
-            this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton2.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2CircleButton2.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton2.Image = global::SchoolSync.Properties.Resources.edit_FILL1_wght700_GRAD0_opsz48;
-            this.guna2CircleButton2.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2CircleButton2.Location = new System.Drawing.Point(1086, 207);
-            this.guna2CircleButton2.Name = "guna2CircleButton2";
-            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton2.Size = new System.Drawing.Size(40, 40);
-            this.guna2CircleButton2.TabIndex = 7;
-            this.guna2CircleButton2.UseTransparentBackground = true;
             // 
             // Profil
             // 

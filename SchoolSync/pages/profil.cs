@@ -69,38 +69,50 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from invataunit where token_user = '{0}'", login_signin.login.accounts_user["token"]));
+            data.Add("sql", string.Format("select * from invataunit where token_user = '{0}'", token));
             task = await _class.PostRequestAsync_norefresh(url, data);
             JObject jb = task;
-            label6.Text = "Intrebari: " + (jb.Count - 1).ToString();
+            if (task["message"] == "success")
+            {
+                label6.Text = "Intrebari: " + (jb.Count - 1).ToString();
+            }
 
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from accounts where token = '{0}'", login_signin.login.accounts_user["token"]));
+            data.Add("sql", string.Format("select * from accounts where token = '{0}'", token));
             task = await _class.PostRequestAsync_norefresh(url, data);
-            string json = task["0"]["favorite_invataunit"];
-            string[] spjson = json.Split(';');
-            label11.Text = "Intrebari favorite: " + (spjson.Length - 1).ToString();
+            if (task["message"] == "success")
+            {
+                string json = task["0"]["favorite_invataunit"];
+                string[] spjson = json.Split(';');
+                label11.Text = "Intrebari favorite: " + (spjson.Length - 1).ToString();
+            }
 
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from edumentor where token_user = '{0}'", login_signin.login.accounts_user["token"]));
+            data.Add("sql", string.Format("select * from edumentor where token_user = '{0}'", token));
             task = await _class.PostRequestAsync_norefresh(url, data);
             jb = task;
-            label7.Text = "Materiale adaugate: " + (jb.Count - 1).ToString();
+            if (task["message"] == "success")
+            {
+                label7.Text = "Materiale adaugate: " + (jb.Count - 1).ToString();
+            }
 
             schoolsync.hide_loading();
         }
 
         private async void Profil_Load(object sender, EventArgs e)
         {
-            if(page == "home")
+            if (page == "home")
             {
                 guna2CircleButton1.Visible = false;
+                guna2CircleButton2.Visible = true;
+                token = login_signin.login.accounts_user["token"];
             }
             load_profil();
+            
         }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)

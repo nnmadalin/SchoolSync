@@ -265,7 +265,8 @@ namespace SchoolSync.login_signin
 
         private void guna2TextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            sign_send();
+            if(e.KeyChar == (char)Keys.Enter)
+                sign_send();
         }
     }
 }

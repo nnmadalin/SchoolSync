@@ -156,8 +156,11 @@ namespace SchoolSync.pages
 
         private async void load_profil(object sender, EventArgs e)
         {
+            Label lbl = (sender as Label);
             var frm = new pages.Profil();
-            pages.Profil.token = login_signin.login.accounts_user["token"];
+            pages.Profil.token = lbl.Tag.ToString();
+            Console.WriteLine(lbl.Tag.ToString());
+            pages.Profil.page = "";
             this.Controls.Add(frm);
             frm.BringToFront();
         }
@@ -653,6 +656,7 @@ namespace SchoolSync.pages
                     Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
                     TextAlign = ContentAlignment.TopLeft,
                     Text = task["0"]["created"],
+                    Tag = task["0"]["token_user"],
                     Cursor = Cursors.Hand
                 };
                 nume.Click += load_profil;
@@ -1040,61 +1044,73 @@ namespace SchoolSync.pages
         
         private void adauga_fisier(object sender, EventArgs e)
         {
-            if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Count < 5)
+            try
             {
-                OpenFileDialog opf = new OpenFileDialog();
-                opf.FileName = "";
-                opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf) " +
-                    "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf";
-                DialogResult dir = opf.ShowDialog();
-
-
-                if (dir == DialogResult.OK)
+                if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Count < 5)
                 {
-                    FileInfo fl = new FileInfo(opf.FileName);
+                    OpenFileDialog opf = new OpenFileDialog();
+                    opf.FileName = "";
+                    opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf) " +
+                        "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf";
+                    DialogResult dir = opf.ShowDialog();
 
-                    long fileSizeibBytes = fl.Length;
-                    long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
 
-                    if (fileSizeibMbs > 10)
+                    if (dir == DialogResult.OK)
                     {
-                        var frm = new notification.error();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-                        notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 10 MB!";
-                        frm.BringToFront();
-                    }
-                    else
-                    {
-                        Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                        FileInfo fl = new FileInfo(opf.FileName);
+
+                        long fileSizeibBytes = fl.Length;
+                        long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                        if (fileSizeibMbs > 10)
                         {
-                            FillColor = Color.White,
-                            BorderColor = Color.White,
-                            ForeColor = Color.Black,
-                            Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
-                            AutoRoundedCorners = false,
-                            BorderRadius = 10,
-                            TextAlign = HorizontalAlignment.Left,
-                            Size = new Size(160, 35),                            
-                            Tag = opf.FileName.ToString()
-                        };
-                        if (opf.FileName.Length > 16)
-                            guna2Chip.Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 16) + "...";
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 10 MB!";
+                            frm.BringToFront();
+                        }
                         else
-                            guna2Chip.Text = opf.FileName;
+                        {
+                            Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                            {
+                                FillColor = Color.White,
+                                BorderColor = Color.White,
+                                ForeColor = Color.Black,
+                                Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                AutoRoundedCorners = false,
+                                BorderRadius = 10,
+                                TextAlign = HorizontalAlignment.Left,
+                                Size = new Size(160, 35),
+                                Tag = opf.FileName.ToString()
+                            };
+                            if (opf.FileName.Length > 16)
+                                guna2Chip.Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 16) + "...";
+                            else
+                                guna2Chip.Text = opf.FileName;
 
-                        this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Add(guna2Chip);
+                            this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Add(guna2Chip);
+                        }
                     }
                 }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Poti adauga maxim 5 fisiere!";
+                    frm.BringToFront();
+                }
             }
-            else
+            catch
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                notification.error.message = "Poti adauga maxim 5 fisiere!";
+                notification.error.message = "Ceva nu a mers bine!";
                 frm.BringToFront();
             }
         }
