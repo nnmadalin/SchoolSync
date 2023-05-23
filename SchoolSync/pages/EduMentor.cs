@@ -162,6 +162,411 @@ namespace SchoolSync.pages
             frm.BringToFront();
         }
 
+        string fisiere_value = "";
+
+        private async void sterge_material(object sender, EventArgs e)
+        {
+            string token = ((Guna.UI2.WinForms.Guna2CircleButton)sender).Tag.ToString();
+            guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
+            guna2MessageDialog1.Caption = "Sterge material education!";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi materialul?";
+            DialogResult dr = guna2MessageDialog1.Show();
+            if (dr == DialogResult.Yes)
+            {
+                string url = "https://schoolsync.nnmadalin.me/api/delete.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("sql", string.Format("delete from edumentor where token = '{0}'", token));
+
+                multiple_class _Class = new multiple_class();
+                dynamic task = await _Class.PostRequestAsync(url, data);
+                string token_app = schoolsync.token;
+
+                if (task["message"] == "delete success")
+                {
+                    string[] split_1 = fisiere_value.Split(';');
+                    for (int i = 0; i < split_1.Length - 1; i++)
+                    {
+                        url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
+                        data = new Dictionary<string, string>();
+                        data.Add("token", token_app);
+                        data.Add("file", split_1[i]);
+                        task = await _Class.PostRequestAsync(url, data);
+                    }
+
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+
+                    notification.success.message = "Material sters cu succes!";
+                    frm.BringToFront();
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+
+                    notification.error.message = "Ceva nu a mers bine, mai incearca!";
+                    frm.BringToFront();
+                }
+                foreach (Control control in this.Controls)
+                {
+                    if (control.Name == "panel_material")
+                    {
+                        this.Controls.Remove(control);
+                        break;
+                    }
+                }
+
+                load_panel();
+            }
+        }
+
+        private async void editare_material_api(object sender, EventArgs e)
+        {
+            string token = ((Guna.UI2.WinForms.Guna2Button)sender).Tag.ToString();
+            if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"]).BorderColor = Color.Red;
+            }
+            else if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"].Text.Trim() == "")
+            {
+                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"]).BorderColor = Color.Red;
+            }
+            else
+            {
+                guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+                guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
+                guna2MessageDialog1.Caption = "Editeaza materialul!";
+                guna2MessageDialog1.Text = "Esti sigur ca vrei sa editezi materialul?";
+                DialogResult dr = guna2MessageDialog1.Show();
+                if (dr == DialogResult.Yes)
+                {
+                    //TOTUL ESTE BINE
+                    schoolsync.show_loading();
+
+                    ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"]).BorderColor = Color.FromArgb(213, 218, 223);
+                    ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"]).BorderColor = Color.FromArgb(213, 218, 223);
+
+                    multiple_class _class = new multiple_class();
+
+                    Control combobox = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["combobox_materii"];
+                    Control textbox_title = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"];
+                    Control textbox_descriere = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"];
+                    Control min = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["gnu"];
+
+                    string url;
+                    Dictionary<string, string> data;
+                    dynamic task;
+
+                    string token_app = schoolsync.token;
+                    string files = "";
+                    string[] split_1 = fisiere_value.Split(';');
+
+                    foreach (Control control in this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls)
+                    {
+                        bool ok = false;
+                        for (int i = 0; i < split_1.Length - 1; i++)
+                        {
+                            if (split_1[i] == control.Tag.ToString())
+                            {
+                                split_1[i] = "-1";
+                                ok = true;
+                                break;
+                            }
+                        }
+                        if (ok == true)
+                        {
+                            files += (control.Tag.ToString() + ";");
+                        }
+                        else
+                        {
+                            string token_file = await _class.UploadFileAsync(control.Tag.ToString());
+                            if (token_file != null)
+                                files += (token_file + ";");
+                        }
+
+
+                    }
+
+
+                    for (int i = 0; i < split_1.Length - 1; i++)
+                    {
+                        if (split_1[i] != "-1")
+                        {
+                            url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
+                            data = new Dictionary<string, string>();
+                            data.Add("token", token_app);
+                            data.Add("file", split_1[i]);
+                            task = await _class.PostRequestAsync_norefresh(url, data);
+                        }
+                    }
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("sql", string.Format("update edumentor set category = '{0}', title = '{1}', description = '{2}' , reading_time = '{3}', files = '{4}' where token = '{5}'",
+                        ((ComboBox)combobox).SelectedItem, textbox_title.Text.Trim(), textbox_descriere.Text.Trim(), ((Guna.UI2.WinForms.Guna2NumericUpDown)min).Value, files, token));
+
+                    task = await _class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Material modificat cu succes!";
+                        frm.BringToFront();
+                        foreach (Control control in this.Controls)
+                        {
+                            if (control.Name == "pnl_fullpage")
+                            {
+                                this.Controls.Remove(control);
+                                break;
+                            }
+                        }
+                        load_panel();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a functionat bine, mai incearca!";
+                        frm.BringToFront();
+                    }
+                }
+            }
+        }
+
+        private async void editare_material(object sender, EventArgs e)
+        {
+            page = "adauga_material";
+            string token = ((Guna.UI2.WinForms.Guna2CircleButton)sender).Tag.ToString();
+
+            Panel pnl_fullpage = new Panel()
+            {
+                Size = new Size(1192, 690),
+                BackColor = Color.FromArgb(133, 135, 237),
+                Name = "pnl_fullpage"
+            };
+            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+            {
+                Size = new Size(950, 650),
+                Location = new Point(120, 20),
+                FillColor = Color.FromArgb(93, 94, 165),
+                BorderRadius = 20,
+                UseTransparentBackground = true,
+                Name = "pnl"
+            };
+
+            Guna.UI2.WinForms.Guna2CircleButton btn_inchide_panel = new Guna.UI2.WinForms.Guna2CircleButton()
+            {
+                Size = new Size(35, 35),
+                BorderColor = Color.White,
+                BorderThickness = 2,
+                UseTransparentBackground = true,
+                FillColor = Color.White,
+                Image = SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48,
+                ImageAlign = HorizontalAlignment.Center,
+                Location = new Point(900, 20),
+                Cursor = Cursors.Hand
+            };
+            btn_inchide_panel.Click += inchide_panel_adauga_material;
+
+            Label title = new Label()
+            {
+                Text = "Modifica materialul!",
+                Font = new Font("Segoe UI Semibold", 17, FontStyle.Bold),
+                Location = new Point(40, 20),
+                ForeColor = Color.White,
+                AutoSize = true,
+            };
+
+            Label lbl_titlu = new Label()
+            {
+                Text = "Titlu:",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Location = new Point(20, 70),
+                ForeColor = Color.White,
+                AutoSize = true,
+            };
+            Guna.UI2.WinForms.Guna2TextBox txt_titlu = new Guna.UI2.WinForms.Guna2TextBox()
+            {
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Size = new Size(900, 40),
+                Location = new Point(20, 100),
+                BorderRadius = 10,
+                PlaceholderText = "Adauga titlu materialului!",
+                ForeColor = Color.Black,
+                Name = "txt_titlu",
+            };
+            txt_titlu.TextChanged += border_none;
+
+            Label lbl_descriere = new Label()
+            {
+                Text = "Descriere:",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Location = new Point(20, 150),
+                ForeColor = Color.White,
+                AutoSize = true,
+            };
+            Guna.UI2.WinForms.Guna2TextBox txt_descriere = new Guna.UI2.WinForms.Guna2TextBox()
+            {
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Size = new Size(900, 250),
+                Location = new Point(20, 180),
+                BorderRadius = 10,
+                PlaceholderText = "Adauga o descriere materialului!",
+                ForeColor = Color.Black,
+                Multiline = true,
+                AutoScroll = true,
+                ScrollBars = ScrollBars.Vertical,
+                Name = "txt_descriere",
+            };
+            txt_descriere.TextChanged += border_none;
+
+            Guna.UI2.WinForms.Guna2CircleButton btn_fisier = new Guna.UI2.WinForms.Guna2CircleButton()
+            {
+                Size = new Size(35, 35),
+                BorderColor = Color.White,
+                BorderThickness = 2,
+                UseTransparentBackground = true,
+                FillColor = Color.White,
+                Image = SchoolSync.Properties.Resources.attach_file_FILL1_wght700_GRAD0_opsz48,
+                ImageAlign = HorizontalAlignment.Center,
+                Location = new Point(20, 450),
+                Cursor = Cursors.Hand
+            };
+
+            btn_fisier.Click += adauga_fisier;
+
+            FlowLayoutPanel flp_fisiere = new FlowLayoutPanel()
+            {
+                Location = new Point(60, 450),
+                Size = new Size(850, 40),
+                Name = "flp_fisiere"
+            };
+
+            Guna.UI2.WinForms.Guna2ComboBox cmb = new Guna.UI2.WinForms.Guna2ComboBox()
+            {
+                BorderRadius = 15,
+                Size = new Size(200, 50),
+                Location = new Point(20, 500),
+                Items = { "Limba română", "Matematică", "Istorie", "Chimie", "Biologie", "Fizică", "Geografie",
+                    "Studii sociale", "Informatică", "Engleza", "Franceza", "Alte limbi", "Ed. tehnologică", "Arte", "Ed. muzicală" },
+                FillColor = Color.White,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                Name = "combobox_materii",
+                Cursor = Cursors.Hand,
+            };
+            cmb.SelectedIndex = 0;
+
+            Label lbl_time = new Label()
+            {
+                Text = "Cat dureaza sa fie citit materialul? (min)",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Location = new Point(20, 550),
+                ForeColor = Color.White,
+                AutoSize = true,
+            };
+            Guna.UI2.WinForms.Guna2NumericUpDown gnu = new Guna.UI2.WinForms.Guna2NumericUpDown()
+            {
+                Minimum = 2,
+                Maximum = 999,
+                Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
+                Size = new Size(90, 30),
+                Location = new Point(370, 550),
+                Value = 2,
+                BorderRadius = 5,
+                Name = "gnu"
+            };
+
+            Guna.UI2.WinForms.Guna2Button btn_trimite = new Guna.UI2.WinForms.Guna2Button()
+            {
+                Location = new Point(20, 600),
+                Text = "Modifica material!",
+                Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                Size = new Size(200, 40),
+                FillColor = Color.FromArgb(107, 150, 108),
+                BorderRadius = 10,
+                Cursor = Cursors.Hand,
+                Tag = token,
+            };
+            btn_trimite.Click += editare_material_api;
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("sql", string.Format("select * from edumentor where token = '{0}'", token));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if(task["message"] == "success")
+            {
+                string files = task["0"]["files"];
+                string[] splitfiles = files.Split(';');
+
+                for(int i = 0; i < splitfiles.Length - 1; i++)
+                {
+                    Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                    {
+                        FillColor = Color.White,
+                        BorderColor = Color.White,
+                        ForeColor = Color.Black,
+                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                        AutoRoundedCorners = false,
+                        BorderRadius = 10,
+                        TextAlign = HorizontalAlignment.Left,
+                        Size = new Size(160, 35),
+                        Tag = splitfiles[i].ToString()
+                    };                    
+                    if (splitfiles[i].Length > 16)
+                        guna2Chip.Text = System.IO.Path.GetFileName(splitfiles[i]).Substring(0, 16) + "...";
+                    else
+                        guna2Chip.Text = splitfiles[i];
+
+                    flp_fisiere.Controls.Add(guna2Chip);
+                }
+
+                txt_titlu.Text = task["0"]["title"];
+                txt_descriere.Text = task["0"]["description"];
+                string x = task["0"]["category"];
+                cmb.SelectedIndex = cmb.Items.IndexOf(x);
+                gnu.Value = Convert.ToInt32(task["0"]["reading_time"]);
+            }
+
+            pnl.Controls.Add(title);
+            pnl.Controls.Add(btn_inchide_panel);
+
+            pnl.Controls.Add(lbl_titlu);
+            pnl.Controls.Add(txt_titlu);
+
+            pnl.Controls.Add(lbl_descriere);
+            pnl.Controls.Add(txt_descriere);
+
+            pnl.Controls.Add(btn_fisier);
+            pnl.Controls.Add(flp_fisiere);
+
+            pnl.Controls.Add(cmb);
+            pnl.Controls.Add(lbl_time);
+            pnl.Controls.Add(gnu);
+
+            pnl.Controls.Add(btn_trimite);
+
+            pnl_fullpage.Controls.Add(pnl);
+
+            this.Controls.Add(pnl_fullpage);
+            pnl_fullpage.BringToFront();
+        }
+
         private async void load_material(object sender, EventArgs e)
         {
             Label lbl_token = sender as Label;
@@ -266,14 +671,14 @@ namespace SchoolSync.pages
                 {
                     FillColor = Color.Gray,
                     Size = new Size(20, 20),
-                    Location = new Point(675, 237),
+                    Location = new Point(625, 237),
                     Image = SchoolSync.Properties.Resources.schedule_FILL1_wght700_GRAD0_opsz48,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     UseTransparentBackground = true
                 };
                 Label read_time = new Label()
                 {
-                    Location = new Point(700, 235),
+                    Location = new Point(650, 235),
                     AutoSize = true,
                     Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
                     TextAlign = ContentAlignment.TopRight,
@@ -283,7 +688,7 @@ namespace SchoolSync.pages
                 {
                     FillColor = Color.Gray,
                     Size = new Size(20, 20),
-                    Location = new Point(675, 260),
+                    Location = new Point(625, 260),
                     Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48,
                     SizeMode = PictureBoxSizeMode.StretchImage,
                     UseTransparentBackground = true
@@ -292,12 +697,43 @@ namespace SchoolSync.pages
                 string[] spinimi = inimi.Split(';');
                 Label loves = new Label()
                 {
-                    Location = new Point(700, 257),
+                    Location = new Point(650, 257),
                     AutoSize = true,
                     Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
                     TextAlign = ContentAlignment.TopLeft,
                     Text = (spinimi.Length - 1).ToString()
                 };
+
+                Guna.UI2.WinForms.Guna2CircleButton btn_edit = new Guna.UI2.WinForms.Guna2CircleButton()
+                {
+                    Image = SchoolSync.Properties.Resources.edit_FILL1_wght700_GRAD0_opsz48,
+                    Size = new Size(30, 30),
+                    ImageAlign = HorizontalAlignment.Center,
+                    ImageSize = new Size(15, 15),
+                    UseTransparentBackground = true,
+                    FillColor = Color.White,
+                    BorderColor = Color.Black,
+                    Tag = task["0"]["token"],
+                    BorderThickness = 1,
+                    Location = new Point(760, 220),
+                    Cursor = Cursors.Hand
+                };
+                btn_edit.Click += editare_material;
+                Guna.UI2.WinForms.Guna2CircleButton btn_delete = new Guna.UI2.WinForms.Guna2CircleButton()
+                {
+                    Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                    Size = new Size(30, 30),
+                    ImageAlign = HorizontalAlignment.Center,
+                    ImageSize = new Size(15, 15),
+                    UseTransparentBackground = true,
+                    FillColor = Color.White,
+                    BorderColor = Color.Black,
+                    Tag = task["0"]["token"],
+                    BorderThickness = 1,
+                    Location = new Point(760, 260),
+                    Cursor = Cursors.Hand
+                };
+                btn_delete.Click += sterge_material;
 
                 FlowLayoutPanel flp_main = new FlowLayoutPanel()
                 {
@@ -356,6 +792,8 @@ namespace SchoolSync.pages
                 flp_panel.Controls.Add(flp);
 
                 flp.Controls.Add(descriere_material);
+
+                fisiere_value = task["0"]["files"];
 
                 string file = task["0"]["files"];
                 string[] file_split = file.Split(';');
@@ -426,8 +864,12 @@ namespace SchoolSync.pages
 
                 }
 
-                
-                
+
+                if (task["0"]["created"] == login_signin.login.accounts_user["username"])
+                {
+                    center.Controls.Add(btn_edit);
+                    center.Controls.Add(btn_delete);
+                }
 
                 pnl.Controls.Add(flp_main);
                 pnl.Controls.Add(center);

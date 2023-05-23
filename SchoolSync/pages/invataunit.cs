@@ -963,7 +963,6 @@ namespace SchoolSync.pages
             frm.BringToFront();
         }
 
-
         async void load_intrebare_cu_raspunsuri()
         {
             page_now = "question_answer";

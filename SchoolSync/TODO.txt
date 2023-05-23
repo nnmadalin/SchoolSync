@@ -6,7 +6,6 @@ de pus comentarii si redenumit fct
 
 PT JUDET: de facut profil editare
 PT JUDET: de facut editare/sterge material educativ
-PT JUDET: asociere numere utilizator cu profilul!
 
 PE VIITOR:  adminul SAU creatorul sa poate sterge mesajul + sa apara "Sters de creator[gigel]"/"Sters de utilizator[gigel]"/"Sters de admin[gigel]"
 PE VIITOR:  comentarii la EduMentor
