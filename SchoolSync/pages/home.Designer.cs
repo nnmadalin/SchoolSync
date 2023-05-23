@@ -35,6 +35,7 @@ namespace SchoolSync.pages
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@ namespace SchoolSync.pages
             this.label9 = new System.Windows.Forms.Label();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -130,6 +130,17 @@ namespace SchoolSync.pages
             this.guna2Panel2.Size = new System.Drawing.Size(630, 60);
             this.guna2Panel2.TabIndex = 5;
             this.guna2Panel2.UseTransparentBackground = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
+            this.label10.Location = new System.Drawing.Point(15, 18);
+            this.label10.MaximumSize = new System.Drawing.Size(606, 100);
+            this.label10.Name = "label10";
+            this.label10.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
+            this.label10.Size = new System.Drawing.Size(0, 30);
+            this.label10.TabIndex = 0;
             // 
             // label5
             // 
@@ -260,17 +271,6 @@ namespace SchoolSync.pages
             this.guna2CirclePictureBox1.TabIndex = 3;
             this.guna2CirclePictureBox1.TabStop = false;
             this.guna2CirclePictureBox1.UseTransparentBackground = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(15, 18);
-            this.label10.MaximumSize = new System.Drawing.Size(606, 100);
-            this.label10.Name = "label10";
-            this.label10.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.label10.Size = new System.Drawing.Size(0, 30);
-            this.label10.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 

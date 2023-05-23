@@ -54,9 +54,7 @@ namespace SchoolSync
 
             background_color_btn();
             guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
-        }
-
-       
+        }       
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
