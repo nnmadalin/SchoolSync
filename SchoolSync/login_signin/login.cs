@@ -90,11 +90,16 @@ namespace SchoolSync.login_signin
 
             var multiple_class = new multiple_class();
 
+            string tkn = schoolsync.token;
+
+            schoolsync.show_loading();
+
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("sql", string.Format("select * from accounts where (username = '{0}' or email = '{0}') and password = '{1}'", username, pswd));
-            dynamic task = await multiple_class.PostRequestAsync(url, data);
+            dynamic task = await multiple_class.PostRequestAsync_norefresh(url, data);
+
             if (task["message"] == "success")
             {
 
@@ -110,6 +115,16 @@ namespace SchoolSync.login_signin
                 else
                 {
                     accounts_user = task["0"];
+                    
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", tkn);
+                    data.Add("sql", string.Format("update accounts set last_login = now() where token = '{0}'", accounts_user["token"]));
+
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    schoolsync.show_loading();
+
+                    task = await multiple_class.PostRequestAsync_norefresh(url, data);
                     if (guna2ToggleSwitch1.Checked == true)
                     {
                         Properties.Settings.Default.Data_account = JsonConvert.SerializeObject(accounts_user);
@@ -120,8 +135,10 @@ namespace SchoolSync.login_signin
                         Properties.Settings.Default.Data_account = "";
                         Properties.Settings.Default.Save();
                     }
+                    
                     var frm = new navbar_home();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    
+                    
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
                     panel.Controls.Remove(this);
@@ -134,6 +151,7 @@ namespace SchoolSync.login_signin
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                schoolsync.hide_loading();
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
                 notification.error.message = "Email sau parola gresita!";
@@ -143,6 +161,7 @@ namespace SchoolSync.login_signin
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                schoolsync.hide_loading();
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
                 notification.error.message = "Ceva nu e mers bine!";
@@ -152,8 +171,7 @@ namespace SchoolSync.login_signin
         
 
         private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            
+        {            
             send_login();            
         }
 

@@ -64,7 +64,7 @@ namespace SchoolSync
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         private void guna2CircleButton3_Click(object sender, EventArgs e)

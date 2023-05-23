@@ -154,6 +154,14 @@ namespace SchoolSync.pages
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
         }
 
+        private async void load_profil(object sender, EventArgs e)
+        {
+            var frm = new pages.Profil();
+            pages.Profil.token = login_signin.login.accounts_user["token"];
+            this.Controls.Add(frm);
+            frm.BringToFront();
+        }
+
         private async void load_material(object sender, EventArgs e)
         {
             Label lbl_token = sender as Label;
@@ -239,8 +247,11 @@ namespace SchoolSync.pages
                     AutoSize = true,
                     Font = new Font("Segoe UI Semibold", 12, FontStyle.Bold),
                     TextAlign = ContentAlignment.TopLeft,
-                    Text = task["0"]["created"]
+                    Text = task["0"]["created"],
+                    Cursor = Cursors.Hand
                 };
+                nume.Click += load_profil;
+
                 string date = task["0"]["data"];
                 Label descriere = new Label()
                 {

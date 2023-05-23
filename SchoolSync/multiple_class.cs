@@ -86,6 +86,25 @@ namespace SchoolSync
             }
         }
 
+        public async Task<Image> IncarcaImagineBackgroundAsync(string url)
+        {
+            try
+            {
+                using (var webClient = new WebClient())
+                {
+                    byte[] imageData = await webClient.DownloadDataTaskAsync(url);
+
+                    using (var ms = new System.IO.MemoryStream(imageData))
+                    {
+                        return Image.FromStream(ms);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return SchoolSync.Properties.Resources.abstract_pyrimid_upsplash;    
+            }
+        }
         public async Task<Image> IncarcaImagineAsync(string url)
         {
             try

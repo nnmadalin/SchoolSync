@@ -20,6 +20,7 @@ namespace SchoolSync
         private void home_Load(object sender, EventArgs e)
         {
             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            schoolsync.hide_loading();
             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
             var label = panel.Controls["label1"];
             label.Text = "SchoolSync | Acasa";
@@ -90,6 +91,7 @@ namespace SchoolSync
             guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
         }
 
+
         private void guna2Button5_Click(object sender, EventArgs e)
         {
             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -99,12 +101,12 @@ namespace SchoolSync
             GC.Collect();
 
             
-            var frm = new pages.Profil();
+            var frm = new pages.Profil();           
+            pages.Profil.token = login_signin.login.accounts_user["token"];
+            pages.Profil.page = "home";
             guna2Panel2.Controls.Clear();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
-
-            
 
             background_color_btn();
             guna2Button5.FillColor = Color.FromArgb(66, 66, 66);

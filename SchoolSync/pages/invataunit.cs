@@ -955,7 +955,15 @@ namespace SchoolSync.pages
             }           
         }
 
-        
+        private async void load_profil(object sender, EventArgs e)
+        {
+            var frm = new pages.Profil();
+            pages.Profil.token = login_signin.login.accounts_user["token"];
+            this.Controls.Add(frm);
+            frm.BringToFront();
+        }
+
+
         async void load_intrebare_cu_raspunsuri()
         {
             page_now = "question_answer";
@@ -1083,8 +1091,11 @@ namespace SchoolSync.pages
                 Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
                 Location = new Point(82, 25),
                 Text = "",
-                AutoSize = true
+                AutoSize = true,
+                Cursor = Cursors.Hand
             };
+            lbl_name.Click += load_profil;            
+
             Label lbl_category_time = new Label()
             {
                 Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
@@ -1147,6 +1158,7 @@ namespace SchoolSync.pages
             if (task["message"] == "success")
             {
                 lbl_name.Text = task["0"]["created"];
+                lbl_name.Tag = task["0"]["token"];
                 string date = task["0"]["data"]; DateTime dt = Convert.ToDateTime(date);
                 lbl_category_time.Text = task["0"]["category"] + " • "
                         + dt.Day + "/" + dt.Month + "/" + dt.Year + " " + Convert.ToDateTime(date).ToShortTimeString(); ;
