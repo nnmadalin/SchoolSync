@@ -33,8 +33,8 @@ namespace SchoolSync.pages
             dynamic task = await _class.PostRequestAsync_norefresh(url, data);
             if(task["message"] == "success")
             {
-                guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");
-                guna2PictureBox1.Image = await _class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userbackground_" + task["0"]["token_user"] + ".png");
+                guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token"] + ".png");
+                guna2PictureBox1.Image = await _class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userbackground_" + task["0"]["token"] + ".png");
                 label1.Text = task["0"]["full_name"];
                 label2.Text = "@" + task["0"]["username"];
                 label5.Text = "Ultima conectare: " + task["0"]["last_login"];
@@ -118,6 +118,13 @@ namespace SchoolSync.pages
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void guna2CircleButton2_Click(object sender, EventArgs e)
+        {
+            var frm = new pages.Profil_Modifica();
+            this.Controls.Add(frm);
+            frm.BringToFront();
         }
     }
 }

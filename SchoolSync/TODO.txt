@@ -13,7 +13,6 @@ PE VIITOR: de adaugat un seartch bar coll like '%stringcautat%'
 PE VIITOR: de adaugat redirect home -> material educativ
 
 ===================================================================================
-PE VIITOR: EduMentor, editeaza material / sterge
 de facut pt post; token, comanda sql DAR CU PARAMETRI, si parametri, tip json
 ===================================================================================
 

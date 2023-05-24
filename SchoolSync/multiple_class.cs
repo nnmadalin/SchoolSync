@@ -57,6 +57,32 @@ namespace SchoolSync
             return finalString.ToString();
         }
 
+        public async Task UploadFileAsync_token(string path, string ext)
+        {
+            
+            try
+            {
+                using (var ftpClient = new FtpClient())
+                {
+                    ftpClient.Host = "nnmadalin.me";
+                    ftpClient.Credentials = new NetworkCredential("assets@schoolsync.nnmadalin.me", "F8(#-vjTbCmNn52WW9");
+
+                    await Task.Run(() => ftpClient.Connect());
+                    string token = login_signin.login.accounts_user["token"];
+                    FileInfo fi = new FileInfo(path);
+
+                    ftpClient.UploadFile(path, "/" + ext + token + fi.Extension);
+
+                    ftpClient.Disconnect();
+                    Console.WriteLine("Fișierul a fost încărcat cu succes pe serverul FTP.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"A apărut o eroare la încărcarea fisierului pe serverul FTP: {ex.InnerException?.Message ?? ex.Message}");
+            }
+        }
         public async Task<string> UploadFileAsync(string path)
         {
             

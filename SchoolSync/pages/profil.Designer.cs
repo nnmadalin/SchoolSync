@@ -92,6 +92,7 @@ namespace SchoolSync.pages
             // guna2CircleButton2
             // 
             this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -108,6 +109,7 @@ namespace SchoolSync.pages
             this.guna2CircleButton2.TabIndex = 7;
             this.guna2CircleButton2.UseTransparentBackground = true;
             this.guna2CircleButton2.Visible = false;
+            this.guna2CircleButton2.Click += new System.EventHandler(this.guna2CircleButton2_Click);
             // 
             // guna2Panel3
             // 
