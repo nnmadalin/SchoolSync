@@ -140,6 +140,7 @@ namespace SchoolSync.login_signin
                     
                     
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    schoolsync.show_loading();
                     panel.Controls.Add(frm);
                     panel.Controls.Remove(this);
                     GC.Collect();
@@ -167,6 +168,7 @@ namespace SchoolSync.login_signin
                 notification.error.message = "Ceva nu e mers bine!";
                 frm.BringToFront();
             }
+            schoolsync.hide_loading();
         }
         
 

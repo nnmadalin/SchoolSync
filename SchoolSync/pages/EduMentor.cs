@@ -965,7 +965,7 @@ namespace SchoolSync.pages
                         Location = new Point(3, 3),
                         UseTransparentBackground = true,
                         BorderRadius = 5,
-                        SizeMode = PictureBoxSizeMode.Normal,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                     };                    
                     Label lbl = new Label()
                     {
@@ -1057,11 +1057,12 @@ namespace SchoolSync.pages
 
                     if (dir == DialogResult.OK)
                     {
+                        
                         FileInfo fl = new FileInfo(opf.FileName);
 
                         long fileSizeibBytes = fl.Length;
                         long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
-
+                        
                         if (fileSizeibMbs > 10)
                         {
                             var frm = new notification.error();
@@ -1073,6 +1074,7 @@ namespace SchoolSync.pages
                         }
                         else
                         {
+                            
                             Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
                             {
                                 FillColor = Color.White,
@@ -1085,11 +1087,12 @@ namespace SchoolSync.pages
                                 Size = new Size(160, 35),
                                 Tag = opf.FileName.ToString()
                             };
-                            if (opf.FileName.Length > 16)
-                                guna2Chip.Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 16) + "...";
+                            string fnm = Path.GetFileName(opf.FileName);
+                            if (fnm.Length >= 16)
+                                guna2Chip.Text = fnm.Substring(0, 16) + "...";
                             else
-                                guna2Chip.Text = opf.FileName;
-
+                                guna2Chip.Text = fnm;
+                            
                             this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls.Add(guna2Chip);
                         }
                     }

@@ -173,6 +173,7 @@ namespace SchoolSync.pages
             this.panel_materii.Name = "panel_materii";
             this.panel_materii.Size = new System.Drawing.Size(176, 662);
             this.panel_materii.TabIndex = 18;
+            this.panel_materii.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_materii_Paint);
             // 
             // guna2Button16
             // 
@@ -599,7 +600,7 @@ namespace SchoolSync.pages
             // 
             // timer2
             // 
-            this.timer2.Interval = 1000;
+            this.timer2.Interval = 1500;
             this.timer2.Tick += new System.EventHandler(this.timer_refresh_intrebare);
             // 
             // guna2MessageDialog1

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SchoolSync.pages
 {
@@ -76,9 +77,25 @@ namespace SchoolSync.pages
             DialogResult dr = openFileDialog1.ShowDialog();
             if(dr == DialogResult.OK)
             {
-                guna2CirclePictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
-                change_foto1 = true;
-                ff1 = openFileDialog1.FileName;
+                FileInfo fl = new FileInfo(openFileDialog1.FileName);
+
+                long fileSizeibBytes = fl.Length;
+                long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+                if (fileSizeibMbs > 5)
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
+                    frm.BringToFront();
+                }
+                else
+                {
+                    guna2CirclePictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                    change_foto1 = true;
+                    ff1 = openFileDialog1.FileName;
+                }
             }
         }
 
@@ -87,9 +104,26 @@ namespace SchoolSync.pages
             DialogResult dr = openFileDialog1.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                guna2PictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
-                change_foto2 = true;
-                ff2 = openFileDialog1.FileName;
+                FileInfo fl = new FileInfo(openFileDialog1.FileName);
+
+                long fileSizeibBytes = fl.Length;
+                long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                if (fileSizeibMbs > 5)
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
+                    frm.BringToFront();
+                }
+                else
+                {
+                    guna2PictureBox1.Image = Image.FromFile(openFileDialog1.FileName);
+                    change_foto2 = true;
+                    ff2 = openFileDialog1.FileName;
+                }
             }
         }
 

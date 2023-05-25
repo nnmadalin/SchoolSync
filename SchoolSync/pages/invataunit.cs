@@ -119,9 +119,14 @@ namespace SchoolSync.pages
                                 BorderRadius = 10,
                                 TextAlign = HorizontalAlignment.Left,
                                 Size = new Size(100, 35),
-                                Text = System.IO.Path.GetFileName(opf.FileName).Substring(0, 8) + "...",
                                 Tag = opf.FileName.ToString()
                             };
+
+                            string fnm = Path.GetFileName(opf.FileName);
+                            if (fnm.Length >= 9)
+                                guna2Chip.Text = fnm.Substring(0, 9) + "...";
+                            else
+                                guna2Chip.Text = fnm;
 
                             this.Controls["panel_question"].Controls["sub_panel_question"].Controls["flp_files"].Controls.Add(guna2Chip);
                         }
@@ -979,6 +984,7 @@ namespace SchoolSync.pages
 
         async void load_intrebare_cu_raspunsuri()
         {
+            schoolsync.show_loading();
             page_now = "question_answer";
             multiple_class _Class = new multiple_class();
 
@@ -1097,7 +1103,7 @@ namespace SchoolSync.pages
                 UseTransparentBackground = true,
                 Location = new Point(30, 20)
             };
-            cpb.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
+            
             
             Label lbl_name = new Label()
             {
@@ -1171,6 +1177,8 @@ namespace SchoolSync.pages
             this.Controls["panel_question_with_answer"].Controls.Add(btn_add_favorite);
             if (task["message"] == "success")
             {
+                cpb.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");
+
                 lbl_name.Text = task["0"]["created"];
                 lbl_name.Tag = task["0"]["token_user"];
                 string date = task["0"]["data"]; DateTime dt = Convert.ToDateTime(date);
@@ -1296,10 +1304,21 @@ namespace SchoolSync.pages
                         InitialImage = SchoolSync.Properties.Resources.standard_avatar,
                         SizeMode = PictureBoxSizeMode.StretchImage,
                         UseTransparentBackground = true,
-                        Location = new Point(30, 20)
+                        Location = new Point(30, 20),
+                        Name = i.ToString()
                     };
-                    cpb_answer.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
 
+                    url = "https://schoolsync.nnmadalin.me/api/get.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+
+                    string name = jb[i.ToString()]["username"].ToString();
+
+                    data.Add("sql", string.Format("select * from accounts where username = '{0}'", name));
+
+                    dynamic  task2 = await _Class.PostRequestAsync(url, data);
+
+                    cpb_answer.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task2["0"]["token"] + ".png");                    
                     Label lbl_name_answer = new Label()
                     {
                         Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
@@ -1377,11 +1396,16 @@ namespace SchoolSync.pages
                     this.Controls["panel_question_with_answer"].Controls.Add(pnl_answer);
                     this.Controls["panel_question_with_answer"].Controls.Add(flp_answer);
                 }
+                timer2.Enabled = true;
 
-                
             }
-            
-            timer2.Enabled = true;
+            else
+            {
+                timer2.Enabled = false;
+                load_intrebari_panel();
+            }
+
+            schoolsync.hide_loading();
         }
         
         private async void intrebare_cu_raspunsuri(object sender, EventArgs e)
@@ -1704,6 +1728,11 @@ namespace SchoolSync.pages
         private void invataunit_Load(object sender, EventArgs e)
         {
             load_intrebari_panel();
+        }
+
+        private void panel_materii_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void combobox1(object sender, EventArgs e)

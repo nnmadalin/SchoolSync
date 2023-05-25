@@ -161,16 +161,35 @@ namespace SchoolSync.login_signin
                         string token = multiple_class.generate_token();
                         data.Add("sql", string.Format("insert into accounts (token, full_name, username, email, password) values ('{0}', '{1}', '{2}', '{3}', '{4}')", token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text)));
                         task = await multiple_class.PostRequestAsync(url, data);
-                        Console.WriteLine(task["message"] + " " + data["sql"]);
+                        string token_app = schoolsync.token;
                         if (task["message"] == "insert success")
                         {
-                            var frm = new notification.success();
-                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                            panel.Controls.Add(frm);
-                            notification.success.message = "Cont creat cu succes. Intra pe email si confirma contul!";
-                            frm.BringToFront();
-                            guna2TextBox1.Text = guna2TextBox2.Text = guna2TextBox3.Text = guna2TextBox4.Text = guna2TextBox5.Text = "";
+                            url = "https://schoolsync.nnmadalin.me/api/send_email.php";
+                            data = new Dictionary<string, string>();
+                            data.Add("token", token_app);
+                            data.Add("token_user", token);
+                            data.Add("to", guna2TextBox3.Text);
+                            task = await multiple_class.PostRequestAsync(url, data);
+
+                            if (task["message"] == "success")
+                            {
+                                var frm = new notification.success();
+                                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                                panel.Controls.Add(frm);
+                                notification.success.message = "Cont creat cu succes. Intra pe email si confirma contul!";
+                                frm.BringToFront();
+                                guna2TextBox1.Text = guna2TextBox2.Text = guna2TextBox3.Text = guna2TextBox4.Text = guna2TextBox5.Text = "";
+                            }
+                            else
+                            {
+                                var frm = new notification.error();
+                                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                                panel.Controls.Add(frm);
+                                notification.error.message = "Ceva nu e mers bine!";
+                                frm.BringToFront();
+                            }
                         }
                         else
                         {
