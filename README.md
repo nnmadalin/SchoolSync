@@ -31,4 +31,9 @@ cunoștințe între elevi)
 * Profilul meu
 
 # Imagini
-![photo1](https://yourimageshare.com/ib/T3jQgS9vy1)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_2.png?raw=true)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_4.png?raw=true)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_5.png?raw=true)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_8.png?raw=true)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_10.png?raw=true)
+![photo1](https://github.com/nnmadalin/SchoolSync/blob/master/foto/Screenshot_11.png?raw=true)
