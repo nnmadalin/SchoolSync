@@ -188,12 +188,9 @@ namespace SchoolSync.login_signin
                         };
 
                         data.Add("params", JsonConvert.SerializeObject(param));
-                        //token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text))
 
                         task = await multiple_class.PostRequestAsync(url, data);
                         string token_app = schoolsync.token;
-
-                        Console.WriteLine(task);
 
                         if (task["message"] == "insert success")
                         {

@@ -191,7 +191,7 @@ namespace SchoolSync.pages
                         data = new Dictionary<string, string>();
                         data.Add("token", schoolsync.token);
                         data.Add("sql", string.Format("update accounts set password = '{1}' where token = '{0}'",
-                            login_signin.login.accounts_user["token"], login_signin.login.passencrypt(pass)));
+                            login_signin.login.accounts_user["token"], login_signin.signin.passencrypt(pass)));
 
                         task = await _Class.PostRequestAsync(url, data);
                         if (task["message"] == "update success")
