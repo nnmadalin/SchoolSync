@@ -109,27 +109,38 @@ namespace SchoolSync.login_signin
             GC.Collect();
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
         public static string passencrypt(string text)
         {
-            var plain = System.Text.Encoding.UTF8.GetBytes(text);
-            return System.Convert.ToBase64String(plain);
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+
+                StringBuilder builder = new StringBuilder();
+                foreach (byte b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+
+                return builder.ToString();
+            }
         }
 
         async void sign_send()
         {
+            schoolsync.show_loading();
             if (check_trim())
             {
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
                 Dictionary<string, string> data = new Dictionary<string, string>();
                 data.Add("token", schoolsync.token);
-                data.Add("sql", string.Format("select * from accounts where username = '{0}'", guna2TextBox2.Text));
+                data.Add("command", "select * from accounts where username = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"username", guna2TextBox2.Text}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
 
                 var multiple_class = new multiple_class();
 
@@ -139,19 +150,26 @@ namespace SchoolSync.login_signin
                     errorProvider2.SetError(guna2TextBox2, "Username deja in baza de date!");
                     guna2TextBox2.BorderColor = Color.FromArgb(203, 25, 39);
                 }
-                else if (task["message"] == "Database no value")
+                else if (task["message"] == "database no value")
                 {
                     url = "https://schoolsync.nnmadalin.me/api/get.php";
                     data = new Dictionary<string, string>();
                     data.Add("token", schoolsync.token);
-                    data.Add("sql", string.Format("select * from accounts where email = '{0}'", guna2TextBox3.Text));
+                    data.Add("command", "select * from accounts where email = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"email", guna2TextBox3.Text}
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
                     task = await multiple_class.PostRequestAsync(url, data);
                     if (task["message"] == "success")
                     {
                         errorProvider3.SetError(guna2TextBox3, "Email deja in baza de date!");
                         guna2TextBox3.BorderColor = Color.FromArgb(203, 25, 39);
                     }
-                    else if (task["message"] == "Database no value")
+                    else if (task["message"] == "database no value")
                     {
                         url = "https://schoolsync.nnmadalin.me/api/post.php";
                         data = new Dictionary<string, string>();
@@ -159,9 +177,24 @@ namespace SchoolSync.login_signin
 
                         multiple_class multiple_Class = new multiple_class();
                         string token = multiple_class.generate_token();
-                        data.Add("sql", string.Format("insert into accounts (token, full_name, username, email, password) values ('{0}', '{1}', '{2}', '{3}', '{4}')", token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text)));
+                        data.Add("command", "insert into accounts (token, full_name, username, email, password) values (?, ?, ?, ?, ?)");
+                        param = new Dictionary<string, string>()
+                        {
+                            {"token", token},
+                            {"full_name", guna2TextBox1.Text},
+                            {"username", guna2TextBox2.Text},
+                            {"email", guna2TextBox3.Text},
+                            {"password", passencrypt(guna2TextBox4.Text)}
+                        };
+
+                        data.Add("params", JsonConvert.SerializeObject(param));
+                        //token, guna2TextBox1.Text, guna2TextBox2.Text, guna2TextBox3.Text, passencrypt(guna2TextBox4.Text))
+
                         task = await multiple_class.PostRequestAsync(url, data);
                         string token_app = schoolsync.token;
+
+                        Console.WriteLine(task);
+
                         if (task["message"] == "insert success")
                         {
                             url = "https://schoolsync.nnmadalin.me/api/send_email.php";
@@ -187,7 +220,7 @@ namespace SchoolSync.login_signin
                                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                                 panel.Controls.Add(frm);
-                                notification.error.message = "Ceva nu e mers bine!";
+                                notification.error.message = "Eroare API: " + task["message"];
                                 frm.BringToFront();
                             }
                         }
@@ -197,50 +230,31 @@ namespace SchoolSync.login_signin
                             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                             panel.Controls.Add(frm);
-                            notification.error.message = "Ceva nu e mers bine!";
+                            notification.error.message = "Eroare API: " + task["message"];
                             frm.BringToFront();
                         }
-
                     }
-                    else if (task["message"] == "SQL command error")
+                    else
                     {
                         var frm = new notification.error();
                         schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                         var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                         panel.Controls.Add(frm);
-                        notification.error.message = "Eroare API";
-                        frm.BringToFront();
-                    }
-                    else if (task["message"] == "token invalid")
-                    {
-                        var frm = new notification.error();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-                        notification.error.message = "Eroare API - token";
+                        notification.error.message = "Eroare API: " + task["message"];
                         frm.BringToFront();
                     }
                 }
-                else if (task["message"] == "SQL command error")
+                else 
                 {
                     var frm = new notification.error();
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
-                    notification.error.message = "Eroare API";
+                    notification.error.message = "Eroare API: " + task["message"];
                     frm.BringToFront();
                 }
-                else if (task["message"] == "token invalid")
-                {
-                    var frm = new notification.error();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-                    notification.error.message = "Eroare API - token";
-                    frm.BringToFront();
-                }
-
             }
+            schoolsync.hide_loading();
         }
 
         private void guna2Button1_Click_1(object sender, EventArgs e)

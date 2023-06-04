@@ -14,13 +14,12 @@ namespace SchoolSync
     {
         public async Task<dynamic> PostRequestAsync(string url, Dictionary<string, string> data)
         {
-            schoolsync.show_loading();
+            
             var client = new HttpClient();
             var content = new FormUrlEncodedContent(data);
             var response = await client.PostAsync(url, content);
             var responseString = await response.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(responseString);
-            schoolsync.hide_loading();
             return json;
         }       
 
