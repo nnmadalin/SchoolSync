@@ -79,6 +79,9 @@
     <Reference Include="Guna.UI2, Version=2.0.4.4, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.4\lib\net472\Guna.UI2.dll</HintPath>
     </Reference>
+    <Reference Include="MstHtmlEditor, Version=4.23.4.14, Culture=neutral, PublicKeyToken=8ee81cea60080003, processorArchitecture=MSIL">
+      <HintPath>..\packages\BaiqiSoft.WinFormsHtmlEditor.NET4.23.4.14\lib\net40\MstHtmlEditor.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -151,11 +154,17 @@
     <Compile Include="pages\ClassPortal.Designer.cs">
       <DependentUpon>ClassPortal.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\EduMentor.cs">
+    <Compile Include="pages\EduMentor_pages\EduMentor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\EduMentor.Designer.cs">
+    <Compile Include="pages\EduMentor_pages\EduMentor.Designer.cs">
       <DependentUpon>EduMentor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\EduMentor_pages\EduMentor_Adauga.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduMentor_pages\EduMentor_Adauga.Designer.cs">
+      <DependentUpon>EduMentor_Adauga.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\Home.cs">
       <SubType>UserControl</SubType>
@@ -214,8 +223,11 @@
     <EmbeddedResource Include="pages\ClassPortal.resx">
       <DependentUpon>ClassPortal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\EduMentor.resx">
+    <EmbeddedResource Include="pages\EduMentor_pages\EduMentor.resx">
       <DependentUpon>EduMentor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduMentor_pages\EduMentor_Adauga.resx">
+      <DependentUpon>EduMentor_Adauga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -318,6 +330,14 @@
     <None Include="Resources\timothy-dykes-zVU_3H3cwjk-unsplash.jpg" />
     <None Include="Resources\terry-vlisidis-RflgrtzU3Cw-unsplash %281%29.jpg" />
     <None Include="Resources\anthony-choren-lYzap0eubDY-unsplash.jpg" />
+    <None Include="Resources\format_underlined_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\format_italic_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\format_align_center_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\format_align_right_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\format_align_left_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\format_bold_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\expand_more_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\expand_less_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

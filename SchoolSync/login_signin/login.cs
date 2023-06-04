@@ -95,7 +95,6 @@ namespace SchoolSync.login_signin
                 {"username", username},
                 {"email", username},
             };
-
             data.Add("params", JsonConvert.SerializeObject(param));
 
             dynamic task = await multiple_class.PostRequestAsync(url, data);
@@ -152,8 +151,6 @@ namespace SchoolSync.login_signin
                     GC.Collect();
                     schoolsync.hide_loading();
                 }
-
-                
             }
             else if (task["message"] == "Database no value" || !VerifyPassword(pswd, pswd_db))
             {
