@@ -1035,6 +1035,8 @@ namespace SchoolSync.pages
             
         }
 
+        
+
         private void EduMentor_Load(object sender, EventArgs e)
         {
             load_panel();
@@ -1212,11 +1214,8 @@ namespace SchoolSync.pages
 
         private void adauga_material(object sender, EventArgs e)
         {
-            page = "adauga_material";
-            
-            var frm = new EduMentor_pages.EduMentor_Adauga();
-            this.Controls.Add(frm);
-            frm.BringToFront();
+            navbar_home.use = false;
+            navbar_home.page = "EduMentor_adauga";            
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)

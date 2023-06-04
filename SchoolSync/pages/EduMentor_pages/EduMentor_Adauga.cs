@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
 using System.IO;
 using System.Windows.Forms;
 
@@ -20,6 +20,9 @@ namespace SchoolSync.pages.EduMentor_pages
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
             this.Dispose();
+
+            navbar_home.use = false;
+            navbar_home.page = "EduMentor";
         }
 
         private async void guna2Button1_Click(object sender, EventArgs e)
@@ -51,9 +54,21 @@ namespace SchoolSync.pages.EduMentor_pages
             string url = "https://schoolsync.nnmadalin.me/api/post.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", "insert into edumentor(token, token_user, created, category, color, title, description, files, reading_time, users_hearts) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            data.Add("command", "insert into edumentor(token, token_user, created, category, color, title, description, files, reading_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            var param = new Dictionary<string, string>()
+            {
+                {"token", token},
+                {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                {"created", Convert.ToString(login_signin.login.accounts_user["username"])},
+                {"category", guna2ComboBox2.SelectedItem.ToString()},
+                {"color", random_color},
+                {"title", guna2TextBox1.Text},
+                {"description", richTextBox1.Rtf},
+                {"files", files},
+                {"reading_time", guna2NumericUpDown1.Value.ToString()},
+            };
 
-            //token, login_signin.login.accounts_user["token"], login_signin.login.accounts_user["username"], ((ComboBox)combobox).SelectedItem, random_color, txt_title.Text.Trim(), txt_descriere.Text.Trim(), files, ((Guna.UI2.WinForms.Guna2NumericUpDown)gnu).Value, ""
+            data.Add("params", JsonConvert.SerializeObject(param));
 
             dynamic task = await _class.PostRequestAsync(url, data);
             if (task["message"] == "insert success")
@@ -67,7 +82,10 @@ namespace SchoolSync.pages.EduMentor_pages
 
                 notification.success.message = "Material salvat cu succes!";
                 frm.BringToFront();
-                this.Dispose();
+
+
+                navbar_home.use = false;
+                navbar_home.page = "EduMentor";
             }
             else
             {
