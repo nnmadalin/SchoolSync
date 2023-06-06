@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Windows.Forms;
 using System.IO;
 using Newtonsoft.Json.Linq;
@@ -65,11 +65,15 @@ namespace SchoolSync.pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from edumentor where token = '{0}'", pct.Name.ToString()));
+            data.Add("command", "select * from edumentor where token = ?");
+            var param = new Dictionary<string, string>()
+            {
+                {"token", pct.Name.ToString()}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
 
             dynamic task = await _class.PostRequestAsync(url, data);
-            
-            string users = task["0"]["users_hearts"];
+            string users = task["0"]["favourites"];
                             
             string[] split_user = users.Split(';');
 
@@ -103,7 +107,14 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/put.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("update edumentor set users_hearts = '{1}' where token = '{0}'", pct.Name.ToString(), users));
+            data.Add("command", "update edumentor set favourites = ? where token = ?");
+
+            param = new Dictionary<string, string>()
+            {
+                {"favourites", users},
+                {"token", pct.Name.ToString()}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
             task = await _class.PostRequestAsync(url, data);
             if (task["message"] == "update success")
             {
@@ -124,205 +135,11 @@ namespace SchoolSync.pages
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
-                notification.error.message = "Ceva nu a mers bine!";
+                notification.error.message = "Eroare API: " + task["message"];
                 frm.BringToFront();
             }
             load_panel();
         }          
-
-        private async void load_profil(object sender, EventArgs e)
-        {
-            Label lbl = (sender as Label);
-            var frm = new pages.Profil();
-            pages.Profil.token = lbl.Tag.ToString();
-            Console.WriteLine(lbl.Tag.ToString());
-            pages.Profil.page = "";
-            this.Controls.Add(frm);
-            frm.BringToFront();
-        }
-
-        string fisiere_value = "";
-
-        private async void sterge_material(object sender, EventArgs e)
-        {
-            string token = ((Guna.UI2.WinForms.Guna2CircleButton)sender).Tag.ToString();
-            guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
-            guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
-            guna2MessageDialog1.Caption = "Sterge material education!";
-            guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi materialul?";
-            DialogResult dr = guna2MessageDialog1.Show();
-            if (dr == DialogResult.Yes)
-            {
-                string url = "https://schoolsync.nnmadalin.me/api/delete.php";
-                Dictionary<string, string> data = new Dictionary<string, string>();
-                data.Add("token", schoolsync.token);
-                data.Add("sql", string.Format("delete from edumentor where token = '{0}'", token));
-
-                multiple_class _Class = new multiple_class();
-                dynamic task = await _Class.PostRequestAsync(url, data);
-                string token_app = schoolsync.token;
-
-                if (task["message"] == "delete success")
-                {
-                    string[] split_1 = fisiere_value.Split(';');
-                    for (int i = 0; i < split_1.Length - 1; i++)
-                    {
-                        url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
-                        data = new Dictionary<string, string>();
-                        data.Add("token", token_app);
-                        data.Add("file", split_1[i]);
-                        task = await _Class.PostRequestAsync(url, data);
-                    }
-
-                    var frm = new notification.success();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-
-                    notification.success.message = "Material sters cu succes!";
-                    frm.BringToFront();
-                }
-                else
-                {
-                    var frm = new notification.error();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-
-                    notification.error.message = "Ceva nu a mers bine, mai incearca!";
-                    frm.BringToFront();
-                }
-                foreach (Control control in this.Controls)
-                {
-                    if (control.Name == "panel_material")
-                    {
-                        this.Controls.Remove(control);
-                        break;
-                    }
-                }
-
-                load_panel();
-            }
-        }
-
-        private async void editare_material_api(object sender, EventArgs e)
-        {
-            string token = ((Guna.UI2.WinForms.Guna2Button)sender).Tag.ToString();
-            if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"].Text.Trim() == "")
-            {
-                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"]).BorderColor = Color.Red;
-            }
-            else if (this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"].Text.Trim() == "")
-            {
-                ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"]).BorderColor = Color.Red;
-            }
-            else
-            {
-                guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
-                guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
-                guna2MessageDialog1.Caption = "Editeaza materialul!";
-                guna2MessageDialog1.Text = "Esti sigur ca vrei sa editezi materialul?";
-                DialogResult dr = guna2MessageDialog1.Show();
-                if (dr == DialogResult.Yes)
-                {
-                    //TOTUL ESTE BINE
-                    schoolsync.show_loading();
-
-                    ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"]).BorderColor = Color.FromArgb(213, 218, 223);
-                    ((Guna.UI2.WinForms.Guna2TextBox)this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"]).BorderColor = Color.FromArgb(213, 218, 223);
-
-                    multiple_class _class = new multiple_class();
-
-                    Control combobox = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["combobox_materii"];
-                    Control textbox_title = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_titlu"];
-                    Control textbox_descriere = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["txt_descriere"];
-                    Control min = this.Controls["pnl_fullpage"].Controls["pnl"].Controls["gnu"];
-
-                    string url;
-                    Dictionary<string, string> data;
-                    dynamic task;
-
-                    string token_app = schoolsync.token;
-                    string files = "";
-                    string[] split_1 = fisiere_value.Split(';');
-
-                    foreach (Control control in this.Controls["pnl_fullpage"].Controls["pnl"].Controls["flp_fisiere"].Controls)
-                    {
-                        bool ok = false;
-                        for (int i = 0; i < split_1.Length - 1; i++)
-                        {
-                            if (split_1[i] == control.Tag.ToString())
-                            {
-                                split_1[i] = "-1";
-                                ok = true;
-                                break;
-                            }
-                        }
-                        if (ok == true)
-                        {
-                            files += (control.Tag.ToString() + ";");
-                        }
-                        else
-                        {
-                            string token_file = await _class.UploadFileAsync(control.Tag.ToString());
-                            if (token_file != null)
-                                files += (token_file + ";");
-                        }
-
-
-                    }
-
-
-                    for (int i = 0; i < split_1.Length - 1; i++)
-                    {
-                        if (split_1[i] != "-1")
-                        {
-                            url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
-                            data = new Dictionary<string, string>();
-                            data.Add("token", token_app);
-                            data.Add("file", split_1[i]);
-                            task = await _class.PostRequestAsync_norefresh(url, data);
-                        }
-                    }
-
-                    url = "https://schoolsync.nnmadalin.me/api/put.php";
-                    data = new Dictionary<string, string>();
-                    data.Add("token", schoolsync.token);
-                    data.Add("sql", string.Format("update edumentor set category = '{0}', title = '{1}', description = '{2}' , reading_time = '{3}', files = '{4}' where token = '{5}'",
-                        ((ComboBox)combobox).SelectedItem, textbox_title.Text.Trim(), textbox_descriere.Text.Trim(), ((Guna.UI2.WinForms.Guna2NumericUpDown)min).Value, files, token));
-
-                    task = await _class.PostRequestAsync(url, data);
-                    if (task["message"] == "update success")
-                    {
-                        var frm = new notification.success();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-
-                        notification.success.message = "Material modificat cu succes!";
-                        frm.BringToFront();
-                        foreach (Control control in this.Controls)
-                        {
-                            if (control.Name == "pnl_fullpage")
-                            {
-                                this.Controls.Remove(control);
-                                break;
-                            }
-                        }
-                        load_panel();
-                    }
-                    else
-                    {
-                        var frm = new notification.error();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-                        notification.error.message = "Ceva nu a functionat bine, mai incearca!";
-                        frm.BringToFront();
-                    }
-                }
-            }
-        }
 
         private async void load_material(object sender, EventArgs e)
         {
