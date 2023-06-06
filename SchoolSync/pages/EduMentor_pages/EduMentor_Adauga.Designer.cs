@@ -475,6 +475,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.Controls.Add(this.label8);
             this.Name = "EduMentor_Adauga";
             this.Size = new System.Drawing.Size(1192, 690);
+            this.Load += new System.EventHandler(this.EduMentor_Adauga_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).EndInit();

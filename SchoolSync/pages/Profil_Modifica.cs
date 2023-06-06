@@ -162,7 +162,7 @@ namespace SchoolSync.pages
                     data.Add("file", "userfoto_" + login_signin.login.accounts_user["token"] + ".png");
                     task = await _Class.PostRequestAsync(url, data);
 
-                    _Class.UploadFileAsync_token(ff1, "userfoto_");
+                    //_Class.UploadFileAsync_token(ff1, "userfoto_");
                 }
 
                 if (change_foto2 == true)
@@ -172,7 +172,7 @@ namespace SchoolSync.pages
                     data.Add("token", schoolsync.token);
                     data.Add("file", "userbackground_" + login_signin.login.accounts_user["token"] + ".png");
                     task = await _Class.PostRequestAsync(url, data);
-                    _Class.UploadFileAsync_token(ff2, "userbackground_");
+                    //_Class.UploadFileAsync_token(ff2, "userbackground_");
                 }
 
                 url = "https://schoolsync.nnmadalin.me/api/put.php";

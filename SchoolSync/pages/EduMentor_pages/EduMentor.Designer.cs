@@ -167,6 +167,7 @@ namespace SchoolSync.pages
             this.label2.Size = new System.Drawing.Size(117, 19);
             this.label2.TabIndex = 9;
             this.label2.Text = "Citeşte mai mult";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // guna2PictureBox2
             // 
