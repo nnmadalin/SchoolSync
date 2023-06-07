@@ -178,11 +178,23 @@
     <Compile Include="pages\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\InvataUnit.cs">
+    <Compile Include="pages\InvataUnit_pages\InvataUnit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\InvataUnit.Designer.cs">
+    <Compile Include="pages\InvataUnit_pages\InvataUnit.Designer.cs">
       <DependentUpon>InvataUnit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\InvataUnit_pages\InvataUnit_Adauga.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\InvataUnit_pages\InvataUnit_Adauga.Designer.cs">
+      <DependentUpon>InvataUnit_Adauga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\InvataUnit_pages\InvataUnit_Vizualizare.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\InvataUnit_pages\InvataUnit_Vizualizare.Designer.cs">
+      <DependentUpon>InvataUnit_Vizualizare.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\Profil.cs">
       <SubType>UserControl</SubType>
@@ -241,8 +253,11 @@
     <EmbeddedResource Include="pages\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\InvataUnit.resx">
+    <EmbeddedResource Include="pages\InvataUnit_pages\InvataUnit.resx">
       <DependentUpon>InvataUnit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\InvataUnit_pages\InvataUnit_Adauga.resx">
+      <DependentUpon>InvataUnit_Adauga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\Profil.resx">
       <DependentUpon>Profil.cs</DependentUpon>
