@@ -14,8 +14,7 @@ namespace SchoolSync
     class multiple_class
     {
         public async Task<dynamic> PostRequestAsync(string url, Dictionary<string, string> data)
-        {
-            
+        {            
             var client = new HttpClient();
             var content = new FormUrlEncodedContent(data);
             var response = await client.PostAsync(url, content);

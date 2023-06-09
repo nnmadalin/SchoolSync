@@ -191,8 +191,6 @@ namespace SchoolSync.pages.EduMentor_pages
 
         private async void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            
-
             string token = navbar_home.token_page;
             guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
             guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;

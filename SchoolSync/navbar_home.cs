@@ -48,19 +48,8 @@ namespace SchoolSync
 
         private void guna2Button3_Click(object sender, EventArgs e)
         {
-            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
-            var label = panel.Controls["label1"];
-            label.Text = "SchoolSync | ÎnvațăUnit";
-            GC.Collect();
-
-            var frm = new pages.InvataUnit();
-            guna2Panel2.Controls.Clear();
-            guna2Panel2.Controls.Add(frm);
-            frm.Show();
-
-            background_color_btn();
-            guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
+            navbar_home.use = false;
+            navbar_home.page = "InvataUnit";
         }
 
 
@@ -118,7 +107,7 @@ namespace SchoolSync
                 background_color_btn();
                 guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
             }
-            else if(page == "EduMentor" && use == false)
+            else if (page == "EduMentor" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
@@ -180,7 +169,7 @@ namespace SchoolSync
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
-            else if(page == "EduMentor_editare" && use == false)
+            else if (page == "EduMentor_editare" && use == false)
             {
 
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -211,6 +200,67 @@ namespace SchoolSync
                 var frm = new pages.EduMentor_pages.EduMentor_Adauga();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
+            }
+
+            else if (page == "InvataUnit" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | InvataUnit";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.InvataUnit();
+                guna2Panel2.Controls.Add(frm);
+
+                background_color_btn();
+                guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
+            }
+            else if (page == "InvataUnit_adauga" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | InvataUnit - Adauga Intrebare";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.InvataUnit_pages.InvataUnit_Adauga();
+                guna2Panel2.Controls.Add(frm);
+            }
+            else if (page == "InvataUnit_editare" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | InvataUnit - Editare Intrebare";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+                var frm = new pages.InvataUnit_pages.InvataUnit_Adauga();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
+            else if (page == "InvataUnit_vizualizare" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | InvataUnit - Vizualizare intrebare";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.InvataUnit_pages.InvataUnit_Vizualizare();
+                guna2Panel2.Controls.Add(frm);
+
             }
         }
     }

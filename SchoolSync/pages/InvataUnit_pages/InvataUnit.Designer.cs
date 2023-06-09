@@ -601,7 +601,6 @@ namespace SchoolSync.pages
             // timer2
             // 
             this.timer2.Interval = 1500;
-            this.timer2.Tick += new System.EventHandler(this.timer_refresh_intrebare);
             // 
             // guna2MessageDialog1
             // 

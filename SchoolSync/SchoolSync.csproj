@@ -259,6 +259,9 @@
     <EmbeddedResource Include="pages\InvataUnit_pages\InvataUnit_Adauga.resx">
       <DependentUpon>InvataUnit_Adauga.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\InvataUnit_pages\InvataUnit_Vizualizare.resx">
+      <DependentUpon>InvataUnit_Vizualizare.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\Profil.resx">
       <DependentUpon>Profil.cs</DependentUpon>
     </EmbeddedResource>

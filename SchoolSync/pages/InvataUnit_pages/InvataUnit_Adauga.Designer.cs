@@ -38,8 +38,8 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.fontright = new Guna.UI2.WinForms.Guna2Button();
+            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.fontcenter = new Guna.UI2.WinForms.Guna2Button();
             this.fontleft = new Guna.UI2.WinForms.Guna2Button();
             this.fontunderline = new Guna.UI2.WinForms.Guna2Button();
@@ -151,11 +151,11 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Panel1.Controls.Add(this.adauga_fisier);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
-            this.guna2Panel1.Location = new System.Drawing.Point(26, 86);
+            this.guna2Panel1.Location = new System.Drawing.Point(29, 96);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.guna2Panel1.Size = new System.Drawing.Size(1124, 588);
+            this.guna2Panel1.Size = new System.Drawing.Size(1124, 560);
             this.guna2Panel1.TabIndex = 15;
             this.guna2Panel1.UseTransparentBackground = true;
             // 
@@ -171,11 +171,12 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Button1.Location = new System.Drawing.Point(934, 539);
+            this.guna2Button1.Location = new System.Drawing.Point(931, 502);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(170, 40);
             this.guna2Button1.TabIndex = 40;
             this.guna2Button1.Text = "Adauga intrebare!";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // label8
             // 
@@ -210,6 +211,24 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2CircleButton1.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton1.TabIndex = 13;
             this.guna2CircleButton1.UseTransparentBackground = true;
+            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
+            // 
+            // fontright
+            // 
+            this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontright.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontright.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontright.FillColor = System.Drawing.Color.Transparent;
+            this.fontright.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontright.ForeColor = System.Drawing.Color.White;
+            this.fontright.Image = global::SchoolSync.Properties.Resources.format_align_right_FILL1_wght700_GRAD0_opsz48;
+            this.fontright.Location = new System.Drawing.Point(365, 3);
+            this.fontright.Name = "fontright";
+            this.fontright.Size = new System.Drawing.Size(30, 27);
+            this.fontright.TabIndex = 18;
+            this.fontright.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontup
             // 
@@ -227,22 +246,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontup.Name = "fontup";
             this.fontup.Size = new System.Drawing.Size(30, 27);
             this.fontup.TabIndex = 12;
-            // 
-            // fontright
-            // 
-            this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontright.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontright.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontright.FillColor = System.Drawing.Color.Transparent;
-            this.fontright.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontright.ForeColor = System.Drawing.Color.White;
-            this.fontright.Image = global::SchoolSync.Properties.Resources.format_align_right_FILL1_wght700_GRAD0_opsz48;
-            this.fontright.Location = new System.Drawing.Point(365, 3);
-            this.fontright.Name = "fontright";
-            this.fontright.Size = new System.Drawing.Size(30, 27);
-            this.fontright.TabIndex = 18;
+            this.fontup.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontcenter
             // 
@@ -259,6 +263,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontcenter.Name = "fontcenter";
             this.fontcenter.Size = new System.Drawing.Size(30, 27);
             this.fontcenter.TabIndex = 17;
+            this.fontcenter.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontleft
             // 
@@ -275,6 +280,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontleft.Name = "fontleft";
             this.fontleft.Size = new System.Drawing.Size(30, 27);
             this.fontleft.TabIndex = 16;
+            this.fontleft.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontunderline
             // 
@@ -291,6 +297,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontunderline.Name = "fontunderline";
             this.fontunderline.Size = new System.Drawing.Size(30, 27);
             this.fontunderline.TabIndex = 15;
+            this.fontunderline.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontitalic
             // 
@@ -307,6 +314,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontitalic.Name = "fontitalic";
             this.fontitalic.Size = new System.Drawing.Size(30, 27);
             this.fontitalic.TabIndex = 14;
+            this.fontitalic.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontbold
             // 
@@ -323,6 +331,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontbold.Name = "fontbold";
             this.fontbold.Size = new System.Drawing.Size(30, 27);
             this.fontbold.TabIndex = 13;
+            this.fontbold.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // fontdown
             // 
@@ -339,6 +348,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.fontdown.Name = "fontdown";
             this.fontdown.Size = new System.Drawing.Size(30, 27);
             this.fontdown.TabIndex = 12;
+            this.fontdown.Click += new System.EventHandler(this.btn_texteditor);
             // 
             // adauga_fisier
             // 
@@ -356,16 +366,19 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.adauga_fisier.Name = "adauga_fisier";
             this.adauga_fisier.Size = new System.Drawing.Size(40, 40);
             this.adauga_fisier.TabIndex = 36;
+            this.adauga_fisier.Click += new System.EventHandler(this.adauga_fisier_Click);
             // 
             // InvataUnit_Adauga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.GhostWhite;
             this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.label8);
             this.Name = "InvataUnit_Adauga";
             this.Size = new System.Drawing.Size(1192, 690);
+            this.Load += new System.EventHandler(this.InvataUnit_Adauga_Load);
             this.guna2Panel2.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();

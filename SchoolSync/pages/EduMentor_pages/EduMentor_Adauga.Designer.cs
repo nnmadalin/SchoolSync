@@ -34,15 +34,6 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2NumericUpDown1 = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.fontright = new Guna.UI2.WinForms.Guna2Button();
             this.fontcenter = new Guna.UI2.WinForms.Guna2Button();
             this.fontleft = new Guna.UI2.WinForms.Guna2Button();
@@ -50,7 +41,16 @@ namespace SchoolSync.pages.EduMentor_pages
             this.fontitalic = new Guna.UI2.WinForms.Guna2Button();
             this.fontbold = new Guna.UI2.WinForms.Guna2Button();
             this.fontdown = new Guna.UI2.WinForms.Guna2Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.guna2ComboBox2 = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.adauga_fisier = new Guna.UI2.WinForms.Guna2Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).BeginInit();
@@ -150,6 +150,132 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2Panel2.TabIndex = 41;
             this.guna2Panel2.UseTransparentBackground = true;
             // 
+            // fontright
+            // 
+            this.fontright.Animated = true;
+            this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontright.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontright.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontright.FillColor = System.Drawing.Color.Transparent;
+            this.fontright.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontright.ForeColor = System.Drawing.Color.White;
+            this.fontright.Image = global::SchoolSync.Properties.Resources.format_align_right_FILL1_wght700_GRAD0_opsz48;
+            this.fontright.Location = new System.Drawing.Point(365, 3);
+            this.fontright.Name = "fontright";
+            this.fontright.Size = new System.Drawing.Size(30, 27);
+            this.fontright.TabIndex = 18;
+            this.fontright.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontcenter
+            // 
+            this.fontcenter.Animated = true;
+            this.fontcenter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontcenter.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontcenter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontcenter.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontcenter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontcenter.FillColor = System.Drawing.Color.Transparent;
+            this.fontcenter.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontcenter.ForeColor = System.Drawing.Color.White;
+            this.fontcenter.Image = global::SchoolSync.Properties.Resources.format_align_center_FILL1_wght700_GRAD0_opsz48;
+            this.fontcenter.Location = new System.Drawing.Point(329, 3);
+            this.fontcenter.Name = "fontcenter";
+            this.fontcenter.Size = new System.Drawing.Size(30, 27);
+            this.fontcenter.TabIndex = 17;
+            this.fontcenter.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontleft
+            // 
+            this.fontleft.Animated = true;
+            this.fontleft.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontleft.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontleft.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontleft.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontleft.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontleft.FillColor = System.Drawing.Color.Transparent;
+            this.fontleft.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontleft.ForeColor = System.Drawing.Color.White;
+            this.fontleft.Image = global::SchoolSync.Properties.Resources.format_align_left_FILL1_wght700_GRAD0_opsz48;
+            this.fontleft.Location = new System.Drawing.Point(293, 3);
+            this.fontleft.Name = "fontleft";
+            this.fontleft.Size = new System.Drawing.Size(30, 27);
+            this.fontleft.TabIndex = 16;
+            this.fontleft.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontunderline
+            // 
+            this.fontunderline.Animated = true;
+            this.fontunderline.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontunderline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontunderline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontunderline.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontunderline.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontunderline.FillColor = System.Drawing.Color.Transparent;
+            this.fontunderline.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontunderline.ForeColor = System.Drawing.Color.White;
+            this.fontunderline.Image = global::SchoolSync.Properties.Resources.format_underlined_FILL1_wght700_GRAD0_opsz48;
+            this.fontunderline.Location = new System.Drawing.Point(211, 3);
+            this.fontunderline.Name = "fontunderline";
+            this.fontunderline.Size = new System.Drawing.Size(30, 27);
+            this.fontunderline.TabIndex = 15;
+            this.fontunderline.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontitalic
+            // 
+            this.fontitalic.Animated = true;
+            this.fontitalic.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontitalic.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontitalic.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontitalic.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontitalic.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontitalic.FillColor = System.Drawing.Color.Transparent;
+            this.fontitalic.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontitalic.ForeColor = System.Drawing.Color.White;
+            this.fontitalic.Image = global::SchoolSync.Properties.Resources.format_italic_FILL1_wght700_GRAD0_opsz48;
+            this.fontitalic.Location = new System.Drawing.Point(175, 3);
+            this.fontitalic.Name = "fontitalic";
+            this.fontitalic.Size = new System.Drawing.Size(30, 27);
+            this.fontitalic.TabIndex = 14;
+            this.fontitalic.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontbold
+            // 
+            this.fontbold.Animated = true;
+            this.fontbold.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontbold.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontbold.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontbold.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontbold.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontbold.FillColor = System.Drawing.Color.Transparent;
+            this.fontbold.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontbold.ForeColor = System.Drawing.Color.White;
+            this.fontbold.Image = global::SchoolSync.Properties.Resources.format_bold_FILL1_wght700_GRAD0_opsz48;
+            this.fontbold.Location = new System.Drawing.Point(139, 3);
+            this.fontbold.Name = "fontbold";
+            this.fontbold.Size = new System.Drawing.Size(30, 27);
+            this.fontbold.TabIndex = 13;
+            this.fontbold.Click += new System.EventHandler(this.texteditor_button);
+            // 
+            // fontdown
+            // 
+            this.fontdown.Animated = true;
+            this.fontdown.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontdown.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontdown.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontdown.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontdown.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontdown.FillColor = System.Drawing.Color.Transparent;
+            this.fontdown.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontdown.ForeColor = System.Drawing.Color.White;
+            this.fontdown.Image = global::SchoolSync.Properties.Resources.expand_more_FILL1_wght700_GRAD0_opsz48;
+            this.fontdown.Location = new System.Drawing.Point(46, 3);
+            this.fontdown.Name = "fontdown";
+            this.fontdown.Size = new System.Drawing.Size(30, 27);
+            this.fontdown.TabIndex = 12;
+            this.fontdown.Click += new System.EventHandler(this.texteditor_button);
+            // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -165,6 +291,7 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // guna2Button1
             // 
+            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 5;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -238,6 +365,25 @@ namespace SchoolSync.pages.EduMentor_pages
             this.flowLayoutPanel1.Size = new System.Drawing.Size(987, 40);
             this.flowLayoutPanel1.TabIndex = 37;
             // 
+            // adauga_fisier
+            // 
+            this.adauga_fisier.Animated = true;
+            this.adauga_fisier.BorderRadius = 20;
+            this.adauga_fisier.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.adauga_fisier.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.adauga_fisier.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.adauga_fisier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.adauga_fisier.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.adauga_fisier.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.adauga_fisier.ForeColor = System.Drawing.Color.White;
+            this.adauga_fisier.Image = global::SchoolSync.Properties.Resources.attach_file_FILL1_wght700_GRAD0_opsz48;
+            this.adauga_fisier.ImageSize = new System.Drawing.Size(25, 25);
+            this.adauga_fisier.Location = new System.Drawing.Point(46, 444);
+            this.adauga_fisier.Name = "adauga_fisier";
+            this.adauga_fisier.Size = new System.Drawing.Size(40, 40);
+            this.adauga_fisier.TabIndex = 36;
+            this.adauga_fisier.Click += new System.EventHandler(this.adauga_fisier_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -288,6 +434,7 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontup
             // 
+            this.fontup.Animated = true;
             this.fontup.BackColor = System.Drawing.Color.White;
             this.fontup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -304,145 +451,9 @@ namespace SchoolSync.pages.EduMentor_pages
             this.fontup.TabIndex = 1;
             this.fontup.Click += new System.EventHandler(this.texteditor_button);
             // 
-            // fontright
-            // 
-            this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontright.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontright.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontright.FillColor = System.Drawing.Color.Transparent;
-            this.fontright.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontright.ForeColor = System.Drawing.Color.White;
-            this.fontright.Image = global::SchoolSync.Properties.Resources.format_align_right_FILL1_wght700_GRAD0_opsz48;
-            this.fontright.Location = new System.Drawing.Point(365, 3);
-            this.fontright.Name = "fontright";
-            this.fontright.Size = new System.Drawing.Size(30, 27);
-            this.fontright.TabIndex = 18;
-            this.fontright.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontcenter
-            // 
-            this.fontcenter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontcenter.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontcenter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontcenter.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontcenter.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontcenter.FillColor = System.Drawing.Color.Transparent;
-            this.fontcenter.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontcenter.ForeColor = System.Drawing.Color.White;
-            this.fontcenter.Image = global::SchoolSync.Properties.Resources.format_align_center_FILL1_wght700_GRAD0_opsz48;
-            this.fontcenter.Location = new System.Drawing.Point(329, 3);
-            this.fontcenter.Name = "fontcenter";
-            this.fontcenter.Size = new System.Drawing.Size(30, 27);
-            this.fontcenter.TabIndex = 17;
-            this.fontcenter.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontleft
-            // 
-            this.fontleft.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontleft.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontleft.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontleft.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontleft.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontleft.FillColor = System.Drawing.Color.Transparent;
-            this.fontleft.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontleft.ForeColor = System.Drawing.Color.White;
-            this.fontleft.Image = global::SchoolSync.Properties.Resources.format_align_left_FILL1_wght700_GRAD0_opsz48;
-            this.fontleft.Location = new System.Drawing.Point(293, 3);
-            this.fontleft.Name = "fontleft";
-            this.fontleft.Size = new System.Drawing.Size(30, 27);
-            this.fontleft.TabIndex = 16;
-            this.fontleft.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontunderline
-            // 
-            this.fontunderline.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontunderline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontunderline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontunderline.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontunderline.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontunderline.FillColor = System.Drawing.Color.Transparent;
-            this.fontunderline.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontunderline.ForeColor = System.Drawing.Color.White;
-            this.fontunderline.Image = global::SchoolSync.Properties.Resources.format_underlined_FILL1_wght700_GRAD0_opsz48;
-            this.fontunderline.Location = new System.Drawing.Point(211, 3);
-            this.fontunderline.Name = "fontunderline";
-            this.fontunderline.Size = new System.Drawing.Size(30, 27);
-            this.fontunderline.TabIndex = 15;
-            this.fontunderline.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontitalic
-            // 
-            this.fontitalic.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontitalic.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontitalic.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontitalic.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontitalic.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontitalic.FillColor = System.Drawing.Color.Transparent;
-            this.fontitalic.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontitalic.ForeColor = System.Drawing.Color.White;
-            this.fontitalic.Image = global::SchoolSync.Properties.Resources.format_italic_FILL1_wght700_GRAD0_opsz48;
-            this.fontitalic.Location = new System.Drawing.Point(175, 3);
-            this.fontitalic.Name = "fontitalic";
-            this.fontitalic.Size = new System.Drawing.Size(30, 27);
-            this.fontitalic.TabIndex = 14;
-            this.fontitalic.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontbold
-            // 
-            this.fontbold.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontbold.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontbold.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontbold.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontbold.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontbold.FillColor = System.Drawing.Color.Transparent;
-            this.fontbold.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontbold.ForeColor = System.Drawing.Color.White;
-            this.fontbold.Image = global::SchoolSync.Properties.Resources.format_bold_FILL1_wght700_GRAD0_opsz48;
-            this.fontbold.Location = new System.Drawing.Point(139, 3);
-            this.fontbold.Name = "fontbold";
-            this.fontbold.Size = new System.Drawing.Size(30, 27);
-            this.fontbold.TabIndex = 13;
-            this.fontbold.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // fontdown
-            // 
-            this.fontdown.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontdown.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontdown.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontdown.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontdown.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontdown.FillColor = System.Drawing.Color.Transparent;
-            this.fontdown.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontdown.ForeColor = System.Drawing.Color.White;
-            this.fontdown.Image = global::SchoolSync.Properties.Resources.expand_more_FILL1_wght700_GRAD0_opsz48;
-            this.fontdown.Location = new System.Drawing.Point(46, 3);
-            this.fontdown.Name = "fontdown";
-            this.fontdown.Size = new System.Drawing.Size(30, 27);
-            this.fontdown.TabIndex = 12;
-            this.fontdown.Click += new System.EventHandler(this.texteditor_button);
-            // 
-            // adauga_fisier
-            // 
-            this.adauga_fisier.BorderRadius = 20;
-            this.adauga_fisier.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.adauga_fisier.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.adauga_fisier.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.adauga_fisier.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.adauga_fisier.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.adauga_fisier.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.adauga_fisier.ForeColor = System.Drawing.Color.White;
-            this.adauga_fisier.Image = global::SchoolSync.Properties.Resources.attach_file_FILL1_wght700_GRAD0_opsz48;
-            this.adauga_fisier.ImageSize = new System.Drawing.Size(25, 25);
-            this.adauga_fisier.Location = new System.Drawing.Point(46, 444);
-            this.adauga_fisier.Name = "adauga_fisier";
-            this.adauga_fisier.Size = new System.Drawing.Size(40, 40);
-            this.adauga_fisier.TabIndex = 36;
-            this.adauga_fisier.Click += new System.EventHandler(this.adauga_fisier_Click);
-            // 
             // guna2CircleButton1
             // 
+            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
             this.guna2CircleButton1.BorderThickness = 2;

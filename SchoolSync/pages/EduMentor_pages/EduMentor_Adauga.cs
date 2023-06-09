@@ -337,7 +337,6 @@ namespace SchoolSync.pages.EduMentor_pages
             }
         }
 
-        public string filestring = "";
 
         private async void EduMentor_Adauga_Load(object sender, EventArgs e)
         {
@@ -364,23 +363,25 @@ namespace SchoolSync.pages.EduMentor_pages
                 {
                     guna2TextBox1.Text = task["0"]["title"];
                     richTextBox1.Rtf = task["0"]["description"];
+                    guna2ComboBox2.SelectedIndex = guna2ComboBox2.Items.IndexOf(Convert.ToString(task["0"]["category"]));
+                    guna2NumericUpDown1.Value = Convert.ToInt32(Convert.ToString(task["0"]["reading_time"]));
 
                     string[] split = Convert.ToString(task["0"]["files"]).Split(';');
-                    filestring = task["0"]["files"];
                     for (int i = 0; i < split.Length - 1; i++)
                     {
                         url = "https://schoolsync.nnmadalin.me/api/get.php";
                         data = new Dictionary<string, string>();
                         data.Add("token", schoolsync.token);
-                        data.Add("command", "select * files where token_user and token = ?");
+                        data.Add("command", "select * from files where token_user = ? and token = ?");
                         param = new Dictionary<string, string>()
                         {
-                            {"token_user", login_signin.login.accounts_user["token"]},
-                            {"token", navbar_home.token_page}
+                            {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                            {"token", split[i]},
                         };
 
                         data.Add("params", JsonConvert.SerializeObject(param));
                         task = await _class.PostRequestAsync(url, data);
+                        Console.WriteLine(task);
                         if(task["message"] == "success")
                         {
                             Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
@@ -404,8 +405,7 @@ namespace SchoolSync.pages.EduMentor_pages
                         }
                     }
 
-                    guna2ComboBox2.SelectedIndex = guna2ComboBox2.Items.IndexOf(Convert.ToString(task["0"]["category"]));
-                    guna2NumericUpDown1.Value = Convert.ToInt32(Convert.ToString(task["0"]["reading_time"]));
+                   
                 }
             }
         }
