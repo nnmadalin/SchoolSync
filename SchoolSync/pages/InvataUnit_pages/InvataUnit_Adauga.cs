@@ -180,8 +180,16 @@ namespace SchoolSync.pages.InvataUnit_pages
                 data.Add("token_file", token_file);
                 data.Add("filename", inf.Name);
 
-                _= await _class.new_UploadFileAsync(data, control.Tag.ToString());
-                files += (token_file + ";");
+                try
+                {
+                    _ = await _class.new_UploadFileAsync(data, control.Tag.ToString());
+                    files += (token_file + ";");
+                }
+                catch (Exception ee)
+                {
+                    files += (control.Tag.ToString() + ";");
+                }
+                
             }
 
 
@@ -219,7 +227,8 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                         schoolsync.hide_loading();
 
-                        
+                        navbar_home.use = false;
+                        navbar_home.page = "InvataUnit_vizualizare";
                     }
                     else
                     {
@@ -333,7 +342,6 @@ namespace SchoolSync.pages.InvataUnit_pages
                     string[] split = Convert.ToString(task["0"]["files"]).Split(';');
                     for (int i = 0; i < split.Length - 1; i++)
                     {
-                        Console.WriteLine(navbar_home.token_page);
                         url = "https://schoolsync.nnmadalin.me/api/get.php";
                         data = new Dictionary<string, string>();
                         data.Add("token", schoolsync.token);
@@ -364,7 +372,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                                 guna2Chip.Text = fnm.Substring(0, 16) + "...";
                             else
                                 guna2Chip.Text = fnm;
-                            guna2Chip.Tag = task["0"]["token"];
+                            guna2Chip.Tag = split[i];
                             flowLayoutPanel1.Controls.Add(guna2Chip);
                         }
                     }

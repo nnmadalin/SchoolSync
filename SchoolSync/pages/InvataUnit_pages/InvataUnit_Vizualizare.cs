@@ -25,6 +25,12 @@ namespace SchoolSync.pages.InvataUnit_pages
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
         }
 
+        private void deschide_fisier_chip(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Chip;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
+        }
+
         private async void InvataUnit_Vizualizare_Load(object sender, EventArgs e)
         {
             schoolsync.show_loading();
@@ -59,18 +65,23 @@ namespace SchoolSync.pages.InvataUnit_pages
                 label1.Text = task["0"]["created"];
                 label2.Text = task["0"]["category"] + " • " + task["0"]["data"];
                 richTextBox1.Rtf = task["0"]["question"];
-
-                if (task["0"]["files"] != "")
+                if (task["0"]["token_user"] == login_signin.login.accounts_user["token"])
                 {
-                    label4.Visible = false;
+                    guna2CircleButton2.Visible = true;
+                    guna2CircleButton3.Visible = true;
+                }
+
+                if (task["0"]["files"] == "")
+                {
+                    label4.Visible = true;
                 }
                 else
                 {
-                    string row = task["0"]["files"].ToString();
+                    string row = task["0"]["files"];
                     string[] file_split = row.Split(';');
-
                     for (int i = 0; i < file_split.Length - 1; i++)
                     {
+                       
                         url = "https://schoolsync.nnmadalin.me/api/get.php";
                         data = new Dictionary<string, string>();
                         data.Add("token", schoolsync.token);
@@ -85,6 +96,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                         task = await _Class.PostRequestAsync(url, data);
                         if (task["message"] == "success")
                         {
+                            Console.WriteLine(1);
                             try
                             {
                                 string[] splitplit = Convert.ToString(task["0"]["name"]).Split('.');
@@ -128,7 +140,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                                     Location = new Point((200 - 110) / 2, 140)
                                 };
 
-                                flowLayoutPanel1.Controls.Add(flp_files_panel);
+                                flowLayoutPanel4.Controls.Add(flp_files_panel);
                                 flp_files_panel.Controls.Add(gcp);
                                 flp_files_panel.Controls.Add(lbl_panel_file);
 
@@ -150,18 +162,15 @@ namespace SchoolSync.pages.InvataUnit_pages
                                 panel_file_btn.Tag = Convert.ToString(login_signin.login.accounts_user["token"]) + "/" + task["0"]["token"] + "/" + task["0"]["name"];
                                 panel_file_btn.Click += deschide_fisier_buton;
                             }
-                            catch { };
+                            catch (Exception ee) { };
+                            
                         }
                     }
                 }
 
-                if (task["0"]["token_user"] == login_signin.login.accounts_user["token"])
-                {
-                    guna2CircleButton2.Visible = true;
-                    guna2CircleButton3.Visible = true;
-                }
+                
             }
-            schoolsync.hide_loading();
+            
             load_answers();
         }
 
@@ -360,30 +369,48 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                         if (files != "")
                         {
+                            
                             for (int j = 0; j < split.Length - 1; j++)
                             {
+                                multiple_class _class = new multiple_class();
+
                                 Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
                                 {
-                                    FillColor = Color.FromArgb(180, 180, 180),
-                                    BorderColor = Color.FromArgb(180, 180, 180),
+                                    FillColor = Color.White,
+                                    BorderColor = Color.FromArgb(94, 148, 255),
                                     ForeColor = Color.Black,
                                     Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
                                     AutoRoundedCorners = false,
                                     BorderRadius = 10,
                                     TextAlign = HorizontalAlignment.Left,
-                                    Size = new Size(150, 40),
-                                    IsClosable = false,
-                                    Cursor = Cursors.Hand
+                                    Size = new Size(160, 35),
+                                    IsClosable = false
                                 };
 
-                                string[] splitsplit = split[j].Split('.');
-                                guna2Chip.Tag = split[j].ToString();
-                                if (splitsplit[0].Length > 10)
-                                    guna2Chip.Text = splitsplit[0].Substring(0, 10) + "___." + splitsplit[1];
-                                else
-                                    guna2Chip.Text = split[j];
-                                //guna2Chip.Click += deschide_fisier_chip;
-                                flp_answer.Controls.Add(guna2Chip);
+                                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                                var data = new Dictionary<string, string>();
+                                data.Add("token", schoolsync.token);
+                                data.Add("command", "select * from files where token = ? and token_user = ?");
+                                var param = new Dictionary<string, string>()
+                                {
+                                    {"token", split[j]},
+                                    {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])}
+                                };
+
+                                data.Add("params", JsonConvert.SerializeObject(param));
+                                task = await _class.PostRequestAsync(url, data);
+                                if (task["message"] == "success")
+                                {
+                                    
+                                    string[] splitsplit = Convert.ToString(task["0"]["name"]).Split('.');
+                                    guna2Chip.Tag = login_signin.login.accounts_user["token"] + "/" + split[j].ToString() + "/" + task["0"]["name"];
+                                    if (splitsplit[0].Length > 10)
+                                        guna2Chip.Text = splitsplit[0].Substring(0, 10) + "___." + splitsplit[1];
+                                    else
+                                        guna2Chip.Text = task["0"]["name"];
+                                    guna2Chip.Click += deschide_fisier_chip;
+                                    flp_answer.Controls.Add(guna2Chip);
+                                }
                             }
                         }
 
@@ -400,16 +427,17 @@ namespace SchoolSync.pages.InvataUnit_pages
                 }
                 schoolsync.hide_loading();
             }
-            catch
+            catch(Exception e)
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
                 notification.error.message = "Conexiunea oprita!";
-                await Task.Delay(200);
+                Console.WriteLine(e.Message);
                 navbar_home.page = "InvataUnit";
                 navbar_home.use = false;
+                schoolsync.hide_loading();
             }
         }
         public static TcpClient client = null;
@@ -491,7 +519,7 @@ namespace SchoolSync.pages.InvataUnit_pages
         {
             try
             {
-                if (flowLayoutPanel1.Controls.Count < 3)
+                if (flowLayoutPanel2.Controls.Count < 3)
                 {
                     OpenFileDialog opf = new OpenFileDialog();
                     opf.FileName = "";
