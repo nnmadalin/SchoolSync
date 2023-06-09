@@ -98,7 +98,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                             panel.Controls.Add(frm);
-                            notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 10 MB!";
+                            notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 5 MB!";
                             frm.BringToFront();
                         }
                         else
@@ -164,11 +164,10 @@ namespace SchoolSync.pages.InvataUnit_pages
 
             multiple_class _class = new multiple_class();
             string token = _class.generate_token();
-
-            string files = "";
-                        
+      
             Dictionary<string, string> data;
-
+            
+            string files = "";
             foreach (Control control in flowLayoutPanel1.Controls)
             {
                 FileInfo inf = new FileInfo(control.Tag.ToString());
@@ -183,7 +182,6 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                 _= await _class.new_UploadFileAsync(data, control.Tag.ToString());
                 files += (token_file + ";");
-
             }
 
 
@@ -381,6 +379,11 @@ namespace SchoolSync.pages.InvataUnit_pages
                     frm.BringToFront();
                 }
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

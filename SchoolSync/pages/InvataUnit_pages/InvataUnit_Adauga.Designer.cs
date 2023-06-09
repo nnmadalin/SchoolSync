@@ -106,6 +106,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(987, 40);
             this.flowLayoutPanel1.TabIndex = 37;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
             // richTextBox1
             // 
