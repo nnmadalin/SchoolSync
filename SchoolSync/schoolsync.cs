@@ -19,14 +19,42 @@ namespace SchoolSync
 
         public static string token = "W!WSAnXZLOhyQ6lpt=adAhsOaF5QrI6eN4!1p/PWi7y8A9gTwKiD6DO6kmwdmcUHFeG?v99ihZYAeiLtf7NdT2MHCnzy=mvdI1MnmZLEtVOus2O0qYFo4oDfVyB7QeLBFo5SrzqueDvwtMFVBpRcLygr3Jxg-GhmOZ07IPsBpmZ8P0bhBUegmskNsTKk!x!bc2yT-LOrCwk!XU!!2I10=SLFfsf0s-OGCcmS-f=4l3X8u3lL/nsnY8vjSQ0jn13H";
         public static bool is_loading = false;
+        public static string version = "v3.1.11/6/2023";
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
-            var frm = new login_signin.login();
-            guna2Panel2.Controls.Add(frm);
-            frm.Show();
-            frm.Location = new Point(0, 0);
-            GC.Collect();
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from version");
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if(task["message"] == "success")
+            {
+                if(task["0"]["required_version_app"] == version)
+                {
+                    var frm = new login_signin.login();
+                    guna2Panel2.Controls.Add(frm);
+                    frm.Show();
+                    frm.Location = new Point(0, 0);
+                    GC.Collect();
+                }
+                else
+                {
+                    guna2MessageDialog1.Caption = "Versiune trecuta!";
+                    guna2MessageDialog1.Text = "Ai o versiune prea veche. Te rog sa instalezi versiunea noua! \r\nschoolsync.nnmadalin.me \r\nVersiune actuala: " + version + " ;Versiune necesara: " + task["0"]["required_version_app"];
+                    guna2MessageDialog1.Show();
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                guna2MessageDialog1.Caption = "Eroare!";
+                guna2MessageDialog1.Text = "Ceva nu a mers bine! Te rog sa redeschizi aplicatia!";
+                guna2MessageDialog1.Show();
+                Application.Exit();
+            }
         }
 
         public static void show_loading()
