@@ -33,6 +33,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
         private async void InvataUnit_Vizualizare_Load(object sender, EventArgs e)
         {
+            flowLayoutPanel1.HorizontalScroll.Visible = false;
             schoolsync.show_loading();
             multiple_class _Class = new multiple_class();
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -54,7 +55,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                 string[] split = str.Split(';');
                 for (int i = 0; i < split.Length - 1; i++)
                 {
-                    if (split[i] == login_signin.login.accounts_user["token"])
+                    if (split[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
                     {
                         guna2Button1.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
                         guna2Button1.Tag = "1";
@@ -79,7 +80,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                 {
                     string row = task["0"]["files"];
                     string[] file_split = row.Split(';');
-                    for (int i = 0; i < file_split.Length - 1; i++)
+                    for (int i = 0; i < file_split.Length; i++)
                     {
                        
                         url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -96,7 +97,6 @@ namespace SchoolSync.pages.InvataUnit_pages
                         task = await _Class.PostRequestAsync(url, data);
                         if (task["message"] == "success")
                         {
-                            Console.WriteLine(1);
                             try
                             {
                                 string[] splitplit = Convert.ToString(task["0"]["name"]).Split('.');
@@ -140,10 +140,10 @@ namespace SchoolSync.pages.InvataUnit_pages
                                     Location = new Point((200 - 110) / 2, 140)
                                 };
 
-                                flowLayoutPanel4.Controls.Add(flp_files_panel);
+                                flowLayoutPanel5.Controls.Add(flp_files_panel);
                                 flp_files_panel.Controls.Add(gcp);
                                 flp_files_panel.Controls.Add(lbl_panel_file);
-
+                                
                                 if (splitplit[0].Length >= 10)
                                 {
                                     lbl_panel_file.Text = splitplit[0].Substring(0, 10) + "." + splitplit[1];
@@ -156,7 +156,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                                 }
                                 else
                                     gcp.Image = SchoolSync.Properties.Resources.description_FILL1_wght700_GRAD0_opsz48;
-
+                                
                                 flp_files_panel.Controls.Add(panel_file_btn);
 
                                 panel_file_btn.Tag = Convert.ToString(login_signin.login.accounts_user["token"]) + "/" + task["0"]["token"] + "/" + task["0"]["name"];
@@ -309,8 +309,8 @@ namespace SchoolSync.pages.InvataUnit_pages
                     {
                         Guna.UI2.WinForms.Guna2Panel pnl_answer = new Guna.UI2.WinForms.Guna2Panel()
                         {
-                            MaximumSize = new Size(1140, 0),
-                            MinimumSize = new Size(1140, 0),
+                            MaximumSize = new Size(1130, 0),
+                            MinimumSize = new Size(1130, 0),
                             Padding = new Padding(0, 0, 0, 10),
                             AutoSize = true,
                             BorderColor = Color.FromArgb(96, 211, 153),
@@ -384,7 +384,8 @@ namespace SchoolSync.pages.InvataUnit_pages
                                     BorderRadius = 10,
                                     TextAlign = HorizontalAlignment.Left,
                                     Size = new Size(160, 35),
-                                    IsClosable = false
+                                    IsClosable = false,
+                                    Cursor = Cursors.Hand
                                 };
 
                                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -429,15 +430,16 @@ namespace SchoolSync.pages.InvataUnit_pages
             }
             catch(Exception e)
             {
+                navbar_home.page = "InvataUnit";
+                navbar_home.use = false;                
+
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                 panel.Controls.Add(frm);
                 notification.error.message = "Conexiunea oprita!";
-                Console.WriteLine(e.Message);
-                navbar_home.page = "InvataUnit";
-                navbar_home.use = false;
                 schoolsync.hide_loading();
+
             }
         }
         public static TcpClient client = null;
@@ -505,7 +507,6 @@ namespace SchoolSync.pages.InvataUnit_pages
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
-                    Console.WriteLine(e.Message);
                     notification.error.message = "Conexiunea oprita!";
                     frm.BringToFront();
                     await Task.Delay(200);
@@ -513,6 +514,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     navbar_home.use = false;
                 }
             }
+            schoolsync.hide_loading();
         }
 
         private void adauga_fisier_Click(object sender, EventArgs e)
@@ -635,6 +637,126 @@ namespace SchoolSync.pages.InvataUnit_pages
                 byte[] data = Encoding.UTF8.GetBytes(message);
                 await stream.WriteAsync(data, 0, data.Length);
                 guna2TextBox1.Clear();
+            }
+        }
+
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private async void guna2Button1_Click(object sender, EventArgs e)
+        {
+            Guna.UI2.WinForms.Guna2Button btn = sender as Guna.UI2.WinForms.Guna2Button;
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command","select * from invataunit where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", navbar_home.token_page}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            bool ok = false;
+
+            if (btn.Tag == "1")
+            {
+                btn.Image = SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48;
+                btn.Tag = "0";
+                ok = true;
+            }
+            else
+            {
+                btn.Image = SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
+                btn.Tag = "1";
+            }
+
+            multiple_class _Class = new multiple_class();
+            dynamic task = await _Class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                string str = task["0"]["favourites"];
+                if (ok == false)
+                {
+                    str += (login_signin.login.accounts_user["token"] + ";");
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update invataunit set favourites = ? where token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"favourites", str},
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Adaugat la favorite cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu e mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+                else
+                {
+                    string[] split = str.Split(';');
+                    string fns = "";
+                    for (int i = 0; i < split.Length - 1; i++)
+                    {
+                        if (split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            fns += (split[i] + ";");
+                        }
+                    }
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update invataunit set favourites = ? where token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"favourites", fns},
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Scos de la favorite cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu e mers bine!";
+                        frm.BringToFront();
+                    }
+                }
             }
         }
     }

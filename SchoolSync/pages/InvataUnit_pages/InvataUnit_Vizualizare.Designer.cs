@@ -38,7 +38,6 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.label1 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -50,13 +49,14 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -66,9 +66,9 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.flowLayoutPanel1.Controls.Add(this.guna2Panel1);
             this.flowLayoutPanel1.Controls.Add(this.guna2Panel3);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel3);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(11, 48);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 48);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1178, 639);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1189, 639);
             this.flowLayoutPanel1.TabIndex = 17;
             // 
             // guna2Panel2
@@ -185,25 +185,16 @@ namespace SchoolSync.pages.InvataUnit_pages
             // guna2Panel1
             // 
             this.guna2Panel1.AutoSize = true;
-            this.guna2Panel1.Controls.Add(this.flowLayoutPanel4);
+            this.guna2Panel1.Controls.Add(this.flowLayoutPanel5);
             this.guna2Panel1.Controls.Add(this.label3);
             this.guna2Panel1.Location = new System.Drawing.Point(3, 113);
             this.guna2Panel1.MaximumSize = new System.Drawing.Size(1146, 0);
             this.guna2Panel1.MinimumSize = new System.Drawing.Size(1146, 80);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
-            this.guna2Panel1.Size = new System.Drawing.Size(1146, 80);
+            this.guna2Panel1.Size = new System.Drawing.Size(1146, 82);
             this.guna2Panel1.TabIndex = 18;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(214, 25);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Nu sunt fisiere atasate!";
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // label3
             // 
@@ -226,7 +217,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Panel3.Controls.Add(this.guna2TextBox1);
             this.guna2Panel3.Controls.Add(this.label5);
             this.guna2Panel3.Controls.Add(this.guna2Button2);
-            this.guna2Panel3.Location = new System.Drawing.Point(3, 211);
+            this.guna2Panel3.Location = new System.Drawing.Point(3, 213);
             this.guna2Panel3.Margin = new System.Windows.Forms.Padding(3, 15, 3, 5);
             this.guna2Panel3.MaximumSize = new System.Drawing.Size(1146, 260);
             this.guna2Panel3.MinimumSize = new System.Drawing.Size(1146, 260);
@@ -315,12 +306,12 @@ namespace SchoolSync.pages.InvataUnit_pages
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.AutoSize = true;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 476);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 478);
             this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(1165, 0);
-            this.flowLayoutPanel3.MinimumSize = new System.Drawing.Size(1165, 100);
+            this.flowLayoutPanel3.MaximumSize = new System.Drawing.Size(1170, 0);
+            this.flowLayoutPanel3.MinimumSize = new System.Drawing.Size(1170, 100);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(1165, 100);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(1170, 100);
             this.flowLayoutPanel3.TabIndex = 20;
             // 
             // guna2MessageDialog1
@@ -338,6 +329,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
             this.guna2Button1.BorderRadius = 10;
             this.guna2Button1.BorderThickness = 2;
+            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -353,6 +345,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button1.TabIndex = 15;
             this.guna2Button1.Text = "Favorite!";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2CircleButton1
             // 
@@ -378,17 +371,28 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2CircleButton1.UseTransparentBackground = true;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
-            // flowLayoutPanel4
+            // label4
             // 
-            this.flowLayoutPanel4.AutoSize = true;
-            this.flowLayoutPanel4.Controls.Add(this.label4);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(24, 46);
-            this.flowLayoutPanel4.MaximumSize = new System.Drawing.Size(1108, 0);
-            this.flowLayoutPanel4.MinimumSize = new System.Drawing.Size(1108, 0);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(1108, 25);
-            this.flowLayoutPanel4.TabIndex = 7;
-            this.flowLayoutPanel4.Visible = false;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(214, 25);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Nu sunt fisiere atasate!";
+            this.label4.Visible = false;
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel5.Controls.Add(this.label4);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(23, 49);
+            this.flowLayoutPanel5.MaximumSize = new System.Drawing.Size(1108, 0);
+            this.flowLayoutPanel5.MinimumSize = new System.Drawing.Size(1108, 20);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1108, 25);
+            this.flowLayoutPanel5.TabIndex = 9;
             // 
             // InvataUnit_Vizualizare
             // 
@@ -410,8 +414,8 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Panel1.PerformLayout();
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -430,7 +434,6 @@ namespace SchoolSync.pages.InvataUnit_pages
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private System.Windows.Forms.Label label5;
@@ -439,6 +442,7 @@ namespace SchoolSync.pages.InvataUnit_pages
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private Guna.UI2.WinForms.Guna2Button adauga_fisier;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
     }
 }
