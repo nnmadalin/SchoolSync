@@ -416,6 +416,7 @@ namespace SchoolSync.pages
             // 
             // guna2CircleButton1
             // 
+            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderThickness = 2;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;

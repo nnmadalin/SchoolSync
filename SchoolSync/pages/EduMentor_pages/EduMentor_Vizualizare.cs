@@ -48,6 +48,7 @@ namespace SchoolSync.pages.EduMentor_pages
             {
                 label5.Text = task["0"]["title"];
                 label1.Text = task["0"]["created"];
+                label1.Tag = task["0"]["token_user"];
                 label2.Text = task["0"]["category"] + " ● " + task["0"]["data"];
                 label3.Text = task["0"]["reading_time"] + " min";
                 richTextBox1.Rtf = task["0"]["description"];
@@ -305,6 +306,13 @@ namespace SchoolSync.pages.EduMentor_pages
                 navbar_home.page = "EduMentor_editare";
                 navbar_home.use = false;
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            navbar_home.token_page = ((Label)sender).Tag.ToString();
+            navbar_home.page = "Profil_person";
+            navbar_home.use = false;
         }
     }
 }

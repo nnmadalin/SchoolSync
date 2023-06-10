@@ -64,6 +64,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                 }
 
                 label1.Text = task["0"]["created"];
+                label1.Tag = task["0"]["token_user"];
                 label2.Text = task["0"]["category"] + " • " + task["0"]["data"];
                 richTextBox1.Rtf = task["0"]["question"];
                 if (task["0"]["token_user"] == login_signin.login.accounts_user["token"])
@@ -758,6 +759,13 @@ namespace SchoolSync.pages.InvataUnit_pages
                     }
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            navbar_home.token_page = ((Label)sender).Tag.ToString();
+            navbar_home.page = "Profil_person";
+            navbar_home.use = false;
         }
     }
 }

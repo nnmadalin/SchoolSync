@@ -38,6 +38,8 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.label1 = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
@@ -49,14 +51,12 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             this.guna2Panel1.SuspendLayout();
-            this.guna2Panel3.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.guna2Panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -160,12 +160,14 @@ namespace SchoolSync.pages.InvataUnit_pages
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(79, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(12, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = " ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // guna2CirclePictureBox1
             // 
@@ -195,6 +197,29 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Panel1.Size = new System.Drawing.Size(1146, 82);
             this.guna2Panel1.TabIndex = 18;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.AutoSize = true;
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel5.Controls.Add(this.label4);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(23, 49);
+            this.flowLayoutPanel5.MaximumSize = new System.Drawing.Size(1108, 0);
+            this.flowLayoutPanel5.MinimumSize = new System.Drawing.Size(1108, 20);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(1108, 25);
+            this.flowLayoutPanel5.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(214, 25);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Nu sunt fisiere atasate!";
+            this.label4.Visible = false;
             // 
             // label3
             // 
@@ -371,29 +396,6 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2CircleButton1.UseTransparentBackground = true;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(3, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(214, 25);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Nu sunt fisiere atasate!";
-            this.label4.Visible = false;
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.AutoSize = true;
-            this.flowLayoutPanel5.BackColor = System.Drawing.Color.Transparent;
-            this.flowLayoutPanel5.Controls.Add(this.label4);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(23, 49);
-            this.flowLayoutPanel5.MaximumSize = new System.Drawing.Size(1108, 0);
-            this.flowLayoutPanel5.MinimumSize = new System.Drawing.Size(1108, 20);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(1108, 25);
-            this.flowLayoutPanel5.TabIndex = 9;
-            // 
             // InvataUnit_Vizualizare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,10 +414,10 @@ namespace SchoolSync.pages.InvataUnit_pages
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            this.guna2Panel3.ResumeLayout(false);
-            this.guna2Panel3.PerformLayout();
             this.flowLayoutPanel5.ResumeLayout(false);
             this.flowLayoutPanel5.PerformLayout();
+            this.guna2Panel3.ResumeLayout(false);
+            this.guna2Panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }

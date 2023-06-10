@@ -150,6 +150,7 @@ namespace SchoolSync.pages
 
         async void load_panel()
         {
+            schoolsync.show_loading();
             page = "home";
             flowLayoutPanel1.Controls.Clear();
 
@@ -294,7 +295,7 @@ namespace SchoolSync.pages
                     flowLayoutPanel1.Controls.Add(pnl);
                 }
             }
-            
+            schoolsync.hide_loading();
         } 
 
         private void EduMentor_Load(object sender, EventArgs e)

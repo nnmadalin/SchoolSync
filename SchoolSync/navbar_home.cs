@@ -277,6 +277,7 @@ namespace SchoolSync
 
                 var frm = new pages.Profil();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
             }
         }
     }
