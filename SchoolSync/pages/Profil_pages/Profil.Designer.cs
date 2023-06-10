@@ -47,7 +47,6 @@ namespace SchoolSync.pages
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel8 = new Guna.UI2.WinForms.Guna2Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.guna2Separator2 = new Guna.UI2.WinForms.Guna2Separator();
@@ -281,7 +280,7 @@ namespace SchoolSync.pages
             this.flowLayoutPanel2.MaximumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 308);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 275);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // guna2Panel8
@@ -289,7 +288,6 @@ namespace SchoolSync.pages
             this.guna2Panel8.AutoSize = true;
             this.guna2Panel8.BorderRadius = 10;
             this.guna2Panel8.Controls.Add(this.label7);
-            this.guna2Panel8.Controls.Add(this.label11);
             this.guna2Panel8.Controls.Add(this.label5);
             this.guna2Panel8.Controls.Add(this.label6);
             this.guna2Panel8.Controls.Add(this.label9);
@@ -300,7 +298,7 @@ namespace SchoolSync.pages
             this.guna2Panel8.MinimumSize = new System.Drawing.Size(282, 100);
             this.guna2Panel8.Name = "guna2Panel8";
             this.guna2Panel8.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.guna2Panel8.Size = new System.Drawing.Size(282, 196);
+            this.guna2Panel8.Size = new System.Drawing.Size(282, 163);
             this.guna2Panel8.TabIndex = 2;
             // 
             // label7
@@ -309,23 +307,11 @@ namespace SchoolSync.pages
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
-            this.label7.Location = new System.Drawing.Point(16, 157);
+            this.label7.Location = new System.Drawing.Point(16, 124);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(144, 19);
             this.label7.TabIndex = 10;
             this.label7.Text = "Materiale adaugate: 0";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
-            this.label11.Location = new System.Drawing.Point(16, 124);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(129, 19);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Intrebari favorite: 0";
             // 
             // label6
             // 
@@ -508,7 +494,6 @@ namespace SchoolSync.pages
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label5;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel8;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label9;
         private Guna.UI2.WinForms.Guna2Separator guna2Separator2;

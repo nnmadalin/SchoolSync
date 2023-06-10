@@ -196,16 +196,16 @@
     <Compile Include="pages\InvataUnit_pages\InvataUnit_Vizualizare.Designer.cs">
       <DependentUpon>InvataUnit_Vizualizare.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\Profil.cs">
+    <Compile Include="pages\Profil_pages\Profil.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\Profil.Designer.cs">
+    <Compile Include="pages\Profil_pages\Profil.Designer.cs">
       <DependentUpon>Profil.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\Profil_Modifica.cs">
+    <Compile Include="pages\Profil_pages\Profil_Modifica.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\Profil_Modifica.Designer.cs">
+    <Compile Include="pages\Profil_pages\Profil_Modifica.Designer.cs">
       <DependentUpon>Profil_Modifica.cs</DependentUpon>
     </Compile>
     <Compile Include="schoolsync.cs">
@@ -262,10 +262,10 @@
     <EmbeddedResource Include="pages\InvataUnit_pages\InvataUnit_Vizualizare.resx">
       <DependentUpon>InvataUnit_Vizualizare.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\Profil.resx">
+    <EmbeddedResource Include="pages\Profil_pages\Profil.resx">
       <DependentUpon>Profil.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\Profil_Modifica.resx">
+    <EmbeddedResource Include="pages\Profil_pages\Profil_Modifica.resx">
       <DependentUpon>Profil_Modifica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">

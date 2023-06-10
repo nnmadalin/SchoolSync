@@ -23,38 +23,13 @@ namespace SchoolSync
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            multiple_class _class = new multiple_class();
-            string url = "https://schoolsync.nnmadalin.me/api/get.php";
-            var data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("command", "select * from version");
-            dynamic task = await _class.PostRequestAsync(url, data);
-
-            if(task["message"] == "success")
-            {
-                if(task["0"]["required_version_app"] == version)
-                {
-                    var frm = new login_signin.login();
-                    guna2Panel2.Controls.Add(frm);
-                    frm.Show();
-                    frm.Location = new Point(0, 0);
-                    GC.Collect();
-                }
-                else
-                {
-                    guna2MessageDialog1.Caption = "Versiune trecuta!";
-                    guna2MessageDialog1.Text = "Ai o versiune prea veche. Te rog sa instalezi versiunea noua! \r\nschoolsync.nnmadalin.me \r\nVersiune actuala: " + version + " ;Versiune necesara: " + task["0"]["required_version_app"];
-                    guna2MessageDialog1.Show();
-                    Application.Exit();
-                }
-            }
-            else
-            {
-                guna2MessageDialog1.Caption = "Eroare!";
-                guna2MessageDialog1.Text = "Ceva nu a mers bine! Te rog sa redeschizi aplicatia!";
-                guna2MessageDialog1.Show();
-                Application.Exit();
-            }
+            
+            var frm = new login_signin.login();
+            guna2Panel2.Controls.Add(frm);
+            frm.Show();
+            frm.Location = new Point(0, 0);
+            GC.Collect();
+                
         }
 
         public static void show_loading()

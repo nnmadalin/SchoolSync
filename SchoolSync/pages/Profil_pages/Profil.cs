@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 
@@ -18,8 +18,6 @@ namespace SchoolSync.pages
             InitializeComponent();
         }
 
-        public static string token = "";
-        public static string page = "";
 
         async void load_profil()
         {
@@ -27,14 +25,20 @@ namespace SchoolSync.pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from accounts where token = '{0}'", token));
+            data.Add("command", "select * from accounts where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                { "token", navbar_home.token_page}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
             schoolsync.show_loading();
 
             dynamic task = await _class.PostRequestAsync_norefresh(url, data);
             if(task["message"] == "success")
             {
-                guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token"] + ".png");
-                guna2PictureBox1.Image = await _class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userbackground_" + task["0"]["token"] + ".png");
+                //guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token"] + ".png");
+                //guna2PictureBox1.Image = await _class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userbackground_" + task["0"]["token"] + ".png");
                 label1.Text = task["0"]["full_name"];
                 label2.Text = "@" + task["0"]["username"];
                 label5.Text = "Ultima conectare: " + task["0"]["last_login"];
@@ -69,7 +73,12 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from invataunit where token_user = '{0}'", token));
+            data.Add("command", "select * from invataunit where token_user = ?");
+             param = new Dictionary<string, string>()
+            {
+                { "token_user", navbar_home.token_page}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
             task = await _class.PostRequestAsync_norefresh(url, data);
             JObject jb = task;
             if (task["message"] == "success")
@@ -80,19 +89,12 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from accounts where token = '{0}'", token));
-            task = await _class.PostRequestAsync_norefresh(url, data);
-            if (task["message"] == "success")
+            data.Add("command", "select * from edumentor where token_user = ?");
+            param = new Dictionary<string, string>()
             {
-                string json = task["0"]["favorite_invataunit"];
-                string[] spjson = json.Split(';');
-                label11.Text = "Intrebari favorite: " + (spjson.Length - 1).ToString();
-            }
-
-            url = "https://schoolsync.nnmadalin.me/api/get.php";
-            data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("sql", string.Format("select * from edumentor where token_user = '{0}'", token));
+                { "token_user", navbar_home.token_page}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
             task = await _class.PostRequestAsync_norefresh(url, data);
             jb = task;
             if (task["message"] == "success")
@@ -105,11 +107,10 @@ namespace SchoolSync.pages
 
         private async void Profil_Load(object sender, EventArgs e)
         {
-            if (page == "home")
+            if (navbar_home.page == "Profil")
             {
                 guna2CircleButton1.Visible = false;
                 guna2CircleButton2.Visible = true;
-                token = login_signin.login.accounts_user["token"];
             }
             load_profil();
             

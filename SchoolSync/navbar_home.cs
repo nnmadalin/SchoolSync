@@ -55,22 +55,9 @@ namespace SchoolSync
 
         private void guna2Button5_Click(object sender, EventArgs e)
         {
-            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
-            var label = panel.Controls["label1"];
-            label.Text = "SchoolSync | Profil";
-            GC.Collect();
-
-            
-            var frm = new pages.Profil();           
-            pages.Profil.token = login_signin.login.accounts_user["token"];
-            pages.Profil.page = "home";
-            guna2Panel2.Controls.Clear();
-            guna2Panel2.Controls.Add(frm);
-            frm.Show();
-
-            background_color_btn();
-            guna2Button5.FillColor = Color.FromArgb(66, 66, 66);
+            navbar_home.token_page = login_signin.login.accounts_user["token"];
+            navbar_home.use = false;
+            navbar_home.page = "Profil";
         }
 
         private void guna2Button6_Click(object sender, EventArgs e)
@@ -107,6 +94,7 @@ namespace SchoolSync
                 background_color_btn();
                 guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
             }
+
             else if (page == "EduMentor" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -261,6 +249,34 @@ namespace SchoolSync
                 var frm = new pages.InvataUnit_pages.InvataUnit_Vizualizare();
                 guna2Panel2.Controls.Add(frm);
 
+            }
+
+            else if(page == "Profil" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | Profil";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.Profil();
+                guna2Panel2.Controls.Add(frm);
+            }
+            else if (page == "Profil_person" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | Profil";
+                GC.Collect();
+
+                use = true;
+
+                var frm = new pages.Profil();
+                guna2Panel2.Controls.Add(frm);
             }
         }
     }

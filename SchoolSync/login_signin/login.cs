@@ -31,13 +31,43 @@ namespace SchoolSync.login_signin
             GC.Collect();
         }
 
-        private void login_Load(object sender, EventArgs e)
+        private async void login_Load(object sender, EventArgs e)
         {
             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
             var label = panel.Controls["label1"];
             label.Text = "SchoolSync | Autentificare";
             GC.Collect();
+
+            schoolsync.show_loading();
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from version");
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                if (task["0"]["required_version_app"] == schoolsync.version)
+                {
+                    ; ;
+                }
+                else
+                {
+                    guna2MessageDialog1.Caption = "Versiune trecuta!";
+                    guna2MessageDialog1.Text = "Ai o versiune prea veche. Te rog sa instalezi versiunea noua! \r\nschoolsync.nnmadalin.me \r\nVersiune actuala: " + schoolsync.version + " ;Versiune necesara: " + task["0"]["required_version_app"];
+                    guna2MessageDialog1.Show();
+                    Application.Exit();
+                }
+            }
+            else
+            {
+                guna2MessageDialog1.Caption = "Eroare!";
+                guna2MessageDialog1.Text = "Ceva nu a mers bine! Te rog sa redeschizi aplicatia!";
+                guna2MessageDialog1.Show();
+                Application.Exit();
+            }
 
             if (Properties.Settings.Default.Data_account != "")
             {
@@ -55,14 +85,15 @@ namespace SchoolSync.login_signin
                     guna2TextBox2.Text = guna2TextBox1.Text = "";
                     Properties.Settings.Default.Data_account = "";
                     Properties.Settings.Default.Save();
+                    schoolsync.hide_loading();
                 }
                 
                 if (ok == true)
                 {
                     send_login();
-                }
-                
+                }                
             }
+            
 
         }
 
