@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Windows.Forms;
@@ -21,6 +21,25 @@ namespace SchoolSync.pages.EduMentor_pages
         {
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
+        }
+        async Task<string> get_token(string username)
+        {
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from accounts where username = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                { "username",username}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
+            dynamic task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+                return Convert.ToString(task["0"]["token"]);
+            else
+                return "-1";
         }
 
         private async void EduMentor_Vizualizare_Load(object sender, EventArgs e)
@@ -68,6 +87,8 @@ namespace SchoolSync.pages.EduMentor_pages
                 string file = task["0"]["files"];
                 string[] file_split = file.Split(';');
 
+                string token_user = task["0"]["token_user"];
+
                 for (int i = 0; i < file_split.Length - 1; i++)
                 {
                     url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -76,7 +97,7 @@ namespace SchoolSync.pages.EduMentor_pages
                     data.Add("command", "select * from files where token_user = ? and token = ?");
                     param = new Dictionary<string, string>()
                     {
-                        {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                        {"token_user", token_user},
                         {"token", file_split[i]}
                     };
                     data.Add("params", JsonConvert.SerializeObject(param));
@@ -146,7 +167,7 @@ namespace SchoolSync.pages.EduMentor_pages
 
                             flp_files_panel.Controls.Add(panel_file_btn);
 
-                            panel_file_btn.Tag = Convert.ToString(login_signin.login.accounts_user["token"]) + "/" + task["0"]["token"] + "/" + task["0"]["name"];
+                            panel_file_btn.Tag = token_user + "/" + task["0"]["token"] + "/" + task["0"]["name"];
                             panel_file_btn.Click += deschide_fisier_buton;
                         }
                         catch { };
@@ -220,8 +241,6 @@ namespace SchoolSync.pages.EduMentor_pages
                 if (task["message"] == "success")
                 {
                     string fisiere_value = task["0"]["files"];
-
-
                     url = "https://schoolsync.nnmadalin.me/api/delete.php";
                     data = new Dictionary<string, string>();
                     data.Add("token", schoolsync.token);
@@ -313,6 +332,11 @@ namespace SchoolSync.pages.EduMentor_pages
             navbar_home.token_page = ((Label)sender).Tag.ToString();
             navbar_home.page = "Profil_person";
             navbar_home.use = false;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

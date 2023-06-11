@@ -33,6 +33,7 @@ namespace SchoolSync.login_signin
 
         private async void login_Load(object sender, EventArgs e)
         {
+            
             schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
             var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
             var label = panel.Controls["label1"];
@@ -68,7 +69,7 @@ namespace SchoolSync.login_signin
                 guna2MessageDialog1.Show();
                 Application.Exit();
             }
-
+            
             if (Properties.Settings.Default.Data_account != "")
             {
                 guna2ToggleSwitch1.Checked = true;
@@ -91,9 +92,13 @@ namespace SchoolSync.login_signin
                 if (ok == true)
                 {
                     send_login();
-                }                
+                }
+                else
+                    schoolsync.hide_loading();
             }
-            
+            else
+                schoolsync.hide_loading();
+
 
         }
 

@@ -283,6 +283,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.panel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
             this.panel1.Size = new System.Drawing.Size(1192, 690);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // guna2Panel3
             // 

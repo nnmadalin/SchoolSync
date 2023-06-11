@@ -96,6 +96,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button2
             // 
+            this.guna2Button2.Animated = true;
             this.guna2Button2.BorderRadius = 10;
             this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -113,6 +114,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button1
             // 
+            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 10;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -458,9 +460,11 @@ namespace SchoolSync.pages
             // 
             // guna2CircleButton1
             // 
+            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
             this.guna2CircleButton1.BorderThickness = 2;
+            this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -476,6 +480,7 @@ namespace SchoolSync.pages
             this.guna2CircleButton1.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton1.TabIndex = 7;
             this.guna2CircleButton1.UseTransparentBackground = true;
+            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
             // Profil_Modifica
             // 

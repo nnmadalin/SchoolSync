@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Sockets;
 
 namespace SchoolSync
 {
@@ -75,8 +75,9 @@ namespace SchoolSync
         public static bool use = true;
         public static string page = "", token_page = "";
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private async void timer1_Tick(object sender, EventArgs e)
         {
+
             if (page == "Home" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -251,7 +252,7 @@ namespace SchoolSync
 
             }
 
-            else if(page == "Profil" && use == false)
+            else if (page == "Profil" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
@@ -279,6 +280,8 @@ namespace SchoolSync
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
+
+            
         }
     }
 }
