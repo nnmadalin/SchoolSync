@@ -166,6 +166,12 @@
     <Compile Include="pages\EduMentor_pages\EduMentor_Adauga.Designer.cs">
       <DependentUpon>EduMentor_Adauga.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EduMentor_pages\EduMentor_Cod.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduMentor_pages\EduMentor_Cod.Designer.cs">
+      <DependentUpon>EduMentor_Cod.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EduMentor_pages\EduMentor_Vizualizare.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -246,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduMentor_pages\EduMentor_Adauga.resx">
       <DependentUpon>EduMentor_Adauga.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduMentor_pages\EduMentor_Cod.resx">
+      <DependentUpon>EduMentor_Cod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduMentor_pages\EduMentor_Vizualizare.resx">
       <DependentUpon>EduMentor_Vizualizare.cs</DependentUpon>
@@ -365,6 +374,9 @@
     <None Include="Resources\format_bold_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\expand_more_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\expand_less_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\visibility_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\file_copy_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\add_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

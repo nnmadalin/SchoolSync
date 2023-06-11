@@ -165,7 +165,9 @@ namespace SchoolSync.pages
                 if (guna2Button1.BorderThickness == 2)
                         data["command"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
                 if (guna2Button18.BorderThickness == 2)
-                    data["command"] += " where favourites like '%" + login_signin.login.accounts_user["token"] + "%'";
+                    data["command"] += " where favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1";
+                else if (guna2Button1.BorderThickness != 2)
+                    data["command"] += " where is_visible = 1";
                 data["command"] += " order by data DESC";
             }
             else
@@ -175,7 +177,9 @@ namespace SchoolSync.pages
                 if (guna2Button1.BorderThickness == 2)
                     data["command"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
                 if (guna2Button18.BorderThickness == 2)
-                    data["command"] += " and favourites like '%" + login_signin.login.accounts_user["token"] + "%'";
+                    data["command"] += " and favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1";
+                else if (guna2Button1.BorderThickness != 2)
+                    data["command"] += " and is_visible = 1";
                 data["command"] += " order by data DESC";
             }
 
@@ -315,6 +319,7 @@ namespace SchoolSync.pages
             guna2Button1.BorderThickness = 0;
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 2;
+            guna2Button3.BorderThickness = 0;
             load_panel();
         }
 
@@ -323,12 +328,16 @@ namespace SchoolSync.pages
             guna2Button1.BorderThickness = 2;
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 0;
+            guna2Button3.BorderThickness = 0;
             load_panel();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+        
 
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            navbar_home.use = false;
+            navbar_home.page = "EduMentor_cod";
         }
 
         private void guna2Button18_Click(object sender, EventArgs e)
@@ -336,6 +345,7 @@ namespace SchoolSync.pages
             guna2Button1.BorderThickness = 0;
             guna2Button18.BorderThickness = 2;
             guna2Button2.BorderThickness = 0;
+            guna2Button3.BorderThickness = 0;
             load_panel();
         }
 

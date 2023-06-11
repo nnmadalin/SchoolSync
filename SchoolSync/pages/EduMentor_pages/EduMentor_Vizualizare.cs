@@ -72,6 +72,7 @@ namespace SchoolSync.pages.EduMentor_pages
                 label3.Text = task["0"]["reading_time"] + " min";
                 richTextBox1.Rtf = task["0"]["description"];
                 guna2Panel3.FillColor = task["0"]["color"];
+                guna2CircleButton5.Tag = task["0"]["is_visible"];
                 
                 string[] split_fav = Convert.ToString(task["0"]["favourites"]).Split(';');
                 label4.Text = (split_fav.Length - 1).ToString();
@@ -80,6 +81,7 @@ namespace SchoolSync.pages.EduMentor_pages
                 {
                     guna2CircleButton2.Visible = true;
                     guna2CircleButton1.Visible = true;
+                    guna2CircleButton5.Visible = true;
                 }
 
                 //t_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");                
@@ -337,6 +339,79 @@ namespace SchoolSync.pages.EduMentor_pages
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void guna2CircleButton4_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(navbar_home.token_page);
+            var frm = new notification.success();
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            panel.Controls.Add(frm);
+
+            notification.success.message = "Token material copiat cu succes!";
+            frm.BringToFront();
+        }
+
+        private async void guna2CircleButton5_Click(object sender, EventArgs e)
+        {
+            bool visibil = false;
+            if (guna2CircleButton5.Tag.ToString() == "0")
+            {
+                visibil = true;
+                guna2CircleButton5.Tag = "1";
+            }
+            else
+                guna2CircleButton5.Tag = "0";
+
+            multiple_class _Class = new multiple_class();
+            
+            string url = "https://schoolsync.nnmadalin.me/api/put.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "update edumentor set is_visible = ? where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"is_visible", guna2CircleButton5.Tag.ToString()},
+                {"token", navbar_home.token_page}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
+            dynamic task = await _Class.PostRequestAsync(url, data);
+           
+            if(task["message"] == "update success")
+            {
+                if(visibil == true)
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+
+                    notification.success.message = "Material vizibil!";
+                    frm.BringToFront();
+                }
+                else
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+
+                    notification.success.message = "Material invizibil!";
+                    frm.BringToFront();
+                }
+            }
+            else
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+
+                notification.error.message = "Ceva nu a mers bine, mai incearca!";
+                frm.BringToFront();
+            }
         }
     }
 }

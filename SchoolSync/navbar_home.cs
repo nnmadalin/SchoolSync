@@ -130,6 +130,20 @@ namespace SchoolSync
                 background_color_btn();
                 guna2Button2.FillColor = Color.FromArgb(66, 66, 66);
             }
+            else if (page == "EduMentor_cod" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduMentor - Vizualizare cod";
+                GC.Collect();
+
+                use = true;
+
+                var frm = new pages.EduMentor_pages.EduMentor_Cod();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
             else if (page == "EduMentor_vizualizare" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -265,6 +279,8 @@ namespace SchoolSync
 
                 var frm = new pages.Profil();
                 guna2Panel2.Controls.Add(frm);
+                background_color_btn();
+                guna2Button5.FillColor = Color.FromArgb(66, 66, 66);
             }
             else if (page == "Profil_person" && use == false)
             {
