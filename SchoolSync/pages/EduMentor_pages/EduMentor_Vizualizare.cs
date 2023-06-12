@@ -83,6 +83,26 @@ namespace SchoolSync.pages.EduMentor_pages
                     guna2CircleButton1.Visible = true;
                     guna2CircleButton5.Visible = true;
                 }
+                else if(login_signin.login.accounts_user["invataunit_moderator"] == "1")
+                {
+                    guna2Button1.Visible = true;
+                    guna2Button1.Tag = task["0"]["is_deleted"];
+                }
+                else if(login_signin.login.accounts_user["administrator_add"] == "1")
+                {
+                    guna2Button1.Visible = true;
+                    guna2Button1.Tag = task["0"]["is_deleted"];
+                }
+
+                if(task["0"]["is_deleted"] == "1")
+                {
+                    var frm = new notification.warning();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.warning.message = "Materialul a fost dezactivat de un moderator \r\n (" + task["0"]["is_deleted_by"] + ")!";
+                    frm.BringToFront();
+                }
 
                 //t_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");                
 
@@ -215,12 +235,14 @@ namespace SchoolSync.pages.EduMentor_pages
 
         private async void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            string token = navbar_home.token_page;
+            
+
             guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
             guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
             guna2MessageDialog1.Caption = "Sterge material!";
             guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi materialul?";
             DialogResult dr = guna2MessageDialog1.Show();
+            string token = navbar_home.token_page;
             if (dr == DialogResult.Yes)
             {
                 schoolsync.show_loading();
@@ -254,7 +276,7 @@ namespace SchoolSync.pages.EduMentor_pages
                     };
                     data.Add("params", JsonConvert.SerializeObject(param));
 
-                    task = await _Class.PostRequestAsync(url, data);                    
+                    task = await _Class.PostRequestAsync(url, data);
 
                     string token_app = schoolsync.token;
 
@@ -280,7 +302,7 @@ namespace SchoolSync.pages.EduMentor_pages
                                 {"token", split_1[i]}
                             };
                             data.Add("params", JsonConvert.SerializeObject(param));
-                            task = await _Class.PostRequestAsync(url, data);                           
+                            task = await _Class.PostRequestAsync(url, data);
                         }
 
                         var frm = new notification.success();
@@ -354,7 +376,7 @@ namespace SchoolSync.pages.EduMentor_pages
         }
 
         private async void guna2CircleButton5_Click(object sender, EventArgs e)
-        {
+        {            
             bool visibil = false;
             if (guna2CircleButton5.Tag.ToString() == "0")
             {
@@ -365,7 +387,7 @@ namespace SchoolSync.pages.EduMentor_pages
                 guna2CircleButton5.Tag = "0";
 
             multiple_class _Class = new multiple_class();
-            
+
             string url = "https://schoolsync.nnmadalin.me/api/put.php";
             var data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
@@ -378,10 +400,10 @@ namespace SchoolSync.pages.EduMentor_pages
             };
             data.Add("params", JsonConvert.SerializeObject(param));
             dynamic task = await _Class.PostRequestAsync(url, data);
-           
-            if(task["message"] == "update success")
+
+            if (task["message"] == "update success")
             {
-                if(visibil == true)
+                if (visibil == true)
                 {
                     var frm = new notification.success();
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -412,6 +434,101 @@ namespace SchoolSync.pages.EduMentor_pages
                 notification.error.message = "Ceva nu a mers bine, mai incearca!";
                 frm.BringToFront();
             }
+
+        }
+
+        private async void guna2Button1_Click(object sender, EventArgs e)
+        {            
+            string token = navbar_home.token_page;
+
+            guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
+            if (guna2Button1.Tag.ToString() == "0")
+            {
+                guna2MessageDialog1.Caption = "Ascunde material ADMIN!";
+                guna2MessageDialog1.Text = "Esti sigur ca vrei sa ascunzi acest material?";
+                guna2Button1.Tag = "1";
+            }
+            else
+            {
+                guna2MessageDialog1.Caption = "Arata material ADMIN!";
+                guna2MessageDialog1.Text = "Esti sigur ca vrei sa arati acest material?";
+                guna2Button1.Tag = "0";
+            }
+            DialogResult dr = guna2MessageDialog1.Show();
+            if (dr == DialogResult.Yes)
+            {
+                schoolsync.show_loading();
+
+                multiple_class _Class = new multiple_class();
+
+                string url = "https://schoolsync.nnmadalin.me/api/put.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+
+                if (guna2Button1.Tag.ToString() == "1")
+                {
+                    data.Add("command", "update edumentor set is_deleted = 1, is_deleted_by = ? where token = ?");
+                    var param = new Dictionary<string, string>()
+                    {
+                        {"is_deleted_by", Convert.ToString(login_signin.login.accounts_user["username"])},
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    dynamic task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Material ascuns cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+                else
+                {
+                    data.Add("command", "update edumentor set is_deleted = 0 where token = ?");
+                    var param = new Dictionary<string, string>()
+                    {
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    dynamic task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Material vizibil cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+            }
+            schoolsync.hide_loading();
         }
     }
 }

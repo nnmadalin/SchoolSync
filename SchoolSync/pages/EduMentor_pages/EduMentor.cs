@@ -19,7 +19,7 @@ namespace SchoolSync.pages
             InitializeComponent();
         }
 
-        string page = "", token_first_material = "", sort = "";
+        string page = "", token_first_material = "", sort = "", sort_text = "";
 
         public static Image incarca_imagine_specifica(string str)
         {
@@ -162,24 +162,37 @@ namespace SchoolSync.pages
             if (sort.Trim() == "" || sort == "Toate materiile")
             {
                 data.Add("command", string.Format("select * from edumentor"));
-                if (guna2Button1.BorderThickness == 2)
+                if (guna2Button4.BorderThickness == 2)
+                {
+                    data["command"] += " where is_deleted = 1";
+                }
+                else
+                {
+                    if (guna2Button1.BorderThickness == 2)
                         data["command"] += " where created = '" + login_signin.login.accounts_user["username"] + "'";
-                if (guna2Button18.BorderThickness == 2)
-                    data["command"] += " where favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1";
-                else if (guna2Button1.BorderThickness != 2)
-                    data["command"] += " where is_visible = 1";
+                    if (guna2Button18.BorderThickness == 2)
+                        data["command"] += " where favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1 and is_deleted = 0";
+                    else if (guna2Button1.BorderThickness != 2)
+                        data["command"] += " where is_visible = 1 and is_deleted = 0";
+                }
                 data["command"] += " order by data DESC";
             }
             else
             {
                 data.Add("command", string.Format("select * from edumentor where category = '{0}'", sort));
-
-                if (guna2Button1.BorderThickness == 2)
-                    data["command"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
-                if (guna2Button18.BorderThickness == 2)
-                    data["command"] += " and favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1";
-                else if (guna2Button1.BorderThickness != 2)
-                    data["command"] += " and is_visible = 1";
+                if (guna2Button4.BorderThickness == 2)
+                {
+                    data["command"] += " is_deleted = 1";
+                }
+                else
+                {
+                    if (guna2Button1.BorderThickness == 2)
+                        data["command"] += " and created = '" + login_signin.login.accounts_user["username"] + "'";
+                    if (guna2Button18.BorderThickness == 2)
+                        data["command"] += " and favourites like '%" + login_signin.login.accounts_user["token"] + "%' and is_visible = 1 and is_deleted = 0";
+                    else if (guna2Button1.BorderThickness != 2)
+                        data["command"] += " and is_visible = 1 and is_deleted = 0";
+                }
                 data["command"] += " order by data DESC";
             }
 
@@ -306,6 +319,15 @@ namespace SchoolSync.pages
         {
             load_panel();
             page = "home";
+
+            if(login_signin.login.accounts_user["invataunit_moderator"] == "1")
+            {
+                guna2Button4.Visible = true;
+            }
+            else if(login_signin.login.accounts_user["administrator_app"] == "1")
+            {
+                guna2Button4.Visible = true;
+            }
         }       
         
         private void adauga_material(object sender, EventArgs e)
@@ -316,10 +338,12 @@ namespace SchoolSync.pages
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
+            guna2TextBox1.Clear();
             guna2Button1.BorderThickness = 0;
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 2;
             guna2Button3.BorderThickness = 0;
+            guna2Button4.BorderThickness = 0;
             load_panel();
         }
 
@@ -329,6 +353,7 @@ namespace SchoolSync.pages
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 0;
             guna2Button3.BorderThickness = 0;
+            guna2Button4.BorderThickness = 0;
             load_panel();
         }
 
@@ -340,12 +365,28 @@ namespace SchoolSync.pages
             navbar_home.page = "EduMentor_cod";
         }
 
+        private void guna2Button4_Click(object sender, EventArgs e)
+        {
+            guna2Button1.BorderThickness = 0;
+            guna2Button18.BorderThickness = 0;
+            guna2Button2.BorderThickness = 0;
+            guna2Button3.BorderThickness = 0;
+            guna2Button4.BorderThickness = 2;
+            load_panel();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void guna2Button18_Click(object sender, EventArgs e)
         {
             guna2Button1.BorderThickness = 0;
             guna2Button18.BorderThickness = 2;
             guna2Button2.BorderThickness = 0;
             guna2Button3.BorderThickness = 0;
+            guna2Button4.BorderThickness = 0;
             load_panel();
         }
 

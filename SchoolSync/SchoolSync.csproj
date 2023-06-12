@@ -377,6 +377,7 @@
     <None Include="Resources\visibility_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\file_copy_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\add_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\admin_panel_settings_FILL1_wght700_GRAD0_opsz48.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

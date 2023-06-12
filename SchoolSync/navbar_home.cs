@@ -19,8 +19,20 @@ namespace SchoolSync
 
         private void home_Load(object sender, EventArgs e)
         {
-            navbar_home.use = false;
-            navbar_home.page = "Home";
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+            var label = panel.Controls["label1"];
+            label.Text = "SchoolSync | Acasa";
+            GC.Collect();
+
+            use = true;
+            guna2Panel2.Controls.Clear();
+
+            var frm = new pages.Home();
+            guna2Panel2.Controls.Add(frm);
+
+            background_color_btn();
+            guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
         }
 
         void background_color_btn()
@@ -75,7 +87,7 @@ namespace SchoolSync
         public static bool use = true;
         public static string page = "", token_page = "";
 
-        private async void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
 
             if (page == "Home" && use == false)

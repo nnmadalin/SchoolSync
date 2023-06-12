@@ -29,7 +29,7 @@ namespace SchoolSync.pages.EduMentor_pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             var data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", "select * from edumentor where token = ?");
+            data.Add("command", "select * from edumentor where token = ? and is_deleted = 0");
             var param = new Dictionary<string, string>()
                 {
                     {"token", guna2TextBox1.Text}
