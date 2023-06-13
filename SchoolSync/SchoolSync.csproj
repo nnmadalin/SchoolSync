@@ -178,6 +178,18 @@
     <Compile Include="pages\EduMentor_pages\EduMentor_Vizualizare.Designer.cs">
       <DependentUpon>EduMentor_Vizualizare.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\FlowTalk_pages\FlowTalk.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\FlowTalk_pages\FlowTalk.Designer.cs">
+      <DependentUpon>FlowTalk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\FlowTalk_pages\FlowTalk_Adauga.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\FlowTalk_pages\FlowTalk_Adauga.Designer.cs">
+      <DependentUpon>FlowTalk_Adauga.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -258,6 +270,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduMentor_pages\EduMentor_Vizualizare.resx">
       <DependentUpon>EduMentor_Vizualizare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\FlowTalk_pages\FlowTalk.resx">
+      <DependentUpon>FlowTalk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\FlowTalk_pages\FlowTalk_Adauga.resx">
+      <DependentUpon>FlowTalk_Adauga.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -378,6 +396,12 @@
     <None Include="Resources\file_copy_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\add_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\admin_panel_settings_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\edit_square_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\download %2826%29.png" />
+    <None Include="Resources\group_FILL1_wght700_GRAD0_opsz48.png" />
+    <None Include="Resources\download %2827%29.png" />
+    <None Include="Resources\download %2828%29.png" />
+    <None Include="Resources\download %2829%29.png" />
     <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />

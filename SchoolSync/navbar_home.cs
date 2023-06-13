@@ -42,7 +42,7 @@ namespace SchoolSync
             guna2Button3.FillColor = Color.Transparent;
             guna2Button5.FillColor = Color.Transparent;
             guna2Button6.FillColor = Color.Transparent;
-        }
+        }        
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
@@ -86,6 +86,12 @@ namespace SchoolSync
 
         public static bool use = true;
         public static string page = "", token_page = "";
+
+        private void guna2Button4_Click(object sender, EventArgs e)
+        {
+            navbar_home.use = false;
+            navbar_home.page = "FlowTalk";
+        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -276,6 +282,35 @@ namespace SchoolSync
                 var frm = new pages.InvataUnit_pages.InvataUnit_Vizualizare();
                 guna2Panel2.Controls.Add(frm);
 
+            }
+            
+            else if(page == "FlowTalk" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | FlowTalk";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.FlowTalk_pages.FlowTalk();
+                guna2Panel2.Controls.Add(frm);
+            }
+            else if (page == "FlowTalk_adauga" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | FlowTalk";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.FlowTalk_pages.FlowTalk_Adauga();
+                guna2Panel2.Controls.Add(frm);
             }
 
             else if (page == "Profil" && use == false)

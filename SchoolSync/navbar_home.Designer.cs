@@ -31,14 +31,15 @@ namespace SchoolSync
         {
             this.components = new System.ComponentModel.Container();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button5 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +48,7 @@ namespace SchoolSync
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 10;
+            this.guna2Panel1.Controls.Add(this.guna2Button4);
             this.guna2Panel1.Controls.Add(this.guna2Button6);
             this.guna2Panel1.Controls.Add(this.guna2Button5);
             this.guna2Panel1.Controls.Add(this.guna2Button3);
@@ -62,6 +64,38 @@ namespace SchoolSync
             this.guna2Panel1.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0, 0, 10, 10);
             this.guna2Panel1.Size = new System.Drawing.Size(109, 655);
             this.guna2Panel1.TabIndex = 1;
+            // 
+            // guna2Panel2
+            // 
+            this.guna2Panel2.Location = new System.Drawing.Point(148, 0);
+            this.guna2Panel2.Name = "guna2Panel2";
+            this.guna2Panel2.Size = new System.Drawing.Size(1192, 690);
+            this.guna2Panel2.TabIndex = 2;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // guna2Button4
+            // 
+            this.guna2Button4.BorderRadius = 10;
+            this.guna2Button4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button4.FillColor = System.Drawing.Color.Transparent;
+            this.guna2Button4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button4.ForeColor = System.Drawing.Color.White;
+            this.guna2Button4.Image = global::SchoolSync.Properties.Resources.download__28_;
+            this.guna2Button4.ImageSize = new System.Drawing.Size(35, 35);
+            this.guna2Button4.Location = new System.Drawing.Point(19, 330);
+            this.guna2Button4.Name = "guna2Button4";
+            this.guna2Button4.Size = new System.Drawing.Size(70, 45);
+            this.guna2Button4.TabIndex = 7;
+            this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
             // 
             // guna2Button6
             // 
@@ -95,7 +129,7 @@ namespace SchoolSync
             this.guna2Button5.ForeColor = System.Drawing.Color.White;
             this.guna2Button5.Image = global::SchoolSync.Properties.Resources.my_account;
             this.guna2Button5.ImageSize = new System.Drawing.Size(35, 35);
-            this.guna2Button5.Location = new System.Drawing.Point(19, 321);
+            this.guna2Button5.Location = new System.Drawing.Point(19, 394);
             this.guna2Button5.Name = "guna2Button5";
             this.guna2Button5.Size = new System.Drawing.Size(70, 45);
             this.guna2Button5.TabIndex = 6;
@@ -171,19 +205,6 @@ namespace SchoolSync
             this.guna2PictureBox1.TabStop = false;
             this.guna2PictureBox1.UseTransparentBackground = true;
             // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.Location = new System.Drawing.Point(148, 0);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(1192, 690);
-            this.guna2Panel2.TabIndex = 2;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // navbar_home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -210,5 +231,6 @@ namespace SchoolSync
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         public Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Timer timer1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button4;
     }
 }

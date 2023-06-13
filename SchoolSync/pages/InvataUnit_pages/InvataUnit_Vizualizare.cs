@@ -599,13 +599,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                     _ = await _class.new_UploadFileAsync(param, control.Tag.ToString());
                     files += (token_file + ";");
-                }
-
-                var param3 = new Dictionary<string, string>()
-                {
-                    {"answer", guna2TextBox1.Text},
-                    {"files", files}
-                };
+                }               
 
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
                 var data = new Dictionary<string, string>();

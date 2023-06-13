@@ -273,6 +273,46 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap download__26_ {
+            get {
+                object obj = ResourceManager.GetObject("download__26_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap download__27_ {
+            get {
+                object obj = ResourceManager.GetObject("download__27_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap download__28_ {
+            get {
+                object obj = ResourceManager.GetObject("download__28_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap download__29_ {
+            get {
+                object obj = ResourceManager.GetObject("download__29_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap download_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("download_FILL1_wght700_GRAD0_opsz48", resourceCulture);
@@ -296,6 +336,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap edit_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("edit_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap edit_square_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("edit_square_FILL1_wght700_GRAD0_opsz48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -426,6 +476,16 @@ namespace SchoolSync.Properties {
         public static System.Drawing.Bitmap graphic_eq_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("graphic_eq_FILL1_wght700_GRAD0_opsz48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap group_FILL1_wght700_GRAD0_opsz48 {
+            get {
+                object obj = ResourceManager.GetObject("group_FILL1_wght700_GRAD0_opsz48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
