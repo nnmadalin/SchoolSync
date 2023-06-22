@@ -174,7 +174,9 @@ namespace SchoolSync.pages.FlowTalk_pages
             // 
             // guna2Button1
             // 
+            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 5;
+            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -188,9 +190,11 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button1.Size = new System.Drawing.Size(36, 36);
             this.guna2Button1.TabIndex = 3;
             this.guna2Button1.Visible = false;
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2TextBox1
             // 
+            this.guna2TextBox1.Animated = true;
             this.guna2TextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.guna2TextBox1.BorderRadius = 5;
             this.guna2TextBox1.BorderThickness = 2;
@@ -214,6 +218,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2TextBox1.Size = new System.Drawing.Size(788, 36);
             this.guna2TextBox1.TabIndex = 2;
             this.guna2TextBox1.Visible = false;
+            this.guna2TextBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.guna2TextBox1_KeyDown);
             // 
             // flowLayoutPanel2
             // 
@@ -239,6 +244,8 @@ namespace SchoolSync.pages.FlowTalk_pages
             // 
             // guna2CircleButton3
             // 
+            this.guna2CircleButton3.Animated = true;
+            this.guna2CircleButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -256,6 +263,8 @@ namespace SchoolSync.pages.FlowTalk_pages
             // 
             // guna2CircleButton2
             // 
+            this.guna2CircleButton2.Animated = true;
+            this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -273,6 +282,8 @@ namespace SchoolSync.pages.FlowTalk_pages
             // 
             // guna2CircleButton1
             // 
+            this.guna2CircleButton1.Animated = true;
+            this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -298,7 +309,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(645, 24);
             this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
+            this.label4.Text = "_";
             // 
             // guna2CirclePictureBox2
             // 
@@ -316,11 +327,13 @@ namespace SchoolSync.pages.FlowTalk_pages
             // load_tab_message
             // 
             this.load_tab_message.Enabled = true;
+            this.load_tab_message.Interval = 1000;
             this.load_tab_message.Tick += new System.EventHandler(this.load_tab_message_Tick);
             // 
             // load_message
             // 
             this.load_message.Enabled = true;
+            this.load_message.Interval = 500;
             this.load_message.Tick += new System.EventHandler(this.load_message_Tick);
             // 
             // FlowTalk

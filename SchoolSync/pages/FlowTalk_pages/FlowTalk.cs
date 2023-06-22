@@ -26,6 +26,7 @@ namespace SchoolSync.pages.FlowTalk_pages
         }
 
         string token_message = "", count_tab = "", count_message = "";
+        bool use = false;
 
         private async void click_message(object sender, EventArgs e)
         {
@@ -39,104 +40,108 @@ namespace SchoolSync.pages.FlowTalk_pages
                 guna2Button1.Visible = true;
             }
 
-            token_message = ctrl.Tag.ToString();
-            count_message = "";
+            token_message = ctrl.Tag.ToString();            
+            use = true;
             flowLayoutPanel2.Tag = token_message;
             flowLayoutPanel2.Controls.Clear();
         }
 
         async void load_tab()
-        {           
-            multiple_class _class = new multiple_class();
-            string url = "https://schoolsync.nnmadalin.me/api/get.php";
-            var data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("command", "select * from flowtalk where people like ? order by data ASC");
-
-            var param = new Dictionary<string, string>()
+        {
+            try
             {
-                {"people", "%" + Convert.ToString(login_signin.login.accounts_user["token"]) +"%"}
-            };
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from flowtalk where people like ? order by data ASC");
 
-            data.Add("params", JsonConvert.SerializeObject(param));
-
-            dynamic task = await _class.PostRequestAsync(url, data);
-            if (task["message"] == "success")
-            {
-                JObject jb = task;
-                if (jb.Count.ToString() != count_tab)
+                var param = new Dictionary<string, string>()
                 {
-                    flowLayoutPanel1.Controls.Clear();
-                    count_tab = jb.Count.ToString();
-                    for (int i = 0; i < jb.Count - 1; i++)
+                    {"people", "%" + Convert.ToString(login_signin.login.accounts_user["token"]) +"%"}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    JObject jb = task;
+                    if (jb.Count.ToString() != count_tab)
                     {
-                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                        flowLayoutPanel1.Controls.Clear();
+                        count_tab = jb.Count.ToString();
+                        for (int i = 0; i < jb.Count - 1; i++)
                         {
-                            Size = new Size(273, 68),
-                            BorderRadius = 15,
-                            UseTransparentBackground = true,
-                            FillColor = Color.FromArgb(50, 50, 60),
-                            Margin = new Padding(3, 3, 3, 10),
-                            Cursor = Cursors.Hand
-                        };
-                        pnl.Click += click_message;
-                        pnl.Tag = task[i.ToString()]["token"];
+                            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                            {
+                                Size = new Size(273, 68),
+                                BorderRadius = 15,
+                                UseTransparentBackground = true,
+                                FillColor = Color.FromArgb(50, 50, 60),
+                                Margin = new Padding(3, 3, 3, 10),
+                                Cursor = Cursors.Hand
+                            };
+                            pnl.Click += click_message;
+                            pnl.Tag = task[i.ToString()]["token"];
 
-                        string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
-                        int red = int.Parse(components[0]);
-                        int green = int.Parse(components[1]);
-                        int blue = int.Parse(components[2]);
+                            string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
+                            int red = int.Parse(components[0]);
+                            int green = int.Parse(components[1]);
+                            int blue = int.Parse(components[2]);
 
-                        Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                        {
-                            Size = new Size(40, 40),
-                            Location = new Point(15, 16),
-                            FillColor = Color.FromArgb(red, green, blue),
-                            UseTransparentBackground = true,
-                            Cursor = Cursors.Hand
-                        };
-                        pct.Click += click_message;
-                        pct.Tag = task[i.ToString()]["token"];
-                        Label name = new Label()
-                        {
-                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
-                            Location = new Point(62, 16),
-                            ForeColor = Color.White,
-                            Size = new Size(208, 22),
-                            AutoEllipsis = true,
-                            Text = task[i.ToString()]["name"],
-                            Cursor = Cursors.Hand
-                        };
-                        name.Click += click_message;
-                        name.Tag = task[i.ToString()]["token"];
-                        Label last_mess = new Label()
-                        {
-                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
-                            Location = new Point(62, 35),
-                            ForeColor = Color.FromArgb(207, 207, 207),
-                            Size = new Size(208, 24),
-                            AutoEllipsis = true,
-                            Cursor = Cursors.Hand
-                        };
-                        last_mess.Click += click_message;
-                        last_mess.Tag = task[i.ToString()]["token"];
+                            Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                            {
+                                Size = new Size(40, 40),
+                                Location = new Point(15, 16),
+                                FillColor = Color.FromArgb(red, green, blue),
+                                UseTransparentBackground = true,
+                                Cursor = Cursors.Hand
+                            };
+                            pct.Click += click_message;
+                            pct.Tag = task[i.ToString()]["token"];
+                            Label name = new Label()
+                            {
+                                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                Location = new Point(62, 16),
+                                ForeColor = Color.White,
+                                Size = new Size(208, 22),
+                                AutoEllipsis = true,
+                                Text = task[i.ToString()]["name"],
+                                Cursor = Cursors.Hand
+                            };
+                            name.Click += click_message;
+                            name.Tag = task[i.ToString()]["token"];
+                            Label last_mess = new Label()
+                            {
+                                Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                Location = new Point(62, 35),
+                                ForeColor = Color.FromArgb(207, 207, 207),
+                                Size = new Size(208, 24),
+                                AutoEllipsis = true,
+                                Cursor = Cursors.Hand
+                            };
+                            last_mess.Click += click_message;
+                            last_mess.Tag = task[i.ToString()]["token"];
 
-                        dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task[i.ToString()]["messages"]));
+                            dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task[i.ToString()]["messages"]));
 
-                        JObject message = sub;
+                            JObject message = sub;
 
-                        int x = message.Count - 1;
-                        if (x >= 0)
-                            last_mess.Text = sub[x.ToString()]["text"];
+                            int x = message.Count - 1;
+                            if (x >= 0)
+                                last_mess.Text = sub[x.ToString()]["text"];
 
-                        pnl.Controls.Add(pct);
-                        pnl.Controls.Add(name);
-                        pnl.Controls.Add(last_mess);
+                            pnl.Controls.Add(pct);
+                            pnl.Controls.Add(name);
+                            pnl.Controls.Add(last_mess);
 
-                        flowLayoutPanel1.Controls.Add(pnl);
+                            flowLayoutPanel1.Controls.Add(pnl);
+                        }
                     }
                 }
             }
+            catch { };
         }
 
         private async void FlowTalk_Load(object sender, EventArgs e)
@@ -148,103 +153,270 @@ namespace SchoolSync.pages.FlowTalk_pages
             schoolsync.hide_loading();
         }
 
+        async void send_message()
+        {
+            string message = guna2TextBox1.Text;
+
+            JObject json = new JObject();
+            json.Add("date", DateTime.Now.ToString());
+            json.Add("file", "");
+            json.Add("root", "0");
+            json.Add("text", message);
+            json.Add("user", Convert.ToString(login_signin.login.accounts_user["username"]));
+            json.Add("user_token", Convert.ToString(login_signin.login.accounts_user["token"]));
+            json.Add("is_deleted", "0");
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from flowtalk where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", token_message}
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                dynamic x = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+                JObject jbo = x;
+                jbo.Add(jbo.Count.ToString(), json);
+
+                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "update flowtalk set messages = ? where token = ?");
+                param = new Dictionary<string, string>()
+                {
+                    {"messages", JsonConvert.SerializeObject(jbo)},
+                    {"token", token_message}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _class.PostRequestAsync(url, data);
+                if(task["message"] != "update success")
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine :(!";
+                    frm.BringToFront();
+                }
+            }
+
+           
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            send_message();
+        }
+
+        private void guna2TextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                send_message();
+            }
+        }
+
         private async void load_message_Tick(object sender, EventArgs e)
         {
-            if(token_message != "")
+            if(use == true)
             {
-                multiple_class _class = new multiple_class();
-                string url = "https://schoolsync.nnmadalin.me/api/get.php";
-                var data = new Dictionary<string, string>();
-                data.Add("token", schoolsync.token);
-                data.Add("command", "select * from flowtalk where token = ?");
+                count_message = "";
+                use = false;
+            }
+            try
+            {
+                if (token_message != "")
+                {
+                    multiple_class _class = new multiple_class();
+                    string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                    var data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "select * from flowtalk where token = ?");
 
-                var param = new Dictionary<string, string>()
+                    var param = new Dictionary<string, string>()
                 {
                     {"token", token_message}
                 };
 
-                data.Add("params", JsonConvert.SerializeObject(param));                
+                    data.Add("params", JsonConvert.SerializeObject(param));
 
-                dynamic task = await _class.PostRequestAsync(url, data);
-
-                Console.WriteLine(task);
-                if (task["message"] == "success")
-                {
-                    string[] components = Convert.ToString(task["0"]["color"]).Split(',');
-                    int red = int.Parse(components[0]);
-                    int green = int.Parse(components[1]);
-                    int blue = int.Parse(components[2]);
-
-                    guna2CirclePictureBox2.FillColor = Color.FromArgb(red, green, blue);
-
-                    label4.Text = task["0"]["name"];
-
-                    dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
-
-                    JObject jb = sub;
-                    if (count_message == "")
+                    dynamic task = await _class.PostRequestAsync(url, data);
+     
+                    if (task["message"] == "success")
                     {
-                        flowLayoutPanel2.Controls.Clear();
-                    }
-                    if (jb.Count.ToString() != count_message)
-                    {
-                        count_message = jb.Count.ToString();
-                        for (int i = 0; i < jb.Count; i++)
+                        string[] components = Convert.ToString(task["0"]["color"]).Split(',');
+                        int red = int.Parse(components[0]);
+                        int green = int.Parse(components[1]);
+                        int blue = int.Parse(components[2]);
+
+                        guna2CirclePictureBox2.FillColor = Color.FromArgb(red, green, blue);
+
+                        label4.Text = task["0"]["name"];
+
+                        dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+
+                        JObject jb = sub;
+                        if (count_message == "")
                         {
-
-                            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                            flowLayoutPanel2.Controls.Clear();
+                        }
+                        if (jb.Count.ToString() != count_message)
+                        {
+                            int x = 0;
+                            try
                             {
-                                MinimumSize = new Size(800, 30),
-                                MaximumSize = new Size(800, 0),
-                                AutoSize = true,
-                                Margin = new Padding(0, 0, 0, 15),
-                            };
-
-                            if(sub[i.ToString()]["root"] == "0" && sub[i.ToString()]["file"] == "") 
-                            {
-                                Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                                {
-                                    Size = new Size(40, 40),
-                                    Location = new Point(0, 5),
-                                    FillColor = Color.White,
-                                };
-                                pnl.Controls.Add(pct);
-                                Label lbl = new Label()
-                                {
-                                    AutoSize = true,
-                                    Location = new Point(55, 15),
-                                    MinimumSize = new Size(750, 10),
-                                    MaximumSize = new Size(750, 0),
-                                    Font = new Font("Segoe UI", 10),
-                                    ForeColor = Color.White,
-                                    Text = "",
-                                };
-                                pnl.Controls.Add(lbl);
-                            }              
-                            else if(sub[i.ToString()]["root"] == "1")
-                            {
-                                Label lbl = new Label()
-                                {
-                                    AutoSize = true,
-                                    Location = new Point(55, 15),
-                                    MinimumSize = new Size(750, 10),
-                                    MaximumSize = new Size(750, 0),
-                                    Padding = new Padding(100, 0, 100, 0),
-                                    Font = new Font("Segoe UI", 10,FontStyle.Bold),
-                                    ForeColor = Color.FromArgb(219, 219, 219),
-                                    Text = sub[i.ToString()]["text"],
-                                    TextAlign = ContentAlignment.TopCenter
-                                };
-                                pnl.Controls.Add(lbl);
+                                x = Convert.ToInt32(count_message);
                             }
+                            catch { };
+                            count_message = jb.Count.ToString();
+                            for (int i = x; i < jb.Count; i++)
+                            {
 
-                            
+                                Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                                {
+                                    MinimumSize = new Size(800, 30),
+                                    MaximumSize = new Size(800, 0),
+                                    AutoSize = true,
+                                    Margin = new Padding(0, 0, 0, 15),
+                                };
 
-                            flowLayoutPanel2.Controls.Add(pnl);
+                                if (sub[i.ToString()]["root"] == "0")
+                                {
+                                    if (sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] == "")
+                                    {
+                                        Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                                        {
+                                            Size = new Size(40, 40),
+                                            Location = new Point(760, 5),
+                                            FillColor = Color.White,
+                                        };
+                                        pnl.Controls.Add(pct);
+
+                                        Label lbl_username = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(0, 5),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["user"],
+                                            TextAlign = ContentAlignment.TopRight,
+                                        };
+                                        pnl.Controls.Add(lbl_username);
+
+                                        Label lbl_date= new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(0, 25),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                            ForeColor = Color.FromArgb(219, 219, 219),
+                                            Text = sub[i.ToString()]["date"],
+                                            TextAlign = ContentAlignment.TopRight,
+                                        };
+                                        pnl.Controls.Add(lbl_date);
+
+                                        Label lbl = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(0, 50),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["text"],
+                                            TextAlign = ContentAlignment.TopRight,
+                                        };
+                                        pnl.Controls.Add(lbl);
+                                    }
+                                    else if (sub[i.ToString()]["user"] != login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] == "")
+                                    {
+                                        Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                                        {
+                                            Size = new Size(40, 40),
+                                            Location = new Point(0, 5),
+                                            FillColor = Color.White,
+                                        };
+                                        pnl.Controls.Add(pct);
+
+                                        Label lbl_username = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(45, 5),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["user"],
+                                            TextAlign = ContentAlignment.TopLeft,
+                                        };
+                                        pnl.Controls.Add(lbl_username);
+
+                                        Label lbl_date = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(45, 25),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                            ForeColor = Color.FromArgb(219, 219, 219),
+                                            Text = sub[i.ToString()]["date"],
+                                            TextAlign = ContentAlignment.TopLeft,
+                                        };
+                                        pnl.Controls.Add(lbl_date);
+
+                                        Label lbl = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(45, 50),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["text"],
+                                            TextAlign = ContentAlignment.TopLeft,
+                                        };
+                                        pnl.Controls.Add(lbl);
+                                    }
+                                }
+                                else if (sub[i.ToString()]["root"] == "1")
+                                {
+                                    Label lbl = new Label()
+                                    {
+                                        AutoSize = true,
+                                        Location = new Point(55, 15),
+                                        MinimumSize = new Size(750, 10),
+                                        MaximumSize = new Size(750, 0),
+                                        Padding = new Padding(100, 0, 100, 0),
+                                        Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                                        ForeColor = Color.FromArgb(219, 219, 219),
+                                        Text = sub[i.ToString()]["text"],
+                                        TextAlign = ContentAlignment.TopCenter
+                                    };
+                                    pnl.Controls.Add(lbl);
+                                }
+
+
+
+                                flowLayoutPanel2.Controls.Add(pnl);
+                            }
                         }
                     }
                 }
             }
+            catch { };
         }
 
         private async void load_tab_message_Tick(object sender, EventArgs e)

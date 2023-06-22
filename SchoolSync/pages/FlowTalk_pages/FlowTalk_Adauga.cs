@@ -56,71 +56,73 @@ namespace SchoolSync.pages.FlowTalk_pages
 
         async void add_user()
         {
-            Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+            if (guna2TextBox2.Text.Trim() != "")
             {
-                Size = new Size(200, 50),
-                IsClosable = true,
-                AutoSize = true,
-                TextAlign = HorizontalAlignment.Left,
-                FillColor = Color.Transparent,
-                BorderColor = Color.FromArgb(25, 133, 255),
-                BorderThickness = 2,
-                AutoRoundedCorners = false,
-                BorderRadius = 5,
-            };
-            multiple_class _class = new multiple_class();
-            string url = "https://schoolsync.nnmadalin.me/api/get.php";
-            var data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("command", "select * from accounts where username like ?");
-
-            var param = new Dictionary<string, string>()
-            {
-                {"username", "%" + guna2TextBox2.Text +"%"}
-            };
-
-            data.Add("params", JsonConvert.SerializeObject(param));
-
-            dynamic task = await _class.PostRequestAsync(url, data);
-            if (task["message"] == "success")
-            {
-                chip.Tag = task["0"]["token"];
-                chip.Text = task["0"]["username"];
-
-                if(task["0"]["token"] == login_signin.login.accounts_user["token"])
+                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
                 {
-                    var frm = new notification.error();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-                    notification.error.message = "Nu poti sa te adaugi pe tine :) !";
-                    frm.BringToFront();
-                }
-                else
+                    Size = new Size(200, 50),
+                    IsClosable = true,
+                    AutoSize = true,
+                    TextAlign = HorizontalAlignment.Left,
+                    FillColor = Color.Transparent,
+                    BorderColor = Color.FromArgb(25, 133, 255),
+                    ForeColor = Color.Black,
+                    BorderThickness = 2,
+                    AutoRoundedCorners = false,
+                    BorderRadius = 5,
+                };
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from accounts where username like ?");
+
+                var param = new Dictionary<string, string>()
                 {
-                    bool ok = false;
-                    foreach(Control ctrl in flowLayoutPanel1.Controls)
+                    {"username", "%" + guna2TextBox2.Text +"%"}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    chip.Tag = task["0"]["token"];
+                    chip.Text = task["0"]["username"];
+
+                    if (task["0"]["token"] == login_signin.login.accounts_user["token"])
                     {
-                        if(ctrl.Tag.ToString() == Convert.ToString(task["0"]["token"]))
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Nu poti sa te adaugi pe tine :) !";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        bool ok = false;
+                        foreach (Control ctrl in flowLayoutPanel1.Controls)
                         {
-                            var frm = new notification.error();
-                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                            panel.Controls.Add(frm);
-                            notification.error.message = "Ai adaugat deja aceasta persoana!";
-                            frm.BringToFront();
-                            ok = true;
-                            break;
+                            if (ctrl.Tag.ToString() == Convert.ToString(task["0"]["token"]))
+                            {
+                                var frm = new notification.error();
+                                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                                panel.Controls.Add(frm);
+                                notification.error.message = "Ai adaugat deja aceasta persoana!";
+                                frm.BringToFront();
+                                ok = true;
+                                break;
+                            }
+                        }
+                        if (ok == false)
+                        {
+                            flowLayoutPanel1.Controls.Add(chip);
+                            guna2TextBox2.Clear();
                         }
                     }
-                    if(ok == false)
-                    {
-                        flowLayoutPanel1.Controls.Add(chip);
-                        guna2TextBox2.Clear();
-                    }
                 }
-
-                
             }
         }
 
