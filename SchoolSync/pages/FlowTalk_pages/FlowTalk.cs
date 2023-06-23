@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.IO;
 
 namespace SchoolSync.pages.FlowTalk_pages
 {
@@ -32,6 +33,11 @@ namespace SchoolSync.pages.FlowTalk_pages
         {
             Control ctrl = sender as Control;
 
+            token_message = ctrl.Tag.ToString();            
+            use = true;
+            flowLayoutPanel2.Tag = token_message;
+            flowLayoutPanel2.Controls.Clear();
+
             if (guna2Panel3.Visible == false)
             {
                 guna2Panel3.Visible = true;
@@ -39,11 +45,6 @@ namespace SchoolSync.pages.FlowTalk_pages
                 guna2TextBox1.Visible = true;
                 guna2Button1.Visible = true;
             }
-
-            token_message = ctrl.Tag.ToString();            
-            use = true;
-            flowLayoutPanel2.Tag = token_message;
-            flowLayoutPanel2.Controls.Clear();
         }
 
         async void load_tab()
@@ -226,6 +227,204 @@ namespace SchoolSync.pages.FlowTalk_pages
             }
         }
 
+        public static string token_mess = "", name_mess = "", persoane_mess = "";
+
+        private async void guna2CircleButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog opf = new OpenFileDialog();
+                opf.FileName = "";
+                opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf; *.zip; *.rar) " +
+                    "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf; *.zip; *.rar";
+                DialogResult dir = opf.ShowDialog();
+
+
+                if (dir == DialogResult.OK)
+                {
+
+                    FileInfo fl = new FileInfo(opf.FileName);
+
+                    long fileSizeibBytes = fl.Length;
+                    long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                    if (fileSizeibMbs > 10)
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 10 MB!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        multiple_class _class = new multiple_class();
+
+                        string token_file = _class.generate_token_250();
+
+                        var data = new Dictionary<string, string>();
+                        data.Add("token", schoolsync.token);
+                        data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                        data.Add("token_file", token_file);
+                        data.Add("filename", fl.Name);
+
+                        await _class.new_UploadFileAsync(data, opf.FileName);
+
+                        string fname = Convert.ToString(login_signin.login.accounts_user["token"]) + "/" + token_file + "/" + fl.Name;
+
+                        JObject json = new JObject();
+                        json.Add("date", DateTime.Now.ToString());
+                        json.Add("file", fname);
+                        json.Add("root", "0");
+                        json.Add("text", "");
+                        json.Add("user", Convert.ToString(login_signin.login.accounts_user["username"]));
+                        json.Add("user_token", Convert.ToString(login_signin.login.accounts_user["token"]));
+                        json.Add("is_deleted", "0");
+
+                        
+                        string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                        data = new Dictionary<string, string>();
+                        data.Add("token", schoolsync.token);
+                        data.Add("command", "select * from flowtalk where token = ?");
+
+                        var param = new Dictionary<string, string>()
+                        {
+                            {"token", token_message}
+                        };
+
+                        data.Add("params", JsonConvert.SerializeObject(param));
+
+                        dynamic task = await _class.PostRequestAsync(url, data);
+                        if (task["message"] == "success")
+                        {
+                            dynamic x = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+                            JObject jbo = x;
+                            jbo.Add(jbo.Count.ToString(), json);
+
+                            url = "https://schoolsync.nnmadalin.me/api/put.php";
+                            data = new Dictionary<string, string>();
+                            data.Add("token", schoolsync.token);
+                            data.Add("command", "update flowtalk set messages = ? where token = ?");
+                            param = new Dictionary<string, string>()
+                            {
+                                {"messages", JsonConvert.SerializeObject(jbo)},
+                                {"token", token_message}
+                            };
+
+                            data.Add("params", JsonConvert.SerializeObject(param));
+
+                            task = await _class.PostRequestAsync(url, data);
+                            if (task["message"] != "update success")
+                            {
+                                var frm = new notification.error();
+                                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                                panel.Controls.Add(frm);
+                                notification.error.message = "Ceva nu a mers bine :(!";
+                                frm.BringToFront();
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Ceva nu a mers bine!";
+                Console.WriteLine(ex.Message.ToString());
+                frm.BringToFront();
+            }
+        }
+
+        private async void guna2CircleButton2_Click(object sender, EventArgs e)
+        {
+            guna2MessageDialog1.Caption = "Vrei sa parasesti grupul?";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa parasesti grupul?";
+            DialogResult dr = guna2MessageDialog1.Show();
+            if(dr == DialogResult.Yes)
+            {
+                guna2Panel3.Visible = false;
+                flowLayoutPanel2.Visible = false;
+                guna2TextBox1.Visible = false;
+                guna2Button1.Visible = false;
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from flowtalk where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", token_message}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if(task["message"] == "success")
+                {
+                    string people = task["0"]["people"];
+                    string[] split = people.Split(';');
+                    string new_people = "";
+
+                    for(int i = 0; i < split.Length - 1; i++)
+                    {
+                        if(split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            new_people += (split[i] + ";");
+                        }
+                    }
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update flowtalk set people = ?, messages = ? where token = ?");
+
+                    JObject json = new JObject();
+                    json.Add("date", DateTime.Now.ToString());
+                    json.Add("file", "");
+                    json.Add("root", "1");
+                    json.Add("text", Convert.ToString(login_signin.login.accounts_user["username"]) + " a parasit grupul!");
+                    json.Add("user", "");
+                    json.Add("user_token", "");
+                    json.Add("is_deleted", "0");
+
+                    dynamic x = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+                    JObject jbo = x;
+                    jbo.Add(jbo.Count.ToString(), json);
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"people", new_people},
+                        {"messages", JsonConvert.SerializeObject(jbo)},
+                        {"token", token_message}
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+                }
+            }
+        }
+
+        private void guna2CircleButton3_Click(object sender, EventArgs e)
+        {
+            navbar_home.page = "FlowTalk_editare";
+            navbar_home.use = false;
+        }
+
+        private void click_chip(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Chip;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
+        }
+
         private async void load_message_Tick(object sender, EventArgs e)
         {
             if(use == true)
@@ -262,6 +461,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                         guna2CirclePictureBox2.FillColor = Color.FromArgb(red, green, blue);
 
                         label4.Text = task["0"]["name"];
+                        name_mess = task["0"]["name"];
+                        token_mess = token_message;
+                        persoane_mess = task["0"]["people"];
 
                         dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
 
@@ -289,7 +491,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                     AutoSize = true,
                                     Margin = new Padding(0, 0, 0, 15),
                                 };
-
+                                
                                 if (sub[i.ToString()]["root"] == "0")
                                 {
                                     if (sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] == "")
@@ -315,7 +517,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                         };
                                         pnl.Controls.Add(lbl_username);
 
-                                        Label lbl_date= new Label()
+                                        Label lbl_date = new Label()
                                         {
                                             AutoSize = true,
                                             Location = new Point(0, 25),
@@ -340,6 +542,65 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             TextAlign = ContentAlignment.TopRight,
                                         };
                                         pnl.Controls.Add(lbl);
+                                    }
+                                    else if (sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] != "")
+                                    {
+                                        Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                                        {
+                                            Size = new Size(40, 40),
+                                            Location = new Point(760, 5),
+                                            FillColor = Color.White,
+                                        };
+                                        pnl.Controls.Add(pct);
+
+                                        Label lbl_username = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(0, 5),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["user"],
+                                            TextAlign = ContentAlignment.TopRight,
+                                        };
+                                        pnl.Controls.Add(lbl_username);
+
+                                        Label lbl_date = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(0, 25),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                            ForeColor = Color.FromArgb(219, 219, 219),
+                                            Text = sub[i.ToString()]["date"],
+                                            TextAlign = ContentAlignment.TopRight,
+                                        };
+                                        pnl.Controls.Add(lbl_date);
+
+                                        string file = sub[i.ToString()]["file"];
+                                        string[] split = file.Split('/');
+
+                                        Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                                        {
+                                            Size = new Size(150, 70),
+                                            Location = new Point(600, 50),
+                                            IsClosable = false,
+                                            Font = new Font("Segoe UI", 10),
+                                            Text = split[2],
+                                            Tag = file,
+                                            TextAlign = HorizontalAlignment.Center,
+                                            FillColor = Color.Transparent,
+                                            BorderColor = Color.FromArgb(25, 133, 255),
+                                            BorderThickness = 2,
+                                            AutoRoundedCorners = false,
+                                            BorderRadius = 5,
+                                            Cursor = Cursors.Hand,
+                                        };
+                                        chip.Click += click_chip;
+                                        pnl.Controls.Add(chip);
+                                        
                                     }
                                     else if (sub[i.ToString()]["user"] != login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] == "")
                                     {
@@ -390,6 +651,65 @@ namespace SchoolSync.pages.FlowTalk_pages
                                         };
                                         pnl.Controls.Add(lbl);
                                     }
+                                    else if (sub[i.ToString()]["user"] != login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] != "")
+                                    {
+                                        Guna.UI2.WinForms.Guna2CirclePictureBox pct = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                                        {
+                                            Size = new Size(40, 40),
+                                            Location = new Point(0, 5),
+                                            FillColor = Color.White,
+                                        };
+                                        pnl.Controls.Add(pct);
+
+                                        Label lbl_username = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(45, 5),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                                            ForeColor = Color.White,
+                                            Text = sub[i.ToString()]["user"],
+                                            TextAlign = ContentAlignment.TopLeft,
+                                        };
+                                        pnl.Controls.Add(lbl_username);
+
+                                        Label lbl_date = new Label()
+                                        {
+                                            AutoSize = true,
+                                            Location = new Point(45, 25),
+                                            MinimumSize = new Size(750, 10),
+                                            MaximumSize = new Size(750, 0),
+                                            Font = new Font("Segoe UI", 9, FontStyle.Bold),
+                                            ForeColor = Color.FromArgb(219, 219, 219),
+                                            Text = sub[i.ToString()]["date"],
+                                            TextAlign = ContentAlignment.TopLeft,
+                                        };
+                                        pnl.Controls.Add(lbl_date);
+
+                                        string file = sub[i.ToString()]["file"];
+                                        string[] split = file.Split('/');
+
+                                        Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                                        {
+                                            Size = new Size(150, 70),
+                                            Location = new Point(50, 50),
+                                            IsClosable = false,
+                                            Font = new Font("Segoe UI", 10),
+                                            Text = split[2],
+                                            Tag = file,
+                                            TextAlign = HorizontalAlignment.Center,
+                                            FillColor = Color.Transparent,
+                                            BorderColor = Color.FromArgb(25, 133, 255),
+                                            BorderThickness = 2,
+                                            AutoRoundedCorners = false,
+                                            BorderRadius = 5,
+                                            Cursor = Cursors.Hand,
+                                        };
+                                        chip.Click += click_chip;
+                                        pnl.Controls.Add(chip);
+                                    }
+
                                 }
                                 else if (sub[i.ToString()]["root"] == "1")
                                 {

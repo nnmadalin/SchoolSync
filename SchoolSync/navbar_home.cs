@@ -312,6 +312,20 @@ namespace SchoolSync
                 var frm = new pages.FlowTalk_pages.FlowTalk_Adauga();
                 guna2Panel2.Controls.Add(frm);
             }
+            else if (page == "FlowTalk_editare" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | FlowTalk";
+                GC.Collect();
+
+                use = true;
+
+                var frm = new pages.FlowTalk_pages.FlowTalk_Adauga();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
 
             else if (page == "Profil" && use == false)
             {

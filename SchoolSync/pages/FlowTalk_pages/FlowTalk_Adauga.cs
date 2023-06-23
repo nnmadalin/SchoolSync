@@ -21,25 +21,57 @@ namespace SchoolSync.pages.FlowTalk_pages
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            navbar_home.page = "FlowTalk";
-            navbar_home.use = false;
+            if (navbar_home.page == "FlowTalk_editare")
+            {
+                this.Dispose();
+            }
+            else
+            {
+                navbar_home.page = "FlowTalk";
+                navbar_home.use = false;
+            }
         }
 
         private async void guna2TextBox2_TextChanged(object sender, EventArgs e)
         {
-            string nume_cautat = guna2TextBox2.Text;
+            string nume_cautat = guna2TextBox2.Text;      
+        }
 
-           
+        async Task<string> get_token_name(string token)
+        {
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from accounts where token = ?");
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", token}
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                return task["0"]["username"];
+            }
+            return "";
         }
 
         private async  void FlowTalk_Adauga_Load(object sender, EventArgs e)
         {
+            schoolsync.show_loading();
+
             multiple_class _class = new multiple_class();
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             var data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("command", "select * from accounts");
             dynamic task = await _class.PostRequestAsync(url, data);
+
             if (task["message"] == "success")
             {
                 AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
@@ -51,7 +83,120 @@ namespace SchoolSync.pages.FlowTalk_pages
 
                 }
                 guna2TextBox2.AutoCompleteCustomSource = collection;
+                guna2TextBox3.AutoCompleteCustomSource = collection;
             }
+
+            if(navbar_home.page == "FlowTalk_editare" || navbar_home.page == "FlowTalk_editare_noadmin")
+            {
+                if (navbar_home.page == "FlowTalk_editare")
+                {
+                    label1.Text = "Detalii grup";
+                    guna2Button2.Text = "Modifica grupul";
+                    guna2TextBox1.Text = FlowTalk.name_mess;
+                }
+                else
+                {
+                    label1.Text = "Detalii grup";
+
+                    guna2Button1.Visible = false;
+                    guna2Button3.Visible = false;
+                    guna2Button2.Visible = false;
+                    guna2TextBox1.Enabled = false;
+                    guna2TextBox2.Enabled = false;
+                    guna2TextBox3.Enabled = false;
+                }
+                //load db
+
+                url = "https://schoolsync.nnmadalin.me/api/get.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from flowtalk where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", FlowTalk.token_mess}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    string persoane_grup = task["0"]["people"];
+                    string admin_grup = task["0"]["admins"];
+                    string[] split = persoane_grup.Split(';');
+                    for(int i = 0; i < split.Length - 1; i++)
+                    {
+                        string name = await get_token_name(split[i]);
+                        Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                        {
+                            Size = new Size(200, 50),
+                            IsClosable = true,
+                            AutoSize = true,
+                            TextAlign = HorizontalAlignment.Left,
+                            FillColor = Color.Transparent,
+                            BorderColor = Color.FromArgb(25, 133, 255),
+                            ForeColor = Color.Black,
+                            BorderThickness = 2,
+                            AutoRoundedCorners = false,
+                            BorderRadius = 5,
+                        };
+                        chip.Tag = split[i];
+                        chip.Text = name;
+                        flowLayoutPanel1.Controls.Add(chip);
+                        if (split[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            chip.IsClosable = false;
+                        }
+                    }
+
+                    split = admin_grup.Split(';');
+                    for (int i = 0; i < split.Length - 1; i++)
+                    {                        
+                        string name = await get_token_name(split[i]);
+                        Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                        {
+                            Size = new Size(200, 50),
+                            IsClosable = true,
+                            AutoSize = true,
+                            TextAlign = HorizontalAlignment.Left,
+                            FillColor = Color.Transparent,
+                            BorderColor = Color.FromArgb(25, 133, 255),
+                            ForeColor = Color.Black,
+                            BorderThickness = 2,
+                            AutoRoundedCorners = false,
+                            BorderRadius = 5,
+                        };
+                        chip.Tag = split[i];
+                        chip.Text = name;
+                        flowLayoutPanel2.Controls.Add(chip);
+                        if (split[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            chip.IsClosable = false;
+                        }
+                    }
+                }                
+            }
+            else
+            {
+                Guna.UI2.WinForms.Guna2Chip chip2 = new Guna.UI2.WinForms.Guna2Chip()
+                {
+                    Size = new Size(200, 50),
+                    IsClosable = false,
+                    AutoSize = true,
+                    TextAlign = HorizontalAlignment.Left,
+                    FillColor = Color.Transparent,
+                    BorderColor = Color.FromArgb(25, 133, 255),
+                    ForeColor = Color.Black,
+                    BorderThickness = 2,
+                    AutoRoundedCorners = false,
+                    BorderRadius = 5,
+                };
+                chip2.Tag = login_signin.login.accounts_user["token"];
+                chip2.Text = login_signin.login.accounts_user["username"];
+                flowLayoutPanel2.Controls.Add(chip2);
+            }
+            schoolsync.hide_loading();
         }
 
         async void add_user()
@@ -71,6 +216,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                     AutoRoundedCorners = false,
                     BorderRadius = 5,
                 };
+
                 multiple_class _class = new multiple_class();
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
                 var data = new Dictionary<string, string>();
@@ -128,107 +274,190 @@ namespace SchoolSync.pages.FlowTalk_pages
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            add_user();
-            
+            add_user();      
         }
 
         private async void guna2Button2_Click(object sender, EventArgs e)
         {
-            schoolsync.show_loading();
-            string name_group = guna2TextBox1.Text;
-            string persoane_token = Convert.ToString(login_signin.login.accounts_user["token"]) + ";";
-            if(guna2TextBox1.Text.Trim() == "")
+            if (navbar_home.page != "FlowTalk_editare")
             {
-                name_group = "";
-                foreach (Control ctrl in flowLayoutPanel1.Controls)
+                schoolsync.show_loading();
+                string name_group = guna2TextBox1.Text;
+                string persoane_token = Convert.ToString(login_signin.login.accounts_user["token"]) + ";";
+                string persoane_admin_token = "";
+                if (guna2TextBox1.Text.Trim() == "")
                 {
-                    if(name_group == "")
+                    name_group = login_signin.login.accounts_user["username"];
+                    foreach (Control ctrl in flowLayoutPanel1.Controls)
                     {
-                        name_group = ctrl.Text.ToString();
-                    }
-                    else
-                    {
-                        name_group += ("& " + ctrl.Text.ToString());
+                        name_group += (", " + ctrl.Text.ToString());
                     }
                 }
+                foreach (Control ctrl in flowLayoutPanel1.Controls)
+                {
+                    persoane_token += (ctrl.Tag.ToString() + ";");
+                }
+                foreach (Control ctrl in flowLayoutPanel2.Controls)
+                {
+                    persoane_admin_token += (ctrl.Tag.ToString() + ";");
+                }
+
+                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                {
+                    Size = new Size(200, 50),
+                    IsClosable = true,
+                    AutoSize = true,
+                    TextAlign = HorizontalAlignment.Left,
+                    FillColor = Color.Transparent,
+                    BorderColor = Color.FromArgb(25, 133, 255),
+                    BorderThickness = 2,
+                    AutoRoundedCorners = false,
+                    BorderRadius = 5,
+                };
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/post.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "insert into flowtalk(token, token_user, created, name, color, people, messages, seen, admins) values (?, ?, ?, ?, ?, ? ,?, ?, ?)");
+
+                string token = _class.generate_token();
+
+                JObject sub_json = new JObject();
+                JObject jbo = new JObject();
+
+                sub_json.Add("root", "1");
+                sub_json.Add("user", "");
+                sub_json.Add("user_token", "");
+                sub_json.Add("date", DateTime.Now.ToString());
+                sub_json.Add("file", "");
+                sub_json.Add("text", Convert.ToString(login_signin.login.accounts_user["username"]) + " a creat grupul: '" + name_group + "'");
+                sub_json.Add("is_deleted", "0");
+                jbo.Add("0", sub_json);
+
+                Random random = new Random();
+                string randomColor = random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", " + random.Next(256).ToString();
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", token},
+                    {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                    {"created", Convert.ToString(login_signin.login.accounts_user["username"])},
+                    {"name", name_group},
+                    {"color", randomColor.ToString()},
+                    {"people", persoane_token},
+                    {"messages", JsonConvert.SerializeObject(jbo)},
+                    {"seen", ""},
+                    {"admins", persoane_admin_token},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                schoolsync.hide_loading();
+                if (task["message"] == "insert success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.success.message = "Conversatie creata cu succes!";
+                    frm.BringToFront();
+                    navbar_home.page = "FlowTalk";
+                    navbar_home.use = false;
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu mers bine, mai incearca!";
+                    frm.BringToFront();
+                }
             }
-            foreach (Control ctrl in flowLayoutPanel1.Controls)
-            {
-                persoane_token += (ctrl.Tag.ToString() + ";");
+            else 
+            { 
+                //editare
             }
+        }
 
-            Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+        string token_app = schoolsync.token;
+
+        private async void guna2Button3_Click(object sender, EventArgs e)
+        {
+            if (guna2TextBox3.Text.Trim() != "")
             {
-                Size = new Size(200, 50),
-                IsClosable = true,
-                AutoSize = true,
-                TextAlign = HorizontalAlignment.Left,
-                FillColor = Color.Transparent,
-                BorderColor = Color.FromArgb(25, 133, 255),
-                BorderThickness = 2,
-                AutoRoundedCorners = false,
-                BorderRadius = 5,
-            };
+                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                {
+                    Size = new Size(200, 50),
+                    IsClosable = true,
+                    AutoSize = true,
+                    TextAlign = HorizontalAlignment.Left,
+                    FillColor = Color.Transparent,
+                    BorderColor = Color.FromArgb(25, 133, 255),
+                    ForeColor = Color.Black,
+                    BorderThickness = 2,
+                    AutoRoundedCorners = false,
+                    BorderRadius = 5,
+                };
 
-            multiple_class _class = new multiple_class();
-            string url = "https://schoolsync.nnmadalin.me/api/post.php";
-            var data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("command", "insert into flowtalk(token, token_user, created, name, color, people, messages, seen, admins) values (?, ?, ?, ?, ?, ? ,?, ?, ?)");
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", token_app);
+                data.Add("command", "select * from accounts where username like ?");
 
-            string token = _class.generate_token();
+                var param = new Dictionary<string, string>()
+                {
+                    {"username", "%" + guna2TextBox2.Text +"%"}
+                };
 
-            JObject sub_json = new JObject();
-            JObject jbo = new JObject();
+                data.Add("params", JsonConvert.SerializeObject(param));
 
-            sub_json.Add("root", "1");
-            sub_json.Add("user", "");
-            sub_json.Add("user_token", "");
-            sub_json.Add("date", DateTime.Now.ToString());
-            sub_json.Add("file", "");
-            sub_json.Add("text", Convert.ToString(login_signin.login.accounts_user["username"]) + " a creat grupul: '" + name_group + "'");
-            sub_json.Add("is_deleted", "0");
-            jbo.Add("0", sub_json);
+                dynamic task = await _class.PostRequestAsync(url, data);
 
-            Random random = new Random();
-            string randomColor = random.Next(256).ToString() + ", " + random.Next(256).ToString() + ", " + random.Next(256).ToString();
-
-            var param = new Dictionary<string, string>()
-            {
-                {"token", token},
-                {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
-                {"created", Convert.ToString(login_signin.login.accounts_user["username"])},
-                {"name", name_group},
-                {"color", randomColor.ToString()},
-                {"people", persoane_token},
-                {"messages", JsonConvert.SerializeObject(jbo)},
-                {"seen", ""},
-                {"admins", Convert.ToString(login_signin.login.accounts_user["token"]) + ";"},
-            };
-
-            data.Add("params", JsonConvert.SerializeObject(param));
-
-            dynamic task = await _class.PostRequestAsync(url, data);
-            schoolsync.hide_loading();
-            if (task["message"] == "insert success")
-            {
-                var frm = new notification.success();
-                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                panel.Controls.Add(frm);
-                notification.success.message = "Conversatie creata cu succes!";
-                frm.BringToFront();
-                navbar_home.page = "FlowTalk";
-                navbar_home.use = false;
-            }
-            else
-            {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                panel.Controls.Add(frm);
-                notification.error.message = "Ceva nu mers bine, mai incearca!";
-                frm.BringToFront();
+
+                if (task["message"] == "success")
+                {
+                    chip.Tag = task["0"]["token"];
+                    chip.Text = task["0"]["username"];
+
+                    foreach (Control ctrl in flowLayoutPanel2.Controls)
+                    {
+                        if (ctrl.Tag.ToString() == Convert.ToString(task["0"]["token"]))
+                        {
+                            frm = new notification.error();
+                            schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Ai adaugat deja aceasta persoana!";
+                            frm.BringToFront();
+                            return ;
+                        }
+                    }
+
+                    foreach (Control ctrl in flowLayoutPanel1.Controls)
+                    {
+                        if (ctrl.Tag.ToString() == Convert.ToString(task["0"]["token"]))
+                        {
+                            flowLayoutPanel2.Controls.Add(chip);
+                            guna2TextBox3.Clear();                            
+                            return;
+                        }
+                    }
+
+                    frm = new notification.error();
+                    schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Aceasta persoana nu este in grup!";
+                    frm.BringToFront();
+
+                }
             }
         }
     }

@@ -50,6 +50,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.load_tab_message = new System.Windows.Forms.Timer(this.components);
             this.load_message = new System.Windows.Forms.Timer(this.components);
+            this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2Panel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
@@ -253,13 +254,14 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2CircleButton3.FillColor = System.Drawing.Color.White;
             this.guna2CircleButton3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2CircleButton3.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton3.Image = global::SchoolSync.Properties.Resources.group_FILL1_wght700_GRAD0_opsz48;
+            this.guna2CircleButton3.Image = global::SchoolSync.Properties.Resources.edit_FILL1_wght700_GRAD0_opsz48;
             this.guna2CircleButton3.Location = new System.Drawing.Point(718, 6);
             this.guna2CircleButton3.Name = "guna2CircleButton3";
             this.guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton3.Size = new System.Drawing.Size(32, 32);
             this.guna2CircleButton3.TabIndex = 6;
             this.guna2CircleButton3.UseTransparentBackground = true;
+            this.guna2CircleButton3.Click += new System.EventHandler(this.guna2CircleButton3_Click);
             // 
             // guna2CircleButton2
             // 
@@ -279,6 +281,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2CircleButton2.Size = new System.Drawing.Size(32, 32);
             this.guna2CircleButton2.TabIndex = 5;
             this.guna2CircleButton2.UseTransparentBackground = true;
+            this.guna2CircleButton2.Click += new System.EventHandler(this.guna2CircleButton2_Click);
             // 
             // guna2CircleButton1
             // 
@@ -298,6 +301,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2CircleButton1.Size = new System.Drawing.Size(32, 32);
             this.guna2CircleButton1.TabIndex = 4;
             this.guna2CircleButton1.UseTransparentBackground = true;
+            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
             // label4
             // 
@@ -327,7 +331,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             // load_tab_message
             // 
             this.load_tab_message.Enabled = true;
-            this.load_tab_message.Interval = 1000;
+            this.load_tab_message.Interval = 500;
             this.load_tab_message.Tick += new System.EventHandler(this.load_tab_message_Tick);
             // 
             // load_message
@@ -335,6 +339,15 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.load_message.Enabled = true;
             this.load_message.Interval = 500;
             this.load_message.Tick += new System.EventHandler(this.load_message_Tick);
+            // 
+            // guna2MessageDialog1
+            // 
+            this.guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            this.guna2MessageDialog1.Caption = null;
+            this.guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning;
+            this.guna2MessageDialog1.Parent = null;
+            this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
+            this.guna2MessageDialog1.Text = null;
             // 
             // FlowTalk
             // 
@@ -380,5 +393,6 @@ namespace SchoolSync.pages.FlowTalk_pages
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
     }
 }
