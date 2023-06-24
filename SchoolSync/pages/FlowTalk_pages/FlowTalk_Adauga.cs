@@ -318,20 +318,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                 foreach (Control ctrl in flowLayoutPanel2.Controls)
                 {
                     persoane_admin_token += (ctrl.Tag.ToString() + ";");
-                }
-
-                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
-                {
-                    Size = new Size(200, 50),
-                    IsClosable = true,
-                    AutoSize = true,
-                    TextAlign = HorizontalAlignment.Left,
-                    FillColor = Color.Transparent,
-                    BorderColor = Color.FromArgb(25, 133, 255),
-                    BorderThickness = 2,
-                    AutoRoundedCorners = false,
-                    BorderRadius = 5,
-                };
+                }                
 
                 multiple_class _class = new multiple_class();
                 string url = "https://schoolsync.nnmadalin.me/api/post.php";
@@ -395,8 +382,100 @@ namespace SchoolSync.pages.FlowTalk_pages
                 }
             }
             else 
-            { 
+            {
                 //editare
+
+                schoolsync.show_loading();
+                string name_group = guna2TextBox1.Text;
+                string persoane_token = "";
+                string persoane_admin_token = "";
+                
+                foreach (Control ctrl in flowLayoutPanel1.Controls)
+                {
+                    persoane_token += (ctrl.Tag.ToString() + ";");
+                }
+                foreach (Control ctrl in flowLayoutPanel2.Controls)
+                {
+                    persoane_admin_token += (ctrl.Tag.ToString() + ";");
+                }
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from flowtalk where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", FlowTalk.token_mess},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    JObject json = new JObject();
+                    json.Add("date", DateTime.Now.ToString());
+                    json.Add("file", "");
+                    json.Add("root", "1");
+                    json.Add("text",Convert.ToString(login_signin.login.accounts_user["username"]) + " a facut niste modificari!");
+                    json.Add("user", "");
+                    json.Add("user_token", "");
+                    json.Add("is_deleted", "0");
+
+                    dynamic x = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+                    JObject jbo = x;
+                    jbo.Add(jbo.Count.ToString(), json);
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update flowtalk set name = ?, people = ?, admins = ?, messages = ? where token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"name", name_group},
+                        {"people", persoane_token},
+                        {"admins", persoane_admin_token},
+                        {"messages", JsonConvert.SerializeObject(jbo)},
+                        {"token",  FlowTalk.token_mess}
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+                    schoolsync.hide_loading();
+                    if (task["message"] != "update success")
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine :(!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Modificarile au fost facute cu succes!";
+                        frm.BringToFront();
+                        this.Dispose();
+                    }
+
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu mers bine, mai incearca!";
+                    frm.BringToFront();
+                }
+                schoolsync.hide_loading();
             }
         }
 
@@ -428,7 +507,7 @@ namespace SchoolSync.pages.FlowTalk_pages
 
                 var param = new Dictionary<string, string>()
                 {
-                    {"username", "%" + guna2TextBox2.Text +"%"}
+                    {"username", "%" + guna2TextBox3.Text + "%"}
                 };
 
                 data.Add("params", JsonConvert.SerializeObject(param));
