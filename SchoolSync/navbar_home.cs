@@ -95,7 +95,7 @@ namespace SchoolSync
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            timer1.Stop();
             if (page == "Home" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -365,7 +365,7 @@ namespace SchoolSync
                 frm.BringToFront();
             }
 
-            
+            timer1.Start();
         }
     }
 }

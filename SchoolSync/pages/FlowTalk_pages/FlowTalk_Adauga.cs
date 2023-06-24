@@ -86,13 +86,23 @@ namespace SchoolSync.pages.FlowTalk_pages
                 guna2TextBox3.AutoCompleteCustomSource = collection;
             }
 
-            if(navbar_home.page == "FlowTalk_editare" || navbar_home.page == "FlowTalk_editare_noadmin")
+
+            string[] split2 = FlowTalk.admini_mess.Split(';');
+
+            bool admin = false;
+
+            for(int i = 0; i < split2.Length - 1; i++)
             {
-                if (navbar_home.page == "FlowTalk_editare")
+                if (split2[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                    admin = true;
+            }
+
+            if(navbar_home.page == "FlowTalk_editare")
+            {
+                if (admin == true)
                 {
                     label1.Text = "Detalii grup";
-                    guna2Button2.Text = "Modifica grupul";
-                    guna2TextBox1.Text = FlowTalk.name_mess;
+                    guna2Button2.Text = "Modifica grupul";                    
                 }
                 else
                 {
@@ -102,9 +112,12 @@ namespace SchoolSync.pages.FlowTalk_pages
                     guna2Button3.Visible = false;
                     guna2Button2.Visible = false;
                     guna2TextBox1.Enabled = false;
-                    guna2TextBox2.Enabled = false;
-                    guna2TextBox3.Enabled = false;
+                    guna2TextBox2.Visible = false;
+                    guna2TextBox3.Visible = false;
+                    label3.Text = "Persoane: ";
+                    label4.Text = "Admini: ";
                 }
+                guna2TextBox1.Text = FlowTalk.name_mess;
                 //load db
 
                 url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -148,6 +161,8 @@ namespace SchoolSync.pages.FlowTalk_pages
                         {
                             chip.IsClosable = false;
                         }
+                        if(admin == false)
+                            chip.IsClosable = false;
                     }
 
                     split = admin_grup.Split(';');
@@ -174,7 +189,10 @@ namespace SchoolSync.pages.FlowTalk_pages
                         {
                             chip.IsClosable = false;
                         }
+                        if (admin == false)
+                            chip.IsClosable = false;
                     }
+
                 }                
             }
             else

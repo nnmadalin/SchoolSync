@@ -238,7 +238,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             }
         }
 
-        public static string token_mess = "", name_mess = "", persoane_mess = "";
+        public static string token_mess = "", name_mess = "", persoane_mess = "", admini_mess = "";
 
         private async void guna2CircleButton1_Click(object sender, EventArgs e)
         {
@@ -475,6 +475,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                         name_mess = task["0"]["name"];
                         token_mess = token_message;
                         persoane_mess = task["0"]["people"];
+                        admini_mess = task["0"]["admins"];
 
                         dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
 
@@ -485,6 +486,8 @@ namespace SchoolSync.pages.FlowTalk_pages
                         }
                         if (jb.Count.ToString() != count_message)
                         {
+                            
+
                             int x = 0;
                             try
                             {
