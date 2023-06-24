@@ -431,13 +431,14 @@ namespace SchoolSync.pages.FlowTalk_pages
                     url = "https://schoolsync.nnmadalin.me/api/put.php";
                     data = new Dictionary<string, string>();
                     data.Add("token", schoolsync.token);
-                    data.Add("command", "update flowtalk set name = ?, people = ?, admins = ?, messages = ? where token = ?");
+                    data.Add("command", "update flowtalk set name = ?, people = ?, admins = ?, messages = ?, seen = ? where token = ?");
                     param = new Dictionary<string, string>()
                     {
                         {"name", name_group},
                         {"people", persoane_token},
                         {"admins", persoane_admin_token},
                         {"messages", JsonConvert.SerializeObject(jbo)},
+                        {"seen", ""},
                         {"token",  FlowTalk.token_mess}
                     };
 

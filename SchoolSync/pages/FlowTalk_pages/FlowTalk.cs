@@ -27,7 +27,7 @@ namespace SchoolSync.pages.FlowTalk_pages
         }
 
         string token_message = "", count_tab = "", count_message = "";
-        bool use = false;
+        bool use = false, go = false;
 
         private async void click_message(object sender, EventArgs e)
         {
@@ -35,6 +35,7 @@ namespace SchoolSync.pages.FlowTalk_pages
 
             token_message = ctrl.Tag.ToString();            
             use = true;
+            go = true;
             flowLayoutPanel2.Tag = token_message;
             flowLayoutPanel2.Controls.Clear();
 
@@ -201,10 +202,11 @@ namespace SchoolSync.pages.FlowTalk_pages
                 url = "https://schoolsync.nnmadalin.me/api/put.php";
                 data = new Dictionary<string, string>();
                 data.Add("token", schoolsync.token);
-                data.Add("command", "update flowtalk set messages = ? where token = ?");
+                data.Add("command", "update flowtalk set messages = ?, seen = ? where token = ?");
                 param = new Dictionary<string, string>()
                 {
                     {"messages", JsonConvert.SerializeObject(jbo)},
+                    {"seen", ""},
                     {"token", token_message}
                 };
 
@@ -222,12 +224,13 @@ namespace SchoolSync.pages.FlowTalk_pages
                 }
             }
 
-           
+            guna2TextBox1.Clear();
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             send_message();
+            flowLayoutPanel2.VerticalScroll.Value = flowLayoutPanel2.VerticalScroll.Maximum;
         }
 
         private void guna2TextBox1_KeyDown(object sender, KeyEventArgs e)
@@ -335,6 +338,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                 notification.error.message = "Ceva nu a mers bine :(!";
                                 frm.BringToFront();
                             }
+                            flowLayoutPanel2.VerticalScroll.Value = flowLayoutPanel2.VerticalScroll.Maximum;
                         }
 
                     }
@@ -436,6 +440,68 @@ namespace SchoolSync.pages.FlowTalk_pages
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
         }
 
+        private async void delete_bnt(object sender, EventArgs e)
+        {
+            guna2MessageDialog1.Caption = "Sterge mesaj";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi acest mesaj?";
+            DialogResult dr = guna2MessageDialog1.Show();
+            if (dr == DialogResult.Yes)
+            {
+                string id = ((Control)sender).Tag.ToString();
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from flowtalk where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", token_message}
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    dynamic x = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["messages"]));
+
+                    try
+                    {
+                        x[id]["text"] = "[ Mesaj sters de: " + Convert.ToString(login_signin.login.accounts_user["username"]) + " ]";
+                        x[id]["file"] = "";
+                        x[id]["is_deleted"] = "1";                      
+
+                        url = "https://schoolsync.nnmadalin.me/api/put.php";
+                        data = new Dictionary<string, string>();
+                        data.Add("token", schoolsync.token);
+                        data.Add("command", "update flowtalk set messages = ?, seen = ? where token = ?");
+                        param = new Dictionary<string, string>()
+                        {
+                            {"messages", JsonConvert.SerializeObject(x)},
+                            {"seen", ""},
+                            {"token", token_message}
+                        };
+
+                        data.Add("params", JsonConvert.SerializeObject(param));
+
+                        task = await _class.PostRequestAsync(url, data);
+                        if (task["message"] != "update success")
+                        {
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Ceva nu a mers bine :(!";
+                            frm.BringToFront();
+                        }
+
+                    }
+                    catch { };
+                }
+            }
+        }
+
         private async void load_message_Tick(object sender, EventArgs e)
         {
             if(use == true)
@@ -484,20 +550,58 @@ namespace SchoolSync.pages.FlowTalk_pages
                         {
                             flowLayoutPanel2.Controls.Clear();
                         }
-                        if (jb.Count.ToString() != count_message)
+
+                        bool seen = false;
+                        string isme = task["0"]["seen"];
+                        string[] sple = isme.Split(';');
+
+                        for (int i = 0; i < sple.Length - 1; i++)
                         {
+                            if(sple[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                            {
+                                seen = true;
+                            }
+                        }
+
+
+                        if (seen == false)
+                        {
+                            count_message = "";
+                            flowLayoutPanel2.Controls.Clear();
+                        }
+
+                        if (count_message != jb.Count.ToString())
+                        {
+                            go = false;
+
+                            if (seen == false)
+                            {
+                                isme = isme + Convert.ToString(login_signin.login.accounts_user["token"]) + ";";
+
+                                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                                data = new Dictionary<string, string>();
+                                data.Add("token", schoolsync.token);
+                                data.Add("command", "update flowtalk set seen = ? where token = ?");
+                                param = new Dictionary<string, string>()
+                                {
+                                    {"seen", isme},
+                                    {"token", token_message}
+                                };
+                                data.Add("params", JsonConvert.SerializeObject(param));
+                                task = await _class.PostRequestAsync(url, data);
+                            }
+                            
                             string admin = task["0"]["admins"];
                             string[] spl = admin.Split(';');
                             bool isadmin = false;
-                            for(int i = 0; i < spl.Length - 1; i++)
+                            for (int i = 0; i < spl.Length - 1; i++)
                             {
                                 if(spl[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
                                 {
                                     isadmin = true;
                                     break;
                                 }
-                            }                            
-
+                            }
                             int x = 0;
                             try
                             {
@@ -505,6 +609,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                             }
                             catch { };
                             count_message = jb.Count.ToString();
+
+                            
+
                             for (int i = x; i < jb.Count; i++)
                             {
 
@@ -566,6 +673,10 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             TextAlign = ContentAlignment.TopRight,
                                         };
                                         pnl.Controls.Add(lbl);
+
+                                        if (Convert.ToString(sub[i.ToString()]["is_deleted"]) == "1")
+                                            lbl.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
                                     }
                                     else if (sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] != "")
                                     {
@@ -674,6 +785,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             TextAlign = ContentAlignment.TopLeft,
                                         };
                                         pnl.Controls.Add(lbl);
+
+                                        if (Convert.ToString(sub[i.ToString()]["is_deleted"]) == "1")
+                                            lbl.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                                     }
                                     else if (sub[i.ToString()]["user"] != login_signin.login.accounts_user["username"] && sub[i.ToString()]["file"] != "")
                                     {
@@ -734,7 +848,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                         pnl.Controls.Add(chip);
                                     }
 
-                                    if(sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"])
+                                    if(sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && Convert.ToString(sub[i.ToString()]["is_deleted"]) == "0")
                                     {
                                         Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
                                         {
@@ -748,11 +862,12 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Cursor = Cursors.Hand,
                                             Tag = i,
                                         };
+                                        gcp.Click += delete_bnt;
                                         pnl.Controls.Add(gcp);
                                         gcp.BringToFront();
                                         pnl.Tag = "1";
                                     }
-                                    else
+                                    else if(Convert.ToString(sub[i.ToString()]["is_deleted"]) == "0")
                                     {
                                         Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
                                         {
@@ -767,6 +882,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Tag = i,
                                             Name = "deletebtn"
                                         };
+                                        gcp.Click += delete_bnt;
                                         pnl.Controls.Add(gcp);
                                         gcp.BringToFront();
                                         pnl.Tag = "-1";
@@ -810,6 +926,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                     catch { };
                                 }
                             }
+                            flowLayoutPanel2.VerticalScroll.Value = flowLayoutPanel2.VerticalScroll.Maximum;
                         }
                     }
                 }
