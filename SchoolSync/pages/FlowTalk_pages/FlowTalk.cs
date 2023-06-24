@@ -486,7 +486,17 @@ namespace SchoolSync.pages.FlowTalk_pages
                         }
                         if (jb.Count.ToString() != count_message)
                         {
-                            
+                            string admin = task["0"]["admins"];
+                            string[] spl = admin.Split(';');
+                            bool isadmin = false;
+                            for(int i = 0; i < spl.Length - 1; i++)
+                            {
+                                if(spl[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                                {
+                                    isadmin = true;
+                                    break;
+                                }
+                            }                            
 
                             int x = 0;
                             try
@@ -724,6 +734,44 @@ namespace SchoolSync.pages.FlowTalk_pages
                                         pnl.Controls.Add(chip);
                                     }
 
+                                    if(sub[i.ToString()]["user"] == login_signin.login.accounts_user["username"])
+                                    {
+                                        Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
+                                        {
+                                            Size = new Size(32, 32),
+                                            ImageSize = new Size(20, 20),
+                                            Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                                            ImageAlign = HorizontalAlignment.Center,
+                                            FillColor = Color.White,
+                                            Animated = true,
+                                            Location = new Point(0, 5),
+                                            Cursor = Cursors.Hand,
+                                            Tag = i,
+                                        };
+                                        pnl.Controls.Add(gcp);
+                                        gcp.BringToFront();
+                                        pnl.Tag = "1";
+                                    }
+                                    else
+                                    {
+                                        Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
+                                        {
+                                            Size = new Size(32, 32),
+                                            ImageSize = new Size(20, 20),
+                                            Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                                            ImageAlign = HorizontalAlignment.Center,
+                                            FillColor = Color.White,
+                                            Animated = true,
+                                            Location = new Point(750, 5),
+                                            Cursor = Cursors.Hand,
+                                            Tag = i,
+                                            Name = "deletebtn"
+                                        };
+                                        pnl.Controls.Add(gcp);
+                                        gcp.BringToFront();
+                                        pnl.Tag = "-1";
+                                    }
+
                                 }
                                 else if (sub[i.ToString()]["root"] == "1")
                                 {
@@ -741,10 +789,26 @@ namespace SchoolSync.pages.FlowTalk_pages
                                     };
                                     pnl.Controls.Add(lbl);
                                 }
-
-
-
                                 flowLayoutPanel2.Controls.Add(pnl);
+                            }
+
+                            if (isadmin == false)
+                            {
+                                foreach (Control ctrl in flowLayoutPanel2.Controls)
+                                {
+                                    try
+                                    {
+                                        if (ctrl.Tag != null && ctrl.Tag.ToString() == "-1")
+                                        {
+                                            try
+                                            {
+                                                ctrl.Controls["deletebtn"].Visible = false;
+                                            }
+                                            catch { };
+                                        }
+                                    }
+                                    catch { };
+                                }
                             }
                         }
                     }
