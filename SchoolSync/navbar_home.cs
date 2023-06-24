@@ -109,6 +109,7 @@ namespace SchoolSync
 
                 var frm = new pages.Home();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
 
                 background_color_btn();
                 guna2Button1.FillColor = Color.FromArgb(66, 66, 66);
@@ -127,6 +128,7 @@ namespace SchoolSync
 
                 var frm = new pages.EduMentor();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
 
                 background_color_btn();
                 guna2Button2.FillColor = Color.FromArgb(66, 66, 66);
@@ -144,7 +146,7 @@ namespace SchoolSync
 
                 var frm = new pages.EduMentor_pages.EduMentor_Adauga();
                 guna2Panel2.Controls.Add(frm);
-
+                frm.BringToFront();
                 background_color_btn();
                 guna2Button2.FillColor = Color.FromArgb(66, 66, 66);
             }
@@ -175,6 +177,7 @@ namespace SchoolSync
 
                 var frm = new pages.EduMentor_pages.EduMentor_Vizualizare();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
             }
             else if (page == "EduMentor_vizualizare_->_home" && use == false)
             {
@@ -236,7 +239,7 @@ namespace SchoolSync
 
                 var frm = new pages.InvataUnit();
                 guna2Panel2.Controls.Add(frm);
-
+                frm.BringToFront();
                 background_color_btn();
                 guna2Button3.FillColor = Color.FromArgb(66, 66, 66);
             }
@@ -253,6 +256,7 @@ namespace SchoolSync
 
                 var frm = new pages.InvataUnit_pages.InvataUnit_Adauga();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
             }
             else if (page == "InvataUnit_editare" && use == false)
             {
@@ -281,7 +285,7 @@ namespace SchoolSync
 
                 var frm = new pages.InvataUnit_pages.InvataUnit_Vizualizare();
                 guna2Panel2.Controls.Add(frm);
-
+                frm.BringToFront();
             }
             
             else if(page == "FlowTalk" && use == false)
@@ -297,6 +301,7 @@ namespace SchoolSync
 
                 var frm = new pages.FlowTalk_pages.FlowTalk();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
             }
             else if (page == "FlowTalk_adauga" && use == false)
             {
@@ -311,6 +316,7 @@ namespace SchoolSync
 
                 var frm = new pages.FlowTalk_pages.FlowTalk_Adauga();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
             }
             else if (page == "FlowTalk_editare" && use == false)
             {
@@ -340,6 +346,7 @@ namespace SchoolSync
 
                 var frm = new pages.Profil();
                 guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
                 background_color_btn();
                 guna2Button5.FillColor = Color.FromArgb(66, 66, 66);
             }

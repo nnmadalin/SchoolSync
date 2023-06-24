@@ -402,7 +402,6 @@
     <None Include="Resources\download %2827%29.png" />
     <None Include="Resources\download %2828%29.png" />
     <None Include="Resources\download %2829%29.png" />
-    <Content Include="TODO.txt" />
     <None Include="Resources\standard_avatar.png" />
     <None Include="Resources\home.png" />
     <None Include="Resources\icons8-checkmark-64 %281%29.png" />

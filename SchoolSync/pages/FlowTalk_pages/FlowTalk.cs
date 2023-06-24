@@ -131,7 +131,18 @@ namespace SchoolSync.pages.FlowTalk_pages
 
                             int x = message.Count - 1;
                             if (x >= 0)
-                                last_mess.Text = sub[x.ToString()]["text"];
+                            {
+                                if (Convert.ToString(sub[x.ToString()]["text"]) != "")
+                                {
+                                    last_mess.Text = sub[x.ToString()]["text"];
+                                }
+                                else
+                                {   
+                                    string y = sub[x.ToString()]["file"];
+                                    string[] split = y.Split('/');
+                                    last_mess.Text = split[2];
+                                }
+                            }                                
 
                             pnl.Controls.Add(pct);
                             pnl.Controls.Add(name);
