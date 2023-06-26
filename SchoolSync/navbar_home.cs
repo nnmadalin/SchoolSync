@@ -79,7 +79,10 @@ namespace SchoolSync
             Properties.Settings.Default.Data_account = "";
             Properties.Settings.Default.Save();
 
-            var frm = new login_signin.login ();
+            page = "";
+            timer1.Dispose();
+
+            var frm = new login_signin.login();
             panel.Controls.Clear();
             panel.Controls.Add(frm);
         }
@@ -95,6 +98,7 @@ namespace SchoolSync
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Console.WriteLine(guna2Panel2.Controls[0]);
             timer1.Stop();
             if (page == "Home" && use == false)
             {
