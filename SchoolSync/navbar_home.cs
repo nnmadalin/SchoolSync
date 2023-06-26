@@ -42,6 +42,7 @@ namespace SchoolSync
             guna2Button3.FillColor = Color.Transparent;
             guna2Button5.FillColor = Color.Transparent;
             guna2Button6.FillColor = Color.Transparent;
+            guna2Button7.FillColor = Color.Transparent;
         }        
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -96,9 +97,14 @@ namespace SchoolSync
             navbar_home.page = "FlowTalk";
         }
 
+        private void guna2Button7_Click(object sender, EventArgs e)
+        {
+            navbar_home.use = false;
+            navbar_home.page = "TimePlan";
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Console.WriteLine(guna2Panel2.Controls[0]);
             timer1.Stop();
             if (page == "Home" && use == false)
             {
@@ -306,6 +312,8 @@ namespace SchoolSync
                 var frm = new pages.FlowTalk_pages.FlowTalk();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
+                background_color_btn();
+                guna2Button4.FillColor = Color.FromArgb(66, 66, 66);
             }
             else if (page == "FlowTalk_adauga" && use == false)
             {
