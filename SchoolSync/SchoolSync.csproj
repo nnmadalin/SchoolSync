@@ -226,6 +226,18 @@
     <Compile Include="pages\Profil_pages\Profil_Modifica.Designer.cs">
       <DependentUpon>Profil_Modifica.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\TimePlan_pages\TimePlan_Calendar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\TimePlan_pages\TimePlan_Calendar.Designer.cs">
+      <DependentUpon>TimePlan_Calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\TimePlan_pages\TimePlan_Orar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\TimePlan_pages\TimePlan_Orar.Designer.cs">
+      <DependentUpon>TimePlan_Orar.cs</DependentUpon>
+    </Compile>
     <Compile Include="schoolsync.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +306,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\Profil_pages\Profil_Modifica.resx">
       <DependentUpon>Profil_Modifica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\TimePlan_pages\TimePlan_Calendar.resx">
+      <DependentUpon>TimePlan_Calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\TimePlan_pages\TimePlan_Orar.resx">
+      <DependentUpon>TimePlan_Orar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="schoolsync.resx">
       <DependentUpon>schoolsync.cs</DependentUpon>
@@ -439,5 +457,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
