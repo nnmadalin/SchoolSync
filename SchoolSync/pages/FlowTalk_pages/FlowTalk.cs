@@ -135,13 +135,16 @@ namespace SchoolSync.pages.FlowTalk_pages
                             {
                                 if (Convert.ToString(sub[x.ToString()]["text"]) != "")
                                 {
-                                    last_mess.Text = sub[x.ToString()]["text"];
+                                    if(Convert.ToString(sub[x.ToString()]["root"]) == "0")
+                                        last_mess.Text = sub[x.ToString()]["user"] + ": " + sub[x.ToString()]["text"];
+                                    else
+                                        last_mess.Text =  sub[x.ToString()]["text"];
                                 }
                                 else
                                 {   
                                     string y = sub[x.ToString()]["file"];
                                     string[] split = y.Split('/');
-                                    last_mess.Text = split[2];
+                                    last_mess.Text = sub[x.ToString()]["user"] + ": " + split[2];
                                 }
                             }                                
 
