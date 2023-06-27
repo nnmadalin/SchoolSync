@@ -178,7 +178,7 @@ namespace SchoolSync.pages.TimePlan_pages
             this.guna2Panel1.Controls.Add(this.label4);
             this.guna2Panel1.Controls.Add(this.guna2Panel2);
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
-            this.guna2Panel1.Location = new System.Drawing.Point(27, 55);
+            this.guna2Panel1.Location = new System.Drawing.Point(19, 48);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(1135, 579);
             this.guna2Panel1.TabIndex = 0;
