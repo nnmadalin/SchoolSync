@@ -28,6 +28,8 @@ namespace SchoolSync.pages.TimePlan_pages
 
         async void load_tab(DateTime time)
         {
+            schoolsync.show_loading();
+
             label1.Text = time.Day.ToString();
             if (time.DayOfWeek.ToString() == "Monday")
                 label2.Text = "Luni";
@@ -154,7 +156,25 @@ namespace SchoolSync.pages.TimePlan_pages
                     }
                     catch { };
                 }
+
+                for (int i = 1; i <= daymonth; i++)
+                {
+                    foreach (Control ctrl in guna2Panel1.Controls)
+                    {
+                        if (ctrl is Guna.UI2.WinForms.Guna2CircleButton && ctrl.Name.ToString() == "guna2CircleButton" + (i + dayofweek).ToString())
+                        {
+                            DateTime dt = new DateTime(time.Year, time.Month, i);
+                            string dt_str = dt.ToString("MM/dd/yyyy");
+                            if (json.SelectToken(dt_str) != null)
+                            {
+                                ((Guna.UI2.WinForms.Guna2CircleButton)ctrl).BorderThickness = 2;
+                            }
+                        }
+                    }
+                }
+
             }
+            schoolsync.hide_loading();
         }
 
         private void TimePlan_Calendar_Load(object sender, EventArgs e)
