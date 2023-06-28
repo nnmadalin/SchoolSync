@@ -28,7 +28,7 @@ namespace SchoolSync.pages.TimePlan_pages
 
         async void load_tab(DateTime time)
         {
-            schoolsync.show_loading();
+            //schoolsync.show_loading();
 
             label1.Text = time.Day.ToString();
             if (time.DayOfWeek.ToString() == "Monday")
@@ -136,7 +136,6 @@ namespace SchoolSync.pages.TimePlan_pages
             {
                 dynamic calendar = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["calendar"]));
                 JObject json = calendar;
-
                 try
                 {
                     JArray array = (JArray)json.SelectToken(time.ToString("MM/dd/yyyy"));
@@ -174,7 +173,7 @@ namespace SchoolSync.pages.TimePlan_pages
                 }
 
             }
-            schoolsync.hide_loading();
+            //schoolsync.hide_loading();
         }
 
         private void TimePlan_Calendar_Load(object sender, EventArgs e)
@@ -269,30 +268,37 @@ namespace SchoolSync.pages.TimePlan_pages
                     task = await _class.PostRequestAsync(url, data);
                 }
 
-                JObject json = calendar;
+                JObject json = new JObject(); ;
 
-                bool keyExists = false;
-                foreach (JProperty property in json.Properties())
+                if (calendar != null)
+                    json = calendar;
+
+                bool keyExists = false;  
+
+                if(json != null)
                 {
-                    if (property.Name == now.ToString("MM/dd/yyyy"))
+                    foreach (JProperty property in json.Properties())
                     {
-                        keyExists = true;
-                        if (property.Value.Type == JTokenType.Array)
+                        if (property.Name == now.ToString("MM/dd/yyyy"))
                         {
-                            JArray existingArray = (JArray)property.Value;
-                            existingArray.Add(eveniment);
+                            keyExists = true;
+                            if (property.Value.Type == JTokenType.Array)
+                            {
+                                JArray existingArray = (JArray)property.Value;
+                                existingArray.Add(eveniment);
+                            }
+                            else
+                            {
+                                JArray newArray = new JArray(property.Value, eveniment);
+                                json[now.ToString("MM/dd/yyyy")] = newArray;
+                            }
+                            break;
                         }
-                        else
-                        {
-                            JArray newArray = new JArray(property.Value, eveniment);
-                            json[now.ToString("MM/dd/yyyy")] = newArray;
-                        }
-                        break;
                     }
                 }
 
                 if (!keyExists)
-                {
+                {                    
                     json.Add(now.ToString("MM/dd/yyyy"), eveniment);
                 }
 
@@ -357,8 +363,11 @@ namespace SchoolSync.pages.TimePlan_pages
                         try
                         {
                             JArray array = (JArray)json[now.ToString("MM/dd/yyyy")];
-                           
                             array.RemoveAt(index);
+                            if(array.Count == 0)
+                            {
+                                json.Remove(now.ToString("MM/dd/yyyy"));
+                            }
                         }
                         catch 
                         {
