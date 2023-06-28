@@ -101,7 +101,7 @@ namespace SchoolSync
         private void guna2Button7_Click(object sender, EventArgs e)
         {
             navbar_home.use = false;
-            navbar_home.page = "TimePlan";
+            navbar_home.page = "TimePlan_calendar";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -346,7 +346,7 @@ namespace SchoolSync
                 frm.BringToFront();
             }
 
-            else if (page == "TimePlan" && use == false)
+            else if (page == "TimePlan_calendar" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
@@ -363,6 +363,22 @@ namespace SchoolSync
                 background_color_btn();
                 guna2Button7.FillColor = Color.FromArgb(66, 66, 66);
             }
+            else if (page == "TimePlan_orar" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | TimePlan";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.TimePlan_pages.TimePlan_Orar();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
+           
 
             else if (page == "Profil" && use == false)
             {

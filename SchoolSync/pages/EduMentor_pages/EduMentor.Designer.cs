@@ -102,6 +102,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button1
             // 
+            this.guna2Button1.Animated = true;
             this.guna2Button1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button1.BorderRadius = 10;
@@ -123,6 +124,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button2
             // 
+            this.guna2Button2.Animated = true;
             this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button2.BorderRadius = 10;
@@ -154,6 +156,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button3
             // 
+            this.guna2Button3.Animated = true;
             this.guna2Button3.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button3.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button3.BorderRadius = 10;
@@ -175,6 +178,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button21
             // 
+            this.guna2Button21.Animated = true;
             this.guna2Button21.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button21.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button21.BorderRadius = 20;
@@ -196,6 +200,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button18
             // 
+            this.guna2Button18.Animated = true;
             this.guna2Button18.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button18.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button18.BorderRadius = 20;
@@ -218,6 +223,7 @@ namespace SchoolSync.pages
             // 
             // guna2Button4
             // 
+            this.guna2Button4.Animated = true;
             this.guna2Button4.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button4.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
             this.guna2Button4.BorderRadius = 20;
