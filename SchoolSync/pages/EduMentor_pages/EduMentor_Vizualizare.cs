@@ -104,7 +104,7 @@ namespace SchoolSync.pages.EduMentor_pages
                     frm.BringToFront();
                 }
 
-                //t_usr.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token_user"] + ".png");                
+                guna2CirclePictureBox1.Image = await _class.IncarcaAvatar(Convert.ToString(task["0"]["token_user"]));            
 
                 string file = task["0"]["files"];
                 string[] file_split = file.Split(';');

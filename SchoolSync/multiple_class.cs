@@ -130,6 +130,29 @@ namespace SchoolSync
             }
         }
 
+        public async Task<Image> IncarcaAvatar(string token)
+        {
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from files where token_user = ? and token = ?");
 
+            var param = new Dictionary<string, string>()
+                {
+                    { "token_user", token},
+                    { "token", "user_foto"}
+                };
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                return  await IncarcaImagineAsync("https://schoolsync.nnmadalin.me/attachments/" + token + "/user_foto/" + task["0"]["name"]);
+            }
+            else
+            {
+                return SchoolSync.Properties.Resources.standard_avatar;
+            }
+        }
     }
 }

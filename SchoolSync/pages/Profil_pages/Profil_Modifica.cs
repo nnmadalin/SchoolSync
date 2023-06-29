@@ -36,7 +36,7 @@ namespace SchoolSync.pages
 
             dynamic task = await _Class.PostRequestAsync(url, data);
 
-            if(task["message"] == "success")
+            if (task["message"] == "success")
             {
                 guna2TextBox1.Text = task["0"]["full_name"];
                 guna2TextBox2.Text = task["0"]["username"];
@@ -46,7 +46,7 @@ namespace SchoolSync.pages
                 //load skills
                 string str = task["0"]["skills"];
                 string[] split = str.Split(';');
-                for(int i = 0; i < split.Length - 1; i++)
+                for (int i = 0; i < split.Length - 1; i++)
                 {
                     Guna.UI2.WinForms.Guna2Chip gcp = new Guna.UI2.WinForms.Guna2Chip()
                     {
@@ -62,10 +62,45 @@ namespace SchoolSync.pages
                     flowLayoutPanel1.Controls.Add(gcp);
                 }
 
-
-                //guna2CirclePictureBox1.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
-                //guna2PictureBox1.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userbackground_" + login_signin.login.accounts_user["token"] + ".png");
+                
                 guna2TextBox7.Text = task["0"]["description"];
+
+                // afisare avatar
+                url = "https://schoolsync.nnmadalin.me/api/get.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from files where token_user = ? and token = ?");
+
+                param = new Dictionary<string, string>()
+                {
+                    { "token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                    { "token", "user_foto"}
+                };
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _Class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    guna2CirclePictureBox1.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/attachments/" + login_signin.login.accounts_user["token"] + "/user_foto/" + task["0"]["name"]);
+                }
+                // afisare backgorund
+                url = "https://schoolsync.nnmadalin.me/api/get.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from files where token_user = ? and token = ?");
+
+                param = new Dictionary<string, string>()
+                {
+                    { "token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                    { "token", "user_background"}
+                };
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _Class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    guna2PictureBox1.Image = await _Class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/attachments/" + login_signin.login.accounts_user["token"] + "/user_background/" + task["0"]["name"]);
+                }
             }
             schoolsync.hide_loading();
         }
@@ -146,6 +181,7 @@ namespace SchoolSync.pages
             }            
             else
             {
+                schoolsync.show_loading();
                 string full_name = guna2TextBox1.Text;
                 string locatia = guna2TextBox4.Text;
                 string pass = guna2TextBox5.Text;
@@ -162,34 +198,81 @@ namespace SchoolSync.pages
                 multiple_class _Class = new multiple_class();
                 
                 dynamic task;
-                /*
+                var param = new Dictionary<string, string>();
+
                 if (change_foto1 == true)
                 {
                     url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
                     data = new Dictionary<string, string>();
                     data.Add("token", schoolsync.token);
-                    data.Add("file", "userfoto_" + login_signin.login.accounts_user["token"] + ".png");
+                    data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                    data.Add("file", "user_foto");
                     task = await _Class.PostRequestAsync(url, data);
 
-                    //_Class.UploadFileAsync_token(ff1, "userfoto_");
+                    //sterge background din db
+
+                    url = "https://schoolsync.nnmadalin.me/api/delete.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "delete from files where token_user = ? and token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                        {"token", "user_foto"}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    task = await _Class.PostRequestAsync(url, data);
+
+                    //incarca background pe server
+                    
+                    FileInfo info = new FileInfo(ff1);
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                    data.Add("token_file", "user_foto");
+                    data.Add("filename", info.Name);
+                    await _Class.UploadFileAsync(data, info.FullName);
                 }
 
                 if (change_foto2 == true)
                 {
                     url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
+                    data = new Dictionary<string, string>();  
+                    data.Add("command", schoolsync.token);
+                    data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                    data.Add("file", "user_background");
+                    task = await _Class.PostRequestAsync(url, data);
+                    //sterge background din db
+
+                    url = "https://schoolsync.nnmadalin.me/api/delete.php";
                     data = new Dictionary<string, string>();
                     data.Add("token", schoolsync.token);
-                    data.Add("file", "userbackground_" + login_signin.login.accounts_user["token"] + ".png");
+                    data.Add("command", "delete from files where token_user = ? and token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                        {"token", "user_background"}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
                     task = await _Class.PostRequestAsync(url, data);
-                    //_Class.UploadFileAsync_token(ff2, "userbackground_");
+                    
+                    //incarca background pe server
+
+                    FileInfo info = new FileInfo(ff2);
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                    data.Add("token_file", "user_background");
+                    data.Add("filename", info.Name);
+                    await _Class.UploadFileAsync(data, info.FullName);
                 }
-                */
+                
                 url = "https://schoolsync.nnmadalin.me/api/put.php";
                 data = new Dictionary<string, string>();
                 data.Add("token", schoolsync.token);
                 data.Add("command", "update accounts set full_name = ?, location = ?, description = ?, skills = ? where token = ?");
 
-                var param = new Dictionary<string, string>()
+                param = new Dictionary<string, string>()
                 {
                     { "full_name", full_name},
                     { "location", locatia},
@@ -200,6 +283,7 @@ namespace SchoolSync.pages
                 data.Add("params", JsonConvert.SerializeObject(param));
 
                 task = await _Class.PostRequestAsync(url, data);
+                schoolsync.hide_loading();
                 if (task["message"] == "update success")
                 {
 

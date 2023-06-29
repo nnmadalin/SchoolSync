@@ -63,6 +63,8 @@ namespace SchoolSync.pages.InvataUnit_pages
                     }
                 }
 
+                guna2CirclePictureBox1.Image = await _Class.IncarcaAvatar(Convert.ToString(task["0"]["token_user"]));
+
                 label1.Text = task["0"]["created"];
                 label1.Tag = task["0"]["token_user"];
                 label2.Text = task["0"]["category"] + " • " + task["0"]["data"];
@@ -182,6 +184,7 @@ namespace SchoolSync.pages.InvataUnit_pages
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
         }
+
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
@@ -331,7 +334,10 @@ namespace SchoolSync.pages.InvataUnit_pages
                             UseTransparentBackground = true,
                             Location = new Point(30, 20)
                         };
-                        //cpb_answer.Image = await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
+
+                        string token_user_get = await get_token(Convert.ToString(task[i.ToString()]["username"]));
+
+                        cpb_answer.Image = await _Class.IncarcaAvatar(token_user_get);
 
                         Label lbl_name_answer = new Label()
                         {
@@ -777,6 +783,11 @@ namespace SchoolSync.pages.InvataUnit_pages
                 load_answers();
             else
                 timer1.Enabled = false;
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

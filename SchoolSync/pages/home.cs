@@ -34,7 +34,7 @@ namespace SchoolSync.pages
             multiple_class _Class = new multiple_class();
 
             label2.Text = login_signin.login.accounts_user["username"] + "!";
-            guna2CirclePictureBox1.Image =  await _Class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + login_signin.login.accounts_user["token"] + ".png");
+            guna2CirclePictureBox1.Image =  await _Class.IncarcaAvatar(Convert.ToString(login_signin.login.accounts_user["token"]));
 
             dynamic task = await _Class.getstring("https://type.fit/api/quotes");
 

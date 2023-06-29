@@ -522,6 +522,16 @@ namespace SchoolSync.pages.FlowTalk_pages
             }
         }
 
+        private async void redirect_profile(object sender, EventArgs e)
+        {
+            string tag = ((Control)sender).Tag.ToString();
+
+            navbar_home.page = "Profil_person";
+            navbar_home.use = false;
+            navbar_home.token_page = tag;
+
+        }
+
         private async void load_message_Tick(object sender, EventArgs e)
         {
             if(use == true)
@@ -652,8 +662,14 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Size = new Size(40, 40),
                                             Location = new Point(760, 5),
                                             FillColor = Color.White,
+                                            Tag = sub[i.ToString()]["user_token"],
+                                            SizeMode = PictureBoxSizeMode.StretchImage,
+                                            Cursor = Cursors.Hand,
                                         };
+                                        pct.Click += redirect_profile;
                                         pnl.Controls.Add(pct);
+
+                                        pct.Image = await _class.IncarcaAvatar(Convert.ToString(sub[i.ToString()]["user_token"]));
 
                                         Label lbl_username = new Label()
                                         {
@@ -665,7 +681,11 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             ForeColor = Color.White,
                                             Text = sub[i.ToString()]["user"],
                                             TextAlign = ContentAlignment.TopRight,
+                                            Tag = sub[i.ToString()]["user_token"],
+                                            Cursor = Cursors.Hand,
                                         };
+
+                                        lbl_username.Click += redirect_profile;
                                         pnl.Controls.Add(lbl_username);
 
                                         Label lbl_date = new Label()
@@ -706,6 +726,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Location = new Point(760, 5),
                                             FillColor = Color.White,
                                         };
+                                       
                                         pnl.Controls.Add(pct);
 
                                         Label lbl_username = new Label()
@@ -719,6 +740,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Text = sub[i.ToString()]["user"],
                                             TextAlign = ContentAlignment.TopRight,
                                         };
+                                        
                                         pnl.Controls.Add(lbl_username);
 
                                         Label lbl_date = new Label()
@@ -764,7 +786,12 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             Size = new Size(40, 40),
                                             Location = new Point(0, 5),
                                             FillColor = Color.White,
+                                            Tag = sub[i.ToString()]["user_token"],
+                                            SizeMode = PictureBoxSizeMode.StretchImage,
+                                            Cursor = Cursors.Hand,
                                         };
+                                        pct.Click += redirect_profile;
+                                        pct.Image = await _class.IncarcaAvatar(Convert.ToString(sub[i.ToString()]["user_token"]));
                                         pnl.Controls.Add(pct);
 
                                         Label lbl_username = new Label()
@@ -777,7 +804,10 @@ namespace SchoolSync.pages.FlowTalk_pages
                                             ForeColor = Color.White,
                                             Text = sub[i.ToString()]["user"],
                                             TextAlign = ContentAlignment.TopLeft,
+                                            Tag = sub[i.ToString()]["user_token"],
+                                            Cursor = Cursors.Hand,
                                         };
+                                        lbl_username.Click += redirect_profile;
                                         pnl.Controls.Add(lbl_username);
 
                                         Label lbl_date = new Label()
