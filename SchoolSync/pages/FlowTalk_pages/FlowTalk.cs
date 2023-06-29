@@ -164,7 +164,24 @@ namespace SchoolSync.pages.FlowTalk_pages
         {
             schoolsync.show_loading();
 
-            load_tab();
+            if (navbar_home.page == "FlowTalk_home")
+            {
+                token_message = navbar_home.token_page;
+                use = true;
+                go = true;
+                flowLayoutPanel2.Tag = token_message;
+                flowLayoutPanel2.Controls.Clear();
+
+                if (guna2Panel3.Visible == false)
+                {
+                    guna2Panel3.Visible = true;
+                    flowLayoutPanel2.Visible = true;
+                    guna2TextBox1.Visible = true;
+                    guna2Button1.Visible = true;
+                }
+            }
+
+            load_tab();           
 
             schoolsync.hide_loading();
         }

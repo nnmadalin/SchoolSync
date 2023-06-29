@@ -165,7 +165,7 @@ namespace SchoolSync.pages
             this.guna2Panel3.Controls.Add(this.label7);
             this.guna2Panel3.Controls.Add(this.label6);
             this.guna2Panel3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.guna2Panel3.Location = new System.Drawing.Point(770, 68);
+            this.guna2Panel3.Location = new System.Drawing.Point(770, 62);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.ShadowDecoration.BorderRadius = 25;
             this.guna2Panel3.ShadowDecoration.Depth = 3;
@@ -202,7 +202,7 @@ namespace SchoolSync.pages
             this.guna2Panel4.Controls.Add(this.label8);
             this.guna2Panel4.Controls.Add(this.label9);
             this.guna2Panel4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.guna2Panel4.Location = new System.Drawing.Point(1019, 68);
+            this.guna2Panel4.Location = new System.Drawing.Point(1019, 62);
             this.guna2Panel4.Name = "guna2Panel4";
             this.guna2Panel4.ShadowDecoration.BorderRadius = 25;
             this.guna2Panel4.ShadowDecoration.Depth = 3;
@@ -263,7 +263,7 @@ namespace SchoolSync.pages
             this.guna2Panel5.BorderRadius = 13;
             this.guna2Panel5.Controls.Add(this.label11);
             this.guna2Panel5.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
-            this.guna2Panel5.Location = new System.Drawing.Point(770, 218);
+            this.guna2Panel5.Location = new System.Drawing.Point(770, 216);
             this.guna2Panel5.MinimumSize = new System.Drawing.Size(0, 60);
             this.guna2Panel5.Name = "guna2Panel5";
             this.guna2Panel5.Padding = new System.Windows.Forms.Padding(0, 0, 0, 5);
@@ -271,7 +271,7 @@ namespace SchoolSync.pages
             this.guna2Panel5.ShadowDecoration.Depth = 3;
             this.guna2Panel5.ShadowDecoration.Enabled = true;
             this.guna2Panel5.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(15);
-            this.guna2Panel5.Size = new System.Drawing.Size(406, 199);
+            this.guna2Panel5.Size = new System.Drawing.Size(406, 166);
             this.guna2Panel5.TabIndex = 12;
             this.guna2Panel5.UseTransparentBackground = true;
             // 
@@ -291,7 +291,7 @@ namespace SchoolSync.pages
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.Transparent;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(765, 177);
+            this.label12.Location = new System.Drawing.Point(765, 179);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(62, 25);
             this.label12.TabIndex = 11;
@@ -302,7 +302,7 @@ namespace SchoolSync.pages
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(765, 442);
+            this.label13.Location = new System.Drawing.Point(765, 414);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(173, 25);
             this.label13.TabIndex = 13;
@@ -310,9 +310,9 @@ namespace SchoolSync.pages
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(770, 481);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(770, 460);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(406, 185);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(406, 206);
             this.flowLayoutPanel2.TabIndex = 14;
             // 
             // Home
