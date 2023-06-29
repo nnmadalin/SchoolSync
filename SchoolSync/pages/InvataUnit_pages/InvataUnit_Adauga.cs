@@ -182,7 +182,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                 try
                 {
-                    _ = await _class.new_UploadFileAsync(data, control.Tag.ToString());
+                    _ = await _class.UploadFileAsync(data, control.Tag.ToString());
                     files += (token_file + ";");
                 }
                 catch (Exception ee)

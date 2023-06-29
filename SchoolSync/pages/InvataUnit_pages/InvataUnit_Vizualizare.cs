@@ -307,7 +307,6 @@ namespace SchoolSync.pages.InvataUnit_pages
                 
                 if (number_answer != jb.Count.ToString())
                 {
-                    schoolsync.show_loading();
                     flowLayoutPanel3.Controls.Clear();
                     number_answer = jb.Count.ToString();
                     for (int i = jb.Count - 1; i >= 0; i--)
@@ -327,7 +326,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                         {
                             Size = new Size(50, 50),
                             ErrorImage = SchoolSync.Properties.Resources.standard_avatar,
-                            InitialImage = SchoolSync.Properties.Resources.standard_avatar,
+                            Image = SchoolSync.Properties.Resources.standard_avatar,
                             SizeMode = PictureBoxSizeMode.StretchImage,
                             UseTransparentBackground = true,
                             Location = new Point(30, 20)
@@ -597,7 +596,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     param.Add("token_file", token_file);
                     param.Add("filename", inf.Name);
 
-                    _ = await _class.new_UploadFileAsync(param, control.Tag.ToString());
+                    _ = await _class.UploadFileAsync(param, control.Tag.ToString());
                     files += (token_file + ";");
                 }               
 

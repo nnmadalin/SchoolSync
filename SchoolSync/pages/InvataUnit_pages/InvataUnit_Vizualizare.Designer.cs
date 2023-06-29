@@ -354,7 +354,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             // 
             this.guna2Button1.Animated = true;
             this.guna2Button1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
-            this.guna2Button1.BorderRadius = 10;
+            this.guna2Button1.BorderRadius = 15;
             this.guna2Button1.BorderThickness = 2;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -366,11 +366,10 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button1.ForeColor = System.Drawing.Color.Black;
             this.guna2Button1.Image = global::SchoolSync.Properties.Resources.favorite_FILL0_wght700_GRAD0_opsz48;
             this.guna2Button1.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.guna2Button1.Location = new System.Drawing.Point(67, 3);
+            this.guna2Button1.Location = new System.Drawing.Point(1111, 3);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(121, 39);
+            this.guna2Button1.Size = new System.Drawing.Size(41, 39);
             this.guna2Button1.TabIndex = 15;
-            this.guna2Button1.Text = "Favorite!";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 

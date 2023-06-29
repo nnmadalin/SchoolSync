@@ -94,9 +94,9 @@ namespace SchoolSync.pages
             "Toate",
             "Fără răspuns",
             "S-a răspuns"});
-            this.guna2ComboBox2.Location = new System.Drawing.Point(352, 14);
+            this.guna2ComboBox2.Location = new System.Drawing.Point(225, 15);
             this.guna2ComboBox2.Name = "guna2ComboBox2";
-            this.guna2ComboBox2.Size = new System.Drawing.Size(167, 36);
+            this.guna2ComboBox2.Size = new System.Drawing.Size(188, 36);
             this.guna2ComboBox2.StartIndex = 0;
             this.guna2ComboBox2.TabIndex = 2;
             this.guna2ComboBox2.SelectedIndexChanged += new System.EventHandler(this.combobox1);
@@ -113,11 +113,11 @@ namespace SchoolSync.pages
             this.guna2Button17.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(226)))), ((int)(((byte)(254)))));
             this.guna2Button17.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button17.Location = new System.Drawing.Point(841, 15);
+            this.guna2Button17.Location = new System.Drawing.Point(909, 15);
             this.guna2Button17.Name = "guna2Button17";
             this.guna2Button17.ShadowDecoration.BorderRadius = 15;
             this.guna2Button17.ShadowDecoration.Depth = 20;
-            this.guna2Button17.Size = new System.Drawing.Size(158, 36);
+            this.guna2Button17.Size = new System.Drawing.Size(148, 36);
             this.guna2Button17.TabIndex = 3;
             this.guna2Button17.Text = "Intrebarile tale";
             this.guna2Button17.Click += new System.EventHandler(this.intrebarile_tale);
@@ -125,7 +125,7 @@ namespace SchoolSync.pages
             // guna2Button18
             // 
             this.guna2Button18.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button18.BorderRadius = 10;
+            this.guna2Button18.BorderRadius = 20;
             this.guna2Button18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button18.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button18.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -135,13 +135,12 @@ namespace SchoolSync.pages
             this.guna2Button18.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
             this.guna2Button18.Image = global::SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
-            this.guna2Button18.Location = new System.Drawing.Point(1045, 14);
+            this.guna2Button18.Location = new System.Drawing.Point(1114, 6);
             this.guna2Button18.Name = "guna2Button18";
             this.guna2Button18.ShadowDecoration.BorderRadius = 15;
             this.guna2Button18.ShadowDecoration.Depth = 20;
-            this.guna2Button18.Size = new System.Drawing.Size(132, 36);
+            this.guna2Button18.Size = new System.Drawing.Size(45, 45);
             this.guna2Button18.TabIndex = 4;
-            this.guna2Button18.Text = "Favorite";
             this.guna2Button18.Click += new System.EventHandler(this.favorite);
             // 
             // panel_materii
@@ -553,11 +552,11 @@ namespace SchoolSync.pages
             this.guna2Button19.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(211)))), ((int)(((byte)(153)))));
             this.guna2Button19.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button19.Location = new System.Drawing.Point(546, 14);
+            this.guna2Button19.Location = new System.Drawing.Point(419, 15);
             this.guna2Button19.Name = "guna2Button19";
             this.guna2Button19.ShadowDecoration.BorderRadius = 15;
             this.guna2Button19.ShadowDecoration.Depth = 20;
-            this.guna2Button19.Size = new System.Drawing.Size(200, 36);
+            this.guna2Button19.Size = new System.Drawing.Size(162, 36);
             this.guna2Button19.TabIndex = 19;
             this.guna2Button19.Text = "Toate intrebarile";
             this.guna2Button19.Click += new System.EventHandler(this.home);
@@ -573,7 +572,7 @@ namespace SchoolSync.pages
             // guna2Button21
             // 
             this.guna2Button21.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Button21.BorderRadius = 10;
+            this.guna2Button21.BorderRadius = 20;
             this.guna2Button21.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button21.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button21.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -582,11 +581,11 @@ namespace SchoolSync.pages
             this.guna2Button21.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(199)))), ((int)(((byte)(191)))));
             this.guna2Button21.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button21.Location = new System.Drawing.Point(225, 14);
+            this.guna2Button21.Image = global::SchoolSync.Properties.Resources.add_FILL1_wght700_GRAD0_opsz48;
+            this.guna2Button21.Location = new System.Drawing.Point(1063, 6);
             this.guna2Button21.Name = "guna2Button21";
-            this.guna2Button21.Size = new System.Drawing.Size(121, 36);
+            this.guna2Button21.Size = new System.Drawing.Size(45, 45);
             this.guna2Button21.TabIndex = 22;
-            this.guna2Button21.Text = "Întreabă";
             this.guna2Button21.UseTransparentBackground = true;
             this.guna2Button21.Click += new System.EventHandler(this.load_adaugare_intrebare_panel);
             // 

@@ -40,7 +40,7 @@ namespace SchoolSync.pages
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("command", string.Format("select * from edumentor "));
-            task = await _Class.PostRequestAsync_norefresh(url, data);
+            task = await _Class.PostRequestAsync(url, data);
             JObject jb = task;
             label7.Text = (jb.Count - 1).ToString();
 
@@ -49,7 +49,7 @@ namespace SchoolSync.pages
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("command", string.Format("select * from invataunit "));
-            task = await _Class.PostRequestAsync_norefresh(url, data);
+            task = await _Class.PostRequestAsync(url, data);
             jb = task;
             label8.Text = (jb.Count - 1).ToString();
 
@@ -59,7 +59,7 @@ namespace SchoolSync.pages
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
             data.Add("command", string.Format("select * from edumentor order by data DESC"));
-            task = await _Class.PostRequestAsync_norefresh(url, data);
+            task = await _Class.PostRequestAsync(url, data);
             jb = task;
 
             

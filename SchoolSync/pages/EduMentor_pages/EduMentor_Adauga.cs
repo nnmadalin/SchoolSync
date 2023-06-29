@@ -68,7 +68,7 @@ namespace SchoolSync.pages.EduMentor_pages
                 data.Add("token_file", token_file);
                 data.Add("filename", inf.Name);
 
-                await _class.new_UploadFileAsync(data, control.Tag.ToString());
+                await _class.UploadFileAsync(data, control.Tag.ToString());
                 files += (token_file + ";");
 
             }

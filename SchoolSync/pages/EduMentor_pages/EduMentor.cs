@@ -150,7 +150,6 @@ namespace SchoolSync.pages
 
         async void load_panel()
         {
-            schoolsync.show_loading();
             page = "home";
             flowLayoutPanel1.Controls.Clear();
 
@@ -312,7 +311,6 @@ namespace SchoolSync.pages
                     flowLayoutPanel1.Controls.Add(pnl);
                 }
             }
-            schoolsync.hide_loading();
         } 
 
         private void EduMentor_Load(object sender, EventArgs e)
@@ -338,7 +336,6 @@ namespace SchoolSync.pages
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
-            guna2TextBox1.Clear();
             guna2Button1.BorderThickness = 0;
             guna2Button18.BorderThickness = 0;
             guna2Button2.BorderThickness = 2;
@@ -377,7 +374,7 @@ namespace SchoolSync.pages
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
-
+            load_panel();
         }
 
         private void guna2Button18_Click(object sender, EventArgs e)

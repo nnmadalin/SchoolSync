@@ -34,7 +34,7 @@ namespace SchoolSync.pages
             data.Add("params", JsonConvert.SerializeObject(param));
             schoolsync.show_loading();
 
-            dynamic task = await _class.PostRequestAsync_norefresh(url, data);
+            dynamic task = await _class.PostRequestAsync(url, data);
             if(task["message"] == "success")
             {
                 //guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/api/getfile.php?token=userfoto_" + task["0"]["token"] + ".png");
@@ -79,7 +79,7 @@ namespace SchoolSync.pages
                 { "token_user", navbar_home.token_page}
             };
             data.Add("params", JsonConvert.SerializeObject(param));
-            task = await _class.PostRequestAsync_norefresh(url, data);
+            task = await _class.PostRequestAsync(url, data);
             JObject jb = task;
             if (task["message"] == "success")
             {
@@ -95,7 +95,7 @@ namespace SchoolSync.pages
                 { "token_user", navbar_home.token_page}
             };
             data.Add("params", JsonConvert.SerializeObject(param));
-            task = await _class.PostRequestAsync_norefresh(url, data);
+            task = await _class.PostRequestAsync(url, data);
             jb = task;
             if (task["message"] == "success")
             {

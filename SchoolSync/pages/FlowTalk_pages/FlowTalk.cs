@@ -286,7 +286,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                         data.Add("token_file", token_file);
                         data.Add("filename", fl.Name);
 
-                        await _class.new_UploadFileAsync(data, opf.FileName);
+                        await _class.UploadFileAsync(data, opf.FileName);
 
                         string fname = Convert.ToString(login_signin.login.accounts_user["token"]) + "/" + token_file + "/" + fl.Name;
 
