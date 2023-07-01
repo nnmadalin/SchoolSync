@@ -27,16 +27,173 @@ namespace SchoolSync.pages
 
         private void curs_Click(object sender, EventArgs e)
         {
-           
-        }
-
-        private void pending_decline(object sender, EventArgs e)
-        {
 
         }
-        private void pending_accept(object sender, EventArgs e)
-        {
 
+        private async void pending_decline(object sender, EventArgs e)
+        {
+            string token = ((Control)sender).Tag.ToString();
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                schoolsync.show_loading();
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from educlass where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", token},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+
+                if (task["message"] == "success")
+                {
+                    string pending = task["0"]["pending"];
+                    string[] split = pending.Split(';');
+                    string newpending = "";
+
+                    for (int i = 0; i < split.Length - 1; i++)
+                    {
+                        if (split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            newpending += split[i] + ";";
+                        }
+                    }
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set pending = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"pending", newpending},
+                        {"token", token},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    schoolsync.hide_loading();
+
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Cerere stearsa!";
+                        frm.BringToFront();
+
+                        flowLayoutPanel1.Controls.Clear();
+
+                        navbar_home.page = "EduClass";
+                        navbar_home.use = false;
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine :( !";
+                        frm.BringToFront();
+                    }
+                }
+                schoolsync.hide_loading();
+            }
+        }
+
+        private async void pending_accept(object sender, EventArgs e)
+        {
+            string token = ((Control)sender).Tag.ToString();
+
+            schoolsync.show_loading();
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+                {
+                    {"token", token},
+                };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                string pending = task["0"]["pending"];
+
+                string[] split = pending.Split(';');
+                string newpending = "";
+
+                for (int i = 0; i < split.Length - 1; i++)
+                {
+                    if (split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                    {
+                        newpending += split[i] + ";";
+                    }
+                }
+
+                string students = task["0"]["students"];
+                students += Convert.ToString(login_signin.login.accounts_user["token"]) + ";";
+
+                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "update educlass set pending = ?, students = ? where token = ?");
+
+                param = new Dictionary<string, string>()
+                    {
+                        {"pending", newpending},
+                        {"students", students},
+                        {"token", token},
+                    };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _class.PostRequestAsync(url, data);
+
+                schoolsync.hide_loading();
+
+                if (task["message"] == "update success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.success.message = "Cerere acceptata!";
+                    frm.BringToFront();
+
+                    flowLayoutPanel1.Controls.Clear();
+
+                    navbar_home.page = "EduClass";
+                    navbar_home.use = false;
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine :( !";
+                    frm.BringToFront();
+                }
+            }
+            schoolsync.hide_loading();
         }
 
         private async void EduClass_Load(object sender, EventArgs e)
@@ -73,6 +230,7 @@ namespace SchoolSync.pages
                         Margin = new Padding(3, 3, 20, 30),
                         Cursor = Cursors.Hand,
                     };
+                    pnl.Tag = task[i.ToString()]["token"];
                     pnl.Click += curs_Click;
 
                     Guna.UI2.WinForms.Guna2Panel pnl_color = new Guna.UI2.WinForms.Guna2Panel()
@@ -88,6 +246,7 @@ namespace SchoolSync.pages
                     int green = int.Parse(components[1]);
                     int blue = int.Parse(components[2]);
                     pnl_color.FillColor = Color.FromArgb(red, green, blue);
+                    pnl_color.Tag = task[i.ToString()]["token"];
                     pnl_color.Click += curs_Click;
 
                     Label lbl = new Label()
@@ -101,6 +260,7 @@ namespace SchoolSync.pages
                         Cursor = Cursors.Hand,
                     };
                     lbl.Text = task[i.ToString()]["title"];
+                    lbl.Tag = task[i.ToString()]["token"];
                     lbl.Click += curs_Click;
 
                     Guna.UI2.WinForms.Guna2CircleButton gcb_close = new Guna.UI2.WinForms.Guna2CircleButton()
@@ -112,6 +272,7 @@ namespace SchoolSync.pages
                         Image = SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48,
                         Cursor = Cursors.Hand,
                     };
+                    gcb_close.Tag = task[i.ToString()]["token"];
                     gcb_close.Click += pending_decline;
 
                     Guna.UI2.WinForms.Guna2CircleButton gcb_accept = new Guna.UI2.WinForms.Guna2CircleButton()
@@ -123,6 +284,7 @@ namespace SchoolSync.pages
                         Image = SchoolSync.Properties.Resources.add_FILL1_wght700_GRAD0_opsz48,
                         Cursor = Cursors.Hand,
                     };
+                    gcb_accept.Tag = task[i.ToString()]["token"];
                     gcb_accept.Click += pending_accept;
 
                     pnl.Controls.Add(pnl_color);
@@ -157,49 +319,66 @@ namespace SchoolSync.pages
                 JObject json = task;
                 for (int i = 0; i < json.Count - 1; i++)
                 {
-                    Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                    bool is_use = false;
+
+                    foreach (Control ctrl in flowLayoutPanel1.Controls)
                     {
-                        Size = new Size(354, 200),
-                        FillColor = Color.FromArgb(223, 229, 232),
-                        UseTransparentBackground = true,
-                        BorderRadius = 20,
-                        Margin = new Padding(3, 3, 20, 30),
-                        Cursor = Cursors.Hand,
-                    };
-                    pnl.Click += curs_Click;
+                        if(ctrl.Tag.ToString() == Convert.ToString(task[i.ToString()]["token"]))
+                        {
+                            is_use = true;
+                            break;
+                        }
+                    }
 
-                    Guna.UI2.WinForms.Guna2Panel pnl_color = new Guna.UI2.WinForms.Guna2Panel()
+                    if (is_use == false)
                     {
-                        Size = new Size(120, 120),
-                        Location = new Point(13, 43),
-                        UseTransparentBackground = true,
-                        BorderRadius = 60,
-                        Cursor = Cursors.Hand,
-                    };
-                    string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
-                    int red = int.Parse(components[0]);
-                    int green = int.Parse(components[1]);
-                    int blue = int.Parse(components[2]);
-                    pnl_color.FillColor = Color.FromArgb(red, green, blue);
-                    pnl_color.Click += curs_Click;
+                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                        {
+                            Size = new Size(354, 200),
+                            FillColor = Color.FromArgb(223, 229, 232),
+                            UseTransparentBackground = true,
+                            BorderRadius = 20,
+                            Margin = new Padding(3, 3, 20, 30),
+                            Cursor = Cursors.Hand,
+                        };
+                        pnl.Tag = task[i.ToString()]["token"];
+                        pnl.Click += curs_Click;
 
-                    Label lbl = new Label()
-                    {
-                        AutoSize = false,
-                        AutoEllipsis = true,
-                        Size = new Size(212, 177),
-                        Location = new Point(139, 12),
-                        TextAlign = ContentAlignment.MiddleCenter,
-                        Font = new Font("Segoe UI Semibold", 16, FontStyle.Bold),
-                        Cursor = Cursors.Hand,
-                    };
-                    lbl.Text = task[i.ToString()]["title"];
-                    lbl.Click += curs_Click;
+                        Guna.UI2.WinForms.Guna2Panel pnl_color = new Guna.UI2.WinForms.Guna2Panel()
+                        {
+                            Size = new Size(120, 120),
+                            Location = new Point(13, 43),
+                            UseTransparentBackground = true,
+                            BorderRadius = 60,
+                            Cursor = Cursors.Hand,
+                        };
+                        string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
+                        int red = int.Parse(components[0]);
+                        int green = int.Parse(components[1]);
+                        int blue = int.Parse(components[2]);
+                        pnl_color.FillColor = Color.FromArgb(red, green, blue);
+                        pnl_color.Tag = task[i.ToString()]["token"];
+                        pnl_color.Click += curs_Click;
 
-                    pnl.Controls.Add(pnl_color);
-                    pnl.Controls.Add(lbl);
+                        Label lbl = new Label()
+                        {
+                            AutoSize = false,
+                            AutoEllipsis = true,
+                            Size = new Size(212, 177),
+                            Location = new Point(139, 12),
+                            TextAlign = ContentAlignment.MiddleCenter,
+                            Font = new Font("Segoe UI Semibold", 16, FontStyle.Bold),
+                            Cursor = Cursors.Hand,
+                        };
+                        lbl.Text = task[i.ToString()]["title"];
+                        lbl.Tag = task[i.ToString()]["token"];
+                        lbl.Click += curs_Click;
 
-                    flowLayoutPanel1.Controls.Add(pnl);
+                        pnl.Controls.Add(pnl_color);
+                        pnl.Controls.Add(lbl);
+
+                        flowLayoutPanel1.Controls.Add(pnl);
+                    }
                 }
             }
 
