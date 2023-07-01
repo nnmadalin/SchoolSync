@@ -154,6 +154,12 @@
     <Compile Include="pages\EduClass_pages\EduClass.Designer.cs">
       <DependentUpon>EduClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga_Curs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga_Curs.Designer.cs">
+      <DependentUpon>EduClass_Adauga_Curs.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EduClass_pages\EduClass_Creaza.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -282,6 +288,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass.resx">
       <DependentUpon>EduClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Adauga_Curs.resx">
+      <DependentUpon>EduClass_Adauga_Curs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza.resx">
       <DependentUpon>EduClass_Creaza.cs</DependentUpon>
