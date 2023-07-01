@@ -316,27 +316,24 @@ namespace SchoolSync.pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", "select * from invataunit ");
+            data.Add("command", "select * from invataunit where favourites like ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"favourites", "%" + Convert.ToString(login_signin.login.accounts_user["token"]) + "%"}
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
 
             dynamic task = await _class.PostRequestAsync(url, data);
             if(task["message"] == "success")
             {
-                string favorite = task["0"]["favourites"];
-                string[] split = favorite.Split(';');
 
-                bool ok = false;
+                JObject json = task;
 
-                for (int i = 0; i < split.Length - 1; i++)
+                for (int i = 0; i < json.Count - 1; i++)
                 {
-                    if(split[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
-                    {
-                        ok = true;
-                        break;
-                    }
-                }
-            
-                if(ok == true)
-                {
+
                     Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                     {
                         Size = new Size(925, 137),
@@ -373,13 +370,13 @@ namespace SchoolSync.pages
                         Location = new Point(740, 88)
                     };
 
-                    string date = task["0"]["data"]; DateTime dt = Convert.ToDateTime(date);
+                    string date = task[i.ToString()]["data"]; DateTime dt = Convert.ToDateTime(date);
 
-                    lbl.Text = task["0"]["created"] + " • " + task["0"]["category"] + " • "
+                    lbl.Text = task[i.ToString()]["created"] + " • " + task[i.ToString()]["category"] + " • "
                         + dt.Day + "/" + dt.Month + "/" + dt.Year + " " + Convert.ToDateTime(date).ToShortTimeString();
 
                     RichTextBox rich = new RichTextBox();
-                    rich.Rtf = task["0"]["question"];
+                    rich.Rtf = task[i.ToString()]["question"];
 
                     lbl_question.Text = rich.Text;
 
@@ -388,7 +385,7 @@ namespace SchoolSync.pages
                         lbl_question.Text = lbl_question.Text.Substring(0, 55) + "...";
                     }
 
-                    btn.Tag = task["0"]["token"];
+                    btn.Tag = task[i.ToString()]["token"];
                     btn.Click += intrebare_cu_raspunsuri;
 
                     pnl.Controls.Add(lbl);
