@@ -27,7 +27,9 @@ namespace SchoolSync.pages
 
         private void curs_Click(object sender, EventArgs e)
         {
-
+            navbar_home.token_page = ((Control)sender).Tag.ToString();
+            navbar_home.page = "EduClass_vizualizare";
+            navbar_home.use = false;
         }
 
         private async void pending_decline(object sender, EventArgs e)
@@ -384,6 +386,13 @@ namespace SchoolSync.pages
 
             schoolsync.hide_loading();
 
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            navbar_home.token_page = ((Control)sender).Tag.ToString();
+            navbar_home.page = "EduClass_adauga_curs";
+            navbar_home.use = false;
         }
     }
 }
