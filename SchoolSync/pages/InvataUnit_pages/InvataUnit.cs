@@ -33,6 +33,7 @@ namespace SchoolSync.pages
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             btn.FillColor = Color.FromArgb(225, 225, 225);
             sort = btn.Text;
+            guna2TextBox1.Clear();
             load_intrebari_panel();
         }
 
@@ -222,14 +223,16 @@ namespace SchoolSync.pages
                         Size = new Size(925, 137),
                         BorderColor = Color.FromArgb(96, 211, 153),
                         BorderRadius = 15,
-                        BorderThickness = 2
+                        BorderThickness = 2,
+                        Name = "pnl",
                     };
                     Label lbl = new Label()
                     {
                         Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
                         Location = new Point(28, 20),
                         Text = "",
-                        AutoSize = true
+                        AutoSize = true,
+                        Name = "user",
                     };
                     Label lbl_question = new Label()
                     {
@@ -237,7 +240,8 @@ namespace SchoolSync.pages
                         Location = new Point(25, 39),
                         MaximumSize = new Size(0, 45),
                         AutoSize = true,
-                        Text = ""
+                        Text = "",
+                        Name = "title",
                     };
                     Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
                     {
@@ -339,21 +343,24 @@ namespace SchoolSync.pages
                         Size = new Size(925, 137),
                         BorderColor = Color.FromArgb(96, 211, 153),
                         BorderRadius = 15,
-                        BorderThickness = 2
+                        BorderThickness = 2,
+                        Name = "pnl",
                     };
                     Label lbl = new Label()
                     {
                         Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
                         Location = new Point(28, 20),
                         Text = "",
-                        AutoSize = true
+                        AutoSize = true,
+                        Name = "user",
                     };
                     Label lbl_question = new Label()
                     {
                         Font = new Font("Segoe UI Semibold", 20, FontStyle.Regular),
                         Location = new Point(25, 39),
                         AutoSize = true,
-                        Text = ""
+                        Text = "",
+                        Name = "title",
                     };
                     Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
                     {
@@ -409,6 +416,7 @@ namespace SchoolSync.pages
 
         private void combobox1(object sender, EventArgs e)
         {
+            guna2TextBox1.Clear();
             load_intrebari_panel();
         }
 
@@ -417,6 +425,7 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 2;
             guna2Button17.BorderThickness = 0;
             guna2Button18.BorderThickness = 0;
+            guna2TextBox1.Clear();
             load_intrebari_panel();
         }
 
@@ -425,6 +434,7 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 0;
             guna2Button17.BorderThickness = 2;
             guna2Button18.BorderThickness = 0;
+            guna2TextBox1.Clear();
             load_intrebari_panel();
         }
 
@@ -433,7 +443,34 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 0;
             guna2Button17.BorderThickness = 0;
             guna2Button18.BorderThickness = 2;
+            guna2TextBox1.Clear();
             load_favorite_panel();
+        }
+
+        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            string str = guna2TextBox1.Text.Trim().ToLower();
+            foreach (Control ctrl in flowLayoutPanel1.Controls)
+            {
+                ctrl.Visible = true;
+            }
+
+            if (str != "")
+            {
+                try
+                {
+                    foreach (Control ctrl in flowLayoutPanel1.Controls)
+                    {
+
+                        if (ctrl.Name.ToString() == "pnl" && !ctrl.Controls["title"].Text.ToLower().Contains(str))
+                        {
+                            if(!ctrl.Controls["user"].Text.ToLower().Contains(str))
+                                ctrl.Visible = false;
+                        }
+                    }
+                }
+                catch {; };
+            }
         }
     }
 }

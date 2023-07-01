@@ -390,7 +390,7 @@ namespace SchoolSync.pages
                     foreach (Control ctrl in flowLayoutPanel1.Controls)
                     {
                         
-                        if (!(ctrl is Label) && !ctrl.Controls["title"].Text.Contains(str))
+                        if (!(ctrl is Label) && !ctrl.Controls["title"].Text.ToLower().Contains(str))
                         {
                             ctrl.Visible = false;
                         }
