@@ -21,14 +21,20 @@ namespace SchoolSync.pages.FlowTalk_pages
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            if (navbar_home.page == "FlowTalk_editare")
+            guna2MessageDialog1.Caption = "Inchide";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa inchizi pagina?";
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
             {
-                this.Dispose();
-            }
-            else
-            {
-                navbar_home.page = "FlowTalk";
-                navbar_home.use = false;
+                if (navbar_home.page == "FlowTalk_editare")
+                {
+                    this.Dispose();
+                }
+                else
+                {
+                    navbar_home.page = "FlowTalk";
+                    navbar_home.use = false;
+                }
             }
         }
 

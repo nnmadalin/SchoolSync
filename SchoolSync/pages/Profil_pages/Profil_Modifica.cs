@@ -351,7 +351,11 @@ namespace SchoolSync.pages
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            guna2MessageDialog1.Caption = "Inchide";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa inchizi pagina?";
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
+                this.Dispose();
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)

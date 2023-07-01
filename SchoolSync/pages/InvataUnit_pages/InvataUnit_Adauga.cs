@@ -19,8 +19,14 @@ namespace SchoolSync.pages.InvataUnit_pages
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            navbar_home.use = false;
-            navbar_home.page = "InvataUnit";
+            guna2MessageDialog1.Caption = "Inchide";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa inchizi pagina?";
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                navbar_home.use = false;
+                navbar_home.page = "InvataUnit";
+            }
         }
 
         private void btn_texteditor(object sender, EventArgs e)

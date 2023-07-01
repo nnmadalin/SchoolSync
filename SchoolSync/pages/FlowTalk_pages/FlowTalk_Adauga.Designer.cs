@@ -42,6 +42,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -49,7 +50,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(392, 47);
+            this.label1.Location = new System.Drawing.Point(414, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(375, 62);
             this.label1.TabIndex = 1;
@@ -71,7 +72,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2TextBox1.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(73, 208);
+            this.guna2TextBox1.Location = new System.Drawing.Point(91, 209);
             this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox1.MaxLength = 150;
             this.guna2TextBox1.Name = "guna2TextBox1";
@@ -86,7 +87,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(33, 179);
+            this.label2.Location = new System.Drawing.Point(51, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(154, 25);
             this.label2.TabIndex = 3;
@@ -97,7 +98,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(33, 282);
+            this.label3.Location = new System.Drawing.Point(51, 283);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(173, 25);
             this.label3.TabIndex = 5;
@@ -121,7 +122,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2TextBox2.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2TextBox2.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Location = new System.Drawing.Point(72, 311);
+            this.guna2TextBox2.Location = new System.Drawing.Point(90, 312);
             this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox2.Name = "guna2TextBox2";
             this.guna2TextBox2.PasswordChar = '\0';
@@ -142,7 +143,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(1036, 311);
+            this.guna2Button1.Location = new System.Drawing.Point(1054, 312);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(90, 40);
             this.guna2Button1.TabIndex = 6;
@@ -154,7 +155,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(227)))));
             this.flowLayoutPanel1.ForeColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(38, 358);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(56, 359);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1088, 143);
             this.flowLayoutPanel1.TabIndex = 7;
@@ -170,7 +171,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(985, 788);
+            this.guna2Button2.Location = new System.Drawing.Point(997, 791);
             this.guna2Button2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(161, 49);
@@ -190,7 +191,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
             this.guna2CircleButton1.Image = global::SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48;
-            this.guna2CircleButton1.Location = new System.Drawing.Point(1107, 19);
+            this.guna2CircleButton1.Location = new System.Drawing.Point(1132, 19);
             this.guna2CircleButton1.Name = "guna2CircleButton1";
             this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton1.Size = new System.Drawing.Size(40, 40);
@@ -202,7 +203,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(225)))), ((int)(((byte)(227)))));
             this.flowLayoutPanel2.ForeColor = System.Drawing.Color.White;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(40, 616);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(58, 617);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(1088, 138);
             this.flowLayoutPanel2.TabIndex = 12;
@@ -218,7 +219,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(1038, 569);
+            this.guna2Button3.Location = new System.Drawing.Point(1056, 570);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.Size = new System.Drawing.Size(90, 40);
             this.guna2Button3.TabIndex = 11;
@@ -230,7 +231,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(35, 540);
+            this.label4.Location = new System.Drawing.Point(53, 541);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(152, 25);
             this.label4.TabIndex = 10;
@@ -254,7 +255,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2TextBox3.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2TextBox3.ForeColor = System.Drawing.Color.Black;
             this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Location = new System.Drawing.Point(74, 569);
+            this.guna2TextBox3.Location = new System.Drawing.Point(92, 570);
             this.guna2TextBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox3.Name = "guna2TextBox3";
             this.guna2TextBox3.PasswordChar = '\0';
@@ -262,6 +263,15 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2TextBox3.SelectedText = "";
             this.guna2TextBox3.Size = new System.Drawing.Size(955, 40);
             this.guna2TextBox3.TabIndex = 9;
+            // 
+            // guna2MessageDialog1
+            // 
+            this.guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            this.guna2MessageDialog1.Caption = null;
+            this.guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning;
+            this.guna2MessageDialog1.Parent = null;
+            this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
+            this.guna2MessageDialog1.Text = null;
             // 
             // FlowTalk_Adauga
             // 
@@ -284,7 +294,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.Controls.Add(this.guna2CircleButton1);
             this.Name = "FlowTalk_Adauga";
             this.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.Size = new System.Drawing.Size(1158, 690);
+            this.Size = new System.Drawing.Size(1175, 690);
             this.Load += new System.EventHandler(this.FlowTalk_Adauga_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -306,5 +316,6 @@ namespace SchoolSync.pages.FlowTalk_pages
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private System.Windows.Forms.Label label4;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox3;
+        private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
     }
 }

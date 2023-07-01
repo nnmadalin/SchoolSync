@@ -19,20 +19,28 @@ namespace SchoolSync.pages.EduMentor_pages
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
-            if (navbar_home.page == "EduMentor_editare_->_home")
+
+            guna2MessageDialog1.Caption = "Inchide";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa inchizi pagina?";
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
             {
-                navbar_home.page = "Home";
-                navbar_home.use = false;
-            }
-            else if(navbar_home.page == "EduMentor_editare")
-            {
-                navbar_home.page = "EduMentor_vizualizare";
-                navbar_home.use = false;
-            }
-            else
-            {
-                navbar_home.page = "EduMentor";
-                navbar_home.use = false;
+
+                if (navbar_home.page == "EduMentor_editare_->_home")
+                {
+                    navbar_home.page = "Home";
+                    navbar_home.use = false;
+                }
+                else if (navbar_home.page == "EduMentor_editare")
+                {
+                    navbar_home.page = "EduMentor_vizualizare";
+                    navbar_home.use = false;
+                }
+                else
+                {
+                    navbar_home.page = "EduMentor";
+                    navbar_home.use = false;
+                }
             }
         }
 
