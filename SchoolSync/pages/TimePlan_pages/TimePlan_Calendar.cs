@@ -178,8 +178,12 @@ namespace SchoolSync.pages.TimePlan_pages
 
         private void TimePlan_Calendar_Load(object sender, EventArgs e)
         {
+            schoolsync.show_loading();
+
             load_tab(DateTime.Now);
             now = DateTime.Now;
+
+            schoolsync.hide_loading();
         }
 
         private void label4_Click(object sender, EventArgs e)
