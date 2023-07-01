@@ -148,11 +148,17 @@
     <Compile Include="notification\warning.Designer.cs">
       <DependentUpon>warning.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\ClassPortal.cs">
+    <Compile Include="pages\EduClass_pages\EduClass.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\ClassPortal.Designer.cs">
-      <DependentUpon>ClassPortal.cs</DependentUpon>
+    <Compile Include="pages\EduClass_pages\EduClass.Designer.cs">
+      <DependentUpon>EduClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Creaza.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Creaza.Designer.cs">
+      <DependentUpon>EduClass_Creaza.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\EduMentor_pages\EduMentor.cs">
       <SubType>UserControl</SubType>
@@ -268,8 +274,11 @@
     <EmbeddedResource Include="notification\warning.resx">
       <DependentUpon>warning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\ClassPortal.resx">
-      <DependentUpon>ClassPortal.cs</DependentUpon>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass.resx">
+      <DependentUpon>EduClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza.resx">
+      <DependentUpon>EduClass_Creaza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduMentor_pages\EduMentor.resx">
       <DependentUpon>EduMentor.cs</DependentUpon>
@@ -350,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <None Include="Resources\download %2831%29.png" />
     <None Include="Resources\ballot_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\download %2830%29.png" />
     <None Include="Resources\classroom.png" />

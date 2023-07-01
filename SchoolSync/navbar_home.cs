@@ -44,6 +44,7 @@ namespace SchoolSync
             guna2Button5.FillColor = Color.Transparent;
             guna2Button6.FillColor = Color.Transparent;
             guna2Button7.FillColor = Color.Transparent;
+            guna2Button8.FillColor = Color.Transparent;
         }        
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -102,6 +103,12 @@ namespace SchoolSync
         {
             navbar_home.use = false;
             navbar_home.page = "TimePlan_calendar";
+        }
+
+        private void guna2Button8_Click(object sender, EventArgs e)
+        {
+            navbar_home.use = false;
+            navbar_home.page = "EduClass";
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -395,7 +402,39 @@ namespace SchoolSync
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
-           
+
+            else if (page == "EduClass" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduClass";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.EduClass();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+                background_color_btn();
+                guna2Button8.FillColor = Color.FromArgb(66, 66, 66);
+            }
+            else if (page == "EduClass_creaza" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduClass";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.EduClass_pages.EduClass_Creaza();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
 
             else if (page == "Profil" && use == false)
             {

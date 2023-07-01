@@ -11,13 +11,17 @@ using System.IO;
 
 namespace SchoolSync.pages
 {
-    public partial class ClassPortal : UserControl
+    public partial class EduClass : UserControl
     {
-        public ClassPortal()
+        public EduClass()
         {
             InitializeComponent();
         }
 
-        
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            navbar_home.page = "EduClass_creaza";
+            navbar_home.use = false;
+        }
     }
 }

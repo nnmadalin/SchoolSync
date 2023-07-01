@@ -333,6 +333,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap download__31_ {
+            get {
+                object obj = ResourceManager.GetObject("download__31_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap download_FILL1_wght700_GRAD0_opsz48 {
             get {
                 object obj = ResourceManager.GetObject("download_FILL1_wght700_GRAD0_opsz48", resourceCulture);
