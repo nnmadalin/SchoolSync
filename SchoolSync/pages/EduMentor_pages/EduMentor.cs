@@ -253,6 +253,7 @@ namespace SchoolSync.pages
                         AutoEllipsis = true,
                         Location = new Point(10, 219),
                         Font = new Font("Segoe UI", 13, FontStyle.Bold),
+                        Name = "title",
                     };                    
                     Panel pnl_jos = new Panel()
                     {
@@ -341,6 +342,7 @@ namespace SchoolSync.pages
             guna2Button2.BorderThickness = 2;
             guna2Button3.BorderThickness = 0;
             guna2Button4.BorderThickness = 0;
+            guna2TextBox1.Clear();
             load_panel();
         }
 
@@ -351,6 +353,7 @@ namespace SchoolSync.pages
             guna2Button2.BorderThickness = 0;
             guna2Button3.BorderThickness = 0;
             guna2Button4.BorderThickness = 0;
+            guna2TextBox1.Clear();
             load_panel();
         }
 
@@ -372,10 +375,32 @@ namespace SchoolSync.pages
             load_panel();
         }
 
-        private void guna2TextBox1_TextChanged(object sender, EventArgs e)
+        private void guna2TextBox1_TextChanged_1(object sender, EventArgs e)
         {
-            load_panel();
+            string str = guna2TextBox1.Text.Trim().ToLower();
+            foreach(Control ctrl in flowLayoutPanel1.Controls)
+            {
+                ctrl.Visible = true;
+            }
+
+            if(str != "")
+            {
+                try
+                {
+                    foreach (Control ctrl in flowLayoutPanel1.Controls)
+                    {
+                        
+                        if (!(ctrl is Label) && !ctrl.Controls["title"].Text.Contains(str))
+                        {
+                            ctrl.Visible = false;
+                        }
+                    }
+                }
+                catch {; };
+            }
+
         }
+
 
         private void guna2Button18_Click(object sender, EventArgs e)
         {
@@ -384,12 +409,14 @@ namespace SchoolSync.pages
             guna2Button2.BorderThickness = 0;
             guna2Button3.BorderThickness = 0;
             guna2Button4.BorderThickness = 0;
+            guna2TextBox1.Clear();
             load_panel();
         }
 
         private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             sort = guna2ComboBox2.SelectedItem.ToString();
+            guna2TextBox1.Clear();
             load_panel();
         }
 
