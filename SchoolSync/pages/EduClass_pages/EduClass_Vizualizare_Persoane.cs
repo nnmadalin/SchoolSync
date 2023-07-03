@@ -62,6 +62,117 @@ namespace SchoolSync.pages.EduClass_pages
             navbar_home.use = false;
         }
 
+        async void delete_user(object sender, EventArgs e)
+        {
+            string[] tokens = Convert.ToString(((Control)sender).Tag.ToString()).Split(';');
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", token_local},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                data = new Dictionary<string, string>();
+                
+                if (tokens[0] == "admin")
+                {
+                    string[] prm = Convert.ToString(task["0"]["admins"]).Split(';');
+                    string newprm = "";
+
+                    for(int i = 0; i < prm.Length - 1; i++)
+                    {
+                        if(prm[i] != tokens[1])
+                        {
+                            newprm += (prm[i] + ";");
+                        }
+                    }
+
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set admins = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"admins", newprm},
+                        {"token", token_local},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    load_persoane_dinamic();
+                }
+                else if (tokens[0] == "pending")
+                {
+                    string[] prm = Convert.ToString(task["0"]["pending"]).Split(';');
+                    string newprm = "";
+
+                    for (int i = 0; i < prm.Length - 1; i++)
+                    {
+                        if (prm[i] != tokens[1])
+                        {
+                            newprm += (prm[i] + ";");
+                        }
+                    }
+
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set pending = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"pending", newprm},
+                        {"token", token_local},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    load_persoane_dinamic();
+                }
+                else if (tokens[0] == "student")
+                {
+                    string[] prm = Convert.ToString(task["0"]["students"]).Split(';');
+                    string newprm = "";
+
+                    for (int i = 0; i < prm.Length - 1; i++)
+                    {
+                        if (prm[i] != tokens[1])
+                        {
+                            newprm += (prm[i] + ";");
+                        }
+                    }
+
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set students = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"students", newprm},
+                        {"token", token_local},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    load_persoane_dinamic();
+                }
+            }
+        }
+
         async void load_persoane_dinamic()
         {
             multiple_class _class = new multiple_class();
@@ -107,7 +218,7 @@ namespace SchoolSync.pages.EduClass_pages
 
                 //admini
                 string[] admini = Convert.ToString(task["0"]["admins"]).Split(';');
-                for (int i = 0; i < admins.Length - 1; i++)
+                for (int i = 0; i < admini.Length - 1; i++)
                 {
                     Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                     {
@@ -144,6 +255,21 @@ namespace SchoolSync.pages.EduClass_pages
                     lbl.Text = await getusername(admini[i]);
                     lbl.Tag = admini[i];
                     lbl.Click += deschide_profil;
+
+                    if(is_admin == true && admini[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                    {
+                        Guna.UI2.WinForms.Guna2CircleButton gcb = new Guna.UI2.WinForms.Guna2CircleButton()
+                        {
+                            FillColor = Color.WhiteSmoke,
+                            Size = new Size(40, 40),
+                            Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                            Location = new Point(940, 5),
+                            Cursor = Cursors.Hand,
+                        };
+                        gcb.Tag = "admin;" + admini[i];
+                        gcb.Click += delete_user;
+                        pnl.Controls.Add(gcb);
+                    }
 
                     pnl.Controls.Add(gcp);
                     pnl.Controls.Add(lbl);
@@ -191,6 +317,21 @@ namespace SchoolSync.pages.EduClass_pages
                     lbl.Tag = pending[i];
                     lbl.Click += deschide_profil;
 
+                    if (is_admin == true && pending[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                    {
+                        Guna.UI2.WinForms.Guna2CircleButton gcb = new Guna.UI2.WinForms.Guna2CircleButton()
+                        {
+                            FillColor = Color.WhiteSmoke,
+                            Size = new Size(40, 40),
+                            Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                            Location = new Point(940, 5),
+                            Cursor = Cursors.Hand,
+                        };
+                        gcb.Tag = "pending;" + pending[i];
+                        gcb.Click += delete_user;
+                        pnl.Controls.Add(gcb);
+                    }
+
                     pnl.Controls.Add(gcp);
                     pnl.Controls.Add(lbl);
 
@@ -236,6 +377,21 @@ namespace SchoolSync.pages.EduClass_pages
                     lbl.Text = await getusername(students[i]);
                     lbl.Tag = students[i];
                     lbl.Click += deschide_profil;
+
+                    if (is_admin == true && students[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                    {
+                        Guna.UI2.WinForms.Guna2CircleButton gcb = new Guna.UI2.WinForms.Guna2CircleButton()
+                        {
+                            FillColor = Color.WhiteSmoke,
+                            Size = new Size(40, 40),
+                            Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                            Location = new Point(940, 5),
+                            Cursor = Cursors.Hand,
+                        };
+                        gcb.Tag = "student;" + students[i];
+                        gcb.Click += delete_user;
+                        pnl.Controls.Add(gcb);
+                    }
 
                     pnl.Controls.Add(gcp);
                     pnl.Controls.Add(lbl);
