@@ -53,7 +53,7 @@ namespace SchoolSync.pages.EduClass_pages
 
                 label3.Text = "Ultima modificare: " + task["0"]["last_edit"];
 
-                string[] admins = Convert.ToString(task["0"]["admins"]).Split(',');
+                string[] admins = Convert.ToString(task["0"]["admins"]).Split(';');
                 bool is_admin = false;
 
                 for(int i = 0; i < admins.Length - 1; i++)
