@@ -49,7 +49,7 @@ namespace SchoolSync.pages.EduClass_pages
 
                 label1.Text = task["0"]["title"];
 
-                label2.Text = "De: " + task["0"]["created"];
+                label2.Text = "Creat de: " + task["0"]["created"];
 
                 label3.Text = "Ultima modificare: " + task["0"]["last_edit"];
 
@@ -269,7 +269,8 @@ namespace SchoolSync.pages.EduClass_pages
 
         private void guna2CircleButton2_Click(object sender, EventArgs e)
         {
-
+            navbar_home.page = "EduClass_editare";
+            navbar_home.use = false;
         }
 
         private async void guna2CircleButton3_Click(object sender, EventArgs e)

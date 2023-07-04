@@ -64,6 +64,7 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2Panel2
             // 
+            this.guna2Panel2.BorderRadius = 10;
             this.guna2Panel2.Controls.Add(this.label2);
             this.guna2Panel2.Controls.Add(this.label3);
             this.guna2Panel2.Controls.Add(this.guna2Separator1);
