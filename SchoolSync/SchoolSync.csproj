@@ -384,6 +384,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <None Include="Resources\exit_to_app_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\download %2831%29.png" />
     <None Include="Resources\ballot_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\download %2830%29.png" />

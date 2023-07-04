@@ -98,5 +98,78 @@ namespace SchoolSync.pages.EduClass_pages
             navbar_home.page = "EduClass_vizualizare_persoane";
             navbar_home.use = false;
         }
+
+        private async void guna2CircleButton4_Click(object sender, EventArgs e)
+        {
+            guna2MessageDialog1.Caption = "Sterge";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi acest curs?";
+
+            if(guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                schoolsync.show_loading();
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/delete.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "delete from educlass where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", navbar_home.token_page},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+
+                schoolsync.hide_loading();
+
+                if(task["message"] == "delete success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.success.message = "Curs sters cu succes";
+                    frm.BringToFront();
+
+                    navbar_home.page = "EduClass";
+                    navbar_home.use = false;
+
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine!";
+                    frm.BringToFront();
+                }
+            }
+        }
+
+        private void guna2CircleButton6_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(navbar_home.token_page);
+
+            var frm = new notification.success();
+            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+            panel.Controls.Add(frm);
+            notification.success.message = "Cod curs copiat cu succes!";
+            frm.BringToFront();
+        }
+
+        private void guna2CircleButton7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2CircleButton2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
