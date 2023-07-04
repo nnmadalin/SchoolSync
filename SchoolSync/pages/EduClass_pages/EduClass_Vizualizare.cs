@@ -162,9 +162,109 @@ namespace SchoolSync.pages.EduClass_pages
             frm.BringToFront();
         }
 
-        private void guna2CircleButton7_Click(object sender, EventArgs e)
+        private async void guna2CircleButton7_Click(object sender, EventArgs e)
         {
+            schoolsync.show_loading();
 
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", navbar_home.token_page},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if(task["message"] == "success")
+            {
+                bool is_admin = false;
+
+                string[] split = Convert.ToString(task["0"]["admins"]).Split(';');
+
+                for(int i = 0; i < split.Length - 1; i++)
+                {
+                    if(split[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
+                    {
+                        is_admin = true;
+                        break;
+                    }
+                }
+
+               
+                if(is_admin == true && split.Length - 1 == 1)
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Nu poti parasi cursul deoarece este doar un admin!";
+                    frm.BringToFront();
+
+                    schoolsync.show_loading();
+                }
+                else
+                {
+                    string newadmin = "";
+
+                    for (int i = 0; i < split.Length - 1; i++)
+                    {
+                        if (split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            newadmin += split[i] + ";";
+                        }
+                    }
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set admins = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"admins", newadmin},
+                        {"token", navbar_home.token_page},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    
+                    task = await _class.PostRequestAsync(url, data);
+
+                    schoolsync.hide_loading();
+
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Ai parasit cursul!";
+                        frm.BringToFront();
+
+                        navbar_home.page = "EduClass";
+                        navbar_home.use = false;
+
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                    
+                }
+
+            }
+
+            schoolsync.hide_loading();
         }
 
         private void guna2CircleButton2_Click(object sender, EventArgs e)

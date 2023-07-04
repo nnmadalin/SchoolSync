@@ -304,11 +304,10 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", "select * from educlass where token_user = ? OR admins like ? OR students like ?");
+            data.Add("command", "select * from educlass where admins like ? OR students like ?");
 
             param = new Dictionary<string, string>()
             {
-                {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
                 {"admins", "%" + Convert.ToString(login_signin.login.accounts_user["token"]) + "%"},
                 {"students", "%" + Convert.ToString(login_signin.login.accounts_user["token"]) + "%"},
             };
