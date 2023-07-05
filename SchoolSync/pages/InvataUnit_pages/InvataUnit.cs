@@ -207,7 +207,7 @@ namespace SchoolSync.pages
             JObject jb = task;
             if (guna2Button17.BorderThickness != 2 && guna2Button20.BorderThickness != 2)
                 load_intrebari_panel_informare();
-            else
+            else if(guna2Button20.BorderThickness != 2)
             {
                 Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                 {

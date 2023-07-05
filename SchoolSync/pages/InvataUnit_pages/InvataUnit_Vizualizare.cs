@@ -87,6 +87,16 @@ namespace SchoolSync.pages.InvataUnit_pages
                     guna2Button3.Tag = task["0"]["is_deleted"];
                 }
 
+                if (task["0"]["is_deleted"] == "1")
+                {
+                    var frm = new notification.warning();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.warning.message = "Materialul a fost dezactivat de un moderator \r\n (" + task["0"]["is_deleted_by"] + ")!";
+                    frm.BringToFront();
+                }
+
                 if (task["0"]["files"] == "")
                 {
                     label4.Visible = true;
@@ -97,6 +107,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     string[] file_split = row.Split(';');
 
                     string token_user = task["0"]["token_user"];
+
                     for (int i = 0; i < file_split.Length; i++)
                     {
                        
