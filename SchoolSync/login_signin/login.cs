@@ -135,7 +135,16 @@ namespace SchoolSync.login_signin
 
             dynamic task = await multiple_class.PostRequestAsync(url, data);
 
-            string pswd_db = task["0"]["password"];
+            string pswd_db = "";
+
+            try
+            {
+                pswd_db = task["0"]["password"];
+            }
+            catch
+            {
+                pswd_db = "";
+            }
 
             if (task["message"] == "success" && VerifyPassword(pswd, pswd_db))
             {
