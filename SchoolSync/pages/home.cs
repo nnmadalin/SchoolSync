@@ -350,13 +350,14 @@ namespace SchoolSync.pages
             {
                 dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
                 JObject json = subjson;
-                for(int i = 0; i < json.Count - 1; i++)
+                for(int i = 0; i < json.Count; i++)
                 {
                     string datetime = subjson[i.ToString()]["deadline"];
                     if(datetime != "-1")
                     {
                         DateTime dt = Convert.ToDateTime(datetime);
-                        if(dt.ToShortDateString() == DateTime.Now.ToShortDateString())
+                        
+                        if (dt.ToShortDateString() == DateTime.Now.ToShortDateString())
                         {
                             listBox1.Items.Add("• EduClass: " + Convert.ToString(subjson[i.ToString()]["title"]));
                         }

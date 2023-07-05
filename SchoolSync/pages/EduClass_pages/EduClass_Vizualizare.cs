@@ -111,7 +111,7 @@ namespace SchoolSync.pages.EduClass_pages
                             Guna.UI2.WinForms.Guna2Panel pnl_lectie = new Guna.UI2.WinForms.Guna2Panel()
                             {
                                 FillColor = Color.FromArgb(223, 229, 232),
-                                AutoSize = true,
+                                Size = new Size(1130, 100),
                                 BorderRadius = 10,
                                 UseTransparentBackground = true,
                                 Margin = new Padding(0, 0, 0, 30),
