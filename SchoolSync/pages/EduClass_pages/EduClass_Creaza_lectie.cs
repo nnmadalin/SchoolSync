@@ -262,6 +262,7 @@ namespace SchoolSync.pages.EduClass_pages
                 {
                     JObject jsonnew = new JObject();
                     jsonnew.Add("created", Convert.ToString(login_signin.login.accounts_user["username"]));
+                    jsonnew.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
                     jsonnew.Add("title", guna2TextBox1.Text.Trim());
                     jsonnew.Add("description", richTextBox1.Rtf.ToString());
                     jsonnew.Add("last_edit", DateTime.Now.ToShortDateString());
@@ -274,7 +275,7 @@ namespace SchoolSync.pages.EduClass_pages
                     else
                     {
                         jsonnew.Add("is_homework", "1");
-                        jsonnew.Add("deadline", guna2DateTimePicker1.Value.ToString());
+                        jsonnew.Add("deadline", dateTimePicker1.Value.ToString());
                     }
                     jsonnew.Add("students_homework", "");
                     jsonnew.Add("students_files", "");
@@ -315,9 +316,9 @@ namespace SchoolSync.pages.EduClass_pages
                             notification.success.message = "Lectie adaugata cu succes!";
                             frm.BringToFront();
 
-                            navbar_home.page = "EduClass_vizualizare";
+                            navbar_home.token_page_2 = (json.Count - 1).ToString();
+                            navbar_home.page = "EduClass_vizualizare_lectie";
                             navbar_home.use = false;
-
                         }
                         else
                         {
@@ -328,7 +329,6 @@ namespace SchoolSync.pages.EduClass_pages
                             notification.error.message = "Ceva nu a functionat bine!";
                             frm.BringToFront();
                         }
-
                     }
                     catch
                     {
@@ -357,13 +357,22 @@ namespace SchoolSync.pages.EduClass_pages
         {
             if(guna2CheckBox1.Checked == true)
             {
-                guna2DateTimePicker1.Visible = true;
+                dateTimePicker1.Visible = true;
                 label4.Visible = true;
             }
             else
             {
-                guna2DateTimePicker1.Visible = false;
+                dateTimePicker1.Visible = false;
                 label4.Visible = false;
+            }
+        }
+
+        private void guna2CircleButton1_Click(object sender, EventArgs e)
+        {
+            if(guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                navbar_home.page = "EduClass_vizualizare";
+                navbar_home.use = false;
             }
         }
     }
