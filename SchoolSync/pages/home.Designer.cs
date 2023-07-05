@@ -50,6 +50,7 @@ namespace SchoolSync.pages
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -261,6 +262,7 @@ namespace SchoolSync.pages
             this.guna2Panel5.AutoSize = true;
             this.guna2Panel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel5.BorderRadius = 13;
+            this.guna2Panel5.Controls.Add(this.listBox1);
             this.guna2Panel5.Controls.Add(this.label11);
             this.guna2Panel5.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
             this.guna2Panel5.Location = new System.Drawing.Point(770, 216);
@@ -271,7 +273,7 @@ namespace SchoolSync.pages
             this.guna2Panel5.ShadowDecoration.Depth = 3;
             this.guna2Panel5.ShadowDecoration.Enabled = true;
             this.guna2Panel5.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(15);
-            this.guna2Panel5.Size = new System.Drawing.Size(406, 166);
+            this.guna2Panel5.Size = new System.Drawing.Size(409, 171);
             this.guna2Panel5.TabIndex = 12;
             this.guna2Panel5.UseTransparentBackground = true;
             // 
@@ -314,6 +316,20 @@ namespace SchoolSync.pages
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(406, 206);
             this.flowLayoutPanel2.TabIndex = 14;
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(11, 3);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.None;
+            this.listBox1.Size = new System.Drawing.Size(395, 160);
+            this.listBox1.TabIndex = 1;
             // 
             // Home
             // 
@@ -373,5 +389,6 @@ namespace SchoolSync.pages
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }

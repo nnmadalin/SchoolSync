@@ -288,7 +288,82 @@ namespace SchoolSync.pages
                     flowLayoutPanel2.Controls.Add(pnl);
                 }
             }
-            
+
+            //incarcare evenimentele de azi - TimePlan
+
+            url = "https://schoolsync.nnmadalin.me/api/get.php";
+            data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from timeplan where token_user = ?");
+
+            param = new Dictionary<string, string>()
+            {
+                {"token_user",  Convert.ToString(login_signin.login.accounts_user["token"])}
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            task = await _Class.PostRequestAsync(url, data);
+
+            if(task["message"] == "success")
+            {
+                dynamic calendar = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["calendar"]));
+                JObject json = calendar;
+                try
+                {
+                    JArray array = (JArray)json.SelectToken(DateTime.Now.ToString("MM/dd/yyyy"));
+                    if (array != null && array.Type == JTokenType.Array)
+                    {
+                        foreach (var item in array)
+                        {
+                            listBox1.Items.Add("• TimePlan: " + item.ToString());
+                        }
+                    }
+                }
+                catch
+                {
+                    try
+                    {
+                        listBox1.Items.Add("• TimePlan: " + json[DateTime.Now.ToString("MM/dd/yyyy")]);
+                    }
+                    catch { };
+                }
+            }
+
+            //incarcare evenimentele de azi - EduClass
+
+            url = "https://schoolsync.nnmadalin.me/api/get.php";
+            data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where students like ?");
+
+            param = new Dictionary<string, string>()
+            {
+                {"students",  "%" + Convert.ToString(login_signin.login.accounts_user["token"]) + "%"}
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            task = await _Class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
+                JObject json = subjson;
+                for(int i = 0; i < json.Count - 1; i++)
+                {
+                    string datetime = subjson[i.ToString()]["deadline"];
+                    if(datetime != "-1")
+                    {
+                        DateTime dt = Convert.ToDateTime(datetime);
+                        if(dt.ToShortDateString() == DateTime.Now.ToShortDateString())
+                        {
+                            listBox1.Items.Add("• EduClass: " + Convert.ToString(subjson[i.ToString()]["title"]));
+                        }
+                    }
+                }
+            }
+
             schoolsync.hide_loading();
         }
 

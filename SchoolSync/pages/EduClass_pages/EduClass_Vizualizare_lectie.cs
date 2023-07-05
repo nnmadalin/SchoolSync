@@ -141,7 +141,7 @@ namespace SchoolSync.pages.EduClass_pages
                                     Location = new Point((200 - 110) / 2, 140)
                                 };
 
-                                flowLayoutPanel1.Controls.Add(flp_files_panel);
+                                flowLayoutPanel2.Controls.Add(flp_files_panel);
                                 flp_files_panel.Controls.Add(gcp);
                                 flp_files_panel.Controls.Add(lbl_panel_file);
 

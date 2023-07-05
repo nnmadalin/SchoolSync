@@ -41,10 +41,16 @@ namespace SchoolSync.pages.EduClass_pages
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.label5 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.guna2Panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2Panel2
@@ -151,13 +157,15 @@ namespace SchoolSync.pages.EduClass_pages
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.guna2Panel1);
             this.flowLayoutPanel1.Controls.Add(this.label5);
+            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel2);
+            this.flowLayoutPanel1.Controls.Add(this.guna2Panel4);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(43, 206);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.flowLayoutPanel1.MaximumSize = new System.Drawing.Size(1112, 0);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(1112, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1112, 177);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1112, 349);
             this.flowLayoutPanel1.TabIndex = 5;
             // 
             // richTextBox1
@@ -201,9 +209,73 @@ namespace SchoolSync.pages.EduClass_pages
             this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
             this.label5.Location = new System.Drawing.Point(3, 92);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(1101, 23);
+            this.label5.Size = new System.Drawing.Size(1101, 30);
             this.label5.TabIndex = 5;
             this.label5.Text = "Fisiere";
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 125);
+            this.flowLayoutPanel2.MaximumSize = new System.Drawing.Size(1101, 0);
+            this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(1101, 0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(1101, 0);
+            this.flowLayoutPanel2.TabIndex = 6;
+            // 
+            // guna2Panel4
+            // 
+            this.guna2Panel4.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Panel4.BorderRadius = 15;
+            this.guna2Panel4.Controls.Add(this.guna2Button1);
+            this.guna2Panel4.Controls.Add(this.listBox1);
+            this.guna2Panel4.Controls.Add(this.label6);
+            this.guna2Panel4.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.guna2Panel4.Location = new System.Drawing.Point(3, 148);
+            this.guna2Panel4.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
+            this.guna2Panel4.Name = "guna2Panel4";
+            this.guna2Panel4.Size = new System.Drawing.Size(1101, 188);
+            this.guna2Panel4.TabIndex = 7;
+            this.guna2Panel4.UseTransparentBackground = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(0, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(105, 28);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Tema dvs:";
+            // 
+            // listBox1
+            // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(229)))), ((int)(((byte)(232)))));
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 21;
+            this.listBox1.Location = new System.Drawing.Point(19, 54);
+            this.listBox1.MinimumSize = new System.Drawing.Size(1069, 0);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(1069, 126);
+            this.listBox1.TabIndex = 1;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.BorderRadius = 15;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(181)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.guna2Button1.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button1.Location = new System.Drawing.Point(948, 5);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(140, 40);
+            this.guna2Button1.TabIndex = 2;
+            this.guna2Button1.Text = "Trimite tema";
             // 
             // EduClass_Vizualizare_lectie
             // 
@@ -220,6 +292,8 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2Panel3.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.guna2Panel4.ResumeLayout(false);
+            this.guna2Panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,5 +312,10 @@ namespace SchoolSync.pages.EduClass_pages
         private System.Windows.Forms.RichTextBox richTextBox1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label6;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
     }
 }
