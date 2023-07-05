@@ -137,6 +137,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2Panel2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(218)))), ((int)(((byte)(223)))));
             this.guna2Panel2.BorderRadius = 5;
             this.guna2Panel2.BorderThickness = 1;
+            this.guna2Panel2.Controls.Add(this.fontup);
             this.guna2Panel2.Controls.Add(this.fontright);
             this.guna2Panel2.Controls.Add(this.fontcenter);
             this.guna2Panel2.Controls.Add(this.fontleft);
@@ -446,7 +447,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.fontup.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.fontup.ForeColor = System.Drawing.Color.White;
             this.fontup.Image = global::SchoolSync.Properties.Resources.expand_less_FILL1_wght700_GRAD0_opsz48;
-            this.fontup.Location = new System.Drawing.Point(89, 214);
+            this.fontup.Location = new System.Drawing.Point(10, 3);
             this.fontup.Name = "fontup";
             this.fontup.Size = new System.Drawing.Size(30, 27);
             this.fontup.TabIndex = 1;
@@ -490,7 +491,6 @@ namespace SchoolSync.pages.EduMentor_pages
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.GhostWhite;
-            this.Controls.Add(this.fontup);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.label8);

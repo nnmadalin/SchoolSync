@@ -84,7 +84,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(392, 23);
             this.label2.TabIndex = 2;
-            this.label2.Text = "De:";
+            this.label2.Text = "Creat de:";
             // 
             // label3
             // 
@@ -203,6 +203,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2Button1.Size = new System.Drawing.Size(118, 40);
             this.guna2Button1.TabIndex = 9;
             this.guna2Button1.Text = "Creati";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2CircleButton5
             // 

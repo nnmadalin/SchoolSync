@@ -91,7 +91,7 @@ namespace SchoolSync
         }
 
         public static bool use = true;
-        public static string page = "", token_page = "";
+        public static string page = "", token_page = "", token_page_2 = "";
 
         private void guna2Button4_Click(object sender, EventArgs e)
         {
@@ -304,8 +304,8 @@ namespace SchoolSync
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
-            
-            else if(page == "FlowTalk" && use == false)
+
+            else if (page == "FlowTalk" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                 var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
@@ -491,6 +491,36 @@ namespace SchoolSync
                 guna2Panel2.Controls.Clear();
 
                 var frm = new pages.EduClass_pages.EduClass_Creaza();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
+            else if (page == "EduClass_creaza_lectie" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduClass";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.EduClass_pages.EduClass_Creaza_lectie();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
+            else if (page == "EduClass_vizualizare_lectie" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduClass";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.EduClass_pages.EduClass_Vizualizare_lectie();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }

@@ -164,11 +164,23 @@
     <Compile Include="pages\EduClass_pages\EduClass_Creaza.Designer.cs">
       <DependentUpon>EduClass_Creaza.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Creaza_lectie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Creaza_lectie.Designer.cs">
+      <DependentUpon>EduClass_Creaza_lectie.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EduClass_pages\EduClass_Vizualizare.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="pages\EduClass_pages\EduClass_Vizualizare.Designer.cs">
       <DependentUpon>EduClass_Vizualizare.cs</DependentUpon>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_lectie.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_lectie.Designer.cs">
+      <DependentUpon>EduClass_Vizualizare_lectie.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_Persoane.cs">
       <SubType>UserControl</SubType>
@@ -299,8 +311,14 @@
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza.resx">
       <DependentUpon>EduClass_Creaza.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza_lectie.resx">
+      <DependentUpon>EduClass_Creaza_lectie.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare.resx">
       <DependentUpon>EduClass_Vizualizare.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare_lectie.resx">
+      <DependentUpon>EduClass_Vizualizare_lectie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare_Persoane.resx">
       <DependentUpon>EduClass_Vizualizare_Persoane.cs</DependentUpon>

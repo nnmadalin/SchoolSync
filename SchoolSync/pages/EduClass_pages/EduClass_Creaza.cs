@@ -42,7 +42,7 @@ namespace SchoolSync.pages.EduClass_pages
 
         private async void guna2Button2_Click(object sender, EventArgs e)
         {
-            if(!(guna2TextBox1.Text.Trim() != ""  && guna2TextBox2.Text.Trim() != ""))
+            if(!(guna2TextBox1.Text.Trim() != ""))
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
