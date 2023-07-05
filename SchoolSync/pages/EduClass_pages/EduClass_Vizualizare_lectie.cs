@@ -19,6 +19,8 @@ namespace SchoolSync.pages.EduClass_pages
             InitializeComponent();
         }
 
+
+
         private async void EduClass_Vizualizare_lectie_Load(object sender, EventArgs e)
         {
             schoolsync.show_loading();
@@ -159,7 +161,7 @@ namespace SchoolSync.pages.EduClass_pages
                                 flp_files_panel.Controls.Add(panel_file_btn);
 
                                 panel_file_btn.Tag = token_user + "/" + task["0"]["token"] + "/" + task["0"]["name"];
-                                //panel_file_btn.Click += deschide_fisier_buton;
+                                panel_file_btn.Click += deschide_fisier_buton;
                             }
                             catch (Exception ee) { };
 
@@ -193,6 +195,14 @@ namespace SchoolSync.pages.EduClass_pages
                 navbar_home.page = "EduClass";
                 navbar_home.use = false;
             }
+        }
+
+        
+
+        private void deschide_fisier_buton(object sender, EventArgs e)
+        {
+            var btn = sender as Guna.UI2.WinForms.Guna2Button;
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn.Tag.ToString());
         }
 
         private void guna2CircleButton1_Click(object sender, EventArgs e)

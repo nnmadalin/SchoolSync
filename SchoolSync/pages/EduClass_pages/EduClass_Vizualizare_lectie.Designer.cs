@@ -40,6 +40,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.label5 = new System.Windows.Forms.Label();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -149,6 +150,7 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.Controls.Add(this.guna2Panel1);
+            this.flowLayoutPanel1.Controls.Add(this.label5);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(43, 206);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.flowLayoutPanel1.MaximumSize = new System.Drawing.Size(1112, 0);
@@ -192,6 +194,17 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton1.TabIndex = 6;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoEllipsis = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(3, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1101, 23);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Fisiere";
+            // 
             // EduClass_Vizualizare_lectie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,5 +237,6 @@ namespace SchoolSync.pages.EduClass_pages
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
+        private System.Windows.Forms.Label label5;
     }
 }
