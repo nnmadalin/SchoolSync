@@ -56,6 +56,7 @@ namespace SchoolSync.pages
             this.guna2Button21 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2Button20 = new Guna.UI2.WinForms.Guna2Button();
             this.panel_materii.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@ namespace SchoolSync.pages
             this.guna2Button17.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(185)))), ((int)(((byte)(226)))), ((int)(((byte)(254)))));
             this.guna2Button17.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
-            this.guna2Button17.Location = new System.Drawing.Point(909, 15);
+            this.guna2Button17.Location = new System.Drawing.Point(868, 15);
             this.guna2Button17.Name = "guna2Button17";
             this.guna2Button17.ShadowDecoration.BorderRadius = 15;
             this.guna2Button17.ShadowDecoration.Depth = 20;
@@ -136,7 +137,7 @@ namespace SchoolSync.pages
             this.guna2Button18.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
             this.guna2Button18.Image = global::SchoolSync.Properties.Resources.favorite_FILL1_wght700_GRAD0_opsz48;
-            this.guna2Button18.Location = new System.Drawing.Point(1114, 6);
+            this.guna2Button18.Location = new System.Drawing.Point(1132, 6);
             this.guna2Button18.Name = "guna2Button18";
             this.guna2Button18.ShadowDecoration.BorderRadius = 15;
             this.guna2Button18.ShadowDecoration.Depth = 20;
@@ -583,7 +584,7 @@ namespace SchoolSync.pages
             this.guna2Button21.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
             this.guna2Button21.Image = global::SchoolSync.Properties.Resources.add_FILL1_wght700_GRAD0_opsz48;
-            this.guna2Button21.Location = new System.Drawing.Point(1063, 6);
+            this.guna2Button21.Location = new System.Drawing.Point(1081, 6);
             this.guna2Button21.Name = "guna2Button21";
             this.guna2Button21.Size = new System.Drawing.Size(45, 45);
             this.guna2Button21.TabIndex = 22;
@@ -612,20 +613,44 @@ namespace SchoolSync.pages
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2TextBox1.IconLeft = global::SchoolSync.Properties.Resources.search_FILL1_wght700_GRAD0_opsz48;
-            this.guna2TextBox1.Location = new System.Drawing.Point(604, 14);
+            this.guna2TextBox1.Location = new System.Drawing.Point(587, 15);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';
             this.guna2TextBox1.PlaceholderText = "";
             this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(283, 36);
+            this.guna2TextBox1.Size = new System.Drawing.Size(248, 36);
             this.guna2TextBox1.TabIndex = 30;
             this.guna2TextBox1.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
+            // 
+            // guna2Button20
+            // 
+            this.guna2Button20.Animated = true;
+            this.guna2Button20.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Button20.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(82)))), ((int)(((byte)(81)))));
+            this.guna2Button20.BorderRadius = 20;
+            this.guna2Button20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button20.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button20.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button20.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button20.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button20.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(163)))), ((int)(((byte)(135)))));
+            this.guna2Button20.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.guna2Button20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(46)))), ((int)(((byte)(65)))));
+            this.guna2Button20.Image = global::SchoolSync.Properties.Resources.admin_panel_settings_FILL1_wght700_GRAD0_opsz48;
+            this.guna2Button20.Location = new System.Drawing.Point(1025, 6);
+            this.guna2Button20.Name = "guna2Button20";
+            this.guna2Button20.Size = new System.Drawing.Size(50, 50);
+            this.guna2Button20.TabIndex = 31;
+            this.guna2Button20.UseTransparentBackground = true;
+            this.guna2Button20.Visible = false;
+            this.guna2Button20.Click += new System.EventHandler(this.guna2Button20_Click);
             // 
             // InvataUnit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.guna2Button20);
             this.Controls.Add(this.guna2TextBox1);
             this.Controls.Add(this.guna2Button21);
             this.Controls.Add(this.guna2ComboBox2);
@@ -671,5 +696,6 @@ namespace SchoolSync.pages
         private Guna.UI2.WinForms.Guna2Button guna2Button21;
         private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2Button guna2Button20;
     }
 }

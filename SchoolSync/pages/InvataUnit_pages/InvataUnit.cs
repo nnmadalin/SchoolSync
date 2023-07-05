@@ -129,6 +129,14 @@ namespace SchoolSync.pages
                         param.Add("created", Convert.ToString(login_signin.login.accounts_user["username"]));
                         use_param = true;
                     }
+                    else if (guna2Button20.BorderThickness == 2)
+                    {
+                        data["command"] += " where is_deleted = 1";
+                    }
+                    else
+                    {
+                        data["command"] += " where is_deleted = 0";
+                    }
                 }
                 else
                 {
@@ -141,6 +149,12 @@ namespace SchoolSync.pages
                         data["command"] += " and created = ?";
                         param.Add("created", Convert.ToString(login_signin.login.accounts_user["username"]));
                         use_param = true;
+                    }
+                    else if (guna2Button20.BorderThickness == 2)
+                        data["command"] += " and is_deleted = 1";
+                    else
+                    {
+                        data["command"] += " and is_deleted = 0";
                     }
                 }
                 data["command"] += " order by data DESC";
@@ -174,6 +188,13 @@ namespace SchoolSync.pages
                     param.Add("created", Convert.ToString(login_signin.login.accounts_user["username"]));
                     use_param = true;
                 }
+                else if (guna2Button20.BorderThickness == 2)
+                    data["command"] += " where is_deleted = 1";
+                else
+                {
+                    data["command"] += " and is_deleted = 0";
+                }
+
                 data["command"] += " order by data DESC";
             }
 
@@ -184,7 +205,7 @@ namespace SchoolSync.pages
 
             dynamic task = await _class.PostRequestAsync(url, data);
             JObject jb = task;
-            if (guna2Button17.BorderThickness != 2)
+            if (guna2Button17.BorderThickness != 2 && guna2Button20.BorderThickness != 2)
                 load_intrebari_panel_informare();
             else
             {
@@ -320,7 +341,7 @@ namespace SchoolSync.pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", "select * from invataunit where favourites like ?");
+            data.Add("command", "select * from invataunit where favourites like ? and is_deleted = 0");
 
             var param = new Dictionary<string, string>()
             {
@@ -406,6 +427,15 @@ namespace SchoolSync.pages
 
         private void invataunit_Load(object sender, EventArgs e)
         {
+            if(Convert.ToString(login_signin.login.accounts_user["invataunit_moderator"]) == "1")
+            {
+                guna2Button20.Visible = true;
+            }
+            else if (Convert.ToString(login_signin.login.accounts_user["administrator_app"]) == "1")
+            {
+                guna2Button20.Visible = true;
+            }
+
             load_intrebari_panel();
         }
 
@@ -425,6 +455,7 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 2;
             guna2Button17.BorderThickness = 0;
             guna2Button18.BorderThickness = 0;
+            guna2Button20.BorderThickness = 0;
             guna2TextBox1.Clear();
             load_intrebari_panel();
         }
@@ -434,6 +465,7 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 0;
             guna2Button17.BorderThickness = 2;
             guna2Button18.BorderThickness = 0;
+            guna2Button20.BorderThickness = 0;
             guna2TextBox1.Clear();
             load_intrebari_panel();
         }
@@ -443,6 +475,7 @@ namespace SchoolSync.pages
             guna2Button19.BorderThickness = 0;
             guna2Button17.BorderThickness = 0;
             guna2Button18.BorderThickness = 2;
+            guna2Button20.BorderThickness = 0;
             guna2TextBox1.Clear();
             load_favorite_panel();
         }
@@ -471,6 +504,16 @@ namespace SchoolSync.pages
                 }
                 catch {; };
             }
+        }
+
+        private void guna2Button20_Click(object sender, EventArgs e)
+        {
+            guna2Button19.BorderThickness = 0;
+            guna2Button17.BorderThickness = 0;
+            guna2Button18.BorderThickness = 0;
+            guna2Button20.BorderThickness = 2;
+            guna2TextBox1.Clear();
+            load_intrebari_panel();
         }
     }
 }

@@ -74,6 +74,18 @@ namespace SchoolSync.pages.InvataUnit_pages
                     guna2CircleButton2.Visible = true;
                     guna2CircleButton3.Visible = true;
                 }
+                else if (login_signin.login.accounts_user["invataunit_moderator"] == "1")
+                {
+                    guna2CircleButton3.Visible = true;
+                    guna2Button3.Visible = true;
+                    guna2Button3.Tag = task["0"]["is_deleted"];
+                }
+                else if (login_signin.login.accounts_user["administrator_app"] == "1")
+                {
+                    guna2CircleButton3.Visible = true;
+                    guna2Button3.Visible = true;
+                    guna2Button3.Tag = task["0"]["is_deleted"];
+                }
 
                 if (task["0"]["files"] == "")
                 {
@@ -788,6 +800,100 @@ namespace SchoolSync.pages.InvataUnit_pages
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private async void guna2Button3_Click(object sender, EventArgs e)
+        {
+            string token = navbar_home.token_page;
+
+            guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
+            if (guna2Button3.Tag.ToString() == "0")
+            {
+                guna2MessageDialog1.Caption = "Ascunde intrebare ADMIN!";
+                guna2MessageDialog1.Text = "Esti sigur ca vrei sa ascunzi acesta intrebare ?";
+                guna2Button3.Tag = "1";
+            }
+            else
+            {
+                guna2MessageDialog1.Caption = "Arata intrebare ADMIN!";
+                guna2MessageDialog1.Text = "Esti sigur ca vrei sa arati acesta intrebare ?";
+                guna2Button3.Tag = "0";
+            }
+            DialogResult dr = guna2MessageDialog1.Show();
+            if (dr == DialogResult.Yes)
+            {
+                schoolsync.show_loading();
+
+                multiple_class _Class = new multiple_class();
+
+                string url = "https://schoolsync.nnmadalin.me/api/put.php";
+                Dictionary<string, string> data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+
+                if (guna2Button3.Tag.ToString() == "1")
+                {
+                    data.Add("command", "update invataunit set is_deleted = 1, is_deleted_by = ? where token = ?");
+                    var param = new Dictionary<string, string>()
+                    {
+                        {"is_deleted_by", Convert.ToString(login_signin.login.accounts_user["username"])},
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    dynamic task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Intrebare ascunsa cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+                else
+                {
+                    data.Add("command", "update invataunit set is_deleted = 0 where token = ?");
+                    var param = new Dictionary<string, string>()
+                    {
+                        {"token", navbar_home.token_page}
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    dynamic task = await _Class.PostRequestAsync(url, data);
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+
+                        notification.success.message = "Intrebare vizibila cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+            }
+            schoolsync.hide_loading();
         }
     }
 }

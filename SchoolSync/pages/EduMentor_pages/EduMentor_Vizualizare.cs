@@ -83,14 +83,20 @@ namespace SchoolSync.pages.EduMentor_pages
                     guna2CircleButton1.Visible = true;
                     guna2CircleButton5.Visible = true;
                 }
-                else if(login_signin.login.accounts_user["invataunit_moderator"] == "1")
+                else if(login_signin.login.accounts_user["edumentor_moderator"] == "1")
+                {
+                    guna2CircleButton1.Visible = true;
+                    guna2Button1.Visible = true;
+                    guna2Button1.Tag = task["0"]["is_deleted"];
+                }
+                else if (login_signin.login.accounts_user["administrator_app"] == "1")
                 {
                     guna2CircleButton1.Visible = true;
                     guna2Button1.Visible = true;
                     guna2Button1.Tag = task["0"]["is_deleted"];
                 }
 
-                if(task["0"]["is_deleted"] == "1")
+                if (task["0"]["is_deleted"] == "1")
                 {
                     var frm = new notification.warning();
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];

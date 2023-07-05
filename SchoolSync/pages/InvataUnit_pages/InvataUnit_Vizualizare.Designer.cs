@@ -425,6 +425,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Button3.Text = "show/hide";
             this.guna2Button3.UseTransparentBackground = true;
             this.guna2Button3.Visible = false;
+            this.guna2Button3.Click += new System.EventHandler(this.guna2Button3_Click);
             // 
             // InvataUnit_Vizualizare
             // 
