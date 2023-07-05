@@ -85,11 +85,7 @@ namespace SchoolSync.pages.EduMentor_pages
                 }
                 else if(login_signin.login.accounts_user["invataunit_moderator"] == "1")
                 {
-                    guna2Button1.Visible = true;
-                    guna2Button1.Tag = task["0"]["is_deleted"];
-                }
-                else if(login_signin.login.accounts_user["administrator_add"] == "1")
-                {
+                    guna2CircleButton1.Visible = true;
                     guna2Button1.Visible = true;
                     guna2Button1.Tag = task["0"]["is_deleted"];
                 }
