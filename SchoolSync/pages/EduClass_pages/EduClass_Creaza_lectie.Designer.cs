@@ -434,6 +434,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.Controls.Add(this.label1);
             this.Name = "EduClass_Creaza_lectie";
             this.Size = new System.Drawing.Size(1186, 676);
+            this.Load += new System.EventHandler(this.EduClass_Creaza_lectie_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);

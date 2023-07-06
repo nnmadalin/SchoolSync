@@ -494,6 +494,21 @@ namespace SchoolSync
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
+            else if (page == "EduClass_editare_lectie" && use == false)
+            {
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel1"];
+                var label = panel.Controls["label1"];
+                label.Text = "SchoolSync | EduClass";
+                GC.Collect();
+
+                use = true;
+                guna2Panel2.Controls.Clear();
+
+                var frm = new pages.EduClass_pages.EduClass_Creaza_lectie();
+                guna2Panel2.Controls.Add(frm);
+                frm.BringToFront();
+            }
             else if (page == "EduClass_vizualizare_lectie" && use == false)
             {
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];

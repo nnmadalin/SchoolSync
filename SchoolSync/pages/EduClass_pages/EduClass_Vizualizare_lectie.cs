@@ -48,7 +48,7 @@ namespace SchoolSync.pages.EduClass_pages
                     if (admins[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
                     {
                         is_admin = true;
-                        guna2Button3.Visible = guna2Button4.Visible = true;
+                        guna2Button3.Visible = guna2Button4.Visible = guna2Button5.Visible = true;
 
                         break;
                     }
@@ -608,11 +608,7 @@ namespace SchoolSync.pages.EduClass_pages
                 {
                     dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
                     JObject json = subjson;
-                    try
-                    {
-                        json.Remove(navbar_home.token_page_2);
-                    }
-                    catch { };
+                    subjson[navbar_home.token_page_2]["is_deleted"] = 1;
 
                     subjson = json;
 
@@ -656,6 +652,17 @@ namespace SchoolSync.pages.EduClass_pages
 
                 schoolsync.hide_loading();
             }
+        }
+
+        private void guna2Button3_Click(object sender, EventArgs e)
+        {
+            navbar_home.page = "EduClass_editare_lectie";
+            navbar_home.use = false;
+        }
+
+        private void guna2Panel3_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
