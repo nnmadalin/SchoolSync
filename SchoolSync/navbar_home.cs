@@ -555,6 +555,8 @@ namespace SchoolSync
                 var frm = new pages.Profil();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
+                background_color_btn();
+                guna2Button5.FillColor = Color.FromArgb(66, 66, 66);
             }
 
         }

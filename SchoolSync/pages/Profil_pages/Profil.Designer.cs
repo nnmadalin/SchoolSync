@@ -99,6 +99,7 @@ namespace SchoolSync.pages
             // 
             // guna2CircleButton2
             // 
+            this.guna2CircleButton2.Animated = true;
             this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -487,6 +488,7 @@ namespace SchoolSync.pages
             // 
             // guna2CheckBox1
             // 
+            this.guna2CheckBox1.Animated = true;
             this.guna2CheckBox1.AutoSize = true;
             this.guna2CheckBox1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox1.CheckedState.BorderRadius = 0;
@@ -503,10 +505,11 @@ namespace SchoolSync.pages
             this.guna2CheckBox1.UncheckedState.BorderThickness = 0;
             this.guna2CheckBox1.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.guna2CheckBox1.Visible = false;
-            this.guna2CheckBox1.Click += new System.EventHandler(this.guna2CheckBox1_Click);
+            this.guna2CheckBox1.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
             // 
             // guna2CheckBox2
             // 
+            this.guna2CheckBox2.Animated = true;
             this.guna2CheckBox2.AutoSize = true;
             this.guna2CheckBox2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox2.CheckedState.BorderRadius = 0;
@@ -523,10 +526,11 @@ namespace SchoolSync.pages
             this.guna2CheckBox2.UncheckedState.BorderThickness = 0;
             this.guna2CheckBox2.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.guna2CheckBox2.Visible = false;
-            this.guna2CheckBox2.Click += new System.EventHandler(this.guna2CheckBox1_Click);
+            this.guna2CheckBox2.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
             // 
             // guna2CheckBox3
             // 
+            this.guna2CheckBox3.Animated = true;
             this.guna2CheckBox3.AutoSize = true;
             this.guna2CheckBox3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox3.CheckedState.BorderRadius = 0;
@@ -543,7 +547,7 @@ namespace SchoolSync.pages
             this.guna2CheckBox3.UncheckedState.BorderThickness = 0;
             this.guna2CheckBox3.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             this.guna2CheckBox3.Visible = false;
-            this.guna2CheckBox3.Click += new System.EventHandler(this.guna2CheckBox1_Click);
+            this.guna2CheckBox3.CheckedChanged += new System.EventHandler(this.guna2CheckBox1_CheckedChanged);
             // 
             // Profil
             // 
