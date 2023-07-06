@@ -485,7 +485,7 @@ namespace SchoolSync.pages
             // 
             // guna2MessageDialog1
             // 
-            this.guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNoCancel;
+            this.guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
             this.guna2MessageDialog1.Caption = null;
             this.guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning;
             this.guna2MessageDialog1.Parent = null;

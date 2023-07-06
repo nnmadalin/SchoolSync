@@ -48,6 +48,8 @@ namespace SchoolSync.pages.EduClass_pages
                     if (admins[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
                     {
                         is_admin = true;
+                        guna2Button3.Visible = guna2Button4.Visible = true;
+
                         break;
                     }
                 }
@@ -61,6 +63,11 @@ namespace SchoolSync.pages.EduClass_pages
                     label1.Text = subjson[navbar_home.token_page_2]["title"];
                     label4.Text = subjson[navbar_home.token_page_2]["created"] + " • Ultima Modificare: " + subjson[navbar_home.token_page_2]["last_edit"];
                     richTextBox1.Rtf = subjson[navbar_home.token_page_2]["description"];
+
+                    if(richTextBox1.Text.Trim() == "")
+                    {
+                        guna2Panel1.Visible = false;
+                    }
 
                     if (Convert.ToString(subjson[navbar_home.token_page_2]["is_homework"]) == "0")
                     {
@@ -114,6 +121,16 @@ namespace SchoolSync.pages.EduClass_pages
                         if (item != null)
                         {
                             string[] split = item.Split(';');
+                            if(split.Length == 0)
+                            {
+                                Label lbl_no_file = new Label()
+                                {
+                                    Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
+                                    Text = "Nu ai incarcat fisiere!",
+                                    AutoSize = true,
+                                };
+                                flowLayoutPanel3.Controls.Add(lbl_no_file);
+                            }
 
                             for (int i = 0; i < split.Length - 1; i++)
                             {
@@ -138,8 +155,27 @@ namespace SchoolSync.pages.EduClass_pages
                                 flowLayoutPanel3.Controls.Add(guna2Chip);
                             }
                         }
+                        else
+                        {
+                            Label lbl_no_file = new Label()
+                            {
+                                Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
+                                Text = "Nu ai incarcat fisiere!",
+                                AutoSize = true,
+                            };
+                            flowLayoutPanel3.Controls.Add(lbl_no_file);
+                        }
                     }
-                    catch { };
+                    catch 
+                    {
+                        Label lbl_no_file = new Label()
+                        {
+                            Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
+                            Text = "Nu ai incarcat fisiere!",
+                            AutoSize = true,
+                        };
+                        flowLayoutPanel3.Controls.Add(lbl_no_file);
+                    };
 
                     //afisare fisiere lectie
 
@@ -545,6 +581,81 @@ namespace SchoolSync.pages.EduClass_pages
             }
 
             schoolsync.hide_loading();
+        }
+
+        private async void guna2Button4_Click(object sender, EventArgs e)
+        {
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                schoolsync.show_loading();
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from educlass where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    {"token", navbar_home.token_page},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+
+                if (task["message"] == "success")
+                {
+                    dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
+                    JObject json = subjson;
+                    try
+                    {
+                        json.Remove(navbar_home.token_page_2);
+                    }
+                    catch { };
+
+                    subjson = json;
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set materials = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"materials", JsonConvert.SerializeObject(subjson)},
+                        {"token", navbar_home.token_page},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+                    schoolsync.hide_loading();
+                    if (task["message"] == "update success")
+                    {
+                        navbar_home.page = "EduClass_vizualizare";
+                        navbar_home.use = false;
+
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Lectie stearsa cu succes!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+                }
+
+                schoolsync.hide_loading();
+            }
         }
     }
 }

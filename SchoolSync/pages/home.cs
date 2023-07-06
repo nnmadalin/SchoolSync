@@ -35,14 +35,20 @@ namespace SchoolSync.pages
 
             label2.Text = login_signin.login.accounts_user["username"] + "!";
             guna2CirclePictureBox1.Image =  await _Class.IncarcaAvatar(Convert.ToString(login_signin.login.accounts_user["token"]));
+            dynamic task;
+            try
+            {
+               task = await _Class.getstring("https://type.fit/api/quotes");
 
-            dynamic task = await _Class.getstring("https://type.fit/api/quotes");
+                Random rand = new Random();
+                int p = Convert.ToInt32(rand.Next(0, 1201).ToString());
 
-            Random rand = new Random();
-            int p = Convert.ToInt32(rand.Next(0, 1201).ToString());
-
-            label10.Text = "'" + task[p]["text"] + "'" + " - " + task[p]["author"];
-
+                label10.Text = "'" + task[p]["text"] + "'" + " - " + task[p]["author"];
+            }
+            catch
+            {
+                label10.Text = "'Învingerea nu înseamnă să fii întotdeauna primul. Înseamnă să ajungi acolo unde ai vrut să ajungi, să fii ceea ce ai vrut să fii.'" + " - Kathy Ireland";
+            }
             //incarca informatii materiale educative
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
