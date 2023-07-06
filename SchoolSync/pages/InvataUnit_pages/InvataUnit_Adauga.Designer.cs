@@ -297,6 +297,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             this.guna2Panel1.Size = new System.Drawing.Size(1124, 560);
             this.guna2Panel1.TabIndex = 15;
             this.guna2Panel1.UseTransparentBackground = true;
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // guna2Button1
             // 
