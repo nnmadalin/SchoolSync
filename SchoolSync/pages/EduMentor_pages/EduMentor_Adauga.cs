@@ -62,101 +62,135 @@ namespace SchoolSync.pages.EduMentor_pages
             Random rand = new Random();
             string random_color = rand.Next(256) + ", " + rand.Next(256) + ", " + rand.Next(256);
 
-            Dictionary<string, string> data;
-
-            foreach (Control control in flowLayoutPanel1.Controls)
-            {
-                FileInfo inf = new FileInfo(control.Tag.ToString());
-
-                string token_file = _class.generate_token_250();
-
-                data = new Dictionary<string, string>();
-                data.Add("token", schoolsync.token);
-                data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
-                data.Add("token_file", token_file);
-                data.Add("filename", inf.Name);
-
-                await _class.UploadFileAsync(data, control.Tag.ToString());
-                files += (token_file + ";");
-
-            }
-
-
-            if (navbar_home.page == "EduMentor_editare" || navbar_home.page == "EduMentor_editare_->_home")
-            {
-                string url = "https://schoolsync.nnmadalin.me/api/put.php";
-                data = new Dictionary<string, string>();
-                data.Add("token", schoolsync.token);
-                data.Add("command", "update edumentor set category = ?, title = ?, description = ?, files = ?, reading_time = ? where token = ?");
-                var param = new Dictionary<string, string>()
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from edumentor where token = ?");
+            var param = new Dictionary<string, string>()
                 {
-                    {"category", guna2ComboBox2.SelectedItem.ToString()},
-                    {"title", guna2TextBox1.Text.ToString()},
-                    {"description", richTextBox1.Rtf.ToString()},
-                    {"files", files},
-                    {"reading_time", guna2NumericUpDown1.Value.ToString()},
-                    {"token", navbar_home.token_page},
+                    {"token", navbar_home.token_page}
                 };
 
-                data.Add("params", JsonConvert.SerializeObject(param));
-                dynamic task = null;
-                try
+            data.Add("params", JsonConvert.SerializeObject(param));
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                string file = task["0"]["files"];
+                if (file == null)
+                    file = "";
+                string[] spl = file.Split(';');
+
+                foreach (Control control in flowLayoutPanel1.Controls)
                 {
-                    task = await _class.PostRequestAsync(url, data);
-                    Console.WriteLine(task);
-                    if (task["message"] == "update success")
+                    bool is_ok = false;
+
+                    for (int i = 0; i < spl.Length; i++)
                     {
-                        var frm = new notification.success();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
-
-                        schoolsync.hide_loading();
-
-                        notification.success.message = "Material modificat cu succes!";
-                        frm.BringToFront();
-
-                        schoolsync.hide_loading();
-
-                        if (navbar_home.page == "EduMentor_editare_->_home")
+                        if(spl[i] == control.Tag.ToString())
                         {
-                            navbar_home.use = false;
-                            navbar_home.page = "EduMentor_vizualizare_->_home";
+                            is_ok = true;
+                            break;
+                        }
+                    }
+
+                    if (is_ok == false)
+                    {
+                        FileInfo inf = new FileInfo(control.Tag.ToString());
+
+                        string token_file = _class.generate_token_250();
+
+                        data = new Dictionary<string, string>();
+                        data.Add("token", schoolsync.token);
+                        data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                        data.Add("token_file", token_file);
+                        data.Add("filename", inf.Name);
+
+                        await _class.UploadFileAsync(data, control.Tag.ToString());
+                        files += (token_file + ";");
+                    }
+                    else{
+                        files += (control.Tag.ToString() + ";");
+                    }
+
+                }
+
+
+                    if (navbar_home.page == "EduMentor_editare" || navbar_home.page == "EduMentor_editare_->_home")
+                {
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update edumentor set category = ?, title = ?, description = ?, files = ?, reading_time = ? where token = ?");
+                    param = new Dictionary<string, string>()
+                    {
+                        {"category", guna2ComboBox2.SelectedItem.ToString()},
+                        {"title", guna2TextBox1.Text.ToString()},
+                        {"description", richTextBox1.Rtf.ToString()},
+                        {"files", files},
+                        {"reading_time", guna2NumericUpDown1.Value.ToString()},
+                        {"token", navbar_home.token_page},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    task = null;
+                    try
+                    {
+                        task = await _class.PostRequestAsync(url, data);
+                        Console.WriteLine(task);
+                        if (task["message"] == "update success")
+                        {
+                            var frm = new notification.success();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+
+                            schoolsync.hide_loading();
+
+                            notification.success.message = "Material modificat cu succes!";
+                            frm.BringToFront();
+
+                            schoolsync.hide_loading();
+
+                            if (navbar_home.page == "EduMentor_editare_->_home")
+                            {
+                                navbar_home.use = false;
+                                navbar_home.page = "EduMentor_vizualizare_->_home";
+                            }
+                            else
+                            {
+                                navbar_home.use = false;
+                                navbar_home.page = "EduMentor_vizualizare";
+                            }
                         }
                         else
                         {
-                            navbar_home.use = false;
-                            navbar_home.page = "EduMentor_vizualizare";
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Ceva nu a functionat bine!";
+                            frm.BringToFront();
                         }
+
                     }
-                    else
+                    catch
                     {
                         var frm = new notification.error();
                         schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                         var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                         panel.Controls.Add(frm);
-                        notification.error.message = "Ceva nu a functionat bine!";
+                        notification.error.message = "DIMENSIUNE PREA MARE! Nu adauga fisiere de dimensiuni foarte mari in caseta!";
                         frm.BringToFront();
-                    }
-
+                    };
                 }
-                catch
+                else
                 {
-                    var frm = new notification.error();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-                    notification.error.message = "DIMENSIUNE PREA MARE! Nu adauga fisiere de dimensiuni foarte mari in caseta!";
-                    frm.BringToFront();
-                };
-            }
-            else
-            {
-                string url = "https://schoolsync.nnmadalin.me/api/post.php";
-                data = new Dictionary<string, string>();
-                data.Add("token", schoolsync.token);
-                data.Add("command", "insert into edumentor(token, token_user, created, category, color, title, description, files, reading_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                var param = new Dictionary<string, string>()
+                    url = "https://schoolsync.nnmadalin.me/api/post.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "insert into edumentor(token, token_user, created, category, color, title, description, files, reading_time) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    param = new Dictionary<string, string>()
                 {
                     {"token", token},
                     {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
@@ -169,48 +203,49 @@ namespace SchoolSync.pages.EduMentor_pages
                     {"reading_time", guna2NumericUpDown1.Value.ToString()},
                 };
 
-                data.Add("params", JsonConvert.SerializeObject(param));
-                dynamic task = null;
-                try
-                {
-                    task = await _class.PostRequestAsync(url, data);
-
-                    if (task["message"] == "insert success")
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    task = null;
+                    try
                     {
-                        var frm = new notification.success();
-                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                        panel.Controls.Add(frm);
+                        task = await _class.PostRequestAsync(url, data);
 
-                        schoolsync.hide_loading();
+                        if (task["message"] == "insert success")
+                        {
+                            var frm = new notification.success();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
 
-                        notification.success.message = "Material salvat cu succes!";
-                        frm.BringToFront();
+                            schoolsync.hide_loading();
+
+                            notification.success.message = "Material salvat cu succes!";
+                            frm.BringToFront();
 
 
-                        navbar_home.use = false;
-                        navbar_home.page = "EduMentor";
+                            navbar_home.use = false;
+                            navbar_home.page = "EduMentor";
+                        }
+                        else
+                        {
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Ceva nu a functionat bine!";
+                            frm.BringToFront();
+                        }
+
                     }
-                    else
+                    catch
                     {
                         var frm = new notification.error();
                         schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                         var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                         panel.Controls.Add(frm);
-                        notification.error.message = "Ceva nu a functionat bine!";
+                        notification.error.message = "DIMENSIUNE PREA MARE! Nu adauga fisiere de dimensiuni foarte mari in caseta!";
                         frm.BringToFront();
-                    }
-
+                    };
                 }
-                catch
-                {
-                    var frm = new notification.error();
-                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
-                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
-                    panel.Controls.Add(frm);
-                    notification.error.message = "DIMENSIUNE PREA MARE! Nu adauga fisiere de dimensiuni foarte mari in caseta!";
-                    frm.BringToFront();
-                };
             }
             schoolsync.hide_loading();
         }

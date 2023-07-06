@@ -47,7 +47,7 @@ namespace SchoolSync.pages
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", string.Format("select * from edumentor "));
+            data.Add("command", string.Format("select * from edumentor where is_deleted = 0 and is_visible = 1"));
             task = await _Class.PostRequestAsync(url, data);
             JObject jb = task;
             label7.Text = (jb.Count - 1).ToString();
@@ -56,7 +56,7 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", string.Format("select * from invataunit "));
+            data.Add("command", string.Format("select * from invataunit where is_deleted = 0"));
             task = await _Class.PostRequestAsync(url, data);
             jb = task;
             label8.Text = (jb.Count - 1).ToString();
@@ -66,7 +66,7 @@ namespace SchoolSync.pages
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
             data.Add("token", schoolsync.token);
-            data.Add("command", string.Format("select * from edumentor order by data DESC"));
+            data.Add("command", string.Format("select * from edumentor where is_deleted = 0 and is_visible = 1 order by data DESC"));
             task = await _Class.PostRequestAsync(url, data);
             jb = task;
 
