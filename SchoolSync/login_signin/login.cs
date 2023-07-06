@@ -206,7 +206,7 @@ namespace SchoolSync.login_signin
                     schoolsync.hide_loading();
                 }
             }
-            else if (task["message"] == "Database no value" || !VerifyPassword(pswd, pswd_db))
+            else if (task["message"] == "database no value" || !VerifyPassword(pswd, pswd_db))
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];

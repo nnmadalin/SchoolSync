@@ -34,6 +34,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2NumericUpDown1 = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.fontright = new Guna.UI2.WinForms.Guna2Button();
             this.fontcenter = new Guna.UI2.WinForms.Guna2Button();
             this.fontleft = new Guna.UI2.WinForms.Guna2Button();
@@ -50,7 +51,6 @@ namespace SchoolSync.pages.EduMentor_pages
             this.label2 = new System.Windows.Forms.Label();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.fontup = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2Panel1.SuspendLayout();
@@ -93,6 +93,7 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2Panel1.Size = new System.Drawing.Size(1124, 588);
             this.guna2Panel1.TabIndex = 11;
             this.guna2Panel1.UseTransparentBackground = true;
+            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
             // guna2NumericUpDown1
             // 
@@ -151,6 +152,25 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2Panel2.Size = new System.Drawing.Size(1058, 319);
             this.guna2Panel2.TabIndex = 41;
             this.guna2Panel2.UseTransparentBackground = true;
+            // 
+            // fontup
+            // 
+            this.fontup.Animated = true;
+            this.fontup.BackColor = System.Drawing.Color.White;
+            this.fontup.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.fontup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.fontup.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.fontup.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.fontup.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.fontup.FillColor = System.Drawing.Color.Transparent;
+            this.fontup.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.fontup.ForeColor = System.Drawing.Color.White;
+            this.fontup.Image = global::SchoolSync.Properties.Resources.expand_less_FILL1_wght700_GRAD0_opsz48;
+            this.fontup.Location = new System.Drawing.Point(10, 3);
+            this.fontup.Name = "fontup";
+            this.fontup.Size = new System.Drawing.Size(30, 27);
+            this.fontup.TabIndex = 1;
+            this.fontup.Click += new System.EventHandler(this.texteditor_button);
             // 
             // fontright
             // 
@@ -433,25 +453,6 @@ namespace SchoolSync.pages.EduMentor_pages
             this.label1.Size = new System.Drawing.Size(61, 28);
             this.label1.TabIndex = 24;
             this.label1.Text = "Titlu:";
-            // 
-            // fontup
-            // 
-            this.fontup.Animated = true;
-            this.fontup.BackColor = System.Drawing.Color.White;
-            this.fontup.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.fontup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.fontup.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.fontup.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.fontup.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.fontup.FillColor = System.Drawing.Color.Transparent;
-            this.fontup.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.fontup.ForeColor = System.Drawing.Color.White;
-            this.fontup.Image = global::SchoolSync.Properties.Resources.expand_less_FILL1_wght700_GRAD0_opsz48;
-            this.fontup.Location = new System.Drawing.Point(10, 3);
-            this.fontup.Name = "fontup";
-            this.fontup.Size = new System.Drawing.Size(30, 27);
-            this.fontup.TabIndex = 1;
-            this.fontup.Click += new System.EventHandler(this.texteditor_button);
             // 
             // guna2CircleButton1
             // 

@@ -365,6 +365,31 @@ namespace SchoolSync.pages
                 }
             }
 
+
+            //incarca date in textbox cautare
+
+
+            url = "https://schoolsync.nnmadalin.me/api/get.php";
+            data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from accounts");
+
+            task = await _Class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                AutoCompleteStringCollection acsc = new AutoCompleteStringCollection();
+
+                JObject json = task;
+
+                for (int i = 0; i < json.Count - 1; i++)
+                {
+                    acsc.Add(Convert.ToString(task[i.ToString()]["username"]));
+                    acsc.Add(Convert.ToString(task[i.ToString()]["email"]));
+                }
+
+                guna2TextBox1.AutoCompleteCustomSource = acsc;
+            }
+
             schoolsync.hide_loading();
         }
 
@@ -392,6 +417,61 @@ namespace SchoolSync.pages
         {
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
             System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/api/getfile.php?token=" + btn.Tag.ToString());
+        }
+
+        private async void guna2Button1_Click(object sender, EventArgs e)
+        {
+            string user = guna2TextBox1.Text;
+
+            schoolsync.show_loading();
+            multiple_class _Class = new multiple_class();
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", string.Format("select * from accounts where username like ? or email like ?"));
+
+            var param = new Dictionary<string, string>()
+            {
+                {"username",  "%" + user + "%"},
+                {"email",  "%" + user + "%"},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _Class.PostRequestAsync(url, data);
+
+            schoolsync.hide_loading();  
+
+            if(task["message"] == "success")
+            {
+                navbar_home.page = "Profil_person";
+                navbar_home.token_page = task["0"]["token"];
+                navbar_home.use = false;
+            }
+            else if(task["message"] == "database no value")
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Nu am gasit persoana!";
+                frm.BringToFront();
+
+                guna2TextBox1.Clear();
+            }
+            else
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Ceva nu a mers bine!";
+                frm.BringToFront();
+
+                guna2TextBox1.Clear();
+            }
+
         }
     }
 }
