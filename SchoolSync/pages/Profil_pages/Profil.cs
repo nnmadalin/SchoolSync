@@ -48,6 +48,21 @@ namespace SchoolSync.pages
 
                 label10.Text = task["0"]["description"];
 
+                if(Convert.ToString(task["0"]["edumentor_moderator"]) == "1")
+                {
+                    label11.Text = "Moderator EduMentor: DA";
+                }
+
+                if (Convert.ToString(task["0"]["invataunit_moderator"]) == "1")
+                {
+                    label12.Text = "Moderator InvataUnit: DA";
+                }
+
+                if (Convert.ToString(task["0"]["administrator_app"]) == "1")
+                {
+                    label13.Text = "Administrator: DA";
+                }
+
 
                 string skills = task["0"]["skills"];
                 string[] split_skills = skills.Split(';');

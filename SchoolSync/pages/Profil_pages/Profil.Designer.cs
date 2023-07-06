@@ -57,6 +57,9 @@ namespace SchoolSync.pages
             this.label8 = new System.Windows.Forms.Label();
             this.guna2Separator3 = new Guna.UI2.WinForms.Guna2Separator();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
@@ -280,13 +283,16 @@ namespace SchoolSync.pages
             this.flowLayoutPanel2.MaximumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.MinimumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 275);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(300, 366);
             this.flowLayoutPanel2.TabIndex = 2;
             // 
             // guna2Panel8
             // 
             this.guna2Panel8.AutoSize = true;
             this.guna2Panel8.BorderRadius = 10;
+            this.guna2Panel8.Controls.Add(this.label13);
+            this.guna2Panel8.Controls.Add(this.label12);
+            this.guna2Panel8.Controls.Add(this.label11);
             this.guna2Panel8.Controls.Add(this.label7);
             this.guna2Panel8.Controls.Add(this.label5);
             this.guna2Panel8.Controls.Add(this.label6);
@@ -298,7 +304,7 @@ namespace SchoolSync.pages
             this.guna2Panel8.MinimumSize = new System.Drawing.Size(282, 100);
             this.guna2Panel8.Name = "guna2Panel8";
             this.guna2Panel8.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.guna2Panel8.Size = new System.Drawing.Size(282, 163);
+            this.guna2Panel8.Size = new System.Drawing.Size(282, 254);
             this.guna2Panel8.TabIndex = 2;
             // 
             // label7
@@ -350,6 +356,7 @@ namespace SchoolSync.pages
             // guna2Panel7
             // 
             this.guna2Panel7.AutoScroll = true;
+            this.guna2Panel7.AutoScrollMargin = new System.Drawing.Size(0, 10);
             this.guna2Panel7.Controls.Add(this.guna2Panel9);
             this.guna2Panel7.Controls.Add(this.flowLayoutPanel2);
             this.guna2Panel7.Location = new System.Drawing.Point(32, 305);
@@ -436,6 +443,42 @@ namespace SchoolSync.pages
             this.guna2CircleButton1.UseTransparentBackground = true;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
+            this.label11.Location = new System.Drawing.Point(16, 156);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(177, 19);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Moderator EduMentor: NU";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
+            this.label12.Location = new System.Drawing.Point(16, 186);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(172, 19);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Moderator InvataUnit: NU";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(129)))), ((int)(((byte)(159)))));
+            this.label13.Location = new System.Drawing.Point(16, 215);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(124, 19);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Administrator: NU";
+            // 
             // Profil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -501,5 +544,8 @@ namespace SchoolSync.pages
         private System.Windows.Forms.Label label7;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
     }
 }
