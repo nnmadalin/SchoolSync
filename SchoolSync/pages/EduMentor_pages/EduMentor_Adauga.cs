@@ -87,7 +87,7 @@ namespace SchoolSync.pages.EduMentor_pages
 
                     for (int i = 0; i < spl.Length; i++)
                     {
-                        if(spl[i] == control.Tag.ToString())
+                        if (spl[i] == control.Tag.ToString())
                         {
                             is_ok = true;
                             break;
@@ -109,14 +109,33 @@ namespace SchoolSync.pages.EduMentor_pages
                         await _class.UploadFileAsync(data, control.Tag.ToString());
                         files += (token_file + ";");
                     }
-                    else{
+                    else
+                    {
                         files += (control.Tag.ToString() + ";");
                     }
+                }
+            }
+            else
+            {
+                foreach (Control control in flowLayoutPanel1.Controls)
+                {
+                    FileInfo inf = new FileInfo(control.Tag.ToString());
+
+                    string token_file = _class.generate_token_250();
+
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                    data.Add("token_file", token_file);
+                    data.Add("filename", inf.Name);
+
+                    await _class.UploadFileAsync(data, control.Tag.ToString());
+                    files += (token_file + ";");
 
                 }
+            }
 
-
-                    if (navbar_home.page == "EduMentor_editare" || navbar_home.page == "EduMentor_editare_->_home")
+                if (navbar_home.page == "EduMentor_editare" || navbar_home.page == "EduMentor_editare_->_home")
                 {
                     url = "https://schoolsync.nnmadalin.me/api/put.php";
                     data = new Dictionary<string, string>();
@@ -246,7 +265,7 @@ namespace SchoolSync.pages.EduMentor_pages
                         frm.BringToFront();
                     };
                 }
-            }
+            
             schoolsync.hide_loading();
         }
 
