@@ -150,6 +150,15 @@ namespace SchoolSync.login_signin
             {
                 if (task["0"]["verified"] == "0")
                 {
+                    url = "https://schoolsync.nnmadalin.me/api/send_email.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", tkn);
+                    data.Add("token_user", Convert.ToString(task["0"]["token"]));
+                    data.Add("to", Convert.ToString(task["0"]["email"]));
+                    _= await multiple_class.PostRequestAsync(url, data);
+
+                    
+
                     var frm2 = new notification.error();
                     schoolsync schoolsync2 = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel2 = (Guna.UI2.WinForms.Guna2Panel)schoolsync2.Controls["guna2Panel2"];
@@ -230,6 +239,59 @@ namespace SchoolSync.login_signin
             {
                 send_login();
             }
+        }
+
+        private async void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            schoolsync.show_loading();
+
+            var multiple_class = new multiple_class();
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from accounts where username = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"username", guna2TextBox1.Text}
+            };
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await multiple_class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                var frm = new notification.info();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.info.message = "Verifica email!";
+                frm.BringToFront();
+
+                url = "https://schoolsync.nnmadalin.me/api/lost_password.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("token_user", Convert.ToString(task["0"]["token"]));
+                data.Add("to", Convert.ToString(task["0"]["email"]));
+
+
+                task = await multiple_class.PostRequestAsync(url, data);
+
+
+                
+            }
+            else
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Ceva nu a mers bine!";
+                frm.BringToFront();
+            }
+
+            schoolsync.hide_loading();
         }
     }
 }
