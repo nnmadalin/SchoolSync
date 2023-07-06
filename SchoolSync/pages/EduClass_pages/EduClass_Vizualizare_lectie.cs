@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace SchoolSync.pages.EduClass_pages
 {
@@ -69,6 +65,7 @@ namespace SchoolSync.pages.EduClass_pages
                     if (Convert.ToString(subjson[navbar_home.token_page_2]["is_homework"]) == "0")
                     {
                         label2.Visible = label3.Visible = false;
+                        guna2Panel4.Visible = false;
                     }
                     else
                     {
@@ -78,6 +75,73 @@ namespace SchoolSync.pages.EduClass_pages
 
                     string row = subjson[navbar_home.token_page_2]["files"];
                     string[] file_split = row.Split(';');
+
+                    if(file_split.Length == 0 || row == "")
+                    {
+                        label5.Visible = false;
+                    }
+
+                    string datetime = subjson[navbar_home.token_page_2]["deadline"];
+                    bool is_over_time = false;
+                    if(datetime != "-1")
+                    {
+                        DateTime dt = Convert.ToDateTime(datetime);
+                        if(dt < DateTime.Now)
+                        {
+                            guna2Button1.Visible = false;
+                            guna2Button2.Visible = false;
+                            is_over_time = true;
+                        }
+                    }
+
+                    dynamic subsubjson = subjson[navbar_home.token_page_2];
+
+                    try
+                    {
+                        string nota = subsubjson["students_note"][Convert.ToString(login_signin.login.accounts_user["token"])];
+                        is_over_time = true;
+                        label2.Text = "Nota: " + nota;
+
+                    }
+                    catch { };
+
+                    //incarcare fisiere user
+
+                    try
+                    {
+                        string item = subsubjson["students_files"][Convert.ToString(login_signin.login.accounts_user["token"])];
+
+                        if (item != null)
+                        {
+                            string[] split = item.Split(';');
+
+                            for (int i = 0; i < split.Length - 1; i++)
+                            {
+
+                                Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                                {
+                                    FillColor = Color.White,
+                                    BorderColor = Color.FromArgb(94, 148, 255),
+                                    ForeColor = Color.Black,
+                                    Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                    AutoRoundedCorners = false,
+                                    BorderRadius = 10,
+                                    TextAlign = HorizontalAlignment.Left,
+                                    Size = new Size(200, 35),
+                                };
+                                string item_Str = split[i].ToString();
+                                if (item_Str.Length >= 16)
+                                    guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                else
+                                    guna2Chip.Text = item_Str;
+                                guna2Chip.Tag = item_Str;
+                                flowLayoutPanel3.Controls.Add(guna2Chip);
+                            }
+                        }
+                    }
+                    catch { };
+
+                    //afisare fisiere lectie
 
                     string token_user = subjson[navbar_home.token_page_2]["token_user"];
                     for (int i = 0; i < file_split.Length; i++)
@@ -214,6 +278,273 @@ namespace SchoolSync.pages.EduClass_pages
         private void richTextBox1_ContentsResized(object sender, ContentsResizedEventArgs e)
         {
             ((RichTextBox)sender).Height = e.NewRectangle.Height + 5;
+        }
+
+        private void guna2Button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (flowLayoutPanel3.Controls.Count < 5)
+                {
+                    OpenFileDialog opf = new OpenFileDialog();
+                    opf.FileName = "";
+                    opf.Filter = "Files (*.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf; *.zip; *.rar) " +
+                        "| *.jpg; *.jpeg; *.png; *.svg; *.webp; *.bmp; *.doc; *.docx; *.ppt; *.pptx; *.xlsx; *.xls; *.txt; *.pdf; *.zip; *.rar";
+                    DialogResult dir = opf.ShowDialog();
+
+
+                    if (dir == DialogResult.OK)
+                    {
+
+                        FileInfo fl = new FileInfo(opf.FileName);
+
+                        long fileSizeibBytes = fl.Length;
+                        long fileSizeibMbs = fileSizeibBytes / (1024 * 1024);
+
+                        if (fileSizeibMbs > 10)
+                        {
+                            var frm = new notification.error();
+                            schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                            var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                            panel.Controls.Add(frm);
+                            notification.error.message = "Fisierul: " + fl.Name.Substring(0, 20) + "..." + " are mai mult de 10 MB!";
+                            frm.BringToFront();
+                        }
+                        else
+                        {
+
+                            Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                            {
+                                FillColor = Color.White,
+                                BorderColor = Color.FromArgb(94, 148, 255),
+                                ForeColor = Color.Black,
+                                Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                AutoRoundedCorners = false,
+                                BorderRadius = 10,
+                                TextAlign = HorizontalAlignment.Left,
+                                Size = new Size(200, 35),
+                                Tag = opf.FileName.ToString()
+                            };
+                            string fnm = Path.GetFileName(opf.FileName);
+                            if (fnm.Length >= 16)
+                                guna2Chip.Text = fnm.Substring(0, 20) + "...";
+                            else
+                                guna2Chip.Text = fnm;
+                            guna2Chip.Tag = opf.FileName;
+                            flowLayoutPanel3.Controls.Add(guna2Chip);
+                        }
+                    }
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Poti adauga maxim 5 fisiere!";
+                    frm.BringToFront();
+                }
+            }
+            catch
+            {
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+                notification.error.message = "Ceva nu a mers bine!";
+                frm.BringToFront();
+            }
+        }
+
+        private async void guna2Button1_Click(object sender, EventArgs e)
+        {
+            schoolsync.show_loading();
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", navbar_home.token_page},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
+                dynamic subsubjson = subjson[navbar_home.token_page_2]["students_files"];
+
+                JObject jb = new JObject();
+                if (Convert.ToString(subsubjson) != "")
+                    jb = subsubjson;
+
+                string fnames = "";
+
+                try
+                {
+                    string item = subsubjson[Convert.ToString(login_signin.login.accounts_user["token"])];
+                    if (item != null)
+                    {
+                        string[] split = item.Split(';');
+
+                        for (int i = 0; i < split.Length - 1; i++)
+                        {
+                            bool ok = true;
+                            foreach (Control ctrl in flowLayoutPanel3.Controls)
+                            {
+                                if (ctrl.Tag.ToString() == split[i])
+                                {
+                                    ok = false;
+                                    break;
+                                }
+                            }
+
+                            if(ok == true)
+                            {
+                                url = "https://schoolsync.nnmadalin.me/api/delete.php";
+                                data = new Dictionary<string, string>();
+                                data.Add("token", schoolsync.token);
+                                data.Add("command", "delete from files where token_user = ? and token = ?");
+
+                                param = new Dictionary<string, string>()
+                                    {
+                                        {"token_user", Convert.ToString(login_signin.login.accounts_user["token"])},
+                                        {"token", split[i]},
+                                    };
+
+                                data.Add("params", JsonConvert.SerializeObject(param));
+
+                                task = await _class.PostRequestAsync(url, data);
+
+                                url = "https://schoolsync.nnmadalin.me/api/delete_file.php";
+                                data = new Dictionary<string, string>();
+                                data.Add("token", schoolsync.token);
+                                data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                                data.Add("file", split[i]);
+
+                                task = await _class.PostRequestAsync(url, data);
+                            }
+                        }
+
+                    }
+
+                }
+                catch { };
+
+                try
+                {
+                    string item = subsubjson[Convert.ToString(login_signin.login.accounts_user["token"])];
+                    if (item == null)
+                        item = "";
+                    string[] split = item.Split(';');
+                    foreach (Control control in flowLayoutPanel3.Controls)
+                    {
+                        bool is_ok = false;
+                        for(int i = 0; i < split.Length - 1; i++)
+                        {
+                            if(split[i] == control.Tag.ToString())
+                            {
+                                is_ok = true;
+                            }
+                        }
+
+                        if (is_ok == false)
+                        {
+                            FileInfo inf = new FileInfo(control.Tag.ToString());
+
+                            string token_file = _class.generate_token_250();
+
+                            data = new Dictionary<string, string>();
+                            data.Add("token", schoolsync.token);
+                            data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                            data.Add("token_file", token_file);
+                            data.Add("filename", inf.Name);
+
+                            await _class.UploadFileAsync(data, control.Tag.ToString());
+                            fnames += (token_file + ";");
+                        }
+                        else
+                        {
+                            fnames += (control.Tag + ";");
+                        }
+                    }
+                }
+                catch 
+                {
+                    foreach (Control control in flowLayoutPanel3.Controls)
+                    {
+                        FileInfo inf = new FileInfo(control.Tag.ToString());
+
+                        string token_file = _class.generate_token_250();
+
+                        data = new Dictionary<string, string>();
+                        data.Add("token", schoolsync.token);
+                        data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                        data.Add("token_file", token_file);
+                        data.Add("filename", inf.Name);
+
+                        await _class.UploadFileAsync(data, control.Tag.ToString());
+                        fnames += (token_file + ";");
+                    }
+                };
+
+                try
+                {
+                    jb.Remove(Convert.ToString(login_signin.login.accounts_user["token"]));
+                }
+                catch 
+                {
+                }
+                if(fnames != "")
+                    jb.Add(Convert.ToString(login_signin.login.accounts_user["token"]), fnames);
+
+                subjson[navbar_home.token_page_2]["students_files"] = jb;
+
+                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "update educlass set materials = ? where token = ?");
+
+                param = new Dictionary<string, string>()
+                {
+                    {"students_files", JsonConvert.SerializeObject(subjson)},
+                    {"token", navbar_home.token_page},
+                };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _class.PostRequestAsync(url, data);
+
+                if(task["message"] == "update success")
+                {
+                    var frm = new notification.success();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.success.message = "Tema trimisa!";
+                    frm.BringToFront();
+
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine!";
+                    frm.BringToFront();
+
+                }
+
+            }
+
+            schoolsync.hide_loading();
         }
     }
 }

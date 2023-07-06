@@ -277,7 +277,6 @@ namespace SchoolSync.pages.EduClass_pages
                         jsonnew.Add("is_homework", "1");
                         jsonnew.Add("deadline", dateTimePicker1.Value.ToString());
                     }
-                    jsonnew.Add("students_homework", "");
                     jsonnew.Add("students_files", "");
                     jsonnew.Add("students_note", "");
                     jsonnew.Add("is_deleted", "0");
