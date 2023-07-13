@@ -650,6 +650,10 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                 notification.error.message = "Ceva nu a mers bine!";
                 frm.BringToFront();
+
+                navbar_home.page = "InvataUnit";
+                navbar_home.use = false;
+
             }
         }
 
