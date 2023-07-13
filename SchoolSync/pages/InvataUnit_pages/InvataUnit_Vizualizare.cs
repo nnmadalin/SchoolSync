@@ -33,6 +33,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
         private async void InvataUnit_Vizualizare_Load(object sender, EventArgs e)
         {
+
             flowLayoutPanel1.HorizontalScroll.Visible = false;
             schoolsync.show_loading();
             multiple_class _Class = new multiple_class();
@@ -51,6 +52,7 @@ namespace SchoolSync.pages.InvataUnit_pages
             dynamic task = await _Class.PostRequestAsync(url, data);
             if (task["message"] == "success")
             {
+                token_local = navbar_home.token_page;
                 string str = task["0"]["favourites"];
                 string[] split = str.Split(';');
                 for (int i = 0; i < split.Length - 1; i++)
@@ -196,7 +198,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                         }
                     }
                 }
-
+                timer1.Enabled = true;
                 
             }
             
@@ -223,7 +225,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
         private async void guna2CircleButton3_Click(object sender, EventArgs e)
         {
-            string token = navbar_home.token_page;
+            string token = token_local;
             guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
             guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
             guna2MessageDialog1.Caption = "Sterge intrebare!";
@@ -242,7 +244,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                 //navbar_home.token_page
                 var param = new Dictionary<string, string>()
                 {
-                    {"token", navbar_home.token_page},
+                    {"token", token_local},
                 };
                 data.Add("params", JsonConvert.SerializeObject(param));
 
@@ -318,7 +320,6 @@ namespace SchoolSync.pages.InvataUnit_pages
             }
         }
 
-
         private async void delete_bnt(object sender, EventArgs e)
         {
             guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
@@ -338,7 +339,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                 var param = new Dictionary<string, string>()
                 {
-                    { "token", navbar_home.token_page }
+                    { "token", token_local}
                 };
                 data.Add("params", JsonConvert.SerializeObject(param));
 
@@ -362,7 +363,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     param = new Dictionary<string, string>()
                     {
                         { "answers", JsonConvert.SerializeObject(json)},
-                        { "token", navbar_home.token_page }
+                        { "token", token_local}
                     };
                     data.Add("params", JsonConvert.SerializeObject(param));
                     task = await _class.PostRequestAsync(url, data);
@@ -376,6 +377,16 @@ namespace SchoolSync.pages.InvataUnit_pages
                     }
                 }
             }
+        }
+
+        private async void redirect_profile(object sender, EventArgs e)
+        {
+            string id = ((Control)sender).Tag.ToString();
+
+            navbar_home.token_page = id;
+            navbar_home.page = "Profil_person";
+            navbar_home.use = false;
+
         }
 
         string number_answer = "0";
@@ -430,6 +441,9 @@ namespace SchoolSync.pages.InvataUnit_pages
                             AutoSize = true
                         };
                         lbl_name_answer.Text = jb[i.ToString()]["username"].ToString();
+                        lbl_name_answer.Tag = jb[i.ToString()]["token_user"].ToString();
+                        lbl_name_answer.Click += redirect_profile;
+
                         Label lbl_time_answer = new Label()
                         {
                             Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
@@ -446,7 +460,8 @@ namespace SchoolSync.pages.InvataUnit_pages
                             Location = new Point(10, 80),
                             Text = "",
                             AutoSize = true,
-                            MaximumSize = new Size(1110, 0)
+                            MaximumSize = new Size(1110, 0),
+                            Cursor = Cursors.Hand,
                         };
                         lbl_question_answer.Text = jb[i.ToString()]["answer"].ToString();
 
@@ -599,6 +614,7 @@ namespace SchoolSync.pages.InvataUnit_pages
         }
 
         bool is_admin = false;
+        string token_local = "";
 
         async void load_answers()
         {
@@ -611,7 +627,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
             var param = new Dictionary<string, string>()
             {
-                { "token", navbar_home.token_page }
+                { "token", token_local}
             };
             data.Add("params", JsonConvert.SerializeObject(param));
 
@@ -752,7 +768,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
                 var param2 = new Dictionary<string, string>()
                 {
-                    { "token", navbar_home.token_page }
+                    { "token", token_local}
                 };
                 data.Add("params", JsonConvert.SerializeObject(param2));
 
@@ -764,6 +780,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     JObject jbo = JObject.FromObject(mini);
                     JObject sub_json = new JObject();
 
+                    sub_json.Add("token_user", login_signin.login.accounts_user["token"]);
                     sub_json.Add("username", login_signin.login.accounts_user["username"]);
                     sub_json.Add("data", DateTime.Now.ToString());
                     sub_json.Add("answer", guna2TextBox1.Text);
@@ -779,7 +796,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     param2 = new Dictionary<string, string>()
                     {
                         {"answers",  JsonConvert.SerializeObject(jbo)},
-                        { "token", navbar_home.token_page }
+                        { "token", token_local}
                     };
                     data.Add("params", JsonConvert.SerializeObject(param2));
 
@@ -806,7 +823,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
             var param = new Dictionary<string, string>()
             {
-                {"token", navbar_home.token_page}
+                {"token", token_local}
             };
             data.Add("params", JsonConvert.SerializeObject(param));
 
@@ -919,10 +936,7 @@ namespace SchoolSync.pages.InvataUnit_pages
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            if (navbar_home.page == "InvataUnit_vizualizare")
-                load_answers();
-            else
-                timer1.Enabled = false;
+            load_answers();
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -965,7 +979,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     var param = new Dictionary<string, string>()
                     {
                         {"is_deleted_by", Convert.ToString(login_signin.login.accounts_user["username"])},
-                        {"token", navbar_home.token_page}
+                        {"token", token_local}
                     };
                     data.Add("params", JsonConvert.SerializeObject(param));
 
@@ -995,7 +1009,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     data.Add("command", "update invataunit set is_deleted = 0 where token = ?");
                     var param = new Dictionary<string, string>()
                     {
-                        {"token", navbar_home.token_page}
+                        {"token", token_local}
                     };
                     data.Add("params", JsonConvert.SerializeObject(param));
 
