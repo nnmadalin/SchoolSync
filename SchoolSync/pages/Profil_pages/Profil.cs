@@ -22,6 +22,8 @@ namespace SchoolSync.pages
 
         async void load_profil()
         {
+            flowLayoutPanel1.Controls.Clear();
+
             multiple_class _class = new multiple_class();
             string url = "https://schoolsync.nnmadalin.me/api/get.php";
             Dictionary<string, string> data = new Dictionary<string, string>();
@@ -180,7 +182,7 @@ namespace SchoolSync.pages
                 guna2CircleButton1.Visible = false;
                 guna2CircleButton2.Visible = true;
             }
-            else if(Convert.ToString(login_signin.login.accounts_user["administrator_app"]) == "1")
+            else if(Convert.ToString(login_signin.login.accounts_user["administrator_app"]) == "1" && Convert.ToString(login_signin.login.accounts_user["token"]) != navbar_home.token_page)
             {
                 guna2CheckBox1.Visible = guna2CheckBox2.Visible = guna2CheckBox3.Visible = true;
             }
