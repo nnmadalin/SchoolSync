@@ -318,6 +318,66 @@ namespace SchoolSync.pages.InvataUnit_pages
             }
         }
 
+
+        private async void delete_bnt(object sender, EventArgs e)
+        {
+            guna2MessageDialog1.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo;
+            guna2MessageDialog1.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information;
+            guna2MessageDialog1.Caption = "Sterge mesaj";
+            guna2MessageDialog1.Text = "Esti sigur ca vrei sa stergi acest mesaj?";
+
+            if (guna2MessageDialog1.Show() == DialogResult.Yes)
+            {
+                string id = ((Control)sender).Tag.ToString();
+
+                multiple_class _class = new multiple_class();
+                string url = "https://schoolsync.nnmadalin.me/api/get.php";
+                var data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "select * from invataunit where token = ?");
+
+                var param = new Dictionary<string, string>()
+                {
+                    { "token", navbar_home.token_page }
+                };
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                dynamic task = await _class.PostRequestAsync(url, data);
+                if (task["message"] == "success")
+                {
+                    dynamic json = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["answers"]));
+                    try
+                    {
+                        json[id]["is_deleted"] = "1";
+                        json[id]["files"] = "";
+                        json[id]["answer"] = "Mesaj sters de: " + Convert.ToString(login_signin.login.accounts_user["username"]);
+                    }
+                    catch { };
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update invataunit set answers = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        { "answers", JsonConvert.SerializeObject(json)},
+                        { "token", navbar_home.token_page }
+                    };
+                    data.Add("params", JsonConvert.SerializeObject(param));
+                    task = await _class.PostRequestAsync(url, data);
+                    if(task["message"] == "update success")
+                    {
+                        number_answer = "0";
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+        }
+
         string number_answer = "0";
 
         async void load_design_answers(dynamic task)
@@ -389,6 +449,12 @@ namespace SchoolSync.pages.InvataUnit_pages
                             MaximumSize = new Size(1110, 0)
                         };
                         lbl_question_answer.Text = jb[i.ToString()]["answer"].ToString();
+
+                        if (Convert.ToString(task[i.ToString()]["is_deleted"]) == "1")
+                        {
+                            lbl_question_answer.Font = new Font("Segoe UI Semibold", 11, FontStyle.Italic);
+                        }
+
                         FlowLayoutPanel flp_answer = new FlowLayoutPanel()
                         {
                             MaximumSize = new Size(1150, 0),
@@ -396,6 +462,41 @@ namespace SchoolSync.pages.InvataUnit_pages
                             AutoSize = true,
                             Name = "flp_files"
                         };
+
+                        if (task[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && Convert.ToString(task[i.ToString()]["is_deleted"]) == "0")
+                        {
+                            Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
+                            {
+                                Size = new Size(32, 32),
+                                ImageSize = new Size(20, 20),
+                                Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                                ImageAlign = HorizontalAlignment.Center,
+                                FillColor = Color.White,
+                                Animated = true,
+                                Location = new Point(1090, 20),
+                                Cursor = Cursors.Hand,
+                                Tag = i,
+                            };
+                            gcp.Click += delete_bnt;
+                            pnl_answer.Controls.Add(gcp);
+                        }
+                        else if (Convert.ToString(task[i.ToString()]["is_deleted"]) == "0" && is_admin == true)
+                        {
+                            Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
+                            {
+                                Size = new Size(32, 32),
+                                ImageSize = new Size(20, 20),
+                                Image = SchoolSync.Properties.Resources.delete_FILL1_wght700_GRAD0_opsz48,
+                                ImageAlign = HorizontalAlignment.Center,
+                                FillColor = Color.White,
+                                Animated = true,
+                                Location = new Point(1090, 20),
+                                Cursor = Cursors.Hand,
+                                Tag = i,
+                            };
+                            gcp.Click += delete_bnt;
+                            pnl_answer.Controls.Add(gcp);
+                        }
 
                         string files = jb[i.ToString()]["files"].ToString();
                         string[] split = files.Split(';');
@@ -496,7 +597,9 @@ namespace SchoolSync.pages.InvataUnit_pages
             else
                 return "-1";
         }
-        
+
+        bool is_admin = false;
+
         async void load_answers()
         {
 
@@ -513,11 +616,24 @@ namespace SchoolSync.pages.InvataUnit_pages
             data.Add("params", JsonConvert.SerializeObject(param));
 
             dynamic task = await _class.PostRequestAsync(url, data);
-            if(task["message"] == "success")
+            if (task["message"] == "success")
+            {
+                if (task["0"]["token_user"] == login_signin.login.accounts_user["token"])
+                    is_admin = true;
+                else
+                    is_admin = false;
+
                 load_design_answers(JsonConvert.DeserializeObject(Convert.ToString(task["0"]["answers"])));
+            }
             else
             {
-                ; ;
+                var frm = new notification.error();
+                schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                panel.Controls.Add(frm);
+
+                notification.error.message = "Ceva nu a mers bine!";
+                frm.BringToFront();
             }
         }
 
@@ -652,6 +768,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                     sub_json.Add("data", DateTime.Now.ToString());
                     sub_json.Add("answer", guna2TextBox1.Text);
                     sub_json.Add("files", files);
+                    sub_json.Add("is_deleted", "0");
                     jbo.Add(jbo.Count.ToString(), sub_json);
 
                     url = "https://schoolsync.nnmadalin.me/api/put.php";
