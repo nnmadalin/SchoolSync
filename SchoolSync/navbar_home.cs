@@ -105,6 +105,24 @@ namespace SchoolSync
             navbar_home.page = "TimePlan_calendar";
         }
 
+        private async void guna2CirclePictureBox1_Click(object sender, EventArgs e)
+        {
+            if (Application.OpenForms.OfType<Form>().ToList().Count == 1)
+            {
+                var frm = new openai_chat();
+                frm.Show();
+            }
+            else
+            {
+                Application.OpenForms.OfType<Form>().ToList()[1].WindowState = FormWindowState.Normal; 
+            }
+        }
+
+        public static bool IsFormOpen(string formName)
+        {
+            return Application.OpenForms.OfType<Form>().Any(form => form.Name == formName);
+        }
+
         private void guna2Button8_Click(object sender, EventArgs e)
         {
             navbar_home.use = false;

@@ -103,6 +103,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="openai_chat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="openai_chat.Designer.cs">
+      <DependentUpon>openai_chat.cs</DependentUpon>
+    </Compile>
     <Compile Include="navbar_home.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -296,6 +302,9 @@
     <EmbeddedResource Include="notification\warning.resx">
       <DependentUpon>warning.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="openai_chat.resx">
+      <DependentUpon>openai_chat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass.resx">
       <DependentUpon>EduClass.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +402,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="logo_ico.ico" />
+    <None Include="Resources\ChatGPT_logo.svg.png" />
     <None Include="Resources\exit_to_app_FILL1_wght700_GRAD0_opsz48.png" />
     <None Include="Resources\download %2831%29.png" />
     <None Include="Resources\ballot_FILL1_wght700_GRAD0_opsz48.png" />

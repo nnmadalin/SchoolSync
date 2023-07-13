@@ -550,9 +550,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                     data.Add("command", "select * from flowtalk where token = ?");
 
                     var param = new Dictionary<string, string>()
-                {
-                    {"token", token_message}
-                };
+                    {
+                        {"token", token_message}
+                    };
 
                     data.Add("params", JsonConvert.SerializeObject(param));
 

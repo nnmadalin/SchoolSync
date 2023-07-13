@@ -213,6 +213,16 @@ namespace SchoolSync.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap ChatGPT_logo_svg {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT_logo_svg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap clarisse_meyer_jKU2NneZAbI_unsplash {
             get {
                 object obj = ResourceManager.GetObject("clarisse_meyer_jKU2NneZAbI_unsplash", resourceCulture);

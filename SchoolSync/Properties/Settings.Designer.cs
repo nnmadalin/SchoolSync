@@ -68,5 +68,14 @@ namespace SchoolSync.Properties {
                 return ((string)(this["API_TOKEN"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string API_TOKEN_CHATGPT {
+            get {
+                return ((string)(this["API_TOKEN_CHATGPT"]));
+            }
+        }
     }
 }
