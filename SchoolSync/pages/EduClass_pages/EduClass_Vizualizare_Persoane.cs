@@ -237,6 +237,7 @@ namespace SchoolSync.pages.EduClass_pages
                         Size = new Size(40, 40),
                         Location = new Point(10, 5),
                         Cursor = Cursors.Hand,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                     };
                     gcp.Image = await _class.IncarcaAvatar(admini[i]);
                     gcp.Tag = admini[i];
@@ -298,6 +299,7 @@ namespace SchoolSync.pages.EduClass_pages
                         Size = new Size(40, 40),
                         Location = new Point(10, 5),
                         Cursor = Cursors.Hand,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                     };
                     gcp.Image = await _class.IncarcaAvatar(pending[i]);
                     gcp.Tag = pending[i];
@@ -359,6 +361,7 @@ namespace SchoolSync.pages.EduClass_pages
                         Size = new Size(40, 40),
                         Location = new Point(10, 5),
                         Cursor = Cursors.Hand,
+                        SizeMode = PictureBoxSizeMode.StretchImage,
                     };
                     gcp.Image = await _class.IncarcaAvatar(students[i]);
                     gcp.Tag = students[i];

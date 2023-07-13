@@ -43,6 +43,7 @@ namespace SchoolSync
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.guna2MessageDialog2 = new Guna.UI2.WinForms.Guna2MessageDialog();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -219,6 +220,12 @@ namespace SchoolSync
             this.guna2MessageDialog2.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
             this.guna2MessageDialog2.Text = "Esti sigur ca vrei sa stergi conversatia?";
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Interval = 3500;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // openai_chat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,5 +263,6 @@ namespace SchoolSync
         private System.Windows.Forms.Timer timer1;
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
         private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog2;
+        private System.Windows.Forms.Timer timer2;
     }
 }

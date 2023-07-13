@@ -68,6 +68,9 @@ namespace SchoolSync
                 {
                     string tokenSecret = Convert.ToString(task["0"]["token_api"]);
 
+                    if (tokenSecret == "")
+                        return ;
+
                     JObject subjson = new JObject();
                     subjson.Add("role", "user");
                     subjson.Add("content", message);
@@ -260,7 +263,7 @@ namespace SchoolSync
 
         private void openai_chat_Load(object sender, EventArgs e)
         {
-
+            check_code();
         }
 
         string count_message = "";
@@ -459,6 +462,34 @@ namespace SchoolSync
                 else
                     count_message = "";
             }
+        }
+
+        async void check_code()
+        {
+            multiple_class _class = new multiple_class();
+
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            Dictionary<string, string> data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from chatgpt");
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                if (Convert.ToString(task["0"]["token_api"]).Trim() == "")
+                {
+                    guna2Button1.Visible = guna2CircleButton2.Visible = guna2TextBox1.Visible = false;
+                }
+                else
+                    guna2Button1.Visible = guna2CircleButton2.Visible = guna2TextBox1.Visible = true;
+            }
+            else
+                guna2Button1.Visible = guna2CircleButton2.Visible = guna2TextBox1.Visible = true;
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            check_code();
         }
     }
 }

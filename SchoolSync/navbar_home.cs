@@ -114,7 +114,7 @@ namespace SchoolSync
             }
             else
             {
-                Application.OpenForms.OfType<Form>().ToList()[1].WindowState = FormWindowState.Normal; 
+                Application.OpenForms.OfType<Form>().ToList()[1].WindowState = FormWindowState.Normal;
             }
         }
 
