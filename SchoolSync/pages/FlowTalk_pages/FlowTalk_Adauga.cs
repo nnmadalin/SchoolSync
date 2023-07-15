@@ -69,6 +69,7 @@ namespace SchoolSync.pages.FlowTalk_pages
 
         private async  void FlowTalk_Adauga_Load(object sender, EventArgs e)
         {
+
             schoolsync.show_loading();
 
             multiple_class _class = new multiple_class();
