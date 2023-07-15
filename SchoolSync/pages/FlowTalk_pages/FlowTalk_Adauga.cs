@@ -230,7 +230,8 @@ namespace SchoolSync.pages.FlowTalk_pages
             {
                 Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
                 {
-                    Size = new Size(200, 50),
+                    Size = new Size(350, 90),
+                    Font = new Font("Segoe UI", 15),
                     IsClosable = true,
                     AutoSize = true,
                     TextAlign = HorizontalAlignment.Left,
@@ -495,7 +496,8 @@ namespace SchoolSync.pages.FlowTalk_pages
             {
                 Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
                 {
-                    Size = new Size(200, 50),
+                    Size = new Size(350, 90),
+                    Font = new Font("Segoe UI", 15),
                     IsClosable = true,
                     AutoSize = true,
                     TextAlign = HorizontalAlignment.Left,
