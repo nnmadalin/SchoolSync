@@ -62,6 +62,13 @@ namespace SchoolSync.login_signin
                     Application.Exit();
                 }
             }
+            else if (task["message"] == "token invalid")
+            {
+                guna2MessageDialog1.Caption = "Token Invalid!";
+                guna2MessageDialog1.Text = "Token Invalid! :(";
+                guna2MessageDialog1.Show();
+                Application.Exit();
+            }
             else
             {
                 guna2MessageDialog1.Caption = "Eroare!";
