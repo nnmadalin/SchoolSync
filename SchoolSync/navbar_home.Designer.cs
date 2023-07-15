@@ -86,6 +86,7 @@ namespace SchoolSync
             this.guna2Button8.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button8.Location = new System.Drawing.Point(3, 325);
             this.guna2Button8.Name = "guna2Button8";
+            this.guna2Button8.PressedColor = System.Drawing.Color.White;
             this.guna2Button8.Size = new System.Drawing.Size(103, 45);
             this.guna2Button8.TabIndex = 9;
             this.guna2Button8.Text = "EduClass";
@@ -106,6 +107,7 @@ namespace SchoolSync
             this.guna2Button7.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button7.Location = new System.Drawing.Point(3, 459);
             this.guna2Button7.Name = "guna2Button7";
+            this.guna2Button7.PressedColor = System.Drawing.Color.White;
             this.guna2Button7.Size = new System.Drawing.Size(103, 45);
             this.guna2Button7.TabIndex = 8;
             this.guna2Button7.Text = "TimePlan";
@@ -126,6 +128,7 @@ namespace SchoolSync
             this.guna2Button4.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button4.Location = new System.Drawing.Point(3, 393);
             this.guna2Button4.Name = "guna2Button4";
+            this.guna2Button4.PressedColor = System.Drawing.Color.White;
             this.guna2Button4.Size = new System.Drawing.Size(103, 45);
             this.guna2Button4.TabIndex = 7;
             this.guna2Button4.Text = "FlowTalk";
@@ -140,14 +143,16 @@ namespace SchoolSync
             this.guna2Button6.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2Button6.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.guna2Button6.FillColor = System.Drawing.Color.Transparent;
-            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.guna2Button6.ForeColor = System.Drawing.Color.White;
             this.guna2Button6.Image = global::SchoolSync.Properties.Resources.logout;
             this.guna2Button6.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Button6.Location = new System.Drawing.Point(3, 592);
+            this.guna2Button6.Location = new System.Drawing.Point(0, 585);
             this.guna2Button6.Name = "guna2Button6";
+            this.guna2Button6.PressedColor = System.Drawing.Color.White;
             this.guna2Button6.Size = new System.Drawing.Size(103, 45);
             this.guna2Button6.TabIndex = 6;
+            this.guna2Button6.Text = "Exit";
             this.guna2Button6.Click += new System.EventHandler(this.guna2Button6_Click);
             // 
             // guna2Button5
@@ -165,6 +170,7 @@ namespace SchoolSync
             this.guna2Button5.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button5.Location = new System.Drawing.Point(3, 525);
             this.guna2Button5.Name = "guna2Button5";
+            this.guna2Button5.PressedColor = System.Drawing.Color.White;
             this.guna2Button5.Size = new System.Drawing.Size(103, 45);
             this.guna2Button5.TabIndex = 6;
             this.guna2Button5.Text = "Profil";
@@ -185,6 +191,7 @@ namespace SchoolSync
             this.guna2Button3.ImageSize = new System.Drawing.Size(20, 25);
             this.guna2Button3.Location = new System.Drawing.Point(3, 258);
             this.guna2Button3.Name = "guna2Button3";
+            this.guna2Button3.PressedColor = System.Drawing.Color.White;
             this.guna2Button3.Size = new System.Drawing.Size(103, 45);
             this.guna2Button3.TabIndex = 4;
             this.guna2Button3.Text = "InvataUnit";
@@ -205,6 +212,7 @@ namespace SchoolSync
             this.guna2Button2.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button2.Location = new System.Drawing.Point(3, 191);
             this.guna2Button2.Name = "guna2Button2";
+            this.guna2Button2.PressedColor = System.Drawing.Color.White;
             this.guna2Button2.Size = new System.Drawing.Size(103, 45);
             this.guna2Button2.TabIndex = 3;
             this.guna2Button2.Text = "EduMentor";
@@ -226,6 +234,7 @@ namespace SchoolSync
             this.guna2Button1.ImageSize = new System.Drawing.Size(25, 25);
             this.guna2Button1.Location = new System.Drawing.Point(3, 120);
             this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.PressedColor = System.Drawing.Color.White;
             this.guna2Button1.Size = new System.Drawing.Size(103, 45);
             this.guna2Button1.TabIndex = 2;
             this.guna2Button1.Text = "Home";

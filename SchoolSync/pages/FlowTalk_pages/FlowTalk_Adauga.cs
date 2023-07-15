@@ -26,7 +26,7 @@ namespace SchoolSync.pages.FlowTalk_pages
 
             if (guna2MessageDialog1.Show() == DialogResult.Yes)
             {
-                if (navbar_home.page == "FlowTalk_editare")
+                if (navbar_home.page == "FlowTalk_editare" || navbar_home.page == "Profil_person")
                 {
                     this.Dispose();
                 }
@@ -150,7 +150,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                         string name = await get_token_name(split[i]);
                         Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
                         {
-                            Size = new Size(200, 50),
+                            Size = new Size(350, 90),
                             IsClosable = true,
                             AutoSize = true,
                             TextAlign = HorizontalAlignment.Left,
@@ -160,7 +160,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                             BorderThickness = 2,
                             AutoRoundedCorners = false,
                             BorderRadius = 5,
+                            Cursor = Cursors.Hand,
                         };
+                        chip.Click += redirect_profile;
                         chip.Tag = split[i];
                         chip.Text = name;
                         flowLayoutPanel1.Controls.Add(chip);
@@ -216,7 +218,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                     BorderThickness = 2,
                     AutoRoundedCorners = false,
                     BorderRadius = 5,
+                    Cursor = Cursors.Hand,
                 };
+                chip2.Click += redirect_profile;
                 chip2.Tag = login_signin.login.accounts_user["token"];
                 chip2.Text = login_signin.login.accounts_user["username"];
                 flowLayoutPanel2.Controls.Add(chip2);
@@ -231,7 +235,6 @@ namespace SchoolSync.pages.FlowTalk_pages
                 Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
                 {
                     Size = new Size(350, 90),
-                    Font = new Font("Segoe UI", 15),
                     IsClosable = true,
                     AutoSize = true,
                     TextAlign = HorizontalAlignment.Left,
@@ -241,7 +244,10 @@ namespace SchoolSync.pages.FlowTalk_pages
                     BorderThickness = 2,
                     AutoRoundedCorners = false,
                     BorderRadius = 5,
+                    Cursor = Cursors.Hand,
                 };
+
+                chip.Click += redirect_profile;
 
                 multiple_class _class = new multiple_class();
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
@@ -296,6 +302,13 @@ namespace SchoolSync.pages.FlowTalk_pages
                     }
                 }
             }
+        }
+
+        private void redirect_profile(object sender, EventArgs e)
+        {
+            navbar_home.token_page = ((Control)sender).Tag.ToString();
+            navbar_home.page = "Profil_person";
+            navbar_home.use = false;
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
@@ -494,10 +507,9 @@ namespace SchoolSync.pages.FlowTalk_pages
         {
             if (guna2TextBox3.Text.Trim() != "")
             {
-                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()
+                Guna.UI2.WinForms.Guna2Chip chip = new Guna.UI2.WinForms.Guna2Chip()        
                 {
                     Size = new Size(350, 90),
-                    Font = new Font("Segoe UI", 15),
                     IsClosable = true,
                     AutoSize = true,
                     TextAlign = HorizontalAlignment.Left,
@@ -507,7 +519,9 @@ namespace SchoolSync.pages.FlowTalk_pages
                     BorderThickness = 2,
                     AutoRoundedCorners = false,
                     BorderRadius = 5,
+                    Cursor = Cursors.Hand,
                 };
+                chip.Click += redirect_profile;
 
                 multiple_class _class = new multiple_class();
                 string url = "https://schoolsync.nnmadalin.me/api/get.php";
