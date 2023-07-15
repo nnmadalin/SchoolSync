@@ -32,15 +32,14 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.label8 = new System.Windows.Forms.Label();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
             this.guna2CircleButton1.BorderThickness = 2;
@@ -88,17 +87,24 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2Panel1.TabIndex = 12;
             this.guna2Panel1.UseTransparentBackground = true;
             // 
-            // label1
+            // guna2Button1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(83)))), ((int)(((byte)(140)))));
-            this.label1.Location = new System.Drawing.Point(27, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 28);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Adauga cod:";
+            this.guna2Button1.BorderRadius = 5;
+            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(158)))), ((int)(((byte)(67)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.ImageSize = new System.Drawing.Size(25, 25);
+            this.guna2Button1.Location = new System.Drawing.Point(451, 247);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(170, 40);
+            this.guna2Button1.TabIndex = 41;
+            this.guna2Button1.Text = "Vezi materialul!";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2TextBox1
             // 
@@ -122,25 +128,17 @@ namespace SchoolSync.pages.EduMentor_pages
             this.guna2TextBox1.Size = new System.Drawing.Size(575, 158);
             this.guna2TextBox1.TabIndex = 26;
             // 
-            // guna2Button1
+            // label1
             // 
-            this.guna2Button1.Animated = true;
-            this.guna2Button1.BorderRadius = 5;
-            this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(158)))), ((int)(((byte)(67)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.ImageSize = new System.Drawing.Size(25, 25);
-            this.guna2Button1.Location = new System.Drawing.Point(451, 247);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(170, 40);
-            this.guna2Button1.TabIndex = 41;
-            this.guna2Button1.Text = "Vezi materialul!";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(83)))), ((int)(((byte)(140)))));
+            this.label1.Location = new System.Drawing.Point(27, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 28);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "Adauga cod:";
             // 
             // EduMentor_Cod
             // 

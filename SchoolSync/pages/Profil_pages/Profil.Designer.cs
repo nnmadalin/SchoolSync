@@ -99,7 +99,6 @@ namespace SchoolSync.pages
             // 
             // guna2CheckBox3
             // 
-            this.guna2CheckBox3.Animated = true;
             this.guna2CheckBox3.AutoSize = true;
             this.guna2CheckBox3.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox3.CheckedState.BorderRadius = 0;
@@ -120,7 +119,6 @@ namespace SchoolSync.pages
             // 
             // guna2CheckBox2
             // 
-            this.guna2CheckBox2.Animated = true;
             this.guna2CheckBox2.AutoSize = true;
             this.guna2CheckBox2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox2.CheckedState.BorderRadius = 0;
@@ -141,7 +139,6 @@ namespace SchoolSync.pages
             // 
             // guna2CheckBox1
             // 
-            this.guna2CheckBox1.Animated = true;
             this.guna2CheckBox1.AutoSize = true;
             this.guna2CheckBox1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2CheckBox1.CheckedState.BorderRadius = 0;
@@ -162,7 +159,6 @@ namespace SchoolSync.pages
             // 
             // guna2CircleButton2
             // 
-            this.guna2CircleButton2.Animated = true;
             this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -529,7 +525,6 @@ namespace SchoolSync.pages
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderThickness = 2;
             this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;

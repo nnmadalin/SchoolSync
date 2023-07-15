@@ -155,7 +155,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontup
             // 
-            this.fontup.Animated = true;
             this.fontup.BackColor = System.Drawing.Color.White;
             this.fontup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -174,7 +173,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontright
             // 
-            this.fontright.Animated = true;
             this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -192,7 +190,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontcenter
             // 
-            this.fontcenter.Animated = true;
             this.fontcenter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontcenter.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontcenter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -210,7 +207,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontleft
             // 
-            this.fontleft.Animated = true;
             this.fontleft.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontleft.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontleft.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -228,7 +224,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontunderline
             // 
-            this.fontunderline.Animated = true;
             this.fontunderline.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontunderline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontunderline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -246,7 +241,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontitalic
             // 
-            this.fontitalic.Animated = true;
             this.fontitalic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontitalic.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontitalic.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -264,7 +258,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontbold
             // 
-            this.fontbold.Animated = true;
             this.fontbold.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontbold.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontbold.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -282,7 +275,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // fontdown
             // 
-            this.fontdown.Animated = true;
             this.fontdown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontdown.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontdown.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -313,7 +305,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // guna2Button1
             // 
-            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 5;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -389,7 +380,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // adauga_fisier
             // 
-            this.adauga_fisier.Animated = true;
             this.adauga_fisier.BorderRadius = 20;
             this.adauga_fisier.Cursor = System.Windows.Forms.Cursors.Hand;
             this.adauga_fisier.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -456,7 +446,6 @@ namespace SchoolSync.pages.EduMentor_pages
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CircleButton1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(86)))), ((int)(((byte)(142)))));
             this.guna2CircleButton1.BorderThickness = 2;

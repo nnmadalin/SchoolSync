@@ -149,7 +149,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton7
             // 
-            this.guna2CircleButton7.Animated = true;
             this.guna2CircleButton7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton7.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton7.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -168,7 +167,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton6
             // 
-            this.guna2CircleButton6.Animated = true;
             this.guna2CircleButton6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton6.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton6.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -187,7 +185,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2Button1
             // 
-            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 15;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -207,7 +204,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton5
             // 
-            this.guna2CircleButton5.Animated = true;
             this.guna2CircleButton5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton5.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton5.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -226,7 +222,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton4
             // 
-            this.guna2CircleButton4.Animated = true;
             this.guna2CircleButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -245,7 +240,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton3
             // 
-            this.guna2CircleButton3.Animated = true;
             this.guna2CircleButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -264,7 +258,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton2
             // 
-            this.guna2CircleButton2.Animated = true;
             this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -283,7 +276,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;

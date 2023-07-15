@@ -139,7 +139,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // adauga_fisier
             // 
-            this.adauga_fisier.Animated = true;
             this.adauga_fisier.BorderRadius = 20;
             this.adauga_fisier.Cursor = System.Windows.Forms.Cursors.Hand;
             this.adauga_fisier.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -178,7 +177,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontup
             // 
-            this.fontup.Animated = true;
             this.fontup.BackColor = System.Drawing.Color.Transparent;
             this.fontup.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontup.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -197,7 +195,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontright
             // 
-            this.fontright.Animated = true;
             this.fontright.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontright.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontright.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -215,7 +212,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontcenter
             // 
-            this.fontcenter.Animated = true;
             this.fontcenter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontcenter.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontcenter.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -233,7 +229,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontleft
             // 
-            this.fontleft.Animated = true;
             this.fontleft.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontleft.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontleft.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -251,7 +246,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontunderline
             // 
-            this.fontunderline.Animated = true;
             this.fontunderline.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontunderline.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontunderline.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -269,7 +263,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontitalic
             // 
-            this.fontitalic.Animated = true;
             this.fontitalic.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontitalic.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontitalic.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -287,7 +280,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontbold
             // 
-            this.fontbold.Animated = true;
             this.fontbold.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontbold.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontbold.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -305,7 +297,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // fontdown
             // 
-            this.fontdown.Animated = true;
             this.fontdown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.fontdown.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.fontdown.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -399,7 +390,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;

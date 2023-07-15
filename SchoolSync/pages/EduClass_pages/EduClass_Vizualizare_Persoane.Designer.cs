@@ -63,7 +63,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2CircleButton1
             // 
-            this.guna2CircleButton1.Animated = true;
             this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
@@ -143,7 +142,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2RadioButton2
             // 
-            this.guna2RadioButton2.Animated = true;
             this.guna2RadioButton2.AutoSize = true;
             this.guna2RadioButton2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.guna2RadioButton2.CheckedState.BorderThickness = 0;
@@ -163,7 +161,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2RadioButton1
             // 
-            this.guna2RadioButton1.Animated = true;
             this.guna2RadioButton1.AutoSize = true;
             this.guna2RadioButton1.Checked = true;
             this.guna2RadioButton1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
@@ -185,7 +182,6 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             // guna2Button1
             // 
-            this.guna2Button1.Animated = true;
             this.guna2Button1.BorderRadius = 10;
             this.guna2Button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
