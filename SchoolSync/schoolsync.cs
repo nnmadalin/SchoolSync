@@ -20,7 +20,7 @@ namespace SchoolSync
 
         public static string token = Properties.Settings.Default.API_TOKEN;
         public static bool is_loading = false;
-        public static string version = "v7.2-15/7/2023";
+        public static string version = "v8.6-16/7/2023";
 
         private async void Form1_Load(object sender, EventArgs e)
         {

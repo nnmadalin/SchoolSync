@@ -200,98 +200,103 @@ namespace SchoolSync.pages
             if (task["message"] == "success")
             {
                 JObject json = task["0"];
+                if (json == null)
+                    json = new JObject();
 
                 for (int i = 0; i < 2 && i < json.Count; i++)
                 {
-
-                    Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                    try
                     {
-                        Size = new Size(380, 80),
-                        FillColor = Color.FromArgb(223, 229, 232),
-                        BorderRadius = 20,
-                        Margin = new Padding(0, 0, 0, 40),
-                        Cursor = Cursors.Hand,
-                        Tag = task[i.ToString()]["token"],
-                    };
-                    pnl.Click += deschide_mesaj;
-
-                    Guna.UI2.WinForms.Guna2CirclePictureBox gpb = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                    {
-                        Size = new Size(70, 70),
-                        Location = new Point(25, 5),
-                        UseTransparentBackground = true,
-                        Cursor = Cursors.Hand,
-                        Tag = task[i.ToString()]["token"],
-                    };
-                    gpb.Click += deschide_mesaj;
-
-                    Label lbl = new Label()
-                    {
-                        AutoEllipsis = true,
-                        Location = new Point(100, 15),
-                        Size = new Size(270, 20),
-                        Text = task[i.ToString()]["name"],
-                        TextAlign = ContentAlignment.MiddleLeft,
-                        Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
-                        BackColor = Color.Transparent,
-                        Cursor = Cursors.Hand,
-                        Tag = task[i.ToString()]["token"],
-                    };
-                    lbl.Click += deschide_mesaj;
-
-                    Label lbl_text = new Label()
-                    {
-                        AutoEllipsis = true,
-                        Location = new Point(100, 40),
-                        Size = new Size(270, 20),
-                        TextAlign = ContentAlignment.MiddleLeft,
-                        Text = "Dsad sad sad sad sa dsa",
-                        Font = new Font("Segoe UI", 10),
-                        BackColor = Color.Transparent,
-                        Cursor = Cursors.Hand,
-                        Tag = task[i.ToString()]["token"],
-                    };
-                    lbl_text.Click += deschide_mesaj;
-
-                    dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task[i.ToString()]["messages"]));
-
-                    JObject message = sub;
-
-                    int x = message.Count - 1;
-                    if (x >= 0)
-                    {
-                        if (Convert.ToString(sub[x.ToString()]["text"]) != "")
+                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                         {
-                            if (Convert.ToString(sub[x.ToString()]["root"]) == "0")
+                            Size = new Size(380, 80),
+                            FillColor = Color.FromArgb(223, 229, 232),
+                            BorderRadius = 20,
+                            Margin = new Padding(0, 0, 0, 40),
+                            Cursor = Cursors.Hand,
+                            Tag = task[i.ToString()]["token"],
+                        };
+                        pnl.Click += deschide_mesaj;
+
+                        Guna.UI2.WinForms.Guna2CirclePictureBox gpb = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                        {
+                            Size = new Size(70, 70),
+                            Location = new Point(25, 5),
+                            UseTransparentBackground = true,
+                            Cursor = Cursors.Hand,
+                            Tag = task[i.ToString()]["token"],
+                        };
+                        gpb.Click += deschide_mesaj;
+
+                        Label lbl = new Label()
+                        {
+                            AutoEllipsis = true,
+                            Location = new Point(100, 15),
+                            Size = new Size(270, 20),
+                            Text = task[i.ToString()]["name"],
+                            TextAlign = ContentAlignment.MiddleLeft,
+                            Font = new Font("Segoe UI Semibold", 13, FontStyle.Bold),
+                            BackColor = Color.Transparent,
+                            Cursor = Cursors.Hand,
+                            Tag = task[i.ToString()]["token"],
+                        };
+                        lbl.Click += deschide_mesaj;
+
+                        Label lbl_text = new Label()
+                        {
+                            AutoEllipsis = true,
+                            Location = new Point(100, 40),
+                            Size = new Size(270, 20),
+                            TextAlign = ContentAlignment.MiddleLeft,
+                            Text = "Dsad sad sad sad sa dsa",
+                            Font = new Font("Segoe UI", 10),
+                            BackColor = Color.Transparent,
+                            Cursor = Cursors.Hand,
+                            Tag = task[i.ToString()]["token"],
+                        };
+                        lbl_text.Click += deschide_mesaj;
+
+                        dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task[i.ToString()]["messages"]));
+
+                        JObject message = sub;
+
+                        int x = message.Count - 1;
+                        if (x >= 0)
+                        {
+                            if (Convert.ToString(sub[x.ToString()]["text"]) != "")
                             {
-                                lbl_text.Text = sub[x.ToString()]["user"] + ": " + sub[x.ToString()]["text"];
+                                if (Convert.ToString(sub[x.ToString()]["root"]) == "0")
+                                {
+                                    lbl_text.Text = sub[x.ToString()]["user"] + ": " + sub[x.ToString()]["text"];
+                                }
+                                else
+                                {
+                                    lbl_text.Text = sub[x.ToString()]["text"];
+                                }
                             }
                             else
                             {
-                                lbl_text.Text = sub[x.ToString()]["text"];
+                                string y = sub[x.ToString()]["file"];
+                                string[] split = y.Split('/');
+                                lbl_text.Text = sub[x.ToString()]["user"] + ": " + split[2];
+
                             }
                         }
-                        else
-                        {
-                            string y = sub[x.ToString()]["file"];
-                            string[] split = y.Split('/');
-                            lbl_text.Text = sub[x.ToString()]["user"] + ": " + split[2];
 
-                        }
+
+                        string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
+                        int red = int.Parse(components[0]);
+                        int green = int.Parse(components[1]);
+                        int blue = int.Parse(components[2]);
+                        gpb.FillColor = Color.FromArgb(red, green, blue);
+
+                        pnl.Controls.Add(gpb);
+                        pnl.Controls.Add(lbl);
+                        pnl.Controls.Add(lbl_text);
+
+                        flowLayoutPanel2.Controls.Add(pnl);
                     }
-
-
-                    string[] components = Convert.ToString(task[i.ToString()]["color"]).Split(',');
-                    int red = int.Parse(components[0]);
-                    int green = int.Parse(components[1]);
-                    int blue = int.Parse(components[2]);
-                    gpb.FillColor = Color.FromArgb(red, green, blue);
-
-                    pnl.Controls.Add(gpb);
-                    pnl.Controls.Add(lbl);
-                    pnl.Controls.Add(lbl_text);
-
-                    flowLayoutPanel2.Controls.Add(pnl);
+                    catch {; };
                 }
             }
 

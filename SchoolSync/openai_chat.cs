@@ -287,6 +287,7 @@ namespace SchoolSync
 
             if (task["message"] == "success")
             {
+
                 dynamic sub = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["chatgpt_message"]));
 
                 JObject jb = sub;
@@ -294,6 +295,9 @@ namespace SchoolSync
                 {
                     flowLayoutPanel1.Controls.Clear();
                 }
+
+                if (jb == null)
+                    jb = new JObject();
 
                 if (count_message != jb.Count.ToString())
                 {
