@@ -73,29 +73,34 @@ namespace SchoolSync.pages.EduClass_pages
                 }
 
                 //descriere
-                Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+
+                if (Convert.ToString(task["0"]["description"]).Trim() != "")
                 {
-                    FillColor = Color.FromArgb(223, 229, 232),
-                    AutoSize = true,
-                    MinimumSize = new Size(1130, 0),
-                    MaximumSize = new Size(1130, 0),
-                    Margin = new Padding(0, 0, 0, 30),
-                    BorderRadius = 20,
-                    UseTransparentBackground = true,
-                };
-                Label lbl = new Label()
-                {
-                    AutoSize = true,
-                    MinimumSize = new Size(1110, 0),
-                    MaximumSize = new Size(1110, 0),
-                    Location = new Point(10, 10),
-                    Margin = new Padding(0, 0, 0, 10),
-                    BackColor = Color.Transparent,
-                    Font = new Font("Segoe UI", 12),
-                };
-                lbl.Text = task["0"]["description"];
-                pnl.Controls.Add(lbl);
-                flowLayoutPanel1.Controls.Add(pnl);
+
+                    Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                    {
+                        FillColor = Color.FromArgb(223, 229, 232),
+                        AutoSize = true,
+                        MinimumSize = new Size(1130, 0),
+                        MaximumSize = new Size(1130, 0),
+                        Margin = new Padding(0, 0, 0, 30),
+                        BorderRadius = 20,
+                        UseTransparentBackground = true,
+                    };
+                    Label lbl = new Label()
+                    {
+                        AutoSize = true,
+                        MinimumSize = new Size(1110, 0),
+                        MaximumSize = new Size(1110, 0),
+                        Location = new Point(10, 10),
+                        Margin = new Padding(0, 0, 0, 10),
+                        BackColor = Color.Transparent,
+                        Font = new Font("Segoe UI", 12),
+                    };
+                    lbl.Text = task["0"]["description"];
+                    pnl.Controls.Add(lbl);
+                    flowLayoutPanel1.Controls.Add(pnl);
+                }
 
                 dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
 

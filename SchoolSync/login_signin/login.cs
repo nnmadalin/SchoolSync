@@ -76,7 +76,7 @@ namespace SchoolSync.login_signin
                 guna2MessageDialog1.Show();
                 Application.Exit();
             }
-            
+
             if (Properties.Settings.Default.Data_account != "")
             {
                 guna2ToggleSwitch1.Checked = true;

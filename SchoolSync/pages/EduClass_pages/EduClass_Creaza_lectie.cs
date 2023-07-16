@@ -512,6 +512,8 @@ namespace SchoolSync.pages.EduClass_pages
 
         private async void EduClass_Creaza_lectie_Load(object sender, EventArgs e)
         {
+
+            dateTimePicker1.Value = DateTime.Now.AddDays(1);
             if(navbar_home.page == "EduClass_editare_lectie")
             {
                 label1.Text = "Editeaza lectia";

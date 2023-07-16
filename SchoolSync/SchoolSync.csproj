@@ -194,6 +194,12 @@
     <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_Persoane.Designer.cs">
       <DependentUpon>EduClass_Vizualizare_Persoane.cs</DependentUpon>
     </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_Teme.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="pages\EduClass_pages\EduClass_Vizualizare_Teme.Designer.cs">
+      <DependentUpon>EduClass_Vizualizare_Teme.cs</DependentUpon>
+    </Compile>
     <Compile Include="pages\EduMentor_pages\EduMentor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -325,6 +331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare_Persoane.resx">
       <DependentUpon>EduClass_Vizualizare_Persoane.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare_Teme.resx">
+      <DependentUpon>EduClass_Vizualizare_Teme.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduMentor_pages\EduMentor.resx">
       <DependentUpon>EduMentor.cs</DependentUpon>

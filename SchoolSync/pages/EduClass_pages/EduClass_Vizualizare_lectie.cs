@@ -110,7 +110,7 @@ namespace SchoolSync.pages.EduClass_pages
                         label2.Text = "Nota: " + nota;
 
                     }
-                    catch { };
+                    catch { label2.Text = "Nota: Nu ai primit! :("; };
 
                     //incarcare fisiere user
 
@@ -162,6 +162,7 @@ namespace SchoolSync.pages.EduClass_pages
                                 Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
                                 Text = "Nu ai incarcat fisiere!",
                                 AutoSize = true,
+                                Name = "nofile"
                             };
                             flowLayoutPanel3.Controls.Add(lbl_no_file);
                         }
@@ -173,6 +174,7 @@ namespace SchoolSync.pages.EduClass_pages
                             Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
                             Text = "Nu ai incarcat fisiere!",
                             AutoSize = true,
+                            Name = "nofile"
                         };
                         flowLayoutPanel3.Controls.Add(lbl_no_file);
                     };
@@ -348,7 +350,13 @@ namespace SchoolSync.pages.EduClass_pages
                         }
                         else
                         {
-
+                            foreach(Control ctrl in flowLayoutPanel3.Controls)
+                            {
+                                if(ctrl.Name == "nofile")
+                                {
+                                    flowLayoutPanel3.Controls.Remove(ctrl);
+                                }
+                            }
                             Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
                             {
                                 FillColor = Color.White,
@@ -663,6 +671,12 @@ namespace SchoolSync.pages.EduClass_pages
         private void guna2Panel3_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void guna2Button5_Click(object sender, EventArgs e)
+        {
+            navbar_home.page = "EduClass_vizualizare_teme";
+            navbar_home.use = false;
         }
     }
 }
