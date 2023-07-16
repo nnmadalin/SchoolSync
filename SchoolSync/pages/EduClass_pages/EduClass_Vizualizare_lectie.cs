@@ -48,7 +48,7 @@ namespace SchoolSync.pages.EduClass_pages
                     if (admins[i] == Convert.ToString(login_signin.login.accounts_user["token"]))
                     {
                         is_admin = true;
-                        guna2Button3.Visible = guna2Button4.Visible = guna2Button5.Visible = true;
+                        guna2Button3.Visible = guna2Button4.Visible = guna2Button5.Visible = guna2Button6.Visible = true;
 
                         break;
                     }
@@ -108,7 +108,7 @@ namespace SchoolSync.pages.EduClass_pages
                         string nota = subsubjson["students_note"][Convert.ToString(login_signin.login.accounts_user["token"])];
                         is_over_time = true;
 
-                        if (nota == "0.00")
+                        if (nota == "0.00" || nota == "0.0" || nota == "0")
                             label2.Text = "Nota: Nu ai primit! :(";
                         else
                         {
@@ -684,6 +684,95 @@ namespace SchoolSync.pages.EduClass_pages
         {
             navbar_home.page = "EduClass_vizualizare_teme";
             navbar_home.use = false;
+        }
+
+        private async void guna2Button6_Click(object sender, EventArgs e)
+        {
+            bool is_visible = false;
+
+            schoolsync.show_loading();
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+                {
+                    {"token", navbar_home.token_page},
+                };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
+                JObject json = subjson;
+                if (subjson[navbar_home.token_page_2]["is_visible"] == "1")
+                {
+                    subjson[navbar_home.token_page_2]["is_visible"] = "0";
+                    is_visible = false;
+                }
+                else
+                {
+                    subjson[navbar_home.token_page_2]["is_visible"] = "1";
+                    is_visible = true;
+                }
+                subjson = json;
+
+                url = "https://schoolsync.nnmadalin.me/api/put.php";
+                data = new Dictionary<string, string>();
+                data.Add("token", schoolsync.token);
+                data.Add("command", "update educlass set materials = ? where token = ?");
+
+                param = new Dictionary<string, string>()
+                    {
+                        {"materials", JsonConvert.SerializeObject(subjson)},
+                        {"token", navbar_home.token_page},
+                    };
+
+                data.Add("params", JsonConvert.SerializeObject(param));
+
+                task = await _class.PostRequestAsync(url, data);
+                schoolsync.hide_loading();
+                if (task["message"] == "update success")
+                {
+                    if(is_visible == true)
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Lectie este vizibila!";
+                        frm.BringToFront();
+                    }
+                    else
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Lectie nu este vizibila!";
+                        frm.BringToFront();
+                    }
+
+                    
+                }
+                else
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine!";
+                    frm.BringToFront();
+                }
+            }
+
+            schoolsync.hide_loading();
         }
     }
 }

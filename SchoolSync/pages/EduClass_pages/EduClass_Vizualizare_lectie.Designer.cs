@@ -51,6 +51,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.label6 = new System.Windows.Forms.Label();
             this.guna2MessageDialog1 = new Guna.UI2.WinForms.Guna2MessageDialog();
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.guna2Button6 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel2.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
@@ -164,6 +165,7 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             this.guna2Panel3.AutoScroll = true;
             this.guna2Panel3.AutoScrollMargin = new System.Drawing.Size(0, 20);
+            this.guna2Panel3.Controls.Add(this.guna2Button6);
             this.guna2Panel3.Controls.Add(this.guna2Button5);
             this.guna2Panel3.Controls.Add(this.guna2Button4);
             this.guna2Panel3.Controls.Add(this.guna2Button3);
@@ -366,6 +368,25 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton1.TabIndex = 6;
             this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
+            // guna2Button6
+            // 
+            this.guna2Button6.BorderRadius = 15;
+            this.guna2Button6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2Button6.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button6.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button6.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button6.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button6.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(181)))));
+            this.guna2Button6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.guna2Button6.ForeColor = System.Drawing.Color.Black;
+            this.guna2Button6.Image = global::SchoolSync.Properties.Resources.visibility_FILL1_wght700_GRAD0_opsz48;
+            this.guna2Button6.Location = new System.Drawing.Point(881, 190);
+            this.guna2Button6.Name = "guna2Button6";
+            this.guna2Button6.Size = new System.Drawing.Size(40, 40);
+            this.guna2Button6.TabIndex = 10;
+            this.guna2Button6.Visible = false;
+            this.guna2Button6.Click += new System.EventHandler(this.guna2Button6_Click);
+            // 
             // EduClass_Vizualizare_lectie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,5 +432,6 @@ namespace SchoolSync.pages.EduClass_pages
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2MessageDialog guna2MessageDialog1;
         private Guna.UI2.WinForms.Guna2Button guna2Button5;
+        private Guna.UI2.WinForms.Guna2Button guna2Button6;
     }
 }

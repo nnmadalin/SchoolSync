@@ -66,10 +66,10 @@ namespace SchoolSync.pages.EduClass_pages
                     }
                 }
 
-                if(is_admin == false)
+                if(is_admin == true)
                 {
-                    guna2Button1.Visible = false;
-                    guna2CircleButton2.Visible = guna2CircleButton3.Visible = guna2CircleButton4.Visible = false;
+                    guna2Button1.Visible = true;
+                    guna2CircleButton2.Visible = guna2CircleButton3.Visible = guna2CircleButton4.Visible = true;
                 }
 
                 //descriere

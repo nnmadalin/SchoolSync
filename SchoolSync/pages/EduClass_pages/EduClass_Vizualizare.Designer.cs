@@ -200,6 +200,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2Button1.Size = new System.Drawing.Size(118, 40);
             this.guna2Button1.TabIndex = 9;
             this.guna2Button1.Text = "Creati";
+            this.guna2Button1.Visible = false;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // guna2CircleButton5
@@ -236,6 +237,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton4.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton4.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton4.TabIndex = 7;
+            this.guna2CircleButton4.Visible = false;
             this.guna2CircleButton4.Click += new System.EventHandler(this.guna2CircleButton4_Click);
             // 
             // guna2CircleButton3
@@ -254,6 +256,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton3.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton3.TabIndex = 6;
+            this.guna2CircleButton3.Visible = false;
             this.guna2CircleButton3.Click += new System.EventHandler(this.guna2CircleButton3_Click);
             // 
             // guna2CircleButton2
@@ -272,6 +275,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton2.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton2.TabIndex = 5;
+            this.guna2CircleButton2.Visible = false;
             this.guna2CircleButton2.Click += new System.EventHandler(this.guna2CircleButton2_Click);
             // 
             // guna2CircleButton1
