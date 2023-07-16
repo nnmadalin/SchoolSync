@@ -47,6 +47,101 @@ namespace SchoolSync.pages.EduClass_pages
         private async void trimite_nota(object sender, EventArgs e)
         {
             string token = ((Control)sender).Tag.ToString();
+
+
+            /*try
+            {
+                jb.Remove(Convert.ToString(login_signin.login.accounts_user["token"]));
+            }
+                catch { }
+            if (fnames != "")
+                jb.Add(Convert.ToString(login_signin.login.accounts_user["token"]), fnames);*/
+
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from educlass where token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token", navbar_home.token_page},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+
+            if (task["message"] == "success")
+            {
+                dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
+                dynamic subsubjson = subjson[navbar_home.token_page_2]["students_note"];
+
+                JObject jb = new JObject();
+                if (Convert.ToString(subsubjson) != "")
+                    jb = subsubjson;
+
+                try
+                {
+                    jb.Remove(token);
+                }
+                catch {};
+
+                try { 
+                
+                    string nota = ((Guna.UI2.WinForms.Guna2NumericUpDown)flowLayoutPanel1.Controls[token].Controls["value_nota"]).Value.ToString();
+                    if(nota != "0.00")
+                        jb.Add(token, nota);
+
+                    subjson[navbar_home.token_page_2]["students_note"] = jb;
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set materials = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"materials", JsonConvert.SerializeObject(subjson)},
+                        {"token", navbar_home.token_page},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Nota trimisa!";
+                        frm.BringToFront();
+
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+
+                    }
+
+                }
+                catch
+                {
+                    var frm = new notification.error();
+                    schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                    var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                    panel.Controls.Add(frm);
+                    notification.error.message = "Ceva nu a mers bine!";
+                    frm.BringToFront();
+                }
+            }
         }
 
         private async void EduClass_Vizualizare_Teme_Load(object sender, EventArgs e)
@@ -95,7 +190,7 @@ namespace SchoolSync.pages.EduClass_pages
                             BorderThickness = 1,
                             BorderRadius = 15,
                             Margin = new Padding(0, 0, 0, 10),
-                            Tag = token_user,
+                            Name = token_user,
                         };
 
                         Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
@@ -133,7 +228,7 @@ namespace SchoolSync.pages.EduClass_pages
                         {
                             AutoRoundedCorners = true,
                             Font = new Font("Segoe UI", 11),
-                            Minimum = 1,
+                            Minimum = 0,
                             Maximum = 10,
                             DecimalPlaces = 2,
                             Value = 5,
@@ -277,7 +372,7 @@ namespace SchoolSync.pages.EduClass_pages
                             BorderThickness = 1,
                             BorderRadius = 15,
                             Margin = new Padding(0, 0, 0, 10),
-                            Tag = students[i],
+                            Name = students[i],
                         };
 
                         Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
@@ -315,7 +410,7 @@ namespace SchoolSync.pages.EduClass_pages
                         {
                             AutoRoundedCorners = true,
                             Font = new Font("Segoe UI", 11),
-                            Minimum = 1,
+                            Minimum = 0,
                             Maximum = 10,
                             DecimalPlaces = 2,
                             Value = 5,
@@ -377,6 +472,11 @@ namespace SchoolSync.pages.EduClass_pages
 
             }
             schoolsync.hide_loading();
+        }
+
+        private void guna2CircleButton1_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

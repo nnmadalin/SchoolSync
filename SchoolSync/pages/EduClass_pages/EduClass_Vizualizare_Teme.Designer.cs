@@ -52,6 +52,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton1.Size = new System.Drawing.Size(40, 40);
             this.guna2CircleButton1.TabIndex = 7;
+            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
             // 
             // flowLayoutPanel1
             // 

@@ -107,7 +107,16 @@ namespace SchoolSync.pages.EduClass_pages
                     {
                         string nota = subsubjson["students_note"][Convert.ToString(login_signin.login.accounts_user["token"])];
                         is_over_time = true;
-                        label2.Text = "Nota: " + nota;
+
+                        if (nota == "0.00")
+                            label2.Text = "Nota: Nu ai primit! :(";
+                        else
+                        {
+                            label2.Text = "Nota: " + nota;
+                            guna2Button1.Visible = false;
+                            guna2Button2.Visible = false;
+                            is_over_time = true;
+                        }
 
                     }
                     catch { label2.Text = "Nota: Nu ai primit! :("; };
@@ -542,9 +551,7 @@ namespace SchoolSync.pages.EduClass_pages
                 {
                     jb.Remove(Convert.ToString(login_signin.login.accounts_user["token"]));
                 }
-                catch 
-                {
-                }
+                catch {}
                 if(fnames != "")
                     jb.Add(Convert.ToString(login_signin.login.accounts_user["token"]), fnames);
 

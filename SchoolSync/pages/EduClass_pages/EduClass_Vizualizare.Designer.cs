@@ -176,7 +176,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2CircleButton6.ForeColor = System.Drawing.Color.White;
             this.guna2CircleButton6.Image = global::SchoolSync.Properties.Resources.file_copy_FILL1_wght700_GRAD0_opsz48;
-            this.guna2CircleButton6.Location = new System.Drawing.Point(1093, 3);
+            this.guna2CircleButton6.Location = new System.Drawing.Point(1093, 5);
             this.guna2CircleButton6.Name = "guna2CircleButton6";
             this.guna2CircleButton6.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CircleButton6.Size = new System.Drawing.Size(40, 40);
