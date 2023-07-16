@@ -199,9 +199,10 @@ namespace SchoolSync.pages
             task = await _Class.PostRequestAsync(url, data);
             if (task["message"] == "success")
             {
-                JObject json = task["0"];
+                JObject json = task;
                 if (json == null)
                     json = new JObject();
+                
                 for (int i = 0; i < 2 && i < json.Count - 1; i++)
                 {
                     try
