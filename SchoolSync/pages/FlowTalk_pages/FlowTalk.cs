@@ -74,7 +74,6 @@ namespace SchoolSync.pages.FlowTalk_pages
                     {
                         flowLayoutPanel1.Controls.Clear();
                         count_tab = jb.Count.ToString();
-                        Console.WriteLine(task);
                         for (int i = 0; i < jb.Count - 1; i++)
                         {
                             Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()

@@ -79,7 +79,6 @@ namespace SchoolSync.pages.EduClass_pages
                         label2.Text = "Nota: ";
                         label3.Text = "Termen limita: " + subjson[navbar_home.token_page_2]["deadline"];
                     }
-
                     string row = subjson[navbar_home.token_page_2]["files"];
                     string[] file_split = row.Split(';');
 
@@ -280,13 +279,14 @@ namespace SchoolSync.pages.EduClass_pages
                     }
 
                 }
-                catch
+                catch (Exception eee)
                 {
+                    Console.WriteLine(eee.Message);
                     var frm = new notification.error();
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
                     panel.Controls.Add(frm);
-                    notification.error.message = "Ceva nu a mers bine!";
+                    notification.error.message = "Ceva nu a mers bine! ";
                     frm.BringToFront();
 
                     navbar_home.page = "EduClass_vizualizare";

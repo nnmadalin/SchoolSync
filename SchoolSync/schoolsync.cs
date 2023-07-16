@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace SchoolSync
 {
@@ -24,7 +25,9 @@ namespace SchoolSync
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
+
             var frm = new login_signin.login();
             guna2Panel2.Controls.Add(frm);
             frm.Show();
