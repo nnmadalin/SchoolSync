@@ -69,10 +69,12 @@ namespace SchoolSync.pages.FlowTalk_pages
                 if (task["message"] == "success")
                 {
                     JObject jb = task;
+                    
                     if (jb.Count.ToString() != count_tab)
                     {
                         flowLayoutPanel1.Controls.Clear();
                         count_tab = jb.Count.ToString();
+                        Console.WriteLine(task);
                         for (int i = 0; i < jb.Count - 1; i++)
                         {
                             Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
@@ -131,22 +133,27 @@ namespace SchoolSync.pages.FlowTalk_pages
                             JObject message = sub;
 
                             int x = message.Count - 1;
-                            if (x >= 0)
+                            try
                             {
-                                if (Convert.ToString(sub[x.ToString()]["text"]) != "")
+                                if (x >= 0)
                                 {
-                                    if(Convert.ToString(sub[x.ToString()]["root"]) == "0")
-                                        last_mess.Text = sub[x.ToString()]["user"] + ": " + sub[x.ToString()]["text"];
+
+                                    if (Convert.ToString(sub[x.ToString()]["text"]) != "")
+                                    {
+                                        if (Convert.ToString(sub[x.ToString()]["root"]) == "0")
+                                            last_mess.Text = sub[x.ToString()]["user"] + ": " + sub[x.ToString()]["text"];
+                                        else
+                                            last_mess.Text = sub[x.ToString()]["text"];
+                                    }
                                     else
-                                        last_mess.Text =  sub[x.ToString()]["text"];
+                                    {
+                                        string y = sub[x.ToString()]["file"];
+                                        string[] split = y.Split('/');
+                                        last_mess.Text = sub[x.ToString()]["user"] + ": " + split[2];
+                                    }
                                 }
-                                else
-                                {   
-                                    string y = sub[x.ToString()]["file"];
-                                    string[] split = y.Split('/');
-                                    last_mess.Text = sub[x.ToString()]["user"] + ": " + split[2];
-                                }
-                            }                                
+                            }
+                            catch { };
 
                             pnl.Controls.Add(pct);
                             pnl.Controls.Add(name);
@@ -157,7 +164,7 @@ namespace SchoolSync.pages.FlowTalk_pages
                     }
                 }
             }
-            catch { };
+            catch (Exception ex){ Console.WriteLine(ex.Message); };
         }
 
         private async void FlowTalk_Load(object sender, EventArgs e)
@@ -189,6 +196,9 @@ namespace SchoolSync.pages.FlowTalk_pages
         async void send_message()
         {
             string message = guna2TextBox1.Text;
+
+            if (message.Trim() == "")
+                return;
 
             JObject json = new JObject();
             json.Add("date", DateTime.Now.ToString());

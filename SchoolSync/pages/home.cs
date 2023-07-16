@@ -367,10 +367,11 @@ namespace SchoolSync.pages
                 for(int i = 0; i < json.Count; i++)
                 {
                     string datetime = subjson[i.ToString()]["deadline"];
+                    string[] spl = datetime.Split(' ');
                     if(datetime != "-1")
                     {
-                        DateTime dt = Convert.ToDateTime(datetime);
-                        if (dt.ToShortDateString() == DateTime.Now.ToShortDateString())
+                        string dateact = DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year;
+                        if (spl[0] == dateact)
                         {
                             listBox1.Items.Add("• EduClass: " + Convert.ToString(subjson[i.ToString()]["title"]));
                         }
