@@ -323,7 +323,8 @@ namespace SchoolSync.pages
                 JObject json = calendar;
                 try
                 {
-                    JArray array = (JArray)json.SelectToken(DateTime.Now.ToString("MM/dd/yyyy"));
+                    string dateact = DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year;
+                    JArray array = (JArray)json.SelectToken(dateact);
                     if (array != null && array.Type == JTokenType.Array)
                     {
                         foreach (var item in array)
@@ -336,7 +337,8 @@ namespace SchoolSync.pages
                 {
                     try
                     {
-                        listBox1.Items.Add("• TimePlan: " + json[DateTime.Now.ToString("MM/dd/yyyy")]);
+                        string dateact = DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year;
+                        listBox1.Items.Add("• TimePlan: " + json[dateact]);
                     }
                     catch { };
                 }
@@ -368,7 +370,6 @@ namespace SchoolSync.pages
                     if(datetime != "-1")
                     {
                         DateTime dt = Convert.ToDateTime(datetime);
-                        
                         if (dt.ToShortDateString() == DateTime.Now.ToShortDateString())
                         {
                             listBox1.Items.Add("• EduClass: " + Convert.ToString(subjson[i.ToString()]["title"]));
