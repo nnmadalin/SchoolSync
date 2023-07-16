@@ -202,8 +202,7 @@ namespace SchoolSync.pages
                 JObject json = task["0"];
                 if (json == null)
                     json = new JObject();
-
-                for (int i = 0; i < 2 && i < json.Count; i++)
+                for (int i = 0; i < 2 && i < json.Count - 1; i++)
                 {
                     try
                     {
@@ -297,6 +296,7 @@ namespace SchoolSync.pages
                         flowLayoutPanel2.Controls.Add(pnl);
                     }
                     catch {; };
+                    
                 }
             }
 
