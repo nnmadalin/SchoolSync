@@ -138,7 +138,8 @@ namespace SchoolSync.pages.TimePlan_pages
                 JObject json = calendar;
                 try
                 {
-                    JArray array = (JArray)json.SelectToken(time.ToString("MM/dd/yyyy"));
+                    string dateact = time.Month + "/" + time.Day + "/" + time.Year;
+                    JArray array = (JArray)json.SelectToken(dateact);
                     if (array != null && array.Type == JTokenType.Array)
                     {
                         foreach (var item in array)
@@ -151,7 +152,8 @@ namespace SchoolSync.pages.TimePlan_pages
                 {
                     try
                     {
-                        listBox1.Items.Add(json[time.ToString("MM/dd/yyyy")]);
+                        string dateact = time.Month + "/" + time.Day + "/" + time.Year;
+                        listBox1.Items.Add(json[dateact]);
                     }
                     catch { };
                 }
@@ -163,8 +165,8 @@ namespace SchoolSync.pages.TimePlan_pages
                         if (ctrl is Guna.UI2.WinForms.Guna2CircleButton && ctrl.Name.ToString() == "guna2CircleButton" + (i + dayofweek).ToString())
                         {
                             DateTime dt = new DateTime(time.Year, time.Month, i);
-                            string dt_str = dt.ToString("MM/dd/yyyy");
-                            if (json.SelectToken(dt_str) != null)
+                            string dateact = dt.Month + "/" + dt.Day + "/" + dt.Year;
+                            if (json.SelectToken(dateact) != null)
                             {
                                 ((Guna.UI2.WinForms.Guna2CircleButton)ctrl).BorderThickness = 2;
                             }
@@ -281,9 +283,10 @@ namespace SchoolSync.pages.TimePlan_pages
 
                 if(json != null)
                 {
+                    string dateact = now.Month + "/" + now.Day + "/" + now.Year;
                     foreach (JProperty property in json.Properties())
                     {
-                        if (property.Name == now.ToString("MM/dd/yyyy"))
+                        if (property.Name == dateact)
                         {
                             keyExists = true;
                             if (property.Value.Type == JTokenType.Array)
@@ -294,7 +297,7 @@ namespace SchoolSync.pages.TimePlan_pages
                             else
                             {
                                 JArray newArray = new JArray(property.Value, eveniment);
-                                json[now.ToString("MM/dd/yyyy")] = newArray;
+                                json[dateact] = newArray;
                             }
                             break;
                         }
@@ -302,8 +305,10 @@ namespace SchoolSync.pages.TimePlan_pages
                 }
 
                 if (!keyExists)
-                {                    
-                    json.Add(now.ToString("MM/dd/yyyy"), eveniment);
+                {
+                    string dateact = now.Month + "/" + now.Day + "/" + now.Year;
+                    Console.WriteLine(dateact);
+                    json.Add(dateact, eveniment);
                 }
 
 
@@ -363,21 +368,22 @@ namespace SchoolSync.pages.TimePlan_pages
                         dynamic calendar = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["calendar"]));
 
                         json = calendar;
-
+                        string dateact = now.Month + "/" + now.Day + "/" + now.Year;
                         try
                         {
-                            JArray array = (JArray)json[now.ToString("MM/dd/yyyy")];
+                            
+                            JArray array = (JArray)json[dateact];
                             array.RemoveAt(index);
                             if(array.Count == 0)
                             {
-                                json.Remove(now.ToString("MM/dd/yyyy"));
+                                json.Remove(dateact);
                             }
                         }
                         catch 
                         {
                             try
                             {
-                                json.Remove(now.ToString("MM/dd/yyyy"));
+                                json.Remove(dateact);
                             }
                             catch { };
                         };

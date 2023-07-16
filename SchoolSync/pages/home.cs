@@ -38,12 +38,12 @@ namespace SchoolSync.pages
             dynamic task;
             try
             {
-               task = await _Class.getstring("https://type.fit/api/quotes");
+                //task = await _Class.getstring("https://type.fit/api/quotes");
 
                 Random rand = new Random();
                 int p = Convert.ToInt32(rand.Next(0, 1201).ToString());
 
-                label10.Text = "'" + task[p]["text"] + "'" + " - " + task[p]["author"];
+                //label10.Text = "'" + task[p]["text"] + "'" + " - " + task[p]["author"];
             }
             catch
             {
