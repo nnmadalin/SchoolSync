@@ -308,7 +308,7 @@ namespace SchoolSync.pages.EduClass_pages
 
                     schoolsync.show_loading();
                 }
-                else
+                else if(is_admin == true)
                 {
                     string newadmin = "";
 
@@ -361,7 +361,60 @@ namespace SchoolSync.pages.EduClass_pages
                     }
                     
                 }
+                else
+                {
+                    split = Convert.ToString(task["0"]["students"]).Split(';');
+                    string newstd= "";
 
+                    for (int i = 0; i < split.Length - 1; i++)
+                    {
+                        if (split[i] != Convert.ToString(login_signin.login.accounts_user["token"]))
+                        {
+                            newstd += split[i] + ";";
+                        }
+                    }
+
+                    url = "https://schoolsync.nnmadalin.me/api/put.php";
+                    data = new Dictionary<string, string>();
+                    data.Add("token", schoolsync.token);
+                    data.Add("command", "update educlass set students = ? where token = ?");
+
+                    param = new Dictionary<string, string>()
+                    {
+                        {"admins", newstd},
+                        {"token", navbar_home.token_page},
+                    };
+
+                    data.Add("params", JsonConvert.SerializeObject(param));
+
+                    task = await _class.PostRequestAsync(url, data);
+
+                    schoolsync.hide_loading();
+
+                    if (task["message"] == "update success")
+                    {
+                        var frm = new notification.success();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.success.message = "Ai parasit cursul!";
+                        frm.BringToFront();
+
+                        navbar_home.page = "EduClass";
+                        navbar_home.use = false;
+
+                    }
+                    else
+                    {
+                        var frm = new notification.error();
+                        schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
+                        var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
+                        panel.Controls.Add(frm);
+                        notification.error.message = "Ceva nu a mers bine!";
+                        frm.BringToFront();
+                    }
+
+                }
             }
 
             schoolsync.hide_loading();
