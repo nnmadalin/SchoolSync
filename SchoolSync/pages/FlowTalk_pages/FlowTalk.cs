@@ -453,6 +453,12 @@ namespace SchoolSync.pages.FlowTalk_pages
                     data.Add("params", JsonConvert.SerializeObject(param));
 
                     task = await _class.PostRequestAsync(url, data);
+                    load_tab_message.Enabled = false;
+                    count_tab = "";
+                    token_message = "";
+                    count_message = "";
+                    flowLayoutPanel1.Controls.Clear();
+                    load_tab_message.Enabled = true;
                 }
             }
         }
