@@ -73,6 +73,7 @@ namespace SchoolSync.pages.EduClass_pages
                     {
                         label2.Visible = label3.Visible = false;
                         guna2Panel4.Visible = false;
+                        guna2Button5.Visible = false;
                     }
                     else
                     {

@@ -170,433 +170,437 @@ namespace SchoolSync.pages.EduClass_pages
                 dynamic subjson = JsonConvert.DeserializeObject(Convert.ToString(task["0"]["materials"]));
                 JObject json = subjson;
 
-                JObject studentsFiles = (JObject)json[navbar_home.token_page_2]["students_files"];
-
-                if (studentsFiles != null)
+                try
                 {
-                    foreach (KeyValuePair<string, JToken> keyValue in studentsFiles)
+                    JObject studentsFiles = (JObject)json[navbar_home.token_page_2]["students_files"];
+
+                    if (studentsFiles != null)
                     {
-                        string token_user = keyValue.Key;
-                        string[] files_user = keyValue.Value.ToString().Split(';');
-
-
-                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                        foreach (KeyValuePair<string, JToken> keyValue in studentsFiles)
                         {
-                            Size = new Size(1100, 50),
-                            MinimumSize = new Size(1100, 0),
-                            MaximumSize = new Size(1100, 0),
-                            AutoSize = true,
-                            BorderColor = Color.FromArgb(196, 196, 196),
-                            BorderThickness = 1,
-                            BorderRadius = 15,
-                            Margin = new Padding(0, 0, 0, 10),
-                            Name = token_user,
-                            Tag = token_user,
-                        };
+                            string token_user = keyValue.Key;
+                            string[] files_user = keyValue.Value.ToString().Split(';');
 
-                        Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                        {
-                            Size = new Size(40, 40),
-                            Location = new Point(10, 5),
-                            Cursor = Cursors.Hand,
-                            SizeMode = PictureBoxSizeMode.StretchImage,
-                        };
-                        gcp.Image = await _class.IncarcaAvatar(token_user);
 
-                        Label lbl = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 5),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                        };
-                        lbl.Text = await getusername(token_user);
-
-                        Label lbl_nota = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 45),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                            Text = "Nota: ",
-                        };
-
-                        Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
-                        {
-                            AutoRoundedCorners = true,
-                            Font = new Font("Segoe UI", 11),
-                            Minimum = 0,
-                            Maximum = 10,
-                            DecimalPlaces = 2,
-                            Value = 5,
-                            Size = new Size(100, 30),
-                            Location = new Point(150, 50),
-                            Tag = token_user,
-                            Name = "value_nota",
-                        };
-                        //afisare nota
-                        try
-                        {
-                            dynamic obj = json[navbar_home.token_page_2]["students_note"];
-                            string nota = obj[token_user];
-                            gnud.Value = Convert.ToDecimal(nota);
-                        }
-                        catch { };
-
-                        Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
-                        {
-                            FillColor = Color.FromArgb(152, 152, 181),
-                            ForeColor = Color.White,
-                            Text = "Trimite nota",
-                            Location = new Point(270, 50),
-                            Size = new Size(100, 30),
-                            AutoRoundedCorners = true,
-                            Cursor = Cursors.Hand,
-                            Tag = token_user,
-                        };
-                        btn.Click += trimite_nota;
-
-                        FlowLayoutPanel flp = new FlowLayoutPanel()
-                        {
-                            Size = new Size(1000, 80),
-                            MinimumSize = new Size(1000, 0),
-                            MaximumSize = new Size(1000, 0),
-                            Location = new Point(50, 90),
-                            AutoSize = true,
-                        };
-
-                        try
-                        {
-
-                            if (keyValue.Value.ToString() != null)
+                            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
                             {
-                                string[] split = files_user;
-                                if (split.Length == 0)
+                                Size = new Size(1100, 50),
+                                MinimumSize = new Size(1100, 0),
+                                MaximumSize = new Size(1100, 0),
+                                AutoSize = true,
+                                BorderColor = Color.FromArgb(196, 196, 196),
+                                BorderThickness = 1,
+                                BorderRadius = 15,
+                                Margin = new Padding(0, 0, 0, 10),
+                                Name = token_user,
+                                Tag = token_user,
+                            };
+
+                            Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                            {
+                                Size = new Size(40, 40),
+                                Location = new Point(10, 5),
+                                Cursor = Cursors.Hand,
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+                            };
+                            gcp.Image = await _class.IncarcaAvatar(token_user);
+
+                            Label lbl = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 5),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                            };
+                            lbl.Text = await getusername(token_user);
+
+                            Label lbl_nota = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 45),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                                Text = "Nota: ",
+                            };
+
+                            Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
+                            {
+                                AutoRoundedCorners = true,
+                                Font = new Font("Segoe UI", 11),
+                                Minimum = 0,
+                                Maximum = 10,
+                                DecimalPlaces = 2,
+                                Value = 0,
+                                Size = new Size(100, 30),
+                                Location = new Point(150, 50),
+                                Tag = token_user,
+                                Name = "value_nota",
+                            };
+                            //afisare nota
+                            try
+                            {
+                                dynamic obj = json[navbar_home.token_page_2]["students_note"];
+                                string nota = obj[token_user];
+                                gnud.Value = Convert.ToDecimal(nota);
+                            }
+                            catch { };
+
+                            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+                            {
+                                FillColor = Color.FromArgb(152, 152, 181),
+                                ForeColor = Color.White,
+                                Text = "Trimite nota",
+                                Location = new Point(270, 50),
+                                Size = new Size(100, 30),
+                                AutoRoundedCorners = true,
+                                Cursor = Cursors.Hand,
+                                Tag = token_user,
+                            };
+                            btn.Click += trimite_nota;
+
+                            FlowLayoutPanel flp = new FlowLayoutPanel()
+                            {
+                                Size = new Size(1000, 80),
+                                MinimumSize = new Size(1000, 0),
+                                MaximumSize = new Size(1000, 0),
+                                Location = new Point(50, 90),
+                                AutoSize = true,
+                            };
+
+                            try
+                            {
+
+                                if (keyValue.Value.ToString() != null)
+                                {
+                                    string[] split = files_user;
+                                    if (split.Length == 0)
+                                    {
+                                        Label lbl_no_file = new Label()
+                                        {
+                                            Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
+                                            Text = "Nu a incarcat fisiere!",
+                                            AutoSize = true,
+                                        };
+                                        flp.Controls.Add(lbl_no_file);
+                                    }
+
+                                    for (int i = 0; i < split.Length - 1; i++)
+                                    {
+
+                                        Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
+                                        {
+                                            FillColor = Color.White,
+                                            BorderColor = Color.FromArgb(94, 148, 255),
+                                            ForeColor = Color.Black,
+                                            Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
+                                            AutoRoundedCorners = false,
+                                            BorderRadius = 10,
+                                            TextAlign = HorizontalAlignment.Left,
+                                            Size = new Size(200, 35),
+                                            IsClosable = false,
+                                            Cursor = Cursors.Hand,
+                                        };
+                                        string item_Str = split[i].ToString();
+                                        if (item_Str.Length >= 16)
+                                            guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                        else
+                                            guna2Chip.Text = item_Str;
+                                        guna2Chip.Tag = item_Str;
+                                        flp.Controls.Add(guna2Chip);
+                                    }
+                                }
+                                else
                                 {
                                     Label lbl_no_file = new Label()
                                     {
                                         Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
                                         Text = "Nu a incarcat fisiere!",
                                         AutoSize = true,
+                                        Name = "nofile"
                                     };
                                     flp.Controls.Add(lbl_no_file);
                                 }
-
-                                for (int i = 0; i < split.Length - 1; i++)
-                                {
-
-                                    Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
-                                    {
-                                        FillColor = Color.White,
-                                        BorderColor = Color.FromArgb(94, 148, 255),
-                                        ForeColor = Color.Black,
-                                        Font = new Font("Segoe UI Semibold", 10, FontStyle.Bold),
-                                        AutoRoundedCorners = false,
-                                        BorderRadius = 10,
-                                        TextAlign = HorizontalAlignment.Left,
-                                        Size = new Size(200, 35),
-                                        IsClosable = false,
-                                        Cursor = Cursors.Hand,
-                                    };
-                                    string item_Str = split[i].ToString();
-                                    if (item_Str.Length >= 16)
-                                        guna2Chip.Text = item_Str.Substring(0, 20) + "...";
-                                    else
-                                        guna2Chip.Text = item_Str;
-                                    guna2Chip.Tag = item_Str;
-                                    flp.Controls.Add(guna2Chip);
-                                }
                             }
-                            else
+                            catch
                             {
                                 Label lbl_no_file = new Label()
                                 {
                                     Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
-                                    Text = "Nu a incarcat fisiere!",
+                                    Text = "Nu ai incarcat fisiere!",
                                     AutoSize = true,
                                     Name = "nofile"
                                 };
                                 flp.Controls.Add(lbl_no_file);
+                            };
+
+                            pnl.Controls.Add(btn);
+                            pnl.Controls.Add(gnud);
+                            pnl.Controls.Add(lbl_nota);
+                            pnl.Controls.Add(flp);
+                            pnl.Controls.Add(gcp);
+                            pnl.Controls.Add(lbl);
+
+                            flowLayoutPanel1.Controls.Add(pnl);
+
+                        }
+                    }
+                }
+                catch { };
+
+                string[] students = Convert.ToString(task["0"]["students"]).Split(';');
+                    for (int i = 0; i < students.Length - 1; i++)
+                    {
+                        bool is_ok = false;
+                        foreach (Control ctrl in flowLayoutPanel1.Controls)
+                        {
+                            if (ctrl.Tag.ToString() == students[i])
+                            {
+                                is_ok = true;
+                                break;
                             }
                         }
-                        catch
+
+                        if (is_ok == false)
                         {
+                            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                            {
+                                Size = new Size(1100, 50),
+                                MinimumSize = new Size(1100, 0),
+                                MaximumSize = new Size(1100, 0),
+                                AutoSize = true,
+                                BorderColor = Color.FromArgb(196, 196, 196),
+                                BorderThickness = 1,
+                                BorderRadius = 15,
+                                Margin = new Padding(0, 0, 0, 10),
+                                Name = students[i],
+                                Tag = students[i],
+                            };
+
+                            Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                            {
+                                Size = new Size(40, 40),
+                                Location = new Point(10, 5),
+                                Cursor = Cursors.Hand,
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+                            };
+                            gcp.Image = await _class.IncarcaAvatar(students[i]);
+
+                            Label lbl = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 5),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                            };
+                            lbl.Text = await getusername(students[i]);
+
+                            Label lbl_nota = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 45),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                                Text = "Nota: ",
+                            };
+
+                            Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
+                            {
+                                AutoRoundedCorners = true,
+                                Font = new Font("Segoe UI", 11),
+                                Minimum = 0,
+                                Maximum = 10,
+                                DecimalPlaces = 2,
+                                Value = 0,
+                                Size = new Size(100, 30),
+                                Location = new Point(150, 50),
+                                Tag = students[i],
+                                Name = "value_nota",
+                            };
+                            //afisare nota
+                            try
+                            {
+                                dynamic obj = json[navbar_home.token_page_2]["students_note"];
+                                string nota = obj[students[i]];
+                                gnud.Value = Convert.ToDecimal(nota);
+
+                            }
+                            catch { };
+
+                            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+                            {
+                                FillColor = Color.FromArgb(152, 152, 181),
+                                ForeColor = Color.White,
+                                Text = "Trimite nota",
+                                Location = new Point(270, 50),
+                                Size = new Size(100, 30),
+                                AutoRoundedCorners = true,
+                                Cursor = Cursors.Hand,
+                                Tag = students[i],
+                            };
+                            btn.Click += trimite_nota;
+
+                            FlowLayoutPanel flp = new FlowLayoutPanel()
+                            {
+                                Size = new Size(1000, 80),
+                                MinimumSize = new Size(1000, 0),
+                                MaximumSize = new Size(1000, 0),
+                                Location = new Point(50, 90),
+                                AutoSize = true,
+                            };
+
                             Label lbl_no_file = new Label()
                             {
                                 Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
-                                Text = "Nu ai incarcat fisiere!",
+                                Text = "Nu a incarcat fisiere!",
                                 AutoSize = true,
                                 Name = "nofile"
                             };
                             flp.Controls.Add(lbl_no_file);
-                        };
 
-                        pnl.Controls.Add(btn);
-                        pnl.Controls.Add(gnud);
-                        pnl.Controls.Add(lbl_nota);
-                        pnl.Controls.Add(flp);
-                        pnl.Controls.Add(gcp);
-                        pnl.Controls.Add(lbl);
+                            pnl.Controls.Add(btn);
+                            pnl.Controls.Add(gnud);
+                            pnl.Controls.Add(lbl_nota);
+                            pnl.Controls.Add(flp);
+                            pnl.Controls.Add(gcp);
+                            pnl.Controls.Add(lbl);
 
-                        flowLayoutPanel1.Controls.Add(pnl);
-
-                    }
-                }
-
-                string[] students = Convert.ToString(task["0"]["students"]).Split(';');
-                for(int i = 0; i < students.Length - 1; i++)
-                {
-                    bool is_ok = false;
-                    foreach(Control ctrl in flowLayoutPanel1.Controls)
-                    {
-                        if(ctrl.Tag.ToString() == students[i])
-                        {
-                            is_ok = true;
-                            break;
+                            flowLayoutPanel1.Controls.Add(pnl);
                         }
                     }
 
-                    if(is_ok == false)
+                    students = Convert.ToString(task["0"]["admins"]).Split(';');
+                    for (int i = 0; i < students.Length - 1; i++)
                     {
-                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                        bool is_ok = false;
+                        foreach (Control ctrl in flowLayoutPanel1.Controls)
                         {
-                            Size = new Size(1100, 50),
-                            MinimumSize = new Size(1100, 0),
-                            MaximumSize = new Size(1100, 0),
-                            AutoSize = true,
-                            BorderColor = Color.FromArgb(196, 196, 196),
-                            BorderThickness = 1,
-                            BorderRadius = 15,
-                            Margin = new Padding(0, 0, 0, 10),
-                            Name = students[i],
-                            Tag = students[i],
-                        };
-
-                        Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                        {
-                            Size = new Size(40, 40),
-                            Location = new Point(10, 5),
-                            Cursor = Cursors.Hand,
-                            SizeMode = PictureBoxSizeMode.StretchImage,
-                        };
-                        gcp.Image = await _class.IncarcaAvatar(students[i]);
-
-                        Label lbl = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 5),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                        };
-                        lbl.Text = await getusername(students[i]);
-
-                        Label lbl_nota = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 45),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                            Text = "Nota: ",
-                        };
-
-                        Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
-                        {
-                            AutoRoundedCorners = true,
-                            Font = new Font("Segoe UI", 11),
-                            Minimum = 0,
-                            Maximum = 10,
-                            DecimalPlaces = 2,
-                            Value = 5,
-                            Size = new Size(100, 30),
-                            Location = new Point(150, 50),
-                            Tag = students[i],
-                            Name = "value_nota",
-                        };
-                        //afisare nota
-                        try
-                        {
-                            dynamic obj = json[navbar_home.token_page_2]["students_note"];
-                            string nota = obj[students[i]];
-                            gnud.Value = Convert.ToDecimal(nota);
-
+                            if (ctrl.Tag.ToString() == students[i])
+                            {
+                                is_ok = true;
+                                break;
+                            }
                         }
-                        catch { };
 
-                        Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+                        if (is_ok == false)
                         {
-                            FillColor = Color.FromArgb(152, 152, 181),
-                            ForeColor = Color.White,
-                            Text = "Trimite nota",
-                            Location = new Point(270, 50),
-                            Size = new Size(100, 30),
-                            AutoRoundedCorners = true,
-                            Cursor = Cursors.Hand,
-                            Tag = students[i],
-                        };
-                        btn.Click += trimite_nota;
+                            Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
+                            {
+                                Size = new Size(1100, 50),
+                                MinimumSize = new Size(1100, 0),
+                                MaximumSize = new Size(1100, 0),
+                                AutoSize = true,
+                                BorderColor = Color.FromArgb(196, 196, 196),
+                                BorderThickness = 1,
+                                BorderRadius = 15,
+                                Margin = new Padding(0, 0, 0, 10),
+                                Name = students[i],
+                                Tag = students[i],
+                            };
 
-                        FlowLayoutPanel flp = new FlowLayoutPanel()
-                        {
-                            Size = new Size(1000, 80),
-                            MinimumSize = new Size(1000, 0),
-                            MaximumSize = new Size(1000, 0),
-                            Location = new Point(50, 90),
-                            AutoSize = true,
-                        };
+                            Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
+                            {
+                                Size = new Size(40, 40),
+                                Location = new Point(10, 5),
+                                Cursor = Cursors.Hand,
+                                SizeMode = PictureBoxSizeMode.StretchImage,
+                            };
+                            gcp.Image = await _class.IncarcaAvatar(students[i]);
 
-                        Label lbl_no_file = new Label()
-                        {
-                            Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
-                            Text = "Nu a incarcat fisiere!",
-                            AutoSize = true,
-                            Name = "nofile"
-                        };
-                        flp.Controls.Add(lbl_no_file);
+                            Label lbl = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 5),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                            };
+                            lbl.Text = await getusername(students[i]);
 
-                        pnl.Controls.Add(btn);
-                        pnl.Controls.Add(gnud);
-                        pnl.Controls.Add(lbl_nota);
-                        pnl.Controls.Add(flp);
-                        pnl.Controls.Add(gcp);
-                        pnl.Controls.Add(lbl);
+                            Label lbl_nota = new Label()
+                            {
+                                AutoSize = false,
+                                AutoEllipsis = true,
+                                Size = new Size(870, 40),
+                                Location = new Point(60, 45),
+                                TextAlign = ContentAlignment.MiddleLeft,
+                                Font = new Font("Segoe UI", 15, FontStyle.Bold),
+                                Text = "Nota: ",
+                            };
 
-                        flowLayoutPanel1.Controls.Add(pnl);
-                    }
-                }
+                            Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
+                            {
+                                AutoRoundedCorners = true,
+                                Font = new Font("Segoe UI", 11),
+                                Minimum = 0,
+                                Maximum = 10,
+                                DecimalPlaces = 2,
+                                Value = 0,
+                                Size = new Size(100, 30),
+                                Location = new Point(150, 50),
+                                Tag = students[i],
+                                Name = "value_nota",
+                            };
+                            //afisare nota
+                            try
+                            {
+                                dynamic obj = json[navbar_home.token_page_2]["students_note"];
+                                string nota = obj[students[i]];
+                                gnud.Value = Convert.ToDecimal(nota);
 
-                students = Convert.ToString(task["0"]["admins"]).Split(';');
-                for (int i = 0; i < students.Length - 1; i++)
-                {
-                    bool is_ok = false;
-                    foreach (Control ctrl in flowLayoutPanel1.Controls)
-                    {
-                        if (ctrl.Tag.ToString() == students[i])
-                        {
-                            is_ok = true;
-                            break;
+                            }
+                            catch { };
+
+                            Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
+                            {
+                                FillColor = Color.FromArgb(152, 152, 181),
+                                ForeColor = Color.White,
+                                Text = "Trimite nota",
+                                Location = new Point(270, 50),
+                                Size = new Size(100, 30),
+                                AutoRoundedCorners = true,
+                                Cursor = Cursors.Hand,
+                                Tag = students[i],
+                            };
+                            btn.Click += trimite_nota;
+
+                            FlowLayoutPanel flp = new FlowLayoutPanel()
+                            {
+                                Size = new Size(1000, 80),
+                                MinimumSize = new Size(1000, 0),
+                                MaximumSize = new Size(1000, 0),
+                                Location = new Point(50, 90),
+                                AutoSize = true,
+                            };
+
+                            Label lbl_no_file = new Label()
+                            {
+                                Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
+                                Text = "Nu a incarcat fisiere!",
+                                AutoSize = true,
+                                Name = "nofile"
+                            };
+                            flp.Controls.Add(lbl_no_file);
+
+                            pnl.Controls.Add(btn);
+                            pnl.Controls.Add(gnud);
+                            pnl.Controls.Add(lbl_nota);
+                            pnl.Controls.Add(flp);
+                            pnl.Controls.Add(gcp);
+                            pnl.Controls.Add(lbl);
+
+                            flowLayoutPanel1.Controls.Add(pnl);
                         }
                     }
-
-                    if (is_ok == false)
-                    {
-                        Guna.UI2.WinForms.Guna2Panel pnl = new Guna.UI2.WinForms.Guna2Panel()
-                        {
-                            Size = new Size(1100, 50),
-                            MinimumSize = new Size(1100, 0),
-                            MaximumSize = new Size(1100, 0),
-                            AutoSize = true,
-                            BorderColor = Color.FromArgb(196, 196, 196),
-                            BorderThickness = 1,
-                            BorderRadius = 15,
-                            Margin = new Padding(0, 0, 0, 10),
-                            Name = students[i],
-                            Tag = students[i],
-                        };
-
-                        Guna.UI2.WinForms.Guna2CirclePictureBox gcp = new Guna.UI2.WinForms.Guna2CirclePictureBox()
-                        {
-                            Size = new Size(40, 40),
-                            Location = new Point(10, 5),
-                            Cursor = Cursors.Hand,
-                            SizeMode = PictureBoxSizeMode.StretchImage,
-                        };
-                        gcp.Image = await _class.IncarcaAvatar(students[i]);
-
-                        Label lbl = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 5),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                        };
-                        lbl.Text = await getusername(students[i]);
-
-                        Label lbl_nota = new Label()
-                        {
-                            AutoSize = false,
-                            AutoEllipsis = true,
-                            Size = new Size(870, 40),
-                            Location = new Point(60, 45),
-                            TextAlign = ContentAlignment.MiddleLeft,
-                            Font = new Font("Segoe UI", 15, FontStyle.Bold),
-                            Text = "Nota: ",
-                        };
-
-                        Guna.UI2.WinForms.Guna2NumericUpDown gnud = new Guna.UI2.WinForms.Guna2NumericUpDown()
-                        {
-                            AutoRoundedCorners = true,
-                            Font = new Font("Segoe UI", 11),
-                            Minimum = 0,
-                            Maximum = 10,
-                            DecimalPlaces = 2,
-                            Value = 5,
-                            Size = new Size(100, 30),
-                            Location = new Point(150, 50),
-                            Tag = students[i],
-                            Name = "value_nota",
-                        };
-                        //afisare nota
-                        try
-                        {
-                            dynamic obj = json[navbar_home.token_page_2]["students_note"];
-                            string nota = obj[students[i]];
-                            gnud.Value = Convert.ToDecimal(nota);
-
-                        }
-                        catch { };
-
-                        Guna.UI2.WinForms.Guna2Button btn = new Guna.UI2.WinForms.Guna2Button()
-                        {
-                            FillColor = Color.FromArgb(152, 152, 181),
-                            ForeColor = Color.White,
-                            Text = "Trimite nota",
-                            Location = new Point(270, 50),
-                            Size = new Size(100, 30),
-                            AutoRoundedCorners = true,
-                            Cursor = Cursors.Hand,
-                            Tag = students[i],
-                        };
-                        btn.Click += trimite_nota;
-
-                        FlowLayoutPanel flp = new FlowLayoutPanel()
-                        {
-                            Size = new Size(1000, 80),
-                            MinimumSize = new Size(1000, 0),
-                            MaximumSize = new Size(1000, 0),
-                            Location = new Point(50, 90),
-                            AutoSize = true,
-                        };
-
-                        Label lbl_no_file = new Label()
-                        {
-                            Font = new Font("Segoe UI Semibold", 14, FontStyle.Bold),
-                            Text = "Nu a incarcat fisiere!",
-                            AutoSize = true,
-                            Name = "nofile"
-                        };
-                        flp.Controls.Add(lbl_no_file);
-
-                        pnl.Controls.Add(btn);
-                        pnl.Controls.Add(gnud);
-                        pnl.Controls.Add(lbl_nota);
-                        pnl.Controls.Add(flp);
-                        pnl.Controls.Add(gcp);
-                        pnl.Controls.Add(lbl);
-
-                        flowLayoutPanel1.Controls.Add(pnl);
-                    }
-                }
-
+                
             }
             schoolsync.hide_loading();
         }

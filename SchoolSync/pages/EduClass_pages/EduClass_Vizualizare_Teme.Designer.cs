@@ -29,6 +29,7 @@ namespace SchoolSync.pages.EduClass_pages
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EduClass_Vizualizare_Teme));
             this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,7 +47,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2CircleButton1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(152)))), ((int)(((byte)(152)))), ((int)(((byte)(181)))));
             this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton1.Image = global::SchoolSync.Properties.Resources.close_FILL1_wght700_GRAD0_opsz48;
+            this.guna2CircleButton1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CircleButton1.Image")));
             this.guna2CircleButton1.Location = new System.Drawing.Point(1149, 3);
             this.guna2CircleButton1.Name = "guna2CircleButton1";
             this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -58,10 +59,8 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(30, 80);
-            this.flowLayoutPanel1.MaximumSize = new System.Drawing.Size(1124, 0);
-            this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(1124, 400);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1124, 594);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1124, 596);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
             // label2

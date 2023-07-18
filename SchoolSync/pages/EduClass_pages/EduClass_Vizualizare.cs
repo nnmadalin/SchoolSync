@@ -106,60 +106,63 @@ namespace SchoolSync.pages.EduClass_pages
 
                 JObject json = subjson;
 
-                for(int i = 0; i < json.Count; i++)
+                for(int i = json.Count; i >= 0; i--)
                 {
-                    
-                    if(Convert.ToString(subjson[i.ToString()]["is_deleted"]) == "0")
+                    try
                     {
-                        if ((is_admin == false && subjson[i.ToString()]["is_visible"] == "1") || is_admin == true)
+                        if (Convert.ToString(subjson[i.ToString()]["is_deleted"]) == "0")
                         {
-                            Guna.UI2.WinForms.Guna2Panel pnl_lectie = new Guna.UI2.WinForms.Guna2Panel()
+                            if ((is_admin == false && subjson[i.ToString()]["is_visible"] == "1") || is_admin == true)
                             {
-                                FillColor = Color.FromArgb(223, 229, 232),
-                                Size = new Size(1130, 100),
-                                BorderRadius = 10,
-                                UseTransparentBackground = true,
-                                Margin = new Padding(0, 0, 0, 30),
-                                Padding = new Padding(30, 15, 30, 15),
-                                Cursor = Cursors.Hand,
-                            };
-                            pnl_lectie.Tag = i.ToString();
-                            pnl_lectie.Click += click_lectie;
+                                Guna.UI2.WinForms.Guna2Panel pnl_lectie = new Guna.UI2.WinForms.Guna2Panel()
+                                {
+                                    FillColor = Color.FromArgb(223, 229, 232),
+                                    Size = new Size(1130, 100),
+                                    BorderRadius = 10,
+                                    UseTransparentBackground = true,
+                                    Margin = new Padding(0, 0, 0, 30),
+                                    Padding = new Padding(30, 15, 30, 15),
+                                    Cursor = Cursors.Hand,
+                                };
+                                pnl_lectie.Tag = i.ToString();
+                                pnl_lectie.Click += click_lectie;
 
-                            Label lbl_titlu = new Label()
-                            {
-                                Size = new Size(1110, 40),
-                                Location = new Point(10, 10),
-                                BackColor = Color.Transparent,
-                                TextAlign = ContentAlignment.MiddleCenter,
-                                Font = new Font("Segoe UI", 17, FontStyle.Bold),
-                                Cursor = Cursors.Hand,
-                            };
-                            lbl_titlu.Tag = i.ToString();
-                            lbl_titlu.Click += click_lectie;
+                                Label lbl_titlu = new Label()
+                                {
+                                    Size = new Size(1110, 40),
+                                    Location = new Point(10, 10),
+                                    BackColor = Color.Transparent,
+                                    TextAlign = ContentAlignment.MiddleCenter,
+                                    Font = new Font("Segoe UI", 17, FontStyle.Bold),
+                                    Cursor = Cursors.Hand,
+                                };
+                                lbl_titlu.Tag = i.ToString();
+                                lbl_titlu.Click += click_lectie;
 
-                            Label lbl_descriere = new Label()
-                            {
-                                Size = new Size(1110, 40),
-                                Location = new Point(10, 50),
-                                BackColor = Color.Transparent,
-                                TextAlign = ContentAlignment.MiddleCenter,
-                                Font = new Font("Segoe UI", 12),
-                                Cursor = Cursors.Hand,
-                            };
-                            lbl_descriere.Tag = i.ToString();
-                            lbl_descriere.Click += click_lectie;
+                                Label lbl_descriere = new Label()
+                                {
+                                    Size = new Size(1110, 40),
+                                    Location = new Point(10, 50),
+                                    BackColor = Color.Transparent,
+                                    TextAlign = ContentAlignment.MiddleCenter,
+                                    Font = new Font("Segoe UI", 12),
+                                    Cursor = Cursors.Hand,
+                                };
+                                lbl_descriere.Tag = i.ToString();
+                                lbl_descriere.Click += click_lectie;
 
-                            lbl_titlu.Text = Convert.ToString(subjson[i.ToString()]["created"]) + " a postat o lectie noua: " + Convert.ToString(subjson[i.ToString()]["title"]);
-                            lbl_descriere.Text = "Ultima modificare: " + Convert.ToString(subjson[i.ToString()]["last_edit"]);
+                                lbl_titlu.Text = Convert.ToString(subjson[i.ToString()]["created"]) + " a postat o lectie noua: " + Convert.ToString(subjson[i.ToString()]["title"]);
+                                lbl_descriere.Text = "Ultima modificare: " + Convert.ToString(subjson[i.ToString()]["last_edit"]);
 
-                            pnl_lectie.Controls.Add(lbl_titlu);
-                            pnl_lectie.Controls.Add(lbl_descriere);
+                                pnl_lectie.Controls.Add(lbl_titlu);
+                                pnl_lectie.Controls.Add(lbl_descriere);
 
-                            flowLayoutPanel1.Controls.Add(pnl_lectie);
+                                flowLayoutPanel1.Controls.Add(pnl_lectie);
+                            }
+
                         }
-                        
                     }
+                    catch { };
                 }
                 
 
