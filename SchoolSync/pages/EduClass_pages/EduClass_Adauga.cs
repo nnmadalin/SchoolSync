@@ -11,9 +11,9 @@ using Newtonsoft.Json;
 
 namespace SchoolSync.pages.EduClass_pages
 {
-    public partial class EduClass_Creaza : UserControl
+    public partial class EduClass_Adauga : UserControl
     {
-        public EduClass_Creaza()
+        public EduClass_Adauga()
         {
             InitializeComponent();
         }

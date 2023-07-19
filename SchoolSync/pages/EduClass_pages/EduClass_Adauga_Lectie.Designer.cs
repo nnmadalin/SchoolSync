@@ -1,7 +1,7 @@
 ﻿
 namespace SchoolSync.pages.EduClass_pages
 {
-    partial class EduClass_Creaza_lectie
+    partial class EduClass_Adauga_Lectie
     {
         /// <summary> 
         /// Required designer variable.
@@ -62,9 +62,9 @@ namespace SchoolSync.pages.EduClass_pages
             this.label1.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(456, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(275, 50);
+            this.label1.Size = new System.Drawing.Size(293, 50);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Creaza o lectie";
+            this.label1.Text = "Adauga o lectie";
             // 
             // guna2Panel1
             // 
@@ -341,7 +341,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(134, 45);
             this.guna2Button2.TabIndex = 9;
-            this.guna2Button2.Text = "Creati";
+            this.guna2Button2.Text = "Adauga";
             this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
             // label3
@@ -415,14 +415,14 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
             this.guna2MessageDialog1.Text = "Esti sigur ca vrei sa parasesti pagina?";
             // 
-            // EduClass_Creaza_lectie
+            // EduClass_Adauga_Lectie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2CircleButton1);
             this.Controls.Add(this.label1);
-            this.Name = "EduClass_Creaza_lectie";
+            this.Name = "EduClass_Adauga_Lectie";
             this.Size = new System.Drawing.Size(1186, 676);
             this.Load += new System.EventHandler(this.EduClass_Creaza_lectie_Load);
             this.guna2Panel1.ResumeLayout(false);

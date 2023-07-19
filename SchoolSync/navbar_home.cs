@@ -433,7 +433,7 @@ namespace SchoolSync
                 use = true;
                 guna2Panel2.Controls.Clear();
 
-                var frm = new pages.EduClass_pages.EduClass_Creaza();
+                var frm = new pages.EduClass_pages.EduClass_Adauga();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
@@ -493,7 +493,7 @@ namespace SchoolSync
                 use = true;
                 guna2Panel2.Controls.Clear();
 
-                var frm = new pages.EduClass_pages.EduClass_Creaza();
+                var frm = new pages.EduClass_pages.EduClass_Adauga();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
@@ -508,7 +508,7 @@ namespace SchoolSync
                 use = true;
                 guna2Panel2.Controls.Clear();
 
-                var frm = new pages.EduClass_pages.EduClass_Creaza_lectie();
+                var frm = new pages.EduClass_pages.EduClass_Adauga_Lectie();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }
@@ -523,7 +523,7 @@ namespace SchoolSync
                 use = true;
                 guna2Panel2.Controls.Clear();
 
-                var frm = new pages.EduClass_pages.EduClass_Creaza_lectie();
+                var frm = new pages.EduClass_pages.EduClass_Adauga_Lectie();
                 guna2Panel2.Controls.Add(frm);
                 frm.BringToFront();
             }

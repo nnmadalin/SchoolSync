@@ -199,7 +199,7 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(118, 40);
             this.guna2Button1.TabIndex = 9;
-            this.guna2Button1.Text = "Creati";
+            this.guna2Button1.Text = "Adauga";
             this.guna2Button1.Visible = false;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 

@@ -164,17 +164,17 @@
     <Compile Include="pages\EduClass_pages\EduClass_Adauga_Curs.Designer.cs">
       <DependentUpon>EduClass_Adauga_Curs.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\EduClass_pages\EduClass_Creaza.cs">
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\EduClass_pages\EduClass_Creaza.Designer.cs">
-      <DependentUpon>EduClass_Creaza.cs</DependentUpon>
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga.Designer.cs">
+      <DependentUpon>EduClass_Adauga.cs</DependentUpon>
     </Compile>
-    <Compile Include="pages\EduClass_pages\EduClass_Creaza_lectie.cs">
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga_Lectie.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="pages\EduClass_pages\EduClass_Creaza_lectie.Designer.cs">
-      <DependentUpon>EduClass_Creaza_lectie.cs</DependentUpon>
+    <Compile Include="pages\EduClass_pages\EduClass_Adauga_Lectie.Designer.cs">
+      <DependentUpon>EduClass_Adauga_Lectie.cs</DependentUpon>
     </Compile>
     <Compile Include="pages\EduClass_pages\EduClass_Vizualizare.cs">
       <SubType>UserControl</SubType>
@@ -317,11 +317,11 @@
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Adauga_Curs.resx">
       <DependentUpon>EduClass_Adauga_Curs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza.resx">
-      <DependentUpon>EduClass_Creaza.cs</DependentUpon>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Adauga.resx">
+      <DependentUpon>EduClass_Adauga.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Creaza_lectie.resx">
-      <DependentUpon>EduClass_Creaza_lectie.cs</DependentUpon>
+    <EmbeddedResource Include="pages\EduClass_pages\EduClass_Adauga_Lectie.resx">
+      <DependentUpon>EduClass_Adauga_Lectie.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="pages\EduClass_pages\EduClass_Vizualizare.resx">
       <DependentUpon>EduClass_Vizualizare.cs</DependentUpon>

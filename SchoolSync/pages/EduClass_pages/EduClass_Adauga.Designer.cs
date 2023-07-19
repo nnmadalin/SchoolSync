@@ -1,7 +1,7 @@
 ﻿
 namespace SchoolSync.pages.EduClass_pages
 {
-    partial class EduClass_Creaza
+    partial class EduClass_Adauga
     {
         /// <summary> 
         /// Required designer variable.
@@ -166,11 +166,11 @@ namespace SchoolSync.pages.EduClass_pages
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(390, 60);
+            this.label1.Location = new System.Drawing.Point(387, 54);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(354, 65);
+            this.label1.Size = new System.Drawing.Size(380, 65);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Creaza un curs";
+            this.label1.Text = "Creeaza un curs";
             // 
             // guna2MessageDialog1
             // 
@@ -181,14 +181,14 @@ namespace SchoolSync.pages.EduClass_pages
             this.guna2MessageDialog1.Style = Guna.UI2.WinForms.MessageDialogStyle.Default;
             this.guna2MessageDialog1.Text = null;
             // 
-            // EduClass_Creaza
+            // EduClass_Adauga
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.guna2CircleButton1);
-            this.Name = "EduClass_Creaza";
+            this.Name = "EduClass_Adauga";
             this.Size = new System.Drawing.Size(1192, 690);
             this.Load += new System.EventHandler(this.EduClass_Creaza_Load);
             this.guna2Panel1.ResumeLayout(false);

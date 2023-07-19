@@ -62,9 +62,9 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(400, 50);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(375, 62);
+            this.label1.Size = new System.Drawing.Size(400, 62);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Creaza un grup!";
+            this.label1.Text = "Creeaza un grup!";
             // 
             // guna2TextBox1
             // 
@@ -354,7 +354,7 @@ namespace SchoolSync.pages.FlowTalk_pages
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(161, 49);
             this.guna2Button2.TabIndex = 9;
-            this.guna2Button2.Text = "Creaza grup";
+            this.guna2Button2.Text = "Adauga";
             this.guna2Button2.Click += new System.EventHandler(this.guna2Button2_Click);
             // 
             // FlowTalk_Adauga
