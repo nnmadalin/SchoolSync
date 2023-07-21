@@ -118,11 +118,12 @@ namespace SchoolSync.pages.EduClass_pages
                     }
 
                     string datetime = subjson[navbar_home.token_page_2]["deadline"];
+                    
                     bool is_over_time = false;
                     if(datetime != "-1")
                     {
                         DateTime dt = Convert.ToDateTime(datetime);
-                        if(dt < DateTime.Now)
+                        if (dt < DateTime.Now)
                         {
                             guna2Button1.Visible = false;
                             guna2Button2.Visible = false;

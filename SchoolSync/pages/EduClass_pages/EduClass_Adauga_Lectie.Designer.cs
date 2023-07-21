@@ -90,12 +90,12 @@ namespace SchoolSync.pages.EduClass_pages
             // dateTimePicker1
             // 
             this.dateTimePicker1.CalendarFont = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm:ss";
+            this.dateTimePicker1.CustomFormat = "MM/dd/yyyy hh:mm tt";
             this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(357, 531);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(171, 25);
+            this.dateTimePicker1.Size = new System.Drawing.Size(231, 25);
             this.dateTimePicker1.TabIndex = 49;
             this.dateTimePicker1.Visible = false;
             // 
