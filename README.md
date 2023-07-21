@@ -74,3 +74,14 @@ Cu funcționalitatea asincronă, vei beneficia de o interacțiune fără întrer
 
 ## 📟 Cerințe minime
 SchoolSync a fost concepută pentru a fi accesibilă și ușor de utilizat, având cerințe minime de sistem, astfel încât să poți instala și rula aplicația pe orice dispozitiv care rulează pe un sistem de operare Windows.
+
+
+![SchoolSync img](https://raw.githubusercontent.com/nnmadalin/SchoolSync/master/foto/image%20(2).png)
+## 
+![SchoolSync img](https://raw.githubusercontent.com/nnmadalin/SchoolSync/master/foto/image%20(3).png)
+## 
+![SchoolSync img](https://raw.githubusercontent.com/nnmadalin/SchoolSync/master/foto/image%20(4).png)
+## 
+![SchoolSync img](https://raw.githubusercontent.com/nnmadalin/SchoolSync/master/foto/image%20(5).png)
+## 
+![SchoolSync img](https://raw.githubusercontent.com/nnmadalin/SchoolSync/master/foto/image%20(6).png)
