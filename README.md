@@ -56,3 +56,21 @@
 - **Core CPU:** 1,8GHz (minim),  3 x 2,2GHz (recomandat)
 - **RAM:** 1GB (minim), 3GB (recomandat)
 - **Stocare:** 10GB (minim), 50GB (recomandat)
+
+## 💎 Design
+Cu SchoolSync, vei experimenta o interfață intuitivă, unde fiecare element este plasat strategic pentru a-ți oferi acces rapid și facil la toate funcționalitățile de care ai nevoie. Fie că explorezi resurse educaționale, comunici cu colegii sau gestionezi temele și termenele limită, vei descoperi că designul nostru îți permite să te concentrezi asupra esențialului, fără a fi distras de detalii inutile.
+
+## 🔒 Securitate
+Cu un cod robust și bine structurat, am implementat tehnici avansate de prevenire a atacurilor SQL injection, asigurându-ne că datele tale personale și academice sunt protejate împotriva oricăror tentativări de acces neautorizat sau manipulare a bazelor de date.
+
+## 🖥️ Limbaje de programare folosite
+Pentru partea de dezvoltare a aplicației SchoolSync, am ales să folosim limbajul C#. Acesta este un limbaj puternic, orientat pe obiecte, care ne permite să dezvoltăm aplicații robuste și scalabile. Pentru dezvoltarea API-ului, ne bazăm pe limbajele de programare PHP. PHP este un limbaj de scripting puternic și flexibil, care ne permite să gestionăm și să procesăm datele, să construim logica de backend și să interacționăm cu baza de date a aplicației.
+
+## 🤖 Inteligența artificială
+Cu SchoolSync, educatia și inteligența artificială se întâlnesc pentru a crea o platformă educațională inovatoare și avansată. Îmbinând tehnologia de vârf cu nevoile educaționale, SchoolSync deschide noi orizonturi în procesul de învățare, oferind o experiență educațională adaptată și eficientă pentru fiecare elev.
+
+## 🕛 Funcții asincrone
+Cu funcționalitatea asincronă, vei beneficia de o interacțiune fără întreruperi și de un timp de răspuns rapid în utilizarea fiecărei caracteristici. Indiferent dacă trimiti un mesaj, accesezi resurse educaționale sau colaborezi cu alți utilizatori, vei putea să te miști liber și să profiți de funcționalități fără a întâmpina întârzieri sau blocaje.
+
+## 📟 Cerințe minime
+SchoolSync a fost concepută pentru a fi accesibilă și ușor de utilizat, având cerințe minime de sistem, astfel încât să poți instala și rula aplicația pe orice dispozitiv care rulează pe un sistem de operare Windows.
