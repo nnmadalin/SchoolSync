@@ -144,6 +144,36 @@ namespace SchoolSync.pages.EduClass_pages
             }
         }
 
+        private async void open_file(object sender, EventArgs e)
+        {
+            string btn = ((Control)sender).Tag.ToString();
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn);
+        }
+
+        async Task<string> file_name(string token_user, string token_file)
+        {
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from files where token_user = ? and token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token_user", token_user},
+                {"token", token_file},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            if(task["message"] == "success")
+            {
+                return token_user + "/" + token_file + "/" + Convert.ToString(task["0"]["name"]);
+            }
+            return "-1";
+        }
+
         private async void EduClass_Vizualizare_Teme_Load(object sender, EventArgs e)
         {
             schoolsync.show_loading();
@@ -290,6 +320,10 @@ namespace SchoolSync.pages.EduClass_pages
 
                                     for (int i = 0; i < split.Length - 1; i++)
                                     {
+                                        string item_Str = split[i].ToString();
+                                        string fname = await file_name(token_user, item_Str);
+
+                                        string[] split2 = fname.Split('/');
 
                                         Guna.UI2.WinForms.Guna2Chip guna2Chip = new Guna.UI2.WinForms.Guna2Chip()
                                         {
@@ -304,12 +338,23 @@ namespace SchoolSync.pages.EduClass_pages
                                             IsClosable = false,
                                             Cursor = Cursors.Hand,
                                         };
-                                        string item_Str = split[i].ToString();
-                                        if (item_Str.Length >= 16)
-                                            guna2Chip.Text = item_Str.Substring(0, 20) + "...";
-                                        else
-                                            guna2Chip.Text = item_Str;
-                                        guna2Chip.Tag = item_Str;
+                                        try
+                                        {
+                                            string item_Str2 = split2[2];
+                                            if (item_Str2.Length >= 16)
+                                                guna2Chip.Text = item_Str2.Substring(0, 20) + "...";
+                                            else
+                                                guna2Chip.Text = item_Str2;
+                                        }
+                                        catch
+                                        {
+                                            if (item_Str.Length >= 16)
+                                                guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                            else
+                                                guna2Chip.Text = item_Str;
+                                        }
+                                        guna2Chip.Tag = fname;
+                                        guna2Chip.Click += open_file;
                                         flp.Controls.Add(guna2Chip);
                                     }
                                 }

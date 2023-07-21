@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 namespace SchoolSync.pages.EduClass_pages
 {
@@ -15,7 +16,35 @@ namespace SchoolSync.pages.EduClass_pages
             InitializeComponent();
         }
 
+        private async void open_file(object sender, EventArgs e)
+        {
+            string btn = ((Control)sender).Tag.ToString();
+            System.Diagnostics.Process.Start(@"https://schoolsync.nnmadalin.me/attachments/" + btn);
+        }
 
+        async Task<string> file_name(string token_user, string token_file)
+        {
+            multiple_class _class = new multiple_class();
+            string url = "https://schoolsync.nnmadalin.me/api/get.php";
+            var data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from files where token_user = ? and token = ?");
+
+            var param = new Dictionary<string, string>()
+            {
+                {"token_user", token_user},
+                {"token", token_file},
+            };
+
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            dynamic task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                return token_user + "/" + token_file + "/" + Convert.ToString(task["0"]["name"]);
+            }
+            return "-1";
+        }
 
         private async void EduClass_Vizualizare_lectie_Load(object sender, EventArgs e)
         {
@@ -154,13 +183,36 @@ namespace SchoolSync.pages.EduClass_pages
                                     BorderRadius = 10,
                                     TextAlign = HorizontalAlignment.Left,
                                     Size = new Size(200, 35),
+                                    Cursor = Cursors.Hand,
                                 };
+
+                                if(is_over_time == true)
+                                {
+                                    guna2Chip.IsClosable = false;
+                                }
+
                                 string item_Str = split[i].ToString();
-                                if (item_Str.Length >= 16)
-                                    guna2Chip.Text = item_Str.Substring(0, 20) + "...";
-                                else
-                                    guna2Chip.Text = item_Str;
-                                guna2Chip.Tag = item_Str;
+                                string fname = await file_name(Convert.ToString(login_signin.login.accounts_user["token"]), item_Str);
+
+                                string[] split2 = fname.Split('/');
+
+                                try
+                                {
+                                    string item_Str2 = split2[2];
+                                    if (item_Str2.Length >= 16)
+                                        guna2Chip.Text = item_Str2.Substring(0, 20) + "...";
+                                    else
+                                        guna2Chip.Text = item_Str2;
+                                }
+                                catch
+                                {
+                                    if (item_Str.Length >= 16)
+                                        guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                    else
+                                        guna2Chip.Text = item_Str;
+                                }
+                                guna2Chip.Tag = fname;
+                                guna2Chip.Click += open_file;
                                 flowLayoutPanel3.Controls.Add(guna2Chip);
                             }
                         }
