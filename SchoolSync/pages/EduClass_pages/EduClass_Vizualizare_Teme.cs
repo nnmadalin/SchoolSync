@@ -341,15 +341,15 @@ namespace SchoolSync.pages.EduClass_pages
                                         try
                                         {
                                             string item_Str2 = split2[2];
-                                            if (item_Str2.Length >= 16)
-                                                guna2Chip.Text = item_Str2.Substring(0, 20) + "...";
+                                            if (item_Str2.Length >= 22)
+                                                guna2Chip.Text = item_Str2.Substring(0, 22) + "...";
                                             else
                                                 guna2Chip.Text = item_Str2;
                                         }
                                         catch
                                         {
-                                            if (item_Str.Length >= 16)
-                                                guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                            if (item_Str.Length >= 22)
+                                                guna2Chip.Text = item_Str.Substring(0, 22) + "...";
                                             else
                                                 guna2Chip.Text = item_Str;
                                         }

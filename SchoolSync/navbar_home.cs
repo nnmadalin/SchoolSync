@@ -123,6 +123,11 @@ namespace SchoolSync
             return Application.OpenForms.OfType<Form>().Any(form => form.Name == formName);
         }
 
+        private void guna2Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void guna2Button8_Click(object sender, EventArgs e)
         {
             navbar_home.use = false;

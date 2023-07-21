@@ -184,6 +184,7 @@ namespace SchoolSync.pages.EduClass_pages
                                     TextAlign = HorizontalAlignment.Left,
                                     Size = new Size(200, 35),
                                     Cursor = Cursors.Hand,
+                                    Name = "file_initial"
                                 };
 
                                 if(is_over_time == true)
@@ -195,24 +196,23 @@ namespace SchoolSync.pages.EduClass_pages
                                 string fname = await file_name(Convert.ToString(login_signin.login.accounts_user["token"]), item_Str);
 
                                 string[] split2 = fname.Split('/');
-
                                 try
                                 {
                                     string item_Str2 = split2[2];
-                                    if (item_Str2.Length >= 16)
-                                        guna2Chip.Text = item_Str2.Substring(0, 20) + "...";
+                                    if (item_Str2.Length >= 22)
+                                        guna2Chip.Text = item_Str2.Substring(0, 22) + "...";
                                     else
                                         guna2Chip.Text = item_Str2;
                                 }
-                                catch
+                                catch(Exception ex)
                                 {
-                                    if (item_Str.Length >= 16)
-                                        guna2Chip.Text = item_Str.Substring(0, 20) + "...";
+                                    if (item_Str.Length >= 22)
+                                        guna2Chip.Text = item_Str.Substring(0, 22) + "...";
                                     else
                                         guna2Chip.Text = item_Str;
                                 }
                                 guna2Chip.Tag = fname;
-                                guna2Chip.Click += open_file;
+                                guna2Chip.DoubleClick += open_file;
                                 flowLayoutPanel3.Controls.Add(guna2Chip);
                             }
                         }
@@ -361,8 +361,6 @@ namespace SchoolSync.pages.EduClass_pages
             }
         }
 
-        
-
         private void deschide_fisier_buton(object sender, EventArgs e)
         {
             var btn = sender as Guna.UI2.WinForms.Guna2Button;
@@ -432,8 +430,9 @@ namespace SchoolSync.pages.EduClass_pages
                                 Tag = opf.FileName.ToString()
                             };
                             string fnm = Path.GetFileName(opf.FileName);
-                            if (fnm.Length >= 16)
-                                guna2Chip.Text = fnm.Substring(0, 20) + "...";
+
+                            if (fnm.Length >= 25)
+                                guna2Chip.Text = fnm.Substring(0, 25) + "...";
                             else
                                 guna2Chip.Text = fnm;
                             guna2Chip.Tag = opf.FileName;
@@ -441,8 +440,8 @@ namespace SchoolSync.pages.EduClass_pages
                         }
                     }
                 }
-                else
-                {
+                else { 
+                
                     var frm = new notification.error();
                     schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
                     var panel = (Guna.UI2.WinForms.Guna2Panel)schoolsync.Controls["guna2Panel2"];
@@ -451,7 +450,7 @@ namespace SchoolSync.pages.EduClass_pages
                     frm.BringToFront();
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 var frm = new notification.error();
                 schoolsync schoolsync = (schoolsync)System.Windows.Forms.Application.OpenForms["schoolsync"];
@@ -459,6 +458,7 @@ namespace SchoolSync.pages.EduClass_pages
                 panel.Controls.Add(frm);
                 notification.error.message = "Ceva nu a mers bine!";
                 frm.BringToFront();
+
             }
         }
 
@@ -504,10 +504,23 @@ namespace SchoolSync.pages.EduClass_pages
                             bool ok = true;
                             foreach (Control ctrl in flowLayoutPanel3.Controls)
                             {
-                                if (ctrl.Tag.ToString() == split[i])
+                                if (ctrl.Name != "file_initial")
                                 {
-                                    ok = false;
-                                    break;
+                                    if (ctrl.Tag.ToString() == split[i])
+                                    {
+                                        ok = false;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    string file = ctrl.Tag.ToString();
+                                    string[] spl = file.Split('/');
+                                    if (spl[1] == split[i])
+                                    {
+                                        ok = false;
+                                        break;
+                                    }
                                 }
                             }
 
@@ -551,16 +564,54 @@ namespace SchoolSync.pages.EduClass_pages
                     string[] split = item.Split(';');
                     foreach (Control control in flowLayoutPanel3.Controls)
                     {
-                        bool is_ok = false;
-                        for(int i = 0; i < split.Length - 1; i++)
+                        if (control.Name != "file_initial")
                         {
-                            if(split[i] == control.Tag.ToString())
+                            bool is_ok = false;
+                            for (int i = 0; i < split.Length - 1; i++)
                             {
-                                is_ok = true;
+                                if (split[i] == control.Tag.ToString())
+                                {
+                                    is_ok = true;
+                                }
+                            }
+
+                            if (is_ok == false)
+                            {
+                                FileInfo inf = new FileInfo(control.Tag.ToString());
+
+                                string token_file = _class.generate_token_250();
+
+                                data = new Dictionary<string, string>();
+                                data.Add("token", schoolsync.token);
+                                data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
+                                data.Add("token_file", token_file);
+                                data.Add("filename", inf.Name);
+
+                                await _class.UploadFileAsync(data, control.Tag.ToString());
+                                fnames += (token_file + ";");
+                            }
+                            else
+                            {
+                                fnames += (control.Tag + ";");
                             }
                         }
-
-                        if (is_ok == false)
+                        else
+                        {
+                            try
+                            {
+                                string spl = control.Tag.ToString();
+                                string[] spl2 = spl.Split('/');
+                                fnames += (spl2[1] + ";");
+                            }
+                            catch { };
+                        }
+                    }
+                }
+                catch 
+                {
+                    foreach (Control control in flowLayoutPanel3.Controls)
+                    {
+                        if (control.Name != "file_initial")
                         {
                             FileInfo inf = new FileInfo(control.Tag.ToString());
 
@@ -577,26 +628,14 @@ namespace SchoolSync.pages.EduClass_pages
                         }
                         else
                         {
-                            fnames += (control.Tag + ";");
+                            try
+                            {
+                                string spl = control.Tag.ToString();
+                                string[] spl2 = spl.Split('/');
+                                fnames += (spl2[1] + ";");
+                            }
+                            catch { };
                         }
-                    }
-                }
-                catch 
-                {
-                    foreach (Control control in flowLayoutPanel3.Controls)
-                    {
-                        FileInfo inf = new FileInfo(control.Tag.ToString());
-
-                        string token_file = _class.generate_token_250();
-
-                        data = new Dictionary<string, string>();
-                        data.Add("token", schoolsync.token);
-                        data.Add("token_user", Convert.ToString(login_signin.login.accounts_user["token"]));
-                        data.Add("token_file", token_file);
-                        data.Add("filename", inf.Name);
-
-                        await _class.UploadFileAsync(data, control.Tag.ToString());
-                        fnames += (token_file + ";");
                     }
                 };
 
@@ -633,6 +672,11 @@ namespace SchoolSync.pages.EduClass_pages
                     panel.Controls.Add(frm);
                     notification.success.message = "Tema trimisa!";
                     frm.BringToFront();
+
+                    this.Dispose();
+
+                    navbar_home.page = "EduClass_vizualizare_lectie";
+                    navbar_home.use = false;
 
                 }
                 else

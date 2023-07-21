@@ -260,6 +260,7 @@ namespace SchoolSync
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(1192, 690);
             this.guna2Panel2.TabIndex = 2;
+            this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
             // 
             // timer1
             // 
