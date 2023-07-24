@@ -478,7 +478,7 @@ namespace SchoolSync.pages.InvataUnit_pages
                             Name = "flp_files"
                         };
 
-                        if (task[i.ToString()]["user"] == login_signin.login.accounts_user["username"] && Convert.ToString(task[i.ToString()]["is_deleted"]) == "0")
+                        if (task[i.ToString()]["token_user"] == login_signin.login.accounts_user["token"] && Convert.ToString(task[i.ToString()]["is_deleted"]) == "0")
                         {
                             Guna.UI2.WinForms.Guna2CircleButton gcp = new Guna.UI2.WinForms.Guna2CircleButton()
                             {

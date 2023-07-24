@@ -39,7 +39,6 @@ namespace SchoolSync.pages
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -66,7 +65,6 @@ namespace SchoolSync.pages
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
-            this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.guna2Panel4.SuspendLayout();
@@ -81,6 +79,7 @@ namespace SchoolSync.pages
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel1.BorderRadius = 20;
+            this.guna2Panel1.Controls.Add(this.guna2CirclePictureBox1);
             this.guna2Panel1.Controls.Add(this.guna2CheckBox3);
             this.guna2Panel1.Controls.Add(this.guna2CheckBox2);
             this.guna2Panel1.Controls.Add(this.guna2CheckBox1);
@@ -88,7 +87,6 @@ namespace SchoolSync.pages
             this.guna2Panel1.Controls.Add(this.guna2Panel3);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.label1);
-            this.guna2Panel1.Controls.Add(this.guna2Panel2);
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.FillColor = System.Drawing.Color.White;
             this.guna2Panel1.Location = new System.Drawing.Point(32, 24);
@@ -235,26 +233,17 @@ namespace SchoolSync.pages
             this.label1.Size = new System.Drawing.Size(0, 30);
             this.label1.TabIndex = 3;
             // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.AutoRoundedCorners = true;
-            this.guna2Panel2.BorderRadius = 79;
-            this.guna2Panel2.Controls.Add(this.guna2CirclePictureBox1);
-            this.guna2Panel2.FillColor = System.Drawing.Color.LightGray;
-            this.guna2Panel2.Location = new System.Drawing.Point(36, 58);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(160, 160);
-            this.guna2Panel2.TabIndex = 2;
-            this.guna2Panel2.UseTransparentBackground = true;
-            // 
             // guna2CirclePictureBox1
             // 
             this.guna2CirclePictureBox1.ErrorImage = global::SchoolSync.Properties.Resources.standard_avatar;
             this.guna2CirclePictureBox1.Image = global::SchoolSync.Properties.Resources.standard_avatar;
             this.guna2CirclePictureBox1.ImageRotate = 0F;
             this.guna2CirclePictureBox1.InitialImage = global::SchoolSync.Properties.Resources.standard_avatar;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(5, 5);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(30, 58);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.BorderRadius = 10;
+            this.guna2CirclePictureBox1.ShadowDecoration.Depth = 15;
+            this.guna2CirclePictureBox1.ShadowDecoration.Enabled = true;
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.guna2CirclePictureBox1.Size = new System.Drawing.Size(150, 150);
             this.guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -561,7 +550,6 @@ namespace SchoolSync.pages
             this.guna2Panel3.ResumeLayout(false);
             this.guna2Panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).EndInit();
-            this.guna2Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.guna2Panel4.ResumeLayout(false);
@@ -585,7 +573,6 @@ namespace SchoolSync.pages
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;

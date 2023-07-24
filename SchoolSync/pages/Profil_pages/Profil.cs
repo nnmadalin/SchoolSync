@@ -134,24 +134,6 @@ namespace SchoolSync.pages
                 label7.Text = "Materiale adaugate: " + (jb.Count - 1).ToString();
             }
 
-            // afisare avatar
-            url = "https://schoolsync.nnmadalin.me/api/get.php";
-            data = new Dictionary<string, string>();
-            data.Add("token", schoolsync.token);
-            data.Add("command", "select * from files where token_user = ? and token = ?");
-
-            param = new Dictionary<string, string>()
-                {
-                    { "token_user", navbar_home.token_page},
-                    { "token", "user_foto"}
-                };
-            data.Add("params", JsonConvert.SerializeObject(param));
-
-            task = await _class.PostRequestAsync(url, data);
-            if (task["message"] == "success")
-            {
-                guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/attachments/" + navbar_home.token_page + "/user_foto/" + task["0"]["name"]);
-            }
             // afisare backgorund
             url = "https://schoolsync.nnmadalin.me/api/get.php";
             data = new Dictionary<string, string>();
@@ -169,6 +151,25 @@ namespace SchoolSync.pages
             if (task["message"] == "success")
             {
                 guna2PictureBox1.Image = await _class.IncarcaImagineBackgroundAsync("https://schoolsync.nnmadalin.me/attachments/" + navbar_home.token_page + "/user_background/" + task["0"]["name"]);
+            }
+
+            // afisare avatar
+            url = "https://schoolsync.nnmadalin.me/api/get.php";
+            data = new Dictionary<string, string>();
+            data.Add("token", schoolsync.token);
+            data.Add("command", "select * from files where token_user = ? and token = ?");
+
+            param = new Dictionary<string, string>()
+                {
+                    { "token_user", navbar_home.token_page},
+                    { "token", "user_foto"}
+                };
+            data.Add("params", JsonConvert.SerializeObject(param));
+
+            task = await _class.PostRequestAsync(url, data);
+            if (task["message"] == "success")
+            {
+                guna2CirclePictureBox1.Image = await _class.IncarcaImagineAsync("https://schoolsync.nnmadalin.me/attachments/" + navbar_home.token_page + "/user_foto/" + task["0"]["name"]);
             }
 
             schoolsync.hide_loading();
