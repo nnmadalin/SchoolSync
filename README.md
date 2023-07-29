@@ -5,6 +5,9 @@
 
 
 - **Website:** [Click aici](https://schoolsync.nnmadalin.me)
+- **SchoolSync** [Click aici](https://github.com/nnmadalin/SchoolSync)
+- **SchoolSync - API** [Click aici](https://github.com/nnmadalin/SchoolSync_API)
+- **SchoolSync - WebSite** [Click aici](https://github.com/nnmadalin/SchoolSync_Website)
 - **Documentatia tehnica:** [Click aici](https://schoolsync.nnmadalin.me/assets/SchoolSync_Etapa_Nationala.pdf)
 
 ## 🫂 Echipa Nostra
