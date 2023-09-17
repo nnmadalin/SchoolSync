@@ -39,12 +39,7 @@
     1. C#
 
 ## 📟 Implementare API
-1. Frontend 
-    1. Html
-    2. Css
-    3. JavaScript
-2. Backend 
-    1. PHP
+1. PHP
 
 ## 🗄 **Baza de date: Mysql**
 
